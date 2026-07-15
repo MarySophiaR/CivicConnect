@@ -1,0 +1,25 @@
+# Python
+ml-service/.venv/
+ml-service/__pycache__/
+*.pyc
+
+# Node
+backend/node_modules/
+frontend/node_modules/
+
+# Environment
+.env
+
+# OS
+.DS_Store
+Thumbs.db
+
+# VS Code
+.vscode/
+
+# Python cache
+*.pyo
+*.pyd
+
+# Logs
+*.log
