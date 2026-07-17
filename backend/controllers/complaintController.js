@@ -1,4 +1,5 @@
 const Complaint = require("../models/Complaint");
+const predictImage = require("../services/mlService");
 
 // ---------------------------------
 // Create Complaint
@@ -7,38 +8,51 @@ const createComplaint = async (req, res) => {
     try {
 
         const {
-    title,
-    description,
-    image,
-    category,
-    confidence,
-    latitude,
-    longitude
-} = req.body;
+            title,
+            description,
+            latitude,
+            longitude
+        } = req.body;
 
-// Logged-in user's ID (from JWT)
-const reportedBy = req.user.id;
+        // Check if image is uploaded
+        if (!req.file) {
+            return res.status(400).json({
+                message: "Please upload an image."
+            });
+        }
 
-// Create Complaint
-const complaint = new Complaint({
-    title,
-    description,
-    image,
-    category,
-    confidence,
-    latitude,
-    longitude,
-    reportedBy
-});
+        // Image uploaded by Multer
+        const image = req.file.path.replace(/\\/g, "/");
 
-// Save Complaint
-await complaint.save();
+        // Logged-in user's ID (from JWT)
+        const reportedBy = req.user.id;
 
-// Success Response
-return res.status(201).json({
-    message: "Complaint submitted successfully.",
-    complaint
-});
+        // Get AI Prediction from Flask
+        const prediction = await predictImage(image);
+
+        const category = prediction.category;
+        const confidence = prediction.confidence;
+
+        // Create Complaint
+        const complaint = new Complaint({
+            title,
+            description,
+            image,
+            category,
+            confidence,
+            latitude,
+            longitude,
+            reportedBy
+        });
+
+        // Save Complaint
+        await complaint.save();
+
+        // Success Response
+        return res.status(201).json({
+            message: "Complaint submitted successfully.",
+            complaint
+        });
 
     } catch (error) {
 
