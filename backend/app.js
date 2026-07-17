@@ -4,6 +4,7 @@ require("dotenv").config();
 
 const connectDB = require("./config/db");
 const authRoutes = require("./routes/authRoutes");
+const complaintRoutes = require("./routes/complaintRoutes");
 
 const app = express();
 
@@ -25,6 +26,7 @@ app.use(express.urlencoded({ extended: true }));
 // Routes
 // ---------------------------
 app.use("/api/auth", authRoutes);
+app.use("/api/complaints", complaintRoutes);
 
 // ---------------------------
 // Home Route
