@@ -7,41 +7,58 @@ const jwt = require("jsonwebtoken");
 // ---------------------------
 const registerUser = async (req, res) => {
     try {
-        const { name, email, password } = req.body;
+      const { name, email, password } = req.body;
 
-        // Check if all fields are provided
-        if (!name || !email || !password) {
-            return res.status(400).json({
-                message: "All fields are required."
-            });
-        }
-
-        // Check if email already exists
-        const existingUser = await User.findOne({ email });
-
-        if (existingUser) {
-            return res.status(400).json({
-                message: "User already exists."
-            });
-        }
-
-        // Hash password
-        const hashedPassword = await bcrypt.hash(password, 10);
-
-        // Create new user
-        const user = new User({
-            name,
-            email,
-            password: hashedPassword
+      // Check if all fields are provided
+      if (!name || !email || !password) {
+        return res.status(400).json({
+          message: "All fields are required.",
         });
+      }
 
-        // Save user
-        await user.save();
+      // Check if email already exists
+      const existingUser = await User.findOne({ email });
 
-        return res.status(201).json({
-            message: "User registered successfully."
+      if (existingUser) {
+        return res.status(400).json({
+          message: "User already exists.",
         });
+      }
 
+      // Hash password
+      const hashedPassword = await bcrypt.hash(password, 10);
+
+      // Create new user
+      const user = new User({
+        name,
+        email,
+        password: hashedPassword,
+      });
+
+      // Save user
+      await user.save();
+
+      // Generate JWT Token
+      const token = jwt.sign(
+        {
+          id: user._id,
+        },
+        process.env.JWT_SECRET,
+        {
+          expiresIn: "7d",
+        },
+      );
+
+      return res.status(201).json({
+        message: "User registered successfully.",
+        token,
+        user: {
+          id: user._id,
+          name: user.name,
+          email: user.email,
+          role: user.role,
+        },
+      });
     } catch (error) {
         console.error(error);
 
@@ -101,7 +118,8 @@ const loginUser = async (req, res) => {
             user: {
                 id: user._id,
                 name: user.name,
-                email: user.email
+                email: user.email,
+                role: user.role
             }
         });
 
