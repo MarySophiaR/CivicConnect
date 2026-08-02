@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import API from "../../api/axios";
+import logo from "../../assets/logo.png";
 
 function Register() {
 
@@ -40,36 +41,40 @@ function Register() {
             toast.success(response.data.message);
 
             setTimeout(() => {
-              const role = response.data.user.role;
 
-              switch (role) {
-                case "citizen":
-                  navigate("/citizen/dashboard");
-                  break;
+                const role = response.data.user.role;
 
-                case "systemAdmin":
-                  navigate("/system-admin/dashboard");
-                  break;
+                switch (role) {
 
-                case "juniorEngineer":
-                  navigate("/junior-engineer/dashboard");
-                  break;
+                    case "citizen":
+                        navigate("/citizen/dashboard");
+                        break;
 
-                case "assistantExecutiveEngineer":
-                  navigate("/assistant-executive-engineer/dashboard");
-                  break;
+                    case "systemAdmin":
+                        navigate("/system-admin/dashboard");
+                        break;
 
-                case "executiveEngineer":
-                  navigate("/executive-engineer/dashboard");
-                  break;
+                    case "juniorEngineer":
+                        navigate("/junior-engineer/dashboard");
+                        break;
 
-                case "municipalCommissioner":
-                  navigate("/municipal-commissioner/dashboard");
-                  break;
+                    case "assistantExecutiveEngineer":
+                        navigate("/assistant-executive-engineer/dashboard");
+                        break;
 
-                default:
-                  navigate("/");
-              }
+                    case "executiveEngineer":
+                        navigate("/executive-engineer/dashboard");
+                        break;
+
+                    case "municipalCommissioner":
+                        navigate("/municipal-commissioner/dashboard");
+                        break;
+
+                    default:
+                        navigate("/");
+
+                }
+
             }, 1000);
 
         } catch (error) {
@@ -83,99 +88,83 @@ function Register() {
     };
 
     return (
+      <div className="register-page">
+        <div className="register-card">
+          {/* Left Section */}
 
-        <div className="register-page">
+          <div className="register-left">
+            <img src={logo} alt="CivicConnect Logo" className="register-logo" />
 
-            <div className="register-card">
+            <h1 className="brand-logo">
+              <span className="brand-initial">C</span>
+              <span className="brand-rest">ivic</span>
+              <span className="brand-initial">C</span>
+              <span className="brand-rest">onnect</span>
+            </h1>
 
-                {/* Left Section */}
+            <p>Smart Civic Issue Reporting Portal</p>
+          </div>
 
-                <div className="register-left">
+          {/* Right Section */}
 
-                    <div className="logo-placeholder">
-                        Logo
-                    </div>
+          <div className="register-right">
+            <h2>Create Your Account</h2>
 
-                    <h1>Smart Civic Issue Detection System</h1>
+            <p className="subtitle">
+              Join CivicConnect and help build a cleaner, safer, and smarter
+              community.
+            </p>
 
-                    <p>
-                        Join our platform to report civic issues and help build a cleaner,
-                        safer and smarter city.
-                    </p>
+            <form onSubmit={handleSubmit}>
+              <div className="input-group">
+                <label>Full Name</label>
 
-                </div>
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="Enter your full name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
 
-                {/* Right Section */}
+              <div className="input-group">
+                <label>Email</label>
 
-                <div className="register-right">
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="Enter your email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
 
-                    <h2>Create Account</h2>
+              <div className="input-group">
+                <label>Password</label>
 
-                    <p className="subtitle">
-                        Register to continue
-                    </p>
+                <input
+                  type="password"
+                  name="password"
+                  placeholder="Create a password"
+                  value={formData.password}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
 
-                    <form onSubmit={handleSubmit}>
+              <button type="submit">Create Account</button>
+            </form>
 
-                        <div className="input-group">
-
-                            <label>Full Name</label>
-
-                            <input
-                                type="text"
-                                name="name"
-                                placeholder="Enter your full name"
-                                value={formData.name}
-                                onChange={handleChange}
-                            />
-
-                        </div>
-
-                        <div className="input-group">
-
-                            <label>Email</label>
-
-                            <input
-                                type="email"
-                                name="email"
-                                placeholder="Enter your email"
-                                value={formData.email}
-                                onChange={handleChange}
-                            />
-
-                        </div>
-
-                        <div className="input-group">
-
-                            <label>Password</label>
-
-                            <input
-                                type="password"
-                                name="password"
-                                placeholder="Enter your password"
-                                value={formData.password}
-                                onChange={handleChange}
-                            />
-
-                        </div>
-
-                        <button type="submit">
-                            Register
-                        </button>
-
-                    </form>
-
-                    <p className="login-link">
-                        Already have an account?
-                        <Link to="/"> Login</Link>
-                    </p>
-
-                </div>
-
-            </div>
-
+            <p className="login-link">
+              Already a CivicConnect member?
+              <Link to="/"> Sign In</Link>
+            </p>
+          </div>
         </div>
-
+      </div>
     );
 
 }

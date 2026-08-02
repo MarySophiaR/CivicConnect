@@ -25,19 +25,13 @@ const app = express();
 // Rate Limiter
 // ---------------------------
 const limiter = rateLimit({
-
-    windowMs: 15 * 60 * 1000,
-
-    max: 100,
-
-    message: {
-        message: "Too many requests. Please try again after 15 minutes."
-    },
-
-    standardHeaders: true,
-
-    legacyHeaders: false
-
+  windowMs: 15 * 60 * 1000,
+  max: 100,
+  message: {
+    message: "Too many requests. Please try again after 15 minutes.",
+  },
+  standardHeaders: true,
+  legacyHeaders: false,
 });
 
 // ---------------------------
@@ -48,8 +42,13 @@ connectDB();
 // ---------------------------
 // Middleware
 // ---------------------------
-
-app.use(helmet());
+app.use(
+  helmet({
+    crossOriginResourcePolicy: {
+      policy: "cross-origin",
+    },
+  })
+);
 
 app.use(compression());
 
@@ -59,16 +58,15 @@ app.use(cors());
 
 app.use(express.json());
 
-app.use(express.urlencoded({
-    extended: true
-}));
-
-// ---------------------------
-// Serve Uploaded Images
-// ---------------------------
 app.use(
-    "/uploads",
-    express.static(path.join(__dirname, "uploads"))
+  express.urlencoded({
+    extended: true,
+  })
+);
+
+app.use(
+  "/uploads",
+  express.static(path.join(__dirname, "uploads"))
 );
 
 // ---------------------------
@@ -83,31 +81,26 @@ app.use("/api/system-admin", systemAdminRoutes);
 app.use("/api/junior-engineer", juniorEngineerRoutes);
 
 app.use(
-    "/api/assistant-executive-engineer",
-    assistantExecutiveEngineerRoutes
+  "/api/assistant-executive-engineer",
+  assistantExecutiveEngineerRoutes
 );
 
 app.use(
-    "/api/executive-engineer",
-    executiveEngineerRoutes
+  "/api/executive-engineer",
+  executiveEngineerRoutes
 );
 
 app.use("/api/municipal-commissioner", municipalCommissionerRoutes);
 
 app.use("/api/dashboard", dashboardRoutes);
 
-app.use("/api/system-admin", systemAdminRoutes);
-
-
 // ---------------------------
 // Home Route
 // ---------------------------
 app.get("/", (req, res) => {
-
-    res.json({
-        message: "Smart Issue Detection Backend Running!"
-    });
-
+  res.json({
+    message: "Smart Issue Detection Backend Running!",
+  });
 });
 
 // ---------------------------
@@ -116,10 +109,8 @@ app.get("/", (req, res) => {
 const PORT = process.env.PORT || 5001;
 
 app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 
-    console.log(`Server running on port ${PORT}`);
-
-    // Start SLA Escalation Cron Job
-    escalationJob();
-
+  // Start SLA Escalation Cron Job
+  escalationJob();
 });

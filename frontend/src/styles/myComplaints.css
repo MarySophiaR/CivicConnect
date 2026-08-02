@@ -1,0 +1,15 @@
+.my-complaints{
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+.my-complaints h1{
+
+    color:#0055A4;
+
+    margin-bottom:25px;
+
+}

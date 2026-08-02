@@ -23,3 +23,47 @@ input {
 button {
     cursor: pointer;
 }
+
+/* ---------- CivicConnect Branding ---------- */
+
+.brand-logo{
+
+    font-family:"Poppins",sans-serif;
+
+    font-size:38px;
+
+    font-weight:500;
+
+    letter-spacing:-0.5px;
+
+    line-height:1.15;
+
+    margin:0;
+
+}
+
+.brand-logo-navbar{
+
+    font-family:"Poppins",sans-serif;
+
+    font-size:30px;
+
+    font-weight:500;
+
+    letter-spacing:-0.4px;
+
+    line-height:1;
+
+    margin:0;
+
+    background:linear-gradient(
+        90deg,
+        #2E8DE6 0%,
+        #0055A4 100%
+    );
+
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    background-clip:text;
+
+}

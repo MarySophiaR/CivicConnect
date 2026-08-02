@@ -1,0 +1,455 @@
+/* =========================================
+   EDIT COMPLAINT PAGE
+========================================= */
+
+.edit-complaint-page {
+  min-height: 100vh;
+  background: #f5f7fb;
+  padding: 45px 20px 60px;
+  box-sizing: border-box;
+}
+
+.edit-complaint-container {
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+
+/* =========================================
+   HEADER
+========================================= */
+
+.edit-complaint-header {
+  margin-bottom: 38px;
+}
+
+.edit-complaint-header h1 {
+  margin: 0 0 9px;
+  font-size: 30px;
+  font-weight: 700;
+  color: #1769aa;
+  line-height: 1.25;
+}
+
+.edit-complaint-header p {
+  margin: 0;
+  color: #6b7280;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+
+/* =========================================
+   FORM CARD
+========================================= */
+
+.edit-complaint-card {
+  width: 100%;
+  box-sizing: border-box;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 32px;
+
+  box-shadow:
+    0 4px 18px rgba(15, 23, 42, 0.08);
+}
+
+
+/* =========================================
+   FORM GROUP
+========================================= */
+
+.edit-form-group {
+  margin-bottom: 25px;
+}
+
+.edit-form-group:last-of-type {
+  margin-bottom: 0;
+}
+
+.edit-form-group label {
+  display: block;
+  margin-bottom: 9px;
+
+  font-size: 14px;
+  font-weight: 600;
+  color: #1769aa;
+}
+
+.edit-required {
+  color: #dc2626;
+  margin-left: 3px;
+}
+
+
+/* =========================================
+   INPUT + TEXTAREA
+========================================= */
+
+.edit-form-group input,
+.edit-form-group textarea {
+  width: 100%;
+  box-sizing: border-box;
+
+  border: 1px solid #d1d5db;
+  border-radius: 9px;
+
+  background: #ffffff;
+  color: #172033;
+
+  font-family: inherit;
+  font-size: 15px;
+
+  outline: none;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+
+/* =========================================
+   INPUT
+========================================= */
+
+.edit-form-group input {
+  height: 46px;
+  padding: 0 14px;
+}
+
+
+/* =========================================
+   TEXTAREA
+========================================= */
+
+.edit-form-group textarea {
+  min-height: 150px;
+  padding: 13px 14px;
+
+  resize: vertical;
+  line-height: 1.55;
+}
+
+
+/* =========================================
+   PLACEHOLDER
+========================================= */
+
+.edit-form-group input::placeholder,
+.edit-form-group textarea::placeholder {
+  color: #9ca3af;
+}
+
+
+/* =========================================
+   FOCUS
+========================================= */
+
+.edit-form-group input:focus,
+.edit-form-group textarea:focus {
+  border-color: #1769aa;
+
+  box-shadow:
+    0 0 0 3px rgba(23, 105, 170, 0.12);
+}
+
+
+/* =========================================
+   DISABLED
+========================================= */
+
+.edit-form-group input:disabled,
+.edit-form-group textarea:disabled {
+  background: #f9fafb;
+  cursor: not-allowed;
+}
+
+
+/* =========================================
+   CHARACTER COUNT
+========================================= */
+
+.edit-character-count {
+  display: block;
+
+  margin-top: 5px;
+
+  text-align: right;
+
+  color: #8a94a6;
+  font-size: 12px;
+}
+
+
+/* =========================================
+   EXISTING INFORMATION
+========================================= */
+
+.edit-info-box {
+  background: #f0f6ff;
+  border: 1px solid #d7e8ff;
+  border-radius: 9px;
+
+  padding: 13px 15px;
+  margin-bottom: 26px;
+
+  color: #355070;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+
+/* =========================================
+   ERROR MESSAGE
+========================================= */
+
+.edit-error {
+  background: #fff1f2;
+  border: 1px solid #fecdd3;
+  border-radius: 8px;
+
+  padding: 14px 16px;
+  margin-bottom: 20px;
+
+  color: #be123c;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.edit-error h2 {
+  margin: 0 0 12px;
+  color: #be123c;
+  font-size: 18px;
+}
+
+
+/* =========================================
+   ERROR BUTTON
+========================================= */
+
+.edit-error button {
+  border: none;
+  border-radius: 7px;
+
+  background: #1769aa;
+  color: #ffffff;
+
+  padding: 9px 15px;
+
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: background 0.2s ease;
+}
+
+.edit-error button:hover {
+  background: #12558a;
+}
+
+
+/* =========================================
+   SUCCESS MESSAGE
+========================================= */
+
+.edit-success {
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: 8px;
+
+  padding: 11px 14px;
+  margin-bottom: 20px;
+
+  color: #166534;
+  font-size: 14px;
+}
+
+
+/* =========================================
+   BUTTON ROW
+========================================= */
+
+.edit-button-row {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
+  gap: 12px;
+
+  margin-top: 32px;
+}
+
+
+/* =========================================
+   COMMON BUTTON STYLE
+========================================= */
+
+.edit-cancel-button,
+.edit-save-button {
+  height: 44px;
+
+  padding: 0 22px;
+
+  border-radius: 8px;
+
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+
+/* =========================================
+   CANCEL BUTTON
+========================================= */
+
+.edit-cancel-button {
+  background: #ffffff;
+
+  border: 1px solid #d1d5db;
+
+  color: #374151;
+}
+
+.edit-cancel-button:hover {
+  background: #f3f4f6;
+  border-color: #c4c8cf;
+}
+
+
+/* =========================================
+   SAVE BUTTON
+========================================= */
+
+.edit-save-button {
+  border: 1px solid #1769aa;
+
+  background: #1769aa;
+  color: #ffffff;
+
+  box-shadow:
+    0 2px 5px rgba(23, 105, 170, 0.18);
+}
+
+.edit-save-button:hover {
+  background: #12558a;
+  border-color: #12558a;
+
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 4px 9px rgba(23, 105, 170, 0.22);
+}
+
+
+/* =========================================
+   DISABLED BUTTONS
+========================================= */
+
+.edit-save-button:disabled,
+.edit-cancel-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+
+  transform: none;
+  box-shadow: none;
+}
+
+
+/* =========================================
+   BACK BUTTON
+========================================= */
+
+.edit-back-button {
+  display: inline-flex;
+  align-items: center;
+
+  gap: 7px;
+
+  border: none;
+  background: transparent;
+
+  color: #1769aa;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  padding: 0;
+  margin-bottom: 20px;
+
+  cursor: pointer;
+}
+
+.edit-back-button:hover {
+  color: #12558a;
+}
+
+
+/* =========================================
+   LOADING
+========================================= */
+
+.edit-loading {
+  min-height: 60vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #6b7280;
+  font-size: 15px;
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+  .edit-complaint-page {
+    padding: 30px 14px 45px;
+  }
+
+  .edit-complaint-header {
+    margin-bottom: 28px;
+  }
+
+  .edit-complaint-header h1 {
+    font-size: 25px;
+  }
+
+  .edit-complaint-header p {
+    font-size: 14px;
+  }
+
+  .edit-complaint-card {
+    padding: 22px 20px;
+    border-radius: 12px;
+  }
+
+  .edit-form-group {
+    margin-bottom: 22px;
+  }
+
+  .edit-button-row {
+    flex-direction: column-reverse;
+    align-items: stretch;
+  }
+
+  .edit-cancel-button,
+  .edit-save-button {
+    width: 100%;
+  }
+}

@@ -2,6 +2,9 @@ const mongoose = require("mongoose");
 
 const complaintSchema = new mongoose.Schema(
   {
+    // =================================
+    // Complaint Details
+    // =================================
     title: {
       type: String,
       required: true,
@@ -14,44 +17,114 @@ const complaintSchema = new mongoose.Schema(
       trim: true,
     },
 
+    // =================================
+    // Image Path (Stored as String in MongoDB pointing to uploads/ folder)
+    // =================================
     image: {
       type: String,
       required: true,
     },
 
+    // =================================
+    // Category
+    // =================================
     category: {
       type: String,
       enum: ["pothole", "garbage", "drainage"],
       required: true,
+      index: true,
     },
 
-    confidence: {
-      type: Number,
-      required: true,
-    },
-
+    // =================================
+    // GPS Coordinates
+    // =================================
     latitude: {
       type: Number,
-      required: true,
+      default: null,
     },
 
     longitude: {
       type: Number,
-      required: true,
+      default: null,
     },
 
-    // ---------------------------------
+    // =================================
+    // Address Details
+    // =================================
+    address: {
+      state: {
+        type: String,
+        required: true,
+        trim: true,
+      },
+
+      district: {
+        type: String,
+        required: true,
+        trim: true,
+      },
+
+      city: {
+        type: String,
+        required: true,
+        trim: true,
+      },
+
+      area: {
+        type: String,
+        required: true,
+        trim: true,
+      },
+
+      landmark: {
+        type: String,
+        default: "",
+        trim: true,
+      },
+
+      pincode: {
+        type: String,
+        default: "",
+        trim: true,
+      },
+    },
+
+    // =================================
+    // Community Support
+    // =================================
+    supportCount: {
+      type: Number,
+      default: 1,
+    },
+
+    supporters: [
+      {
+        citizen: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "User",
+          required: true,
+        },
+
+        supportedAt: {
+          type: Date,
+          default: Date.now,
+        },
+      },
+    ],
+
+    // =================================
     // Complaint Status
-    // ---------------------------------
+    // =================================
     status: {
       type: String,
-      enum: ["Assigned", "In Progress", "Resolved"],
-      default: "Assigned",
+      enum: ["Pending", "Assigned", "In Progress", "Resolved"],
+      default: "Pending",
+      index: true,
     },
 
-    // ---------------------------------
+    // =================================
     // Current Officer Level
-    // ---------------------------------
+    // =================================
     currentLevel: {
       type: String,
       enum: [
@@ -62,18 +135,18 @@ const complaintSchema = new mongoose.Schema(
       default: "juniorEngineer",
     },
 
-    // ---------------------------------
+    // =================================
     // Assigned Officer
-    // ---------------------------------
+    // =================================
     assignedTo: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       default: null,
     },
 
-    // ---------------------------------
+    // =================================
     // Assignment History
-    // ---------------------------------
+    // =================================
     assignmentHistory: [
       {
         officer: {
@@ -102,17 +175,17 @@ const complaintSchema = new mongoose.Schema(
       },
     ],
 
-    // ---------------------------------
+    // =================================
     // SLA Deadline
-    // ---------------------------------
+    // =================================
     deadline: {
       type: Date,
       default: null,
     },
 
-    // ---------------------------------
+    // =================================
     // Resolution Details
-    // ---------------------------------
+    // =================================
     resolvedBy: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
@@ -130,9 +203,9 @@ const complaintSchema = new mongoose.Schema(
       default: "",
     },
 
-    // ---------------------------------
+    // =================================
     // Escalation History
-    // ---------------------------------
+    // =================================
     escalationHistory: [
       {
         from: {
@@ -165,18 +238,19 @@ const complaintSchema = new mongoose.Schema(
       },
     ],
 
-    // ---------------------------------
-    // Citizen
-    // ---------------------------------
+    // =================================
+    // Citizen Information
+    // =================================
     reportedBy: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true,
+      index: true,
     },
   },
   {
     timestamps: true,
-  },
+  }
 );
 
 module.exports = mongoose.model("Complaint", complaintSchema);

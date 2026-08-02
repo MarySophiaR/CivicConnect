@@ -1,0 +1,367 @@
+/* ===========================
+   Complaint Card
+=========================== */
+
+.complaint-card {
+  display: flex;
+  gap: 24px;
+
+  background: #ffffff;
+  border-radius: 16px;
+
+  padding: 22px;
+  margin-bottom: 22px;
+
+  border-left: 5px solid #0055A4;
+
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+
+  cursor: pointer;
+  transition: all 0.25s ease;
+
+  align-items: stretch;
+}
+
+.complaint-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.14);
+}
+
+/* ===========================
+   Complaint Image
+=========================== */
+
+.complaint-image {
+  width: 240px;
+  min-width: 240px;
+
+  align-self: stretch;
+
+  object-fit: cover;
+
+  border-radius: 14px;
+
+  border: 3px solid #F3F4F6;
+
+  background: #F3F4F6;
+
+  flex-shrink: 0;
+}
+
+/* ===========================
+   Complaint Details
+=========================== */
+
+.complaint-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===========================
+   Title Row
+=========================== */
+
+.title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  margin-bottom: 6px;
+}
+
+.title-row h3 {
+  margin: 0;
+
+  font-size: 26px;
+  font-weight: 700;
+
+  color: #0055A4;
+
+  line-height: 1.3;
+
+  flex: 1;
+}
+
+/* ===========================
+   Three Dot Menu
+=========================== */
+
+.more-options {
+  position: relative;
+
+  width: 36px;
+  height: 36px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 10px;
+
+  color: #4B5563;
+
+  font-size: 24px;
+  font-weight: bold;
+
+  cursor: pointer;
+
+  transition: .2s;
+}
+
+.more-options svg{
+    color:#4B5563;
+}
+
+.more-options:hover {
+  background: #EEF4FB;
+  color: #0055A4;
+}
+
+/* ===========================
+    Dropdown
+=========================== */
+
+.menu-dropdown{
+    position:absolute;
+    top:38px;
+    right:0;
+
+    width:190px;
+
+    background:#fff;
+
+    border-radius:14px;
+
+    border-left:4px solid #0055A4;
+
+    box-shadow:0 10px 24px rgba(0,0,0,.12);
+
+    display:flex;
+    flex-direction:column;
+    gap:4px;
+
+    padding:8px 6px;    
+}
+
+.menu-dropdown svg{
+    color:#0055A4;
+    font-size: 14px;
+    flex-shrink: 0;
+}
+
+.menu-dropdown button{
+    width:100%;
+    height:38px;
+
+    display:flex;
+    justify-content:flex-start;
+    align-items:center;
+    gap:10px;
+    padding:0 16px;
+    margin:0;
+
+    border:none;
+    border-radius:10px;
+
+    background:#fff;
+
+    color:#0055A4;
+    font-size:14px;
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.2s;
+}
+
+.menu-dropdown button:hover{
+    background:#EEF6FF;
+    color:#0055A4;
+}
+
+/* Edit Complaint */
+.menu-dropdown button:first-child {
+  color: #0055A4;
+  font-weight: 600;
+}
+
+/* View Details */
+.menu-dropdown button:last-child {
+  color: #0055A4;
+  font-weight: 600;
+  margin-bottom: 0;
+}
+
+.menu-dropdown button:not(:last-child){
+    border-bottom:1px solid #EEF2F7;
+}
+
+/* ===========================
+   Description
+=========================== */
+
+.complaint-description {
+  margin: 0 0 8px;
+
+  color: #555;
+
+  font-size: 15px;
+
+  line-height: 1.5;
+}
+
+/* ===========================
+   Location
+=========================== */
+
+.location {
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+
+  color: #374151;
+
+  font-size: 15px;
+
+  margin-bottom: 10px;
+}
+
+/* ===========================
+   Badges
+=========================== */
+
+.badges {
+  display: flex;
+
+  gap: 14px;
+
+  flex-wrap: wrap;
+
+  margin-bottom: 18px;
+}
+
+.category,
+.status {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 10px 20px;
+
+  border-radius: 999px;
+
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.category {
+  background: #E8F2FF;
+  color: #0055A4;
+}
+
+.status.Pending {
+  background: #ECECEC;
+  color: #444;
+}
+
+.status.Assigned {
+  background: #FFF4CC;
+  color: #B58900;
+}
+
+.status.InProgress {
+  background: #D9ECFF;
+  color: #0055A4;
+}
+
+.status.Resolved {
+  background: #D8F8DD;
+  color: #15803D;
+}
+
+.status.Escalated {
+  background: #FFE8D6;
+  color: #C2410C;
+}
+
+/* ===========================
+   Meta
+=========================== */
+
+.complaint-meta {
+  display: flex;
+  flex-direction: column;
+
+  gap: 8px;
+
+  margin-top: auto;
+}
+
+.meta-item {
+  display: flex;
+  align-items: center;
+
+  gap: 5px;
+
+  font-size: 14px;
+
+  color: #444;
+}
+
+.meta-item span{
+  font-weight:500;
+}
+
+/* ===========================
+   SLA
+=========================== */
+
+.sla {
+  color: #16A34A;
+  font-weight: 700;
+}
+
+.sla.expired {
+  color: #DC2626;
+}
+
+.meta-icon{
+    color:#6B7280;
+    font-size:18px;
+    flex-shrink:0;
+}
+
+
+/* ===========================
+   Responsive
+=========================== */
+
+@media (max-width:768px){
+
+  .complaint-card{
+    flex-direction:column;
+    gap:18px;
+  }
+
+  .complaint-image{
+    width:100%;
+    min-width:100%;
+    height:240px;
+  }
+
+  .title-row h3{
+    font-size:24px;
+  }
+
+  .complaint-description{
+    font-size:16px;
+  }
+
+  .menu-dropdown{
+    right:-8px;
+  }
+
+}

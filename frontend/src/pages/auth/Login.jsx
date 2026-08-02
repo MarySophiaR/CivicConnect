@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import API from "../../api/axios";
 import { toast } from "react-toastify";
+import logo from "../../assets/logo.png";
 
 function Login() {
 
@@ -33,13 +34,11 @@ function Login() {
                 formData
             );
 
-            // Store Token
             localStorage.setItem(
                 "token",
                 response.data.token
             );
 
-            // Store User Details
             localStorage.setItem(
                 "user",
                 JSON.stringify(response.data.user)
@@ -91,84 +90,69 @@ function Login() {
     };
 
     return (
+      <div className="login-page">
+        <div className="login-card">
+          {/* Left Section */}
 
-        <div className="login-page">
+          <div className="login-left">
+            <img src={logo} alt="CivicConnect Logo" className="login-logo" />
 
-            <div className="login-card">
+            <h1 className="brand-logo">
+              <span className="brand-initial">C</span>
+              <span className="brand-rest">ivic</span>
+              <span className="brand-initial">C</span>
+              <span className="brand-rest">onnect</span>
+            </h1>
 
-                {/* Left Section */}
+            <p>Smart Civic Issue Reporting Portal</p>
+          </div>
 
-                <div className="login-left">
+          {/* Right Section */}
 
-                    <div className="logo-placeholder">
-                        Logo
-                    </div>
+          <div className="login-right">
+            <h2>Welcome Back</h2>
 
-                    <h1>Smart Civic Issue Detection System</h1>
+            <p className="subtitle">
+              Sign in to CivicConnect and continue reporting civic issues.
+            </p>
 
-                    <p>
-                        Report civic issues easily and help improve your city.
-                    </p>
+            <form onSubmit={handleSubmit}>
+              <div className="input-group">
+                <label>Email</label>
 
-                </div>
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="Enter your email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
 
-                {/* Right Section */}
+              <div className="input-group">
+                <label>Password</label>
 
-                <div className="login-right">
+                <input
+                  type="password"
+                  name="password"
+                  placeholder="Enter your password"
+                  value={formData.password}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
 
-                    <h2>Welcome Back</h2>
+              <button type="submit">Login to CivicConnect</button>
+            </form>
 
-                    <p className="subtitle">
-                        Sign in to continue
-                    </p>
-
-                    <form onSubmit={handleSubmit}>
-
-                        <div className="input-group">
-
-                            <label>Email</label>
-
-                            <input
-                                type="email"
-                                name="email"
-                                placeholder="Enter your email"
-                                value={formData.email}
-                                onChange={handleChange}
-                            />
-
-                        </div>
-
-                        <div className="input-group">
-
-                            <label>Password</label>
-
-                            <input
-                                type="password"
-                                name="password"
-                                placeholder="Enter your password"
-                                value={formData.password}
-                                onChange={handleChange}
-                            />
-
-                        </div>
-
-                        <button type="submit">
-                            Login
-                        </button>
-
-                    </form>
-
-                    <p className="register-link">
-                        Don't have an account?
-                        <Link to="/register"> Register</Link>
-                    </p>
-
-                </div>
-
-            </div>
-
+            <p className="register-link">
+              New to CivicConnect?
+              <Link to="/register"> Create an Account</Link>
+            </p>
+          </div>
         </div>
-
+      </div>
     );
 
 }

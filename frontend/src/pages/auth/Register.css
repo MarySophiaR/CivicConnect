@@ -63,23 +63,38 @@
 
     font-weight:600;
 
-    margin-bottom:30px;
+    margin-bottom:22px;
 
 }
 
-.register-left h1{
+.register-logo{
 
-    font-size:30px;
+    width:100px;
+    height:100px;
 
-    margin-bottom:20px;
+    object-fit:contain;
+
+    border-radius:6px;
+
+    margin-bottom:14px;
+
+}
+
+.register-left .brand-logo{
+
+    color:white;
+
+    margin-bottom:10px;
 
 }
 
 .register-left p{
 
-    font-size:16px;
+    font-size:15px;
 
-    line-height:1.7;
+    line-height:1.5;
+
+    margin-top:4px;
 
 }
 
@@ -191,17 +206,17 @@ button:hover{
 
     font-weight:600;
 
-    cursor:pointer;
-
     text-decoration:none;
-
 
 }
 
 .login-link a:hover{
 
-    transform:scale(1.05);
-
     opacity:0.85;
 
+}
+
+.brand-logo{
+    color: white;
+    font-weight: 600;
 }

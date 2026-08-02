@@ -1,0 +1,106 @@
+.layout{
+    width:100%;
+    min-height:100vh;
+    background:#F8FAFC;
+}
+
+.layout-body{
+    display:flex;
+}
+
+.main-content{
+    margin-left:260px;
+    margin-top:75px;
+    width:calc(100% - 260px);
+    min-height:calc(100vh - 75px);
+    padding:6px 30px 30px;
+    background:#F8FAFC;
+    overflow-x:hidden;
+}
+
+/* Logout Modal */
+.logout-overlay{
+    position:fixed;
+    inset:0;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:rgba(0,0,0,.12);
+    backdrop-filter:blur(4px);
+    -webkit-backdrop-filter:blur(4px);
+    z-index:9999;
+}
+
+.logout-modal{
+    width:370px;
+    background:white;
+    border-radius:16px;
+    padding:30px;
+    text-align:center;
+    box-shadow:0 25px 60px rgba(0,0,0,.22);
+    animation:fadeModal .22s ease;
+}
+
+@keyframes fadeModal{
+    from{
+        opacity:0;
+        transform:translateY(8px) scale(.96);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0) scale(1);
+    }
+}
+
+.logout-modal h3{
+    margin:0;
+    color:#0055A4;
+    font-size:24px;
+}
+
+.logout-modal p{
+    margin:15px 0 30px;
+    color:#6B7280;
+    font-size:15px;
+    line-height:1.6;
+}
+
+.logout-buttons{
+    display:flex;
+    justify-content:center;
+    gap:14px;
+}
+
+.cancel-btn{
+    border:none;
+    background:#E5E7EB;
+    color:#374151;
+    padding:11px 24px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:600;
+    transition:.25s;
+}
+
+.cancel-btn:hover{
+    background:#D1D5DB;
+}
+
+.logout-confirm-btn{
+    border:none;
+    background:#DC2626;
+    color:white;
+    padding:11px 24px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:600;
+    transition:.25s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.logout-confirm-btn:hover{
+    background:#B91C1C;
+}
