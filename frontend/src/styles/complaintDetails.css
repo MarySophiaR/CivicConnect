@@ -1,225 +1,486 @@
 /* =====================================
-   Complaint Details Page
+   COMPLAINT DETAILS PAGE
 ===================================== */
 
 .complaint-details-container {
-    max-width: 1200px;
-    margin: auto;
-    padding: 30px;
+    width: 100%;
+    max-width: none;
+
+    margin: 0;
+
+    padding: 0 0 30px;
+
+    box-sizing: border-box;
 }
 
 .complaint-details-container h1 {
     color: #0055A4;
-    font-size: 34px;
+
+    font-size: 32px;
     font-weight: 700;
-    margin-bottom: 28px;
+
+    margin: 0 0 18px;
 }
 
+
 /* =====================================
-   Top Section
+   TOP SECTION
 ===================================== */
 
 .details-top {
     display: flex;
-    gap: 28px;
+    align-items: center;
+
+    gap: 22px;
+
+    width: 100%;
 
     background: #ffffff;
-    border-radius: 18px;
-
-    padding: 24px;
-
-    box-shadow: 0 8px 22px rgba(0,0,0,.08);
-
-    margin-bottom: 28px;
-}
-
-.details-top img {
-    width: 340px;
-    min-width: 340px;
-    height: 340px;
-
-    object-fit: cover;
 
     border-radius: 16px;
 
-    border: 3px solid #eef2f7;
+    padding: 16px;
 
-    align-self: center;  
+    box-shadow: 0 5px 16px rgba(0, 0, 0, .07);
+
+    margin-bottom: 18px;
+
+    box-sizing: border-box;
 }
 
-.details-info{
-    flex:1;
-
-    display:flex;
-    flex-direction:column;
-}
-
-.details-info h2{
-    margin:0 0 10px;
-
-    font-size:32px;
-    font-weight:700;
-
-    color:#0055A4;
-}
-
-.description{
-    margin-bottom:26px;
-
-    color:#555;
-
-    font-size:18px;
-    line-height:1.7;
-}
 
 /* =====================================
-   Info Rows
+   COMPLAINT IMAGE
 ===================================== */
 
-.info-row{
-    display:flex;
-    align-items:center;
+.details-top img {
+    width: 260px;
+    min-width: 260px;
+    height: 260px;
 
-    gap:12px;
+    object-fit: cover;
 
-    margin-bottom:15px;
+    border-radius: 13px;
 
-    font-size:16px;
+    border: 2px solid #eef2f7;
 
-    color:#444;
+    align-self: center;
 }
 
-.info-row svg{
-    color:#0055A4;
-
-    font-size:18px;
-
-    min-width:18px;
-}
 
 /* =====================================
-   Sections
+   COMPLAINT INFORMATION
 ===================================== */
 
-.section{
-    background:#ffffff;
+.details-info {
+    flex: 1;
 
-    border-radius:18px;
+    display: flex;
+    flex-direction: column;
 
-    padding:24px;
+    justify-content: center;
 
-    margin-bottom:24px;
-
-    box-shadow:0 8px 22px rgba(0,0,0,.08);
+    min-width: 0;
 }
 
-.section h3{
-    display:flex;
-    align-items:center;
+.details-info h2 {
+    margin: 0 0 6px;
 
-    gap:10px;
+    font-size: 28px;
+    font-weight: 700;
 
-    color:#0055A4;
-
-    font-size:24px;
-
-    margin-bottom:18px;
+    color: #0055A4;
 }
 
-.section h3 svg{
-    color:#0055A4;
+.description {
+    margin: 0 0 16px;
+
+    color: #555;
+
+    font-size: 16px;
+
+    line-height: 1.45;
 }
 
-.section p{
-    margin:10px 0;
-
-    color:#444;
-
-    line-height:1.7;
-
-    font-size:16px;
-}
-
-.section strong{
-    color:#0055A4;
-}
 
 /* =====================================
-   History Cards
+   INFO ROWS
 ===================================== */
 
-.history-card{
-    background:#F8FAFC;
+.info-row {
+    display: flex;
+    align-items: center;
 
-    border-left:4px solid #0055A4;
+    gap: 10px;
 
-    border-radius:12px;
+    margin-bottom: 8px;
 
-    padding:18px;
+    font-size: 15px;
 
-    margin-bottom:16px;
+    color: #444;
 
-    transition:.25s;
+    line-height: 1.35;
 }
 
-.history-card:hover{
-    background:#EEF5FF;
+.info-row:last-child {
+    margin-bottom: 0;
 }
 
-.history-card p{
-    margin:8px 0;
+.info-row svg {
+    color: #0055A4;
+
+    min-width: 18px;
+
+    flex-shrink: 0;
 }
+
 
 /* =====================================
-   Responsive
+   OTHER SECTIONS
 ===================================== */
 
-@media (max-width:900px){
+.section {
+    width: 100%;
 
-    .details-top{
-        flex-direction:column;
-    }
+    background: #ffffff;
 
-    .details-top img{
-        width:100%;
-        min-width:100%;
-        height:260px;
-    }
+    border-radius: 16px;
 
-    .details-info h2{
-        font-size:28px;
-    }
+    padding: 18px;
 
-    .complaint-details-container{
-        padding:18px;
-    }
+    margin-bottom: 18px;
 
+    box-shadow: 0 5px 16px rgba(0, 0, 0, .07);
+
+    box-sizing: border-box;
 }
 
-@media (max-width:600px){
+.section h3 {
+    display: flex;
+    align-items: center;
 
-    .complaint-details-container h1{
-        font-size:28px;
+    gap: 9px;
+
+    color: #0055A4;
+
+    font-size: 22px;
+
+    margin: 0 0 12px;
+}
+
+.section h3 svg {
+    color: #0055A4;
+}
+
+.section p {
+    margin: 7px 0;
+
+    color: #444;
+
+    line-height: 1.55;
+
+    font-size: 15px;
+}
+
+.section strong {
+    color: #0055A4;
+}
+
+
+/* =====================================
+   HISTORY CARDS
+===================================== */
+
+.history-card {
+    background: #F8FAFC;
+
+    border-left: 4px solid #0055A4;
+
+    border-radius: 10px;
+
+    padding: 14px;
+
+    margin-bottom: 10px;
+
+    transition: .25s;
+
+    box-sizing: border-box;
+}
+
+.history-card p {
+    margin: 5px 0;
+}
+
+
+/* =====================================
+   TABLET
+===================================== */
+
+@media (max-width: 1000px) {
+
+    .complaint-details-container {
+        width: 100%;
+        padding: 0 0 25px;
     }
 
-    .details-info h2{
-        font-size:24px;
+    .details-top {
+        gap: 18px;
+        padding: 15px;
     }
 
-    .description{
-        font-size:16px;
+    .details-top img {
+        width: 230px;
+        min-width: 230px;
+        height: 230px;
     }
 
-    .section{
-        padding:18px;
+    .details-info h2 {
+        font-size: 26px;
+    }
+}
+
+
+/* =====================================
+   MOBILE
+===================================== */
+
+@media (max-width: 700px) {
+
+    .complaint-details-container {
+        width: 100%;
+
+        max-width: none;
+
+        margin: 0;
+
+        padding: 0 0 25px;
+
+        box-sizing: border-box;
     }
 
-    .section h3{
-        font-size:20px;
+    .complaint-details-container h1 {
+        font-size: 27px;
+
+        margin: 0 0 14px;
     }
 
-    .info-row{
-        font-size:15px;
+
+    /* -------------------------------
+       Top Complaint Card
+    ------------------------------- */
+
+    .details-top {
+        width: 100%;
+
+        flex-direction: column;
+
+        align-items: stretch;
+
+        gap: 14px;
+
+        padding: 14px;
+
+        border-radius: 14px;
+
+        margin-bottom: 16px;
+
+        box-sizing: border-box;
     }
 
+
+    /* -------------------------------
+       Image
+    ------------------------------- */
+
+    .details-top img {
+        width: 100%;
+
+        min-width: 0;
+
+        height: 220px;
+
+        border-radius: 11px;
+
+        align-self: auto;
+    }
+
+
+    /* -------------------------------
+       Information
+    ------------------------------- */
+
+    .details-info {
+        width: 100%;
+    }
+
+    .details-info h2 {
+        font-size: 23px;
+
+        margin-bottom: 6px;
+    }
+
+    .description {
+        font-size: 15px;
+
+        line-height: 1.45;
+
+        margin-bottom: 14px;
+    }
+
+
+    /* -------------------------------
+       Info Rows
+    ------------------------------- */
+
+    .info-row {
+        gap: 9px;
+
+        margin-bottom: 8px;
+
+        font-size: 14px;
+
+        line-height: 1.35;
+    }
+
+    .info-row svg {
+        min-width: 17px;
+    }
+
+
+    /* -------------------------------
+       Sections
+    ------------------------------- */
+
+    .section {
+        width: 100%;
+
+        padding: 14px;
+
+        border-radius: 14px;
+
+        margin-bottom: 16px;
+
+        box-sizing: border-box;
+    }
+
+    .section h3 {
+        font-size: 20px;
+
+        margin-bottom: 10px;
+    }
+
+    .section p {
+        font-size: 14px;
+
+        line-height: 1.5;
+    }
+
+
+    /* -------------------------------
+       History
+    ------------------------------- */
+
+    .history-card {
+        padding: 12px;
+
+        margin-bottom: 9px;
+    }
+}
+
+
+/* =====================================
+   SMALL MOBILE
+===================================== */
+
+@media (max-width: 500px) {
+
+    .complaint-details-container {
+        padding: 0 0 22px;
+    }
+
+    .complaint-details-container h1 {
+        font-size: 25px;
+
+        margin-bottom: 12px;
+    }
+
+    .details-top {
+        padding: 12px;
+
+        gap: 13px;
+    }
+
+    .details-top img {
+        height: 200px;
+    }
+
+    .details-info h2 {
+        font-size: 21px;
+    }
+
+    .description {
+        font-size: 14px;
+
+        margin-bottom: 13px;
+    }
+
+    .info-row {
+        font-size: 13.5px;
+
+        margin-bottom: 7px;
+    }
+
+    .section {
+        padding: 13px;
+    }
+
+    .section h3 {
+        font-size: 19px;
+    }
+}
+
+
+/* =====================================
+   VERY SMALL MOBILE
+===================================== */
+
+@media (max-width: 350px) {
+
+    .complaint-details-container {
+        padding: 0 0 20px;
+    }
+
+    .complaint-details-container h1 {
+        font-size: 23px;
+    }
+
+    .details-top {
+        padding: 11px;
+
+        gap: 12px;
+    }
+
+    .details-top img {
+        height: 185px;
+    }
+
+    .details-info h2 {
+        font-size: 20px;
+    }
+
+    .description {
+        font-size: 13px;
+    }
+
+    .info-row {
+        font-size: 12.5px;
+    }
+
+    .section {
+        padding: 12px;
+    }
+
+    .section h3 {
+        font-size: 18px;
+    }
 }

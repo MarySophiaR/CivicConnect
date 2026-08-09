@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Layout from "../../components/Layout";
+import Sidebar from "../../components/Sidebar";
 import API from "../../api/axios";
 import {
     ClipboardList,
@@ -24,27 +25,34 @@ function Dashboard() {
 
     });
 
+
     useEffect(() => {
 
         fetchDashboard();
 
     }, []);
 
+
     const fetchDashboard = async () => {
 
         try {
 
-            const response = await API.get("/complaints/dashboard");
+            const response =
+                await API.get("/complaints/dashboard");
 
             setStats(response.data);
 
         } catch (error) {
 
-            console.error(error.response?.data || error.message);
+            console.error(
+                error.response?.data ||
+                error.message
+            );
 
         }
 
     };
+
 
     const getStatusClass = (status) => {
 
@@ -69,11 +77,17 @@ function Dashboard() {
 
     };
 
+
     return (
 
         <Layout>
 
             <div className="dashboard">
+
+
+                {/* =====================================
+                    DASHBOARD HEADER
+                ===================================== */}
 
                 <div className="dashboard-header">
 
@@ -86,12 +100,20 @@ function Dashboard() {
                     </p>
 
                     <p className="dashboard-description">
-                        Report civic issues, monitor complaint progress, and contribute towards a cleaner, safer, and smarter community.
+                        Report civic issues, monitor complaint progress,
+                        and contribute towards a cleaner, safer,
+                        and smarter community.
                     </p>
 
                 </div>
 
+
+                {/* =====================================
+                    STATISTICS
+                ===================================== */}
+
                 <div className="stats-grid">
+
 
                     <div className="stat-card">
 
@@ -101,11 +123,16 @@ function Dashboard() {
                             className="card-icon"
                         />
 
-                        <h3>Total Complaints</h3>
+                        <h3>
+                            Total Complaints
+                        </h3>
 
-                        <span>{stats.total}</span>
+                        <span>
+                            {stats.total}
+                        </span>
 
                     </div>
+
 
                     <div className="stat-card">
 
@@ -115,11 +142,16 @@ function Dashboard() {
                             className="card-icon"
                         />
 
-                        <h3>Assigned</h3>
+                        <h3>
+                            Assigned
+                        </h3>
 
-                        <span>{stats.assigned}</span>
+                        <span>
+                            {stats.assigned}
+                        </span>
 
                     </div>
+
 
                     <div className="stat-card">
 
@@ -129,11 +161,16 @@ function Dashboard() {
                             className="card-icon"
                         />
 
-                        <h3>In Progress</h3>
+                        <h3>
+                            In Progress
+                        </h3>
 
-                        <span>{stats.inProgress}</span>
+                        <span>
+                            {stats.inProgress}
+                        </span>
 
                     </div>
+
 
                     <div className="stat-card">
 
@@ -143,13 +180,22 @@ function Dashboard() {
                             className="card-icon"
                         />
 
-                        <h3>Resolved</h3>
+                        <h3>
+                            Resolved
+                        </h3>
 
-                        <span>{stats.resolved}</span>
+                        <span>
+                            {stats.resolved}
+                        </span>
 
                     </div>
 
                 </div>
+
+
+                {/* =====================================
+                    RECENT COMPLAINTS
+                ===================================== */}
 
                 <div className="recent-section">
 
@@ -165,72 +211,106 @@ function Dashboard() {
 
                     </h2>
 
-                    <table className="complaint-table">
 
-                        <thead>
+                    <div className="complaint-table-wrapper">
 
-                            <tr>
+                        <table className="complaint-table">
 
-                                <th>
-                                    <Type size={16} strokeWidth={2} />
-                                    Title
-                                </th>
+                            <thead>
 
-                                <th>
-                                    <FolderOpen size={16} strokeWidth={2} />
-                                    Category
-                                </th>
+                                <tr>
 
-                                <th>
-                                    <BadgeCheck size={16} strokeWidth={2} />
-                                    Status
-                                </th>
+                                    <th>
 
-                                <th>
-                                    <CalendarDays size={16} strokeWidth={2} />
-                                    Date
-                                </th>
+                                        <Type
+                                            size={16}
+                                            strokeWidth={2}
+                                        />
 
-                            </tr>
+                                        Title
 
-                        </thead>
+                                    </th>
 
-                        <tbody>
 
-                            {
+                                    <th>
 
-                                stats.recentComplaints.length === 0 ?
+                                        <FolderOpen
+                                            size={16}
+                                            strokeWidth={2}
+                                        />
 
-                                    (
+                                        Category
 
-                                        <tr>
+                                    </th>
 
-                                            <td
-                                                className="no-data"
-                                                colSpan="4"
+
+                                    <th>
+
+                                        <BadgeCheck
+                                            size={16}
+                                            strokeWidth={2}
+                                        />
+
+                                        Status
+
+                                    </th>
+
+
+                                    <th>
+
+                                        <CalendarDays
+                                            size={16}
+                                            strokeWidth={2}
+                                        />
+
+                                        Date
+
+                                    </th>
+
+                                </tr>
+
+                            </thead>
+
+
+                            <tbody>
+
+                                {stats.recentComplaints.length === 0 ? (
+
+                                    <tr>
+
+                                        <td
+                                            className="no-data"
+                                            colSpan="4"
+                                        >
+                                            No complaints found.
+                                        </td>
+
+                                    </tr>
+
+                                ) : (
+
+                                    stats.recentComplaints.map(
+                                        (complaint) => (
+
+                                            <tr
+                                                key={complaint._id}
                                             >
-                                                No complaints found.
-                                            </td>
 
-                                        </tr>
+                                                <td>
+                                                    {complaint.title}
+                                                </td>
 
-                                    )
-
-                                    :
-
-                                    (
-
-                                        stats.recentComplaints.map((complaint) => (
-
-                                            <tr key={complaint._id}>
-
-                                                <td>{complaint.title}</td>
-
-                                                <td>{complaint.category}</td>
+                                                <td>
+                                                    {complaint.category}
+                                                </td>
 
                                                 <td>
 
-                                                    <span className={getStatusClass(complaint.status)}>
+                                                    <span
+                                                        className={getStatusClass(
+                                                            complaint.status
+                                                        )}
+                                                    >
                                                         {complaint.status}
                                                     </span>
 
@@ -246,15 +326,33 @@ function Dashboard() {
 
                                             </tr>
 
-                                        ))
-
+                                        )
                                     )
 
-                            }
+                                )}
 
-                        </tbody>
+                            </tbody>
 
-                    </table>
+                        </table>
+
+                    </div>
+
+                </div>
+
+
+                {/* =====================================
+                    MOBILE PROFILE
+
+                    Normal flow — appears AFTER
+                    the complaint table.
+                ===================================== */}
+
+                <div className="mobile-dashboard-profile">
+
+                    <Sidebar
+                        setShowLogoutModal={() => {}}
+                        showProfile={true}
+                    />
 
                 </div>
 

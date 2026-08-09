@@ -1,0 +1,1001 @@
+/* =========================================
+   OFFICER DASHBOARD
+========================================= */
+
+.officer-dashboard-page {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 35px;
+
+}
+
+
+/* =========================================
+   DASHBOARD HEADER
+========================================= */
+
+.officer-dashboard-header {
+
+    margin-bottom: 8px;
+
+}
+
+
+.officer-dashboard-header h1 {
+
+    color: #0055A4;
+
+    font-size: 36px;
+
+    font-weight: 700;
+
+    letter-spacing: -0.5px;
+
+    margin: 0 0 8px;
+
+}
+
+
+.officer-dashboard-header p {
+
+    color: #6B7280;
+
+    font-size: 15px;
+
+    line-height: 1.8;
+
+    max-width: 720px;
+
+    margin: 0 0 32px;
+
+}
+
+
+/* =========================================
+   ICONS
+========================================= */
+
+.officer-card-icon {
+
+    width: 22px;
+
+    height: 22px;
+
+    color: #0055A4;
+
+    opacity: 0.82;
+
+    margin-bottom: 2px;
+
+    flex-shrink: 0;
+
+}
+
+
+/* =========================================
+   STATISTICS
+========================================= */
+
+.officer-stat-grid {
+
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 25px;
+
+}
+
+
+.officer-stat-card {
+
+    background: #FFFFFF;
+
+    padding: 28px;
+
+    border-radius: 14px;
+
+    box-shadow:
+        0 6px 18px rgba(0, 0, 0, 0.08);
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 18px;
+
+    transition: 0.25s;
+
+    border-top: 4px solid #0055A4;
+
+    box-sizing: border-box;
+
+}
+
+
+.officer-stat-card:hover {
+
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 12px 28px rgba(0, 0, 0, 0.12);
+
+}
+
+
+/* =========================================
+   STATISTIC TITLE
+========================================= */
+
+.officer-stat-card h3 {
+
+    margin: 0;
+
+    font-size: 16px;
+
+    font-weight: 600;
+
+    color: #4B5563;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.4px;
+
+}
+
+
+/* =========================================
+   STATISTIC VALUE
+========================================= */
+
+.officer-stat-card span {
+
+    font-size: 38px;
+
+    font-weight: 700;
+
+    color: #0055A4;
+
+}
+
+
+/* =========================================
+   COMPLAINT SECTION
+========================================= */
+
+.officer-complaints-section {
+
+    background: #FFFFFF;
+
+    padding: 28px;
+
+    border-radius: 14px;
+
+    box-shadow:
+        0 6px 18px rgba(0, 0, 0, 0.08);
+
+    width: 100%;
+
+    box-sizing: border-box;
+
+}
+
+
+/* =========================================
+   COMPLAINT SECTION HEADING
+   SAME STYLE AS CITIZEN
+========================================= */
+
+.officer-section-heading {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    color: #0055A4;
+
+    margin: 0 0 22px;
+
+    font-size: 26px;
+
+    font-weight: 700;
+
+}
+
+
+/* =========================================
+   TABLE WRAPPER
+========================================= */
+
+.officer-complaint-table-wrapper {
+
+    width: 100%;
+
+    max-width: 100%;
+
+    overflow-x: auto;
+
+    overflow-y: hidden;
+
+    -webkit-overflow-scrolling: touch;
+
+    scrollbar-width: thin;
+
+    box-sizing: border-box;
+
+}
+
+
+/* =========================================
+   TABLE
+========================================= */
+
+.officer-complaint-table {
+
+    width: 100%;
+
+    min-width: 760px;
+
+    border-collapse: collapse;
+
+    overflow: hidden;
+
+    border-radius: 10px;
+
+}
+
+
+/* =========================================
+   TABLE HEADER
+========================================= */
+
+.officer-complaint-table thead {
+
+    background: #0055A4;
+
+}
+
+
+.officer-complaint-table th {
+
+    color: #FFFFFF;
+
+    background: #0055A4;
+
+    padding: 15px;
+
+    text-align: left;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+    white-space: nowrap;
+
+}
+
+
+/* =========================================
+   TABLE HEADER ICONS
+   SAME AS CITIZEN TABLE
+========================================= */
+
+.officer-complaint-table th svg {
+
+    margin-right: 8px;
+
+    vertical-align: middle;
+
+    flex-shrink: 0;
+
+}
+
+
+/* =========================================
+   TABLE BODY
+========================================= */
+
+.officer-complaint-table td {
+
+    padding: 16px;
+
+    border-bottom: 1px solid #E5E7EB;
+
+    color: #374151;
+
+    font-size: 15px;
+
+    vertical-align: middle;
+
+    white-space: nowrap;
+
+}
+
+
+.officer-complaint-table tbody tr {
+
+    transition: 0.2s;
+
+}
+
+
+.officer-complaint-table tbody tr:hover {
+
+    background: #F8FAFC;
+
+}
+
+
+.officer-complaint-table tbody tr:last-child td {
+
+    border-bottom: none;
+
+}
+
+
+.officer-complaint-table td strong {
+
+    color: #172033;
+
+    font-weight: 600;
+
+}
+
+
+/* =========================================
+   STATUS BADGES
+========================================= */
+
+.officer-status-badge {
+
+    display: inline-block;
+
+    padding: 6px 12px;
+
+    border-radius: 999px;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    white-space: nowrap;
+
+}
+
+
+/* =========================================
+   PENDING
+========================================= */
+
+.status-pending {
+
+    background: #FEF3C7;
+
+    color: #92400E;
+
+}
+
+
+/* =========================================
+   ASSIGNED
+========================================= */
+
+.status-assigned {
+
+    background: #DBEAFE;
+
+    color: #1D4ED8;
+
+}
+
+
+/* =========================================
+   IN PROGRESS
+========================================= */
+
+.status-in-progress {
+
+    background: #E0F2FE;
+
+    color: #0369A1;
+
+}
+
+
+/* =========================================
+   ESCALATED
+========================================= */
+
+.status-escalated {
+
+    background: #FEE2E2;
+
+    color: #B91C1C;
+
+}
+
+
+/* =========================================
+   RESOLVED
+========================================= */
+
+.status-resolved {
+
+    background: #DCFCE7;
+
+    color: #166534;
+
+}
+
+
+/* =========================================
+   DEFAULT STATUS
+========================================= */
+
+.status-default {
+
+    background: #F3F4F6;
+
+    color: #374151;
+
+}
+
+
+/* =========================================
+   EMPTY STATE
+========================================= */
+
+.officer-empty-state {
+
+    text-align: center;
+
+    color: #6B7280;
+
+    padding: 45px;
+
+    font-size: 15px;
+
+}
+
+
+.officer-empty-state h3 {
+
+    margin: 0 0 8px;
+
+    color: #374151;
+
+    font-size: 18px;
+
+    font-weight: 600;
+
+}
+
+
+.officer-empty-state p {
+
+    margin: 0;
+
+    color: #6B7280;
+
+    font-size: 15px;
+
+    line-height: 1.5;
+
+}
+
+
+/* =========================================
+   LOADING
+========================================= */
+
+.officer-dashboard-loading {
+
+    min-height: 60vh;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    color: #6B7280;
+
+    font-size: 15px;
+
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 1000px) {
+
+    .officer-stat-grid {
+
+        grid-template-columns: repeat(2, 1fr);
+
+        gap: 20px;
+
+    }
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 700px) {
+
+    .officer-dashboard-page {
+
+        gap: 28px;
+
+    }
+
+
+    /* -----------------------------
+       HEADER
+    ----------------------------- */
+
+    .officer-dashboard-header {
+
+        margin-bottom: 0;
+
+    }
+
+
+    .officer-dashboard-header h1 {
+
+        font-size: 30px;
+
+    }
+
+
+    .officer-dashboard-header p {
+
+        font-size: 14px;
+
+        line-height: 1.7;
+
+        margin-bottom: 28px;
+
+    }
+
+
+    /* -----------------------------
+       ICONS
+    ----------------------------- */
+
+    .officer-card-icon {
+
+        width: 22px;
+
+        height: 22px;
+
+    }
+
+
+    /* -----------------------------
+       STATISTICS
+    ----------------------------- */
+
+    .officer-stat-grid {
+
+        grid-template-columns: 1fr;
+
+        gap: 16px;
+
+    }
+
+
+    .officer-stat-card {
+
+        padding: 24px;
+
+    }
+
+
+    .officer-stat-card h3 {
+
+        font-size: 15px;
+
+    }
+
+
+    .officer-stat-card span {
+
+        font-size: 34px;
+
+    }
+
+
+    /* -----------------------------
+       COMPLAINT SECTION
+    ----------------------------- */
+
+    .officer-complaints-section {
+
+        width: 100%;
+
+        max-width: 100%;
+
+        padding: 22px 18px;
+
+        border-radius: 14px;
+
+        box-sizing: border-box;
+
+        overflow: hidden;
+
+    }
+
+
+    /* -----------------------------
+       COMPLAINT HEADING
+    ----------------------------- */
+
+    .officer-section-heading {
+
+        font-size: 23px;
+
+        gap: 10px;
+
+        margin-bottom: 18px;
+
+    }
+
+
+    /* -----------------------------
+       TABLE
+    ----------------------------- */
+
+    .officer-complaint-table-wrapper {
+
+        display: block;
+
+        width: 100%;
+
+        max-width: 100%;
+
+        overflow-x: auto;
+
+        overflow-y: hidden;
+
+        -webkit-overflow-scrolling: touch;
+
+        scrollbar-width: thin;
+
+        box-sizing: border-box;
+
+    }
+
+
+    .officer-complaint-table {
+
+        width: max-content;
+
+        min-width: 700px;
+
+        border-collapse: collapse;
+
+    }
+
+
+    .officer-complaint-table th {
+
+        padding: 13px 14px;
+
+        font-size: 14px;
+
+        white-space: nowrap;
+
+    }
+
+
+    .officer-complaint-table th svg {
+
+        margin-right: 6px;
+
+    }
+
+
+    .officer-complaint-table td {
+
+        padding: 14px;
+
+        font-size: 14px;
+
+        white-space: nowrap;
+
+    }
+
+
+    .officer-status-badge {
+
+        font-size: 12px;
+
+        padding: 6px 12px;
+
+    }
+
+
+    /* -----------------------------
+       EMPTY STATE
+    ----------------------------- */
+
+    .officer-empty-state {
+
+        padding: 40px 20px;
+
+    }
+
+}
+
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 450px) {
+
+    .officer-dashboard-page {
+
+        gap: 24px;
+
+    }
+
+
+    /* -----------------------------
+       HEADER
+    ----------------------------- */
+
+    .officer-dashboard-header h1 {
+
+        font-size: 26px;
+
+    }
+
+
+    .officer-dashboard-header p {
+
+        font-size: 13px;
+
+        line-height: 1.6;
+
+        margin-bottom: 24px;
+
+    }
+
+
+    /* -----------------------------
+       STATISTICS
+    ----------------------------- */
+
+    .officer-stat-card {
+
+        padding: 22px 20px;
+
+    }
+
+
+    .officer-stat-card h3 {
+
+        font-size: 14px;
+
+    }
+
+
+    .officer-stat-card span {
+
+        font-size: 32px;
+
+    }
+
+
+    /* -----------------------------
+       COMPLAINT SECTION
+    ----------------------------- */
+
+    .officer-complaints-section {
+
+        width: 100%;
+
+        max-width: 100%;
+
+        padding: 20px 15px;
+
+        border-radius: 12px;
+
+        box-sizing: border-box;
+
+        overflow: hidden;
+
+    }
+
+
+    .officer-section-heading {
+
+        font-size: 21px;
+
+        gap: 8px;
+
+        margin-bottom: 18px;
+
+    }
+
+
+    /* -----------------------------
+       TABLE
+    ----------------------------- */
+
+    .officer-complaint-table-wrapper {
+
+        width: 100%;
+
+        max-width: 100%;
+
+        overflow-x: auto;
+
+        overflow-y: hidden;
+
+        -webkit-overflow-scrolling: touch;
+
+        scrollbar-width: thin;
+
+        box-sizing: border-box;
+
+    }
+
+
+    .officer-complaint-table {
+
+        width: max-content;
+
+        min-width: 650px;
+
+    }
+
+
+    .officer-complaint-table th {
+
+        padding: 12px 14px;
+
+        font-size: 13px;
+
+        white-space: nowrap;
+
+    }
+
+
+    .officer-complaint-table th svg {
+
+        margin-right: 5px;
+
+    }
+
+
+    .officer-complaint-table td {
+
+        padding: 13px 14px;
+
+        font-size: 13px;
+
+        white-space: nowrap;
+
+    }
+
+
+    .officer-empty-state {
+
+        padding: 35px 20px;
+
+    }
+
+}
+
+
+/* =========================================
+   VERY SMALL MOBILE
+========================================= */
+
+@media (max-width: 350px) {
+
+    .officer-dashboard-page {
+
+        gap: 22px;
+
+    }
+
+
+    .officer-dashboard-header h1 {
+
+        font-size: 24px;
+
+    }
+
+
+    .officer-stat-card {
+
+        padding: 20px 18px;
+
+    }
+
+
+    .officer-stat-value {
+
+        font-size: 30px;
+
+    }
+
+
+    .officer-complaints-section {
+
+        padding: 18px 12px;
+
+    }
+
+
+    .officer-section-heading {
+
+        font-size: 20px;
+
+    }
+
+
+    .officer-complaint-table-wrapper {
+
+        width: 100%;
+
+        max-width: 100%;
+
+        overflow-x: auto;
+
+        overflow-y: hidden;
+
+        -webkit-overflow-scrolling: touch;
+
+        scrollbar-width: thin;
+
+        box-sizing: border-box;
+
+        touch-action: pan-x;
+
+    }
+
+
+    .officer-complaint-table {
+
+        width: max-content;
+
+        min-width: 650px;
+
+        border-collapse: collapse;
+
+    }
+
+
+    .officer-complaint-table th {
+
+        padding: 11px 12px;
+
+        font-size: 12px;
+
+    }
+
+
+    .officer-complaint-table td {
+
+        padding: 12px;
+
+        font-size: 12px;
+
+    }
+
+}

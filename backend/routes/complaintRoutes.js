@@ -16,6 +16,9 @@ const {
   getAllComplaints,
   getComplaintDetails,
   getDashboardStats,
+  startComplaintWork,
+  resolveComplaint,
+  escalateComplaint
 } = require("../controllers/complaintController");
 
 const router = express.Router();
@@ -23,9 +26,6 @@ const router = express.Router();
 // =================================
 // PREDICT COMPLAINT
 // =================================
-// Image is kept only in RAM.
-// It is sent to the Flask ML service.
-// It is NOT saved in uploads.
 router.post(
   "/predict",
   verifyToken,
@@ -36,8 +36,6 @@ router.post(
 // =================================
 // CREATE COMPLAINT
 // =================================
-// Image is permanently saved in uploads
-// only when a NEW complaint is created.
 router.post(
   "/create",
   verifyToken,
@@ -49,15 +47,6 @@ router.post(
 // =================================
 // UPDATE / EDIT COMPLAINT
 // =================================
-// Citizen can edit only their own
-// Pending / Assigned complaint.
-//
-// Currently updates:
-// - title
-// - description
-//
-// PUT example:
-// /api/complaints/:id
 router.put(
   "/:id",
   verifyToken,
@@ -76,7 +65,6 @@ router.get(
 // =================================
 // GET ALL COMPLAINTS
 // =================================
-// Only officers can access this.
 router.get(
   "/all",
   verifyToken,
@@ -99,6 +87,53 @@ router.get(
 );
 
 // =================================
+// START COMPLAINT WORK
+// =================================
+
+router.post(
+  "/:id/start",
+  verifyToken,
+  authorizeRoles(
+    "juniorEngineer",
+    "assistantExecutiveEngineer",
+    "executiveEngineer"
+  ),
+  startComplaintWork
+);
+
+
+// =================================
+// RESOLVE COMPLAINT
+// =================================
+
+router.post(
+  "/:id/resolve",
+  verifyToken,
+  authorizeRoles(
+    "juniorEngineer",
+    "assistantExecutiveEngineer",
+    "executiveEngineer"
+  ),
+  resolveComplaint
+);
+
+
+// =================================
+// MANUAL ESCALATION
+// =================================
+
+router.post(
+  "/:id/escalate",
+  verifyToken,
+  authorizeRoles(
+    "juniorEngineer",
+    "assistantExecutiveEngineer",
+    "executiveEngineer"
+  ),
+  escalateComplaint
+);
+
+// =================================
 // GET COMPLAINT DETAILS
 // =================================
 router.get(
@@ -106,5 +141,7 @@ router.get(
   verifyToken,
   getComplaintDetails
 );
+
+
 
 module.exports = router;

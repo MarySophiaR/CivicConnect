@@ -4,44 +4,153 @@ const compression = require("compression");
 const rateLimit = require("express-rate-limit");
 const cors = require("cors");
 const path = require("path");
+
 require("dotenv").config();
 
 const connectDB = require("./config/db");
 
+/* =========================================================
+   ROUTES
+========================================================= */
+
 const authRoutes = require("./routes/authRoutes");
 const complaintRoutes = require("./routes/complaintRoutes");
-const municipalCommissionerRoutes = require("./routes/municipalCommissionerRoutes");
-const juniorEngineerRoutes = require("./routes/juniorEngineerRoutes");
-const assistantExecutiveEngineerRoutes = require("./routes/assistantExecutiveEngineerRoutes");
-const executiveEngineerRoutes = require("./routes/executiveEngineerRoutes");
-const dashboardRoutes = require("./routes/dashboardRoutes");
-const systemAdminRoutes = require("./routes/systemAdminRoutes");
+
+const municipalCommissionerRoutes = require(
+  "./routes/municipalCommissionerRoutes"
+);
+
+const juniorEngineerRoutes = require(
+  "./routes/juniorEngineerRoutes"
+);
+
+const assistantExecutiveEngineerRoutes = require(
+  "./routes/assistantExecutiveEngineerRoutes"
+);
+
+const executiveEngineerRoutes = require(
+  "./routes/executiveEngineerRoutes"
+);
+
+const dashboardRoutes = require(
+  "./routes/dashboardRoutes"
+);
+
+const systemAdminRoutes = require(
+  "./routes/systemAdminRoutes"
+);
+
+const alertRoutes =
+  require("./routes/alertRoutes");
+
+/* =========================================================
+   JOBS
+========================================================= */
 
 const escalationJob = require("./jobs/escalationJob");
 
+
+/* =========================================================
+   APP
+========================================================= */
+
 const app = express();
 
-// ---------------------------
-// Rate Limiter
-// ---------------------------
-const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
-  max: 100,
-  message: {
-    message: "Too many requests. Please try again after 15 minutes.",
-  },
-  standardHeaders: true,
-  legacyHeaders: false,
+
+/* =========================================================
+   CORS
+========================================================= */
+
+const corsOptions = {
+  origin: [
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+  ],
+
+  credentials: true,
+
+  methods: [
+    "GET",
+    "POST",
+    "PUT",
+    "PATCH",
+    "DELETE",
+    "OPTIONS",
+  ],
+
+  allowedHeaders: [
+    "Origin",
+    "X-Requested-With",
+    "Content-Type",
+    "Accept",
+    "Authorization",
+  ],
+
+  optionsSuccessStatus: 204,
+};
+
+app.use(cors(corsOptions));
+
+
+/* =========================================================
+   OPTIONS / PREFLIGHT
+========================================================= */
+
+app.use((req, res, next) => {
+
+  if (req.method === "OPTIONS") {
+
+    res.header(
+      "Access-Control-Allow-Origin",
+      req.headers.origin ||
+        "http://localhost:5173"
+    );
+
+    res.header(
+      "Access-Control-Allow-Credentials",
+      "true"
+    );
+
+    res.header(
+      "Access-Control-Allow-Methods",
+      "GET,POST,PUT,PATCH,DELETE,OPTIONS"
+    );
+
+    res.header(
+      "Access-Control-Allow-Headers",
+      "Origin,X-Requested-With,Content-Type,Accept,Authorization"
+    );
+
+    return res.sendStatus(204);
+  }
+
+  next();
+
 });
 
-// ---------------------------
-// Connect Database
-// ---------------------------
+
+/* =========================================================
+   REQUEST LOGGER
+========================================================= */
+
+app.use((req, res, next) => {
+
+  next();
+
+});
+
+
+/* =========================================================
+   CONNECT DATABASE
+========================================================= */
+
 connectDB();
 
-// ---------------------------
-// Middleware
-// ---------------------------
+
+/* =========================================================
+   SECURITY
+========================================================= */
+
 app.use(
   helmet({
     crossOriginResourcePolicy: {
@@ -50,13 +159,48 @@ app.use(
   })
 );
 
+
+/* =========================================================
+   COMPRESSION
+========================================================= */
+
 app.use(compression());
+
+
+/* =========================================================
+   RATE LIMITER
+========================================================= */
+
+const limiter = rateLimit({
+
+  windowMs: 15 * 60 * 1000,
+
+  max: 100,
+
+  message: {
+    message:
+      "Too many requests. Please try again after 15 minutes.",
+  },
+
+  standardHeaders: true,
+
+  legacyHeaders: false,
+
+  skip: (req) =>
+    req.method === "OPTIONS",
+
+});
 
 app.use(limiter);
 
-app.use(cors());
 
-app.use(express.json());
+/* =========================================================
+   BODY PARSERS
+========================================================= */
+
+app.use(
+  express.json()
+);
 
 app.use(
   express.urlencoded({
@@ -64,53 +208,209 @@ app.use(
   })
 );
 
+
+/* =========================================================
+   STATIC UPLOADS
+========================================================= */
+
 app.use(
   "/uploads",
-  express.static(path.join(__dirname, "uploads"))
+  express.static(
+    path.join(
+      __dirname,
+      "uploads"
+    )
+  )
 );
 
-// ---------------------------
-// Routes
-// ---------------------------
-app.use("/api/auth", authRoutes);
 
-app.use("/api/complaints", complaintRoutes);
+/* =========================================================
+   API ROUTES
+========================================================= */
 
-app.use("/api/system-admin", systemAdminRoutes);
 
-app.use("/api/junior-engineer", juniorEngineerRoutes);
+/* ---------------------------------------------------------
+   AUTH
+--------------------------------------------------------- */
+
+app.use(
+  "/api/auth",
+  authRoutes
+);
+
+
+/* ---------------------------------------------------------
+   COMPLAINTS
+
+--------------------------------------------------------- */
+
+app.use(
+  "/api/complaints",
+  complaintRoutes
+);
+
+
+/* ---------------------------------------------------------
+   SYSTEM ADMIN
+--------------------------------------------------------- */
+
+app.use(
+  "/api/system-admin",
+  systemAdminRoutes
+);
+
+
+/* ---------------------------------------------------------
+   JUNIOR ENGINEER
+--------------------------------------------------------- */
+
+app.use(
+  "/api/junior-engineer",
+  juniorEngineerRoutes
+);
+
+
+/* ---------------------------------------------------------
+   ASSISTANT EXECUTIVE ENGINEER
+--------------------------------------------------------- */
 
 app.use(
   "/api/assistant-executive-engineer",
   assistantExecutiveEngineerRoutes
 );
 
+
+/* ---------------------------------------------------------
+   EXECUTIVE ENGINEER
+--------------------------------------------------------- */
+
 app.use(
   "/api/executive-engineer",
   executiveEngineerRoutes
 );
 
-app.use("/api/municipal-commissioner", municipalCommissionerRoutes);
 
-app.use("/api/dashboard", dashboardRoutes);
+/* ---------------------------------------------------------
+   MUNICIPAL COMMISSIONER
+--------------------------------------------------------- */
 
-// ---------------------------
-// Home Route
-// ---------------------------
-app.get("/", (req, res) => {
-  res.json({
-    message: "Smart Issue Detection Backend Running!",
-  });
-});
+app.use(
+  "/api/municipal-commissioner",
+  municipalCommissionerRoutes
+);
 
-// ---------------------------
-// Server
-// ---------------------------
-const PORT = process.env.PORT || 5001;
+/* ---------------------------------------------------------
+   ALERTS
+--------------------------------------------------------- */
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+app.use(
+  "/api/alerts",
+  alertRoutes
+);
 
-  // Start SLA Escalation Cron Job
-  escalationJob();
-});
+/* ---------------------------------------------------------
+   DASHBOARD
+--------------------------------------------------------- */
+
+app.use(
+  "/api/dashboard",
+  dashboardRoutes
+);
+
+
+/* =========================================================
+   HOME
+========================================================= */
+
+app.get(
+  "/",
+  (req, res) => {
+
+    res.json({
+      message:
+        "Smart Issue Detection Backend Running!",
+    });
+
+  }
+);
+
+
+/* =========================================================
+   404
+========================================================= */
+
+app.use(
+  (req, res) => {
+
+
+    res.status(404).json({
+
+      message:
+        "Route not found",
+
+      method:
+        req.method,
+
+      path:
+        req.originalUrl,
+
+    });
+
+  }
+);
+
+
+/* =========================================================
+   GLOBAL ERROR HANDLER
+========================================================= */
+
+app.use(
+  (
+    err,
+    req,
+    res,
+    next
+  ) => {
+
+    console.error(
+      "Server Error:",
+      err
+    );
+
+    res.status(
+      err.status || 500
+    ).json({
+
+      message:
+        err.message ||
+        "Internal server error",
+
+    });
+
+  }
+);
+
+
+/* =========================================================
+   SERVER
+========================================================= */
+
+const PORT =
+  process.env.PORT || 5001;
+
+app.listen(
+  PORT,
+  () => {
+
+    console.log(
+      `Server running on http://localhost:${PORT}`
+    );
+
+    /* -------------------------------------------------------
+       START SLA ESCALATION JOB
+    ------------------------------------------------------- */
+
+    escalationJob();
+
+  }
+);

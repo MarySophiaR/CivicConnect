@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import API from "../../api/axios";
+import { Eye, EyeOff } from "lucide-react";
 import logo from "../../assets/logo.png";
 
 function Register() {
@@ -14,6 +15,8 @@ function Register() {
         email: "",
         password: ""
     });
+
+    const [showPassword, setShowPassword] = useState(false);
 
     const handleChange = (e) => {
 
@@ -36,7 +39,10 @@ function Register() {
             localStorage.setItem("token", response.data.token);
 
             // Store User
-            localStorage.setItem("user", JSON.stringify(response.data.user));
+            localStorage.setItem(
+                "user",
+                JSON.stringify(response.data.user)
+            );
 
             toast.success(response.data.message);
 
@@ -88,85 +94,132 @@ function Register() {
     };
 
     return (
-      <div className="register-page">
-        <div className="register-card">
-          {/* Left Section */}
+        <div className="register-page">
 
-          <div className="register-left">
-            <img src={logo} alt="CivicConnect Logo" className="register-logo" />
+            <div className="register-card">
 
-            <h1 className="brand-logo">
-              <span className="brand-initial">C</span>
-              <span className="brand-rest">ivic</span>
-              <span className="brand-initial">C</span>
-              <span className="brand-rest">onnect</span>
-            </h1>
+                {/* Left Section */}
 
-            <p>Smart Civic Issue Reporting Portal</p>
-          </div>
+                <div className="register-left">
 
-          {/* Right Section */}
+                    <img
+                        src={logo}
+                        alt="CivicConnect Logo"
+                        className="register-logo"
+                    />
 
-          <div className="register-right">
-            <h2>Create Your Account</h2>
+                    <h1 className="brand-logo">
 
-            <p className="subtitle">
-              Join CivicConnect and help build a cleaner, safer, and smarter
-              community.
-            </p>
+                        <span className="brand-initial">
+                            CivicConnect
+                        </span>
 
-            <form onSubmit={handleSubmit}>
-              <div className="input-group">
-                <label>Full Name</label>
+                    </h1>
 
-                <input
-                  type="text"
-                  name="name"
-                  placeholder="Enter your full name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
+                    <p>
+                        Smart Civic Issue Reporting Portal
+                    </p>
 
-              <div className="input-group">
-                <label>Email</label>
+                </div>
 
-                <input
-                  type="email"
-                  name="email"
-                  placeholder="Enter your email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
+                {/* Right Section */}
 
-              <div className="input-group">
-                <label>Password</label>
+                <div className="register-right">
 
-                <input
-                  type="password"
-                  name="password"
-                  placeholder="Create a password"
-                  value={formData.password}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
+                    <h2>Create Your Account</h2>
 
-              <button type="submit">Create Account</button>
-            </form>
+                    <p className="subtitle">
+                        Join CivicConnect and help build a cleaner, safer, and smarter
+                        community.
+                    </p>
 
-            <p className="login-link">
-              Already a CivicConnect member?
-              <Link to="/"> Sign In</Link>
-            </p>
-          </div>
+                    <form onSubmit={handleSubmit}>
+
+                        <div className="input-group">
+
+                            <label>Full Name</label>
+
+                            <input
+                                type="text"
+                                name="name"
+                                placeholder="Enter your full name"
+                                value={formData.name}
+                                onChange={handleChange}
+                                required
+                            />
+
+                        </div>
+
+                        <div className="input-group">
+
+                            <label>Email</label>
+
+                            <input
+                                type="email"
+                                name="email"
+                                placeholder="Enter your email"
+                                value={formData.email}
+                                onChange={handleChange}
+                                required
+                            />
+
+                        </div>
+
+                        <div className="input-group">
+
+                            <label>Password</label>
+
+                            <div className="password-input-wrapper">
+
+                                <input
+                                    type={showPassword ? "text" : "password"}
+                                    name="password"
+                                    placeholder="Create a password"
+                                    value={formData.password}
+                                    onChange={handleChange}
+                                    required
+                                />
+
+                                <button
+                                    type="button"
+                                    className="password-toggle"
+                                    onClick={() =>
+                                        setShowPassword(!showPassword)
+                                    }
+                                    aria-label={
+                                        showPassword
+                                            ? "Hide password"
+                                            : "Show password"
+                                    }
+                                >
+                                    {showPassword ? (
+                                        <Eye size={20} />
+                                    ) : (
+                                        <EyeOff size={20} />
+                                    )}
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                        <button type="submit">
+                            Create Account
+                        </button>
+
+                    </form>
+
+                    <p className="login-link">
+                        Already a CivicConnect member?
+                        <Link to="/"> Sign In</Link>
+                    </p>
+
+                </div>
+
+            </div>
+
         </div>
-      </div>
     );
-
 }
 
 export default Register;

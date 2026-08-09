@@ -10,11 +10,11 @@
 
 }
 
-.complaint-container h1{
+.title{
 
     color:#0055A4;
 
-    margin-bottom:30px;
+    margin-bottom:28px;
 
     font-size:30px;
 
@@ -228,6 +228,141 @@
     to {
         opacity: 1;
         transform: translateY(0);
+    }
+
+}
+
+
+/* =====================================
+   RESPONSIVE
+   Added only for smaller screens
+===================================== */
+
+@media (max-width: 700px) {
+
+    .complaint-container {
+
+        padding: 25px 20px;
+
+        border-radius: 12px;
+
+    }
+
+    .complaint-container h1 {
+
+        font-size: 26px;
+
+        margin-bottom: 24px;
+
+    }
+
+    .complaint-form {
+
+        gap: 17px;
+
+    }
+
+    .complaint-form input,
+    .complaint-form textarea {
+
+        padding: 13px;
+
+        font-size: 14px;
+
+        box-sizing: border-box;
+
+    }
+
+    .complaint-form input[type="file"] {
+
+        padding: 9px;
+
+    }
+
+    .complaint-form button {
+
+        padding: 13px;
+
+        font-size: 15px;
+
+    }
+
+    .location-success {
+
+        padding: 13px;
+
+        font-size: 14px;
+
+    }
+
+    .duplicate-card {
+
+        padding: 18px;
+
+        margin-top: 18px;
+
+        border-radius: 12px;
+
+    }
+
+    .duplicate-card h3 {
+
+        font-size: 18px;
+
+    }
+
+    .duplicate-card p {
+
+        font-size: 14px;
+
+        line-height: 1.6;
+
+    }
+
+    .duplicate-card .duplicate-actions {
+
+        flex-direction: column;
+
+        gap: 10px;
+
+    }
+
+    .duplicate-btn {
+
+        width: 100%;
+
+        padding: 11px 16px;
+
+        font-size: 14px;
+
+    }
+
+}
+
+
+/* =====================================
+   VERY SMALL SCREENS
+===================================== */
+
+@media (max-width: 400px) {
+
+    .complaint-container {
+
+        padding: 20px 15px;
+
+    }
+
+    .complaint-container h1 {
+
+        font-size: 23px;
+
+    }
+
+    .complaint-form input,
+    .complaint-form textarea {
+
+        padding: 12px;
+
     }
 
 }

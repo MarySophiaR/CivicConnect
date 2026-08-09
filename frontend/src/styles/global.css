@@ -4,10 +4,17 @@
     box-sizing: border-box;
 }
 
+html {
+    width: 100%;
+    overflow-x: hidden;
+}
+
 body {
     font-family: "Poppins", sans-serif;
     background-color: #F8FAFC;
     color: #1F2937;
+    width: 100%;
+    overflow-x: hidden;
 }
 
 a {
@@ -65,5 +72,37 @@ button {
     -webkit-background-clip:text;
     -webkit-text-fill-color:transparent;
     background-clip:text;
+
+}
+
+
+/* =========================================
+   GLOBAL RESPONSIVE BASE
+========================================= */
+
+img {
+    max-width: 100%;
+}
+
+input,
+textarea,
+select {
+    max-width: 100%;
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+
+    .brand-logo {
+        font-size: 30px;
+    }
+
+    .brand-logo-navbar {
+        font-size: 24px;
+    }
 
 }

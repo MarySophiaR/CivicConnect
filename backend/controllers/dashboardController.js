@@ -54,30 +54,37 @@ const juniorEngineerDashboard = async (req, res) => {
 
     try {
 
+        const officerId = req.user.id || req.user._id;
+
+        const totalComplaints = await Complaint.countDocuments({
+            assignedTo: officerId
+        });
+
         const assigned = await Complaint.countDocuments({
-            assignedTo: req.user.id,
+            assignedTo: officerId,
             status: "Assigned"
         });
 
         const inProgress = await Complaint.countDocuments({
-            assignedTo: req.user.id,
+            assignedTo: officerId,
             status: "In Progress"
         });
 
         const resolved = await Complaint.countDocuments({
-            assignedTo: req.user.id,
+            assignedTo: officerId,
             status: "Resolved"
         });
 
         return res.status(200).json({
+
+            totalComplaints,
             assigned,
             inProgress,
             resolved
+
         });
 
     } catch (error) {
-
-        console.error(error);
 
         return res.status(500).json({
             message: "Server Error"
@@ -86,6 +93,7 @@ const juniorEngineerDashboard = async (req, res) => {
     }
 
 };
+
 
 // ---------------------------------
 // Assistant Executive Engineer Dashboard
@@ -94,30 +102,37 @@ const assistantExecutiveEngineerDashboard = async (req, res) => {
 
     try {
 
+        const officerId = req.user.id || req.user._id;
+
+        const totalComplaints = await Complaint.countDocuments({
+            assignedTo: officerId
+        });
+
         const assigned = await Complaint.countDocuments({
-            assignedTo: req.user.id,
+            assignedTo: officerId,
             status: "Assigned"
         });
 
         const inProgress = await Complaint.countDocuments({
-            assignedTo: req.user.id,
+            assignedTo: officerId,
             status: "In Progress"
         });
 
         const resolved = await Complaint.countDocuments({
-            assignedTo: req.user.id,
+            assignedTo: officerId,
             status: "Resolved"
         });
 
         return res.status(200).json({
+
+            totalComplaints,
             assigned,
             inProgress,
             resolved
+
         });
 
     } catch (error) {
-
-        console.error(error);
 
         return res.status(500).json({
             message: "Server Error"
@@ -126,6 +141,7 @@ const assistantExecutiveEngineerDashboard = async (req, res) => {
     }
 
 };
+
 
 // ---------------------------------
 // Executive Engineer Dashboard
@@ -134,30 +150,38 @@ const executiveEngineerDashboard = async (req, res) => {
 
     try {
 
+        const officerId = req.user.id || req.user._id;
+
+        const totalComplaints = await Complaint.countDocuments({
+            assignedTo: officerId
+        });
+
         const assigned = await Complaint.countDocuments({
-            assignedTo: req.user.id,
+            assignedTo: officerId,
             status: "Assigned"
         });
 
         const inProgress = await Complaint.countDocuments({
-            assignedTo: req.user.id,
+            assignedTo: officerId,
             status: "In Progress"
         });
 
         const resolved = await Complaint.countDocuments({
-            assignedTo: req.user.id,
+            assignedTo: officerId,
             status: "Resolved"
         });
 
         return res.status(200).json({
+
+            totalComplaints,
             assigned,
             inProgress,
             resolved
+
         });
 
     } catch (error) {
 
-        console.error(error);
 
         return res.status(500).json({
             message: "Server Error"
@@ -167,6 +191,7 @@ const executiveEngineerDashboard = async (req, res) => {
 
 };
 
+
 // ---------------------------------
 // Municipal Commissioner Dashboard
 // ---------------------------------
@@ -174,30 +199,34 @@ const municipalCommissionerDashboard = async (req, res) => {
 
     try {
 
-        const totalComplaints = await Complaint.countDocuments();
+        const totalComplaints =
+            await Complaint.countDocuments();
 
-        const assigned = await Complaint.countDocuments({
-            status: "Assigned"
-        });
+        const assigned =
+            await Complaint.countDocuments({
+                status: "Assigned"
+            });
 
-        const inProgress = await Complaint.countDocuments({
-            status: "In Progress"
-        });
+        const inProgress =
+            await Complaint.countDocuments({
+                status: "In Progress"
+            });
 
-        const resolved = await Complaint.countDocuments({
-            status: "Resolved"
-        });
+        const resolved =
+            await Complaint.countDocuments({
+                status: "Resolved"
+            });
 
         return res.status(200).json({
+
             totalComplaints,
             assigned,
             inProgress,
             resolved
+
         });
 
     } catch (error) {
-
-        console.error(error);
 
         return res.status(500).json({
             message: "Server Error"

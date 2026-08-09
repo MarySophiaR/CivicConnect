@@ -228,15 +228,6 @@ function EditComplaint() {
             ================================= */}
             <div className="edit-button-row">
 
-
-              <button
-                type="submit"
-                className="edit-save-button"
-                disabled={saving}
-              >
-                {saving ? "Saving..." : "Save Changes"}
-              </button>
-
               <button
                 type="button"
                 className="edit-cancel-button"
@@ -244,6 +235,14 @@ function EditComplaint() {
                 disabled={saving}
               >
                 Cancel
+              </button>
+
+              <button
+                type="submit"
+                className="edit-save-button"
+                disabled={saving}
+              >
+                {saving ? "Saving..." : "Save Changes"}
               </button>
 
             </div>

@@ -9,10 +9,7 @@ function Navbar() {
           <img src={logo} alt="CivicConnect Logo" className="navbar-logo" />
 
           <h1 className="brand-logo-navbar">
-            <span className="brand-initial">C</span>
-            <span className="brand-rest">ivic</span>
-            <span className="brand-initial">C</span>
-            <span className="brand-rest">onnect</span>
+            <span className="brand-initial">CivicConnect</span>
           </h1>
         </div>
       </nav>

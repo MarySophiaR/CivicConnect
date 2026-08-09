@@ -3,8 +3,9 @@ const mongoose = require("mongoose");
 const complaintSchema = new mongoose.Schema(
   {
     // =================================
-    // Complaint Details
+    // COMPLAINT DETAILS
     // =================================
+
     title: {
       type: String,
       required: true,
@@ -18,16 +19,18 @@ const complaintSchema = new mongoose.Schema(
     },
 
     // =================================
-    // Image Path (Stored as String in MongoDB pointing to uploads/ folder)
+    // IMAGE
     // =================================
+
     image: {
       type: String,
       required: true,
     },
 
     // =================================
-    // Category
+    // CATEGORY
     // =================================
+
     category: {
       type: String,
       enum: ["pothole", "garbage", "drainage"],
@@ -36,8 +39,9 @@ const complaintSchema = new mongoose.Schema(
     },
 
     // =================================
-    // GPS Coordinates
+    // GPS COORDINATES
     // =================================
+
     latitude: {
       type: Number,
       default: null,
@@ -49,8 +53,9 @@ const complaintSchema = new mongoose.Schema(
     },
 
     // =================================
-    // Address Details
+    // ADDRESS
     // =================================
+
     address: {
       state: {
         type: String,
@@ -90,8 +95,9 @@ const complaintSchema = new mongoose.Schema(
     },
 
     // =================================
-    // Community Support
+    // COMMUNITY SUPPORT
     // =================================
+
     supportCount: {
       type: Number,
       default: 1,
@@ -113,18 +119,25 @@ const complaintSchema = new mongoose.Schema(
     ],
 
     // =================================
-    // Complaint Status
+    // COMPLAINT STATUS
     // =================================
+
     status: {
       type: String,
-      enum: ["Pending", "Assigned", "In Progress", "Resolved"],
+      enum: [
+        "Pending",
+        "Assigned",
+        "In Progress",
+        "Resolved",
+      ],
       default: "Pending",
       index: true,
     },
 
     // =================================
-    // Current Officer Level
+    // CURRENT OFFICER LEVEL
     // =================================
+
     currentLevel: {
       type: String,
       enum: [
@@ -136,8 +149,9 @@ const complaintSchema = new mongoose.Schema(
     },
 
     // =================================
-    // Assigned Officer
+    // CURRENT ASSIGNED OFFICER
     // =================================
+
     assignedTo: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
@@ -145,13 +159,15 @@ const complaintSchema = new mongoose.Schema(
     },
 
     // =================================
-    // Assignment History
+    // ASSIGNMENT HISTORY
     // =================================
+
     assignmentHistory: [
       {
         officer: {
           type: mongoose.Schema.Types.ObjectId,
           ref: "User",
+          required: true,
         },
 
         level: {
@@ -161,12 +177,67 @@ const complaintSchema = new mongoose.Schema(
             "assistantExecutiveEngineer",
             "executiveEngineer",
           ],
+          required: true,
         },
 
         assignedAt: {
           type: Date,
           default: Date.now,
         },
+
+        // =================================
+        // WHEN OFFICER STARTED WORK
+        // =================================
+
+        startedAt: {
+          type: Date,
+          default: null,
+        },
+
+        // =================================
+        // WHEN OFFICER RESOLVED COMPLAINT
+        // =================================
+
+        resolvedAt: {
+          type: Date,
+          default: null,
+        },
+
+        // =================================
+        // WHEN THIS ASSIGNMENT ENDED
+        // =================================
+
+        endedAt: {
+          type: Date,
+          default: null,
+        },
+
+        // =================================
+        // HOW ASSIGNMENT ENDED
+        // =================================
+
+        endReason: {
+          type: String,
+          enum: [
+            "resolved",
+            "manual_escalation",
+            "automatic_escalation",
+            null,
+          ],
+          default: null,
+        },
+
+        // =================================
+        // LEGACY / RESOLUTION FLAG
+        // =================================
+        //
+        // IMPORTANT:
+        //
+        // resolved = true ONLY when the officer
+        // actually resolves the complaint.
+        //
+        // Escalation does NOT mean resolved.
+        //
 
         resolved: {
           type: Boolean,
@@ -176,16 +247,18 @@ const complaintSchema = new mongoose.Schema(
     ],
 
     // =================================
-    // SLA Deadline
+    // SLA DEADLINE
     // =================================
+
     deadline: {
       type: Date,
       default: null,
     },
 
     // =================================
-    // Resolution Details
+    // RESOLUTION DETAILS
     // =================================
+
     resolvedBy: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
@@ -204,8 +277,9 @@ const complaintSchema = new mongoose.Schema(
     },
 
     // =================================
-    // Escalation History
+    // ESCALATION HISTORY
     // =================================
+
     escalationHistory: [
       {
         from: {
@@ -215,6 +289,7 @@ const complaintSchema = new mongoose.Schema(
             "assistantExecutiveEngineer",
             "executiveEngineer",
           ],
+          required: true,
         },
 
         to: {
@@ -224,23 +299,55 @@ const complaintSchema = new mongoose.Schema(
             "assistantExecutiveEngineer",
             "executiveEngineer",
           ],
+          required: true,
         },
+
+        // =================================
+        // ESCALATION REASON
+        // =================================
+        //
+        // Manual:
+        // predefined reason selected by officer.
+        //
+        // Automatic:
+        // system-generated SLA reason.
+        //
 
         reason: {
           type: String,
+          required: true,
           trim: true,
+        },
+
+        // Optional additional note for manual escalation
+
+        note: {
+          type: String,
+          trim: true,
+          default: "",
         },
 
         escalatedAt: {
           type: Date,
           default: Date.now,
         },
+
+        // =================================
+        // MANUAL / AUTOMATIC
+        // =================================
+
+        type: {
+          type: String,
+          enum: ["manual", "automatic"],
+          default: "manual",
+        },
       },
     ],
 
     // =================================
-    // Citizen Information
+    // CITIZEN
     // =================================
+
     reportedBy: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
@@ -253,4 +360,7 @@ const complaintSchema = new mongoose.Schema(
   }
 );
 
-module.exports = mongoose.model("Complaint", complaintSchema);
+module.exports = mongoose.model(
+  "Complaint",
+  complaintSchema
+);

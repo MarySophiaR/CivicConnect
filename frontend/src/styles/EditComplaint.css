@@ -414,16 +414,72 @@
 
 
 /* =========================================
-   MOBILE
+   RESPONSIVE
+   Only responsive rules added below.
 ========================================= */
 
-@media (max-width: 600px) {
+@media (max-width: 900px) {
   .edit-complaint-page {
-    padding: 30px 14px 45px;
+    padding: 38px 20px 55px;
+  }
+
+  .edit-complaint-card {
+    padding: 28px;
+  }
+
+  .edit-complaint-header {
+    margin-bottom: 32px;
+  }
+}
+
+
+@media (max-width: 700px) {
+  .edit-complaint-page {
+    padding: 32px 16px 50px;
   }
 
   .edit-complaint-header {
     margin-bottom: 28px;
+  }
+
+  .edit-complaint-header h1 {
+    font-size: 27px;
+  }
+
+  .edit-complaint-header p {
+    font-size: 14px;
+  }
+
+  .edit-complaint-card {
+    padding: 24px 20px;
+    border-radius: 12px;
+  }
+
+  .edit-form-group {
+    margin-bottom: 22px;
+  }
+
+  .edit-form-group input {
+    height: 45px;
+  }
+
+  .edit-form-group textarea {
+    min-height: 135px;
+  }
+
+  .edit-button-row {
+    margin-top: 28px;
+  }
+}
+
+
+@media (max-width: 600px) {
+  .edit-complaint-page {
+    padding: 28px 14px 45px;
+  }
+
+  .edit-complaint-header {
+    margin-bottom: 26px;
   }
 
   .edit-complaint-header h1 {
@@ -432,24 +488,77 @@
 
   .edit-complaint-header p {
     font-size: 14px;
+    line-height: 1.5;
   }
 
   .edit-complaint-card {
-    padding: 22px 20px;
+    padding: 22px 18px;
     border-radius: 12px;
   }
 
   .edit-form-group {
-    margin-bottom: 22px;
+    margin-bottom: 21px;
+  }
+
+  .edit-form-group label {
+    font-size: 13px;
+  }
+
+  .edit-form-group input,
+  .edit-form-group textarea {
+    font-size: 14px;
+  }
+
+  .edit-form-group input {
+    height: 44px;
+    padding: 0 12px;
+  }
+
+  .edit-form-group textarea {
+    min-height: 130px;
+    padding: 12px;
+  }
+
+  .edit-info-box,
+  .edit-error,
+  .edit-success {
+    font-size: 13px;
   }
 
   .edit-button-row {
     flex-direction: column-reverse;
     align-items: stretch;
+    gap: 10px;
   }
 
   .edit-cancel-button,
   .edit-save-button {
     width: 100%;
+    height: 44px;
+  }
+
+  .edit-back-button {
+    font-size: 13px;
+    margin-bottom: 17px;
+  }
+}
+
+
+@media (max-width: 400px) {
+  .edit-complaint-page {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .edit-complaint-card {
+    padding: 20px 15px;
+  }
+
+  .edit-complaint-header h1 {
+    font-size: 23px;
+  }
+
+  .edit-character-count {
+    font-size: 11px;
   }
 }

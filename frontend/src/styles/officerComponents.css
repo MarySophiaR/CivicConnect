@@ -1,0 +1,7934 @@
+/* =========================================================
+   OFFICER COMPONENTS
+   CivicConnect Officer Theme
+========================================================= */
+
+:root {
+  --officer-blue: #0055a4;
+  --officer-blue-dark: #003f7d;
+  --officer-blue-light: #eaf3ff;
+
+  --officer-bg: #f6f9fc;
+
+  --officer-text: #172033;
+  --officer-text-secondary: #4b5563;
+  --officer-text-muted: #6b7280;
+
+  --officer-border: #e2e8f0;
+
+  --officer-white: #ffffff;
+
+  --officer-shadow:
+    0 5px 18px rgba(15, 23, 42, 0.07);
+
+  --officer-shadow-hover:
+    0 12px 28px rgba(15, 23, 42, 0.11);
+}
+
+
+/* =========================================================
+   OFFICER NAVBAR
+========================================================= */
+
+.officer-navbar {
+  position: fixed;
+
+  top: 0;
+  left: 0;
+  right: 0;
+
+  height: 75px;
+
+  background: white;
+
+  display: flex;
+  align-items: center;
+
+  padding: 0 16px;
+
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+
+  z-index: 1000;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   NAVBAR LEFT
+========================================================= */
+
+.officer-navbar-left {
+  display: flex;
+
+  align-items: center;
+
+  gap: 6px;
+}
+
+
+/* =========================================================
+   NAVBAR LOGO
+========================================================= */
+
+.officer-navbar-logo {
+  width: 60px;
+  height: 60px;
+
+  object-fit: contain;
+
+  padding: 6px;
+
+  background: #ffffff;
+
+  flex-shrink: 0;
+
+  box-sizing: border-box;
+}
+
+/* =========================================
+   NAVBAR RIGHT
+========================================= */
+
+.officer-navbar-right {
+    margin-left: auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    padding-right: 12px;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================
+   NOTIFICATION CONTAINER
+========================================= */
+
+.officer-notification-container {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+}
+
+
+/* =========================================================
+   OFFICER SIDEBAR
+========================================================= */
+
+.officer-sidebar {
+   width:260px;
+
+    height:calc(100vh - 75px);
+
+    background:#0055A4;
+
+    color:white;
+
+    padding:30px 20px;
+
+    position:fixed;
+
+    left:0;
+
+    top:75px;
+
+    box-sizing:border-box;
+
+    z-index:999;
+}
+
+
+/* =========================================================
+   SIDEBAR NAVIGATION
+========================================================= */
+
+.officer-sidebar-nav {
+  display:flex;
+
+    flex-direction:column;
+
+    gap:15px;
+
+    margin-top:5px;
+}
+
+
+/* =========================================================
+   SIDEBAR LINK
+========================================================= */
+
+.officer-nav-link {
+  display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    padding:14px 18px;
+
+    border-radius:12px;
+
+    text-decoration:none;
+
+    font-size:16px;
+
+    font-weight:600;
+
+    color:white;
+
+    background:rgba(255,255,255,.10);
+
+    transition:.25s;
+}
+
+
+.officer-nav-link svg {
+  width:18px;
+
+    height:18px;
+
+    flex-shrink:0;
+
+    opacity:.85;
+}
+
+
+.officer-nav-link:hover {
+  background:rgba(255,255,255,.18);
+}
+
+
+.officer-nav-link.active {
+  background:white;
+
+    color:#0055A4;
+
+    box-shadow:0 8px 18px rgba(0,0,0,.18);
+}
+
+
+/* =========================================================
+   OFFICER LAYOUT
+========================================================= */
+
+.officer-layout {
+  width: 100%;
+
+  min-height: 100vh;
+
+  background: var(--officer-bg);
+}
+
+
+/* =========================================================
+   MAIN CONTENT
+========================================================= */
+
+.officer-main-content {
+  width: calc(100% - 260px);
+
+  min-height: calc(100vh - 75px);
+
+  margin-left: 260px;
+
+  margin-top: 58px;
+
+  padding: 30px;
+
+  background: var(--officer-bg);
+
+  box-sizing: border-box;
+
+  overflow-x: hidden;
+}
+
+
+/* =========================================================
+   PAGE CONTAINER
+========================================================= */
+
+.officer-page-container {
+  width: 100%;
+
+  max-width: 1400px;
+
+  margin: 0 auto;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   PAGE HEADER
+========================================================= */
+
+.officer-page-header {
+  margin-bottom: 26px;
+}
+
+
+/* =========================================================
+   PAGE HEADING ROW
+========================================================= */
+
+.officer-page-heading-row {
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  margin-bottom: 6px;
+}
+
+
+.officer-page-heading-row svg {
+  width: 30px;
+  height: 30px;
+
+  color: var(--officer-blue);
+
+  flex-shrink: 0;
+
+  stroke: currentColor;
+}
+
+
+.officer-page-heading-row h1,
+.officer-page-header h1 {
+  margin: 0 0 8px;
+
+  color: var(--officer-blue);
+
+  font-size: 32px;
+
+  font-weight: 700;
+
+  line-height: 1.25;
+}
+
+
+.officer-page-header p {
+  margin-bottom: 32px;
+
+  color: var(--officer-text-muted);
+
+  font-size: 15px;
+
+  line-height: 1.5;
+}
+
+
+/* =========================================================
+   COMPLAINT SECTION
+========================================================= */
+
+.officer-complaints-section {
+  width: 100%;
+
+  padding: 28px;
+
+  background: var(--officer-white);
+
+  border: 1px solid #edf1f5;
+
+  border-radius: 18px;
+
+  box-shadow: var(--officer-shadow);
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   SECTION HEADER
+========================================================= */
+
+.officer-section-header {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 16px;
+
+  margin-bottom: 24px;
+
+  padding-bottom: 16px;
+
+  border-bottom: 1px solid #edf1f5;
+}
+
+
+/* =========================================================
+   SECTION TITLE
+========================================================= */
+
+.officer-section-title {
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+}
+
+
+.officer-section-title svg {
+  width: 25px;
+  height: 25px;
+
+  color: var(--officer-blue);
+
+  stroke: currentColor;
+
+  flex-shrink: 0;
+}
+
+
+.officer-section-title h2 {
+  margin: 0;
+
+  color: var(--officer-blue);
+
+  font-size: 24px;
+
+  font-weight: 700;
+
+  line-height: 1.3;
+}
+
+
+/* =========================================================
+   COMPLAINT COUNT
+========================================================= */
+
+.officer-complaints-count {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  min-width: 34px;
+
+  height: 34px;
+
+  padding: 0 10px;
+
+  border-radius: 999px;
+
+  background: var(--officer-blue-light);
+
+  color: var(--officer-blue);
+
+  font-size: 14px;
+
+  font-weight: 700;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   COMPLAINT GRID
+========================================================= */
+
+.officer-complaints-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 24px;
+
+    width: 100%;
+
+    align-items: stretch;
+}
+
+
+/* =========================================================
+   COMPLAINT CARD
+========================================================= */
+
+.officer-complaint-card {
+    display: flex;
+
+    flex-direction: column;
+
+    width: 100%;
+
+    min-width: 0;
+
+    height: 100%;
+
+    padding: 24px;
+
+    background: #ffffff;
+
+    border: 1px solid var(--officer-border);
+
+    border-left: 5px solid var(--officer-blue);
+
+    border-radius: 14px;
+
+    box-shadow:
+        0 4px 14px rgba(15, 23, 42, 0.06);
+
+    box-sizing: border-box;
+
+    transition:
+        transform 0.22s ease,
+        box-shadow 0.22s ease,
+        border-color 0.22s ease;
+}
+
+.officer-complaint-card:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        var(--officer-shadow-hover);
+
+    border-color: #d5dee8;
+
+    border-left-color:
+        var(--officer-blue-dark);
+}
+
+
+/* =========================================================
+   CARD HEADER
+========================================================= */
+
+.officer-complaint-card-header {
+    display: flex;
+
+    align-items: flex-start;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    margin-bottom: 8px;
+}
+
+
+/* =========================================================
+   COMPLAINT HEADING
+========================================================= */
+
+.officer-complaint-heading {
+    flex: 1;
+
+    min-width: 0;
+}
+
+
+/* =========================================================
+   COMPLAINT TITLE
+========================================================= */
+
+.officer-complaint-title {
+    margin: 0;
+
+    color: var(--officer-blue);
+
+    font-size: 20px;
+
+    font-weight: 700;
+
+    line-height: 1.35;
+
+    letter-spacing: -0.1px;
+
+    overflow-wrap: anywhere;
+}
+
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+.officer-complaint-status {
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 6px 11px;
+
+    border-radius: 999px;
+
+    white-space: nowrap;
+
+    font-size: 12px;
+
+    font-weight: 650;
+
+    line-height: 1.2;
+
+    border: 1px solid transparent;
+
+    flex-shrink: 0;
+}
+
+
+/* =========================================================
+   STATUS COLORS
+========================================================= */
+
+.officer-complaint-status.pending {
+    color: #c2410c;
+
+    background: #fff7ed;
+
+    border-color: #fed7aa;
+}
+
+.officer-complaint-status.assigned {
+    color: #1d4ed8;
+
+    background: #eff6ff;
+
+    border-color: #bfdbfe;
+}
+
+.officer-complaint-status.in-progress {
+    color: #a16207;
+
+    background: #fefce8;
+
+    border-color: #fde68a;
+}
+
+.officer-complaint-status.escalated {
+    color: #b91c1c;
+
+    background: #fef2f2;
+
+    border-color: #fecaca;
+}
+
+.officer-complaint-status.resolved {
+    color: #15803d;
+
+    background: #f0fdf4;
+
+    border-color: #bbf7d0;
+}
+
+.officer-complaint-status.default {
+    color: #4b5563;
+
+    background: #f3f4f6;
+
+    border-color: #e5e7eb;
+}
+
+
+/* =========================================================
+   CATEGORY
+========================================================= */
+
+.officer-complaint-category {
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    margin-bottom: 7px;
+
+    color: var(--officer-blue);
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    line-height: 1.4;
+}
+
+.officer-complaint-category svg {
+    color: var(--officer-blue);
+
+    stroke: currentColor;
+
+    flex-shrink: 0;
+
+    width: 16px;
+
+    height: 16px;
+}
+
+
+/* =========================================================
+   DESCRIPTION
+========================================================= */
+
+.officer-complaint-description {
+    margin: 2px 0 0;
+
+    color: var(--officer-text-secondary);
+
+    font-size: 14px;
+
+    line-height: 1.55;
+
+    overflow-wrap: anywhere;
+}
+
+
+/* =========================================================
+   INFORMATION AREA
+========================================================= */
+
+.officer-complaint-info {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 16px;
+
+    padding: 16px 0;
+
+    margin-top: 14px;
+
+    border-top: 1px solid #edf1f5;
+
+    border-bottom: 1px solid #edf1f5;
+}
+
+
+/* =========================================================
+   INFORMATION ITEM
+========================================================= */
+
+.officer-complaint-info-item {
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 9px;
+
+    min-width: 0;
+}
+
+.officer-complaint-info-item > svg {
+    width: 17px;
+
+    height: 17px;
+
+    color: var(--officer-blue);
+
+    stroke: currentColor;
+
+    flex-shrink: 0;
+
+    margin-top: 2px;
+}
+
+
+/* =========================================================
+   INFORMATION CONTENT
+========================================================= */
+
+.officer-complaint-info-content {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 3px;
+
+    min-width: 0;
+}
+
+
+/* =========================================================
+   INFORMATION LABEL
+========================================================= */
+
+.officer-complaint-info-label {
+    color: #8b95a5;
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+    line-height: 1.3;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.3px;
+}
+
+
+/* =========================================================
+   INFORMATION VALUE
+========================================================= */
+
+.officer-complaint-info-value {
+    color: var(--officer-text);
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    line-height: 1.4;
+
+    overflow-wrap: anywhere;
+}
+
+
+/* =========================================================
+   CARD FOOTER
+========================================================= */
+
+.officer-complaint-card-footer {
+    width: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: flex-end;
+
+    margin-top: auto;
+
+    padding-top: 18px;
+}
+
+
+/* =========================================================
+   HIDE BOTTOM ASSIGNED
+========================================================= */
+
+.officer-bottom-assigned {
+    display: none !important;
+}
+
+
+/* =========================================================
+   VIEW DETAILS BUTTON
+========================================================= */
+
+.officer-complaint-view-btn {
+    min-height: 40px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    padding: 9px 17px;
+
+    border: 1px solid var(--officer-blue);
+
+    border-radius: 8px;
+
+    background: var(--officer-blue);
+
+    color: #ffffff;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    font-weight: 650;
+
+    line-height: 1;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.officer-complaint-view-btn:hover {
+    background: var(--officer-blue-dark);
+
+    border-color: var(--officer-blue-dark);
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 5px 12px rgba(0, 85, 164, 0.2);
+}
+
+.officer-complaint-view-btn:active {
+    transform: translateY(0);
+}
+
+.officer-complaint-view-btn svg {
+    flex-shrink: 0;
+
+    transition:
+        transform 0.2s ease;
+}
+
+.officer-complaint-view-btn:hover svg {
+    transform: translateX(3px);
+}
+
+.officer-complaint-view-btn:focus-visible {
+    outline: 2px solid var(--officer-blue);
+
+    outline-offset: 3px;
+}
+
+
+/* =========================================================
+   COMPLAINT STATUS FILTERS
+========================================================= */
+
+.officer-complaint-status-filters {
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    gap: 12px;
+
+    margin: 22px 0 38px;
+}
+
+
+/* =========================================================
+   STATUS FILTER BUTTON
+========================================================= */
+
+.officer-status-filter-button {
+    min-width: 0;
+
+    height: 52px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    padding: 0 18px;
+
+    border: 1px solid #dbe3ec;
+
+    border-radius: 9px;
+
+    background: #ffffff;
+
+    color: #475569;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    font-weight: 650;
+
+    line-height: 1;
+
+    cursor: pointer;
+
+    box-sizing: border-box;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+/* =========================================================
+   STATUS FILTER BUTTON - HOVER
+========================================================= */
+
+.officer-status-filter-button:hover {
+    background: #f8fafc;
+
+    border-color: var(--officer-blue);
+
+    color: var(--officer-blue);
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 4px 10px
+        rgba(0, 85, 164, 0.08);
+}
+
+
+/* =========================================================
+   STATUS FILTER BUTTON - ACTIVE
+========================================================= */
+
+.officer-status-filter-button.active {
+    background: var(--officer-blue);
+
+    border-color: var(--officer-blue);
+
+    color: #ffffff;
+
+    box-shadow:
+        0 4px 10px
+        rgba(0, 85, 164, 0.16);
+}
+
+
+/* =========================================================
+   STATUS FILTER BUTTON - ACTIVE HOVER
+========================================================= */
+
+.officer-status-filter-button.active:hover {
+    background: var(--officer-blue-dark);
+
+    border-color: var(--officer-blue-dark);
+
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   STATUS FILTER COUNT
+========================================================= */
+
+.officer-status-filter-count {
+    min-width: 22px;
+
+    height: 22px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 0 6px;
+
+    border-radius: 999px;
+
+    background: #eef5ff;
+
+    color: var(--officer-blue);
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    line-height: 1;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   ACTIVE STATUS COUNT
+========================================================= */
+
+.officer-status-filter-button.active
+.officer-status-filter-count {
+    background:
+        rgba(255, 255, 255, 0.18);
+
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   STATUS FILTER FOCUS
+========================================================= */
+
+.officer-status-filter-button:focus-visible {
+    outline:
+        2px solid var(--officer-blue);
+
+    outline-offset: 3px;
+}
+
+
+/* =========================================================
+   FILTER CARD
+========================================================= */
+
+.officer-filter-card {
+    width: 100%;
+
+    background: #ffffff;
+
+    border: 1px solid #e5eaf0;
+
+    border-radius: 16px;
+
+    padding: 22px;
+
+    margin-bottom: 22px;
+
+    box-shadow:
+        0 4px 16px rgba(0, 0, 0, 0.06);
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   FILTER HEADING
+========================================================= */
+
+.officer-filter-heading {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    margin-bottom: 16px;
+}
+
+.officer-filter-heading svg {
+    color: var(--officer-blue);
+
+    stroke: currentColor;
+}
+
+.officer-filter-heading h2 {
+    margin: 0;
+
+    color: var(--officer-text);
+
+    font-size: 17px;
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   FILTER FORM
+========================================================= */
+
+.officer-filter-form {
+    display: grid;
+
+    grid-template-columns:
+        minmax(240px, 1.5fr)
+        minmax(150px, 1fr)
+        minmax(150px, 1fr)
+        minmax(170px, 1fr)
+        auto
+        auto;
+
+    gap: 12px;
+
+    align-items: center;
+}
+
+
+/* =========================================================
+   SEARCH GROUP
+========================================================= */
+
+.officer-search-group {
+    height: 44px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    padding: 0 13px;
+
+    background: #f8fafc;
+
+    border: 1px solid #dfe5ec;
+
+    border-radius: 9px;
+
+    box-sizing: border-box;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.officer-search-group:focus-within {
+    border-color: var(--officer-blue);
+
+    box-shadow:
+        0 0 0 3px rgba(0, 85, 164, 0.10);
+}
+
+.officer-search-group svg {
+    color: #64748b;
+
+    flex-shrink: 0;
+}
+
+.officer-search-group input {
+    width: 100%;
+
+    height: 100%;
+
+    border: none;
+
+    outline: none;
+
+    background: transparent;
+
+    color: var(--officer-text);
+
+    font-family: inherit;
+
+    font-size: 14px;
+}
+
+.officer-search-group input::placeholder {
+    color: #9ca3af;
+}
+
+
+/* =========================================================
+   FILTER SELECTS
+========================================================= */
+
+.officer-filter-form select {
+    width: 100%;
+
+    height: 44px;
+
+    padding: 0 12px;
+
+    background: #ffffff;
+
+    border: 1px solid #dfe5ec;
+
+    border-radius: 9px;
+
+    color: #374151;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    outline: none;
+
+    cursor: pointer;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.officer-filter-form select:focus {
+    border-color: var(--officer-blue);
+
+    box-shadow:
+        0 0 0 3px rgba(0, 85, 164, 0.10);
+}
+
+
+/* =========================================================
+   FILTER SEARCH BUTTON
+========================================================= */
+
+.officer-filter-search-button {
+    height: 44px;
+
+    padding: 0 18px;
+
+    border: none;
+
+    border-radius: 9px;
+
+    background: var(--officer-blue);
+
+    color: #ffffff;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.officer-filter-search-button:hover {
+    background: var(--officer-blue-dark);
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 5px 12px rgba(0, 85, 164, 0.20);
+}
+
+
+/* =========================================================
+   CLEAR BUTTON
+========================================================= */
+
+.officer-clear-button {
+    height: 44px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 6px;
+
+    padding: 0 15px;
+
+    border: 1px solid #dfe5ec;
+
+    border-radius: 9px;
+
+    background: #ffffff;
+
+    color: #4b5563;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease;
+}
+
+.officer-clear-button:hover {
+    background: #f8fafc;
+
+    border-color: #cbd5e1;
+
+    color: var(--officer-blue);
+}
+
+
+/* =========================================================
+   RESULT INFO
+========================================================= */
+
+.officer-result-info {
+    margin-bottom: 14px;
+
+    color: #64748b;
+
+    font-size: 14px;
+}
+
+.officer-result-info strong {
+    color: var(--officer-blue);
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   COMPLAINT LIST
+========================================================= */
+
+.officer-complaints-list {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 18px;
+
+    width: 100%;
+}
+
+
+/* =========================================================
+   DETAIL COMPLAINT CARD
+========================================================= */
+
+.officer-detail-complaint-card {
+    width: 100%;
+
+    background: #ffffff;
+
+    border: 1px solid #e1e7ee;
+
+    border-left: 5px solid var(--officer-blue);
+
+    border-radius: 14px;
+
+    padding: 22px;
+
+    box-sizing: border-box;
+
+    box-shadow:
+        0 4px 14px rgba(0, 0, 0, 0.055);
+
+    transition:
+        transform 0.22s ease,
+        box-shadow 0.22s ease,
+        border-color 0.22s ease;
+}
+
+.officer-detail-complaint-card:hover {
+    transform: translateY(-2px);
+
+    border-color: #cbd5e1;
+
+    border-left-color: var(--officer-blue);
+
+    box-shadow:
+        0 10px 25px rgba(0, 0, 0, 0.09);
+}
+
+
+/* =========================================================
+   DETAIL CARD HEADER
+========================================================= */
+
+.officer-detail-card-header {
+    display: flex;
+
+    align-items: flex-start;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    margin-bottom: 12px;
+}
+
+
+/* =========================================================
+   TITLE AREA
+========================================================= */
+
+.officer-detail-title-area {
+    min-width: 0;
+
+    flex: 1;
+}
+
+.officer-detail-title-area h3 {
+    margin: 0 0 6px;
+
+    color: var(--officer-blue);
+
+    font-size: 20px;
+
+    font-weight: 700;
+
+    line-height: 1.35;
+
+    overflow-wrap: anywhere;
+}
+
+
+/* =========================================================
+   COMPLAINT ID
+========================================================= */
+
+.officer-complaint-id {
+    display: block;
+
+    color: #94a3b8;
+
+    font-size: 11px;
+
+    font-weight: 500;
+
+    line-height: 1.4;
+
+    overflow-wrap: anywhere;
+}
+
+
+/* =========================================================
+   DETAIL DESCRIPTION
+========================================================= */
+
+.officer-detail-description {
+    margin: 0 0 18px;
+
+    color: #4b5563;
+
+    font-size: 15px;
+
+    line-height: 1.6;
+
+    overflow-wrap: anywhere;
+}
+
+
+/* =========================================================
+   DETAILS GRID
+========================================================= */
+
+.officer-detail-card-details {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    gap: 15px;
+
+    padding: 16px 0;
+
+    border-top: 1px solid #eef2f6;
+
+    border-bottom: 1px solid #eef2f6;
+}
+
+
+/* =========================================================
+   DETAIL ITEM
+========================================================= */
+
+.officer-detail-item {
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 9px;
+
+    min-width: 0;
+}
+
+.officer-detail-item > div:last-child {
+    min-width: 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 4px;
+}
+
+
+/* =========================================================
+   DETAIL ICON
+========================================================= */
+
+.officer-detail-icon {
+    width: 32px;
+
+    height: 32px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border-radius: 8px;
+
+    background: #eef5ff;
+
+    color: var(--officer-blue);
+}
+
+.officer-detail-icon svg {
+    color: currentColor;
+
+    stroke: currentColor;
+}
+
+
+/* =========================================================
+   DETAIL LABEL
+========================================================= */
+
+.officer-detail-item .detail-label {
+    display: block;
+
+    color: #94a3b8;
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+    line-height: 1.3;
+}
+
+
+/* =========================================================
+   DETAIL VALUE
+========================================================= */
+
+.officer-detail-item strong {
+    color: #263244;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    line-height: 1.4;
+
+    overflow-wrap: anywhere;
+}
+
+
+/* =========================================================
+   CATEGORY BADGES
+========================================================= */
+
+.officer-category {
+    display: inline-flex;
+
+    width: fit-content;
+
+    padding: 4px 8px;
+
+    border-radius: 7px;
+
+    font-size: 11px;
+
+    font-weight: 700;
+}
+
+.officer-category-pothole {
+    background: #fff7ed;
+
+    color: #c2410c;
+}
+
+.officer-category-drainage {
+    background: #eff6ff;
+
+    color: #1d4ed8;
+}
+
+.officer-category-garbage {
+    background: #f0fdf4;
+
+    color: #15803d;
+}
+
+.officer-category-default {
+    background: #f1f5f9;
+
+    color: #475569;
+}
+
+
+/* =========================================================
+   DETAIL CARD FOOTER
+========================================================= */
+
+.officer-detail-card-footer {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: flex-end;
+
+    gap: 18px;
+
+    padding-top: 16px;
+}
+
+
+/* =========================================================
+   COMMUNITY SUPPORT
+========================================================= */
+
+.officer-support-info {
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    color: #64748b;
+
+    font-size: 13px;
+
+    font-weight: 500;
+}
+
+.officer-support-info svg {
+    color: var(--officer-blue);
+
+    flex-shrink: 0;
+}
+
+.officer-support-info strong {
+    color: var(--officer-blue);
+
+    font-size: 14px;
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   DETAIL VIEW BUTTON
+========================================================= */
+
+.officer-view-details-button {
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    min-height: 40px;
+
+    padding: 0 16px;
+
+    border: 1px solid var(--officer-blue);
+
+    border-radius: 8px;
+
+    background: var(--officer-blue);
+
+    color: #ffffff;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.officer-view-details-button:hover {
+    background: var(--officer-blue-dark);
+
+    border-color: var(--officer-blue-dark);
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 6px 14px rgba(0, 85, 164, 0.20);
+}
+
+.officer-view-details-button svg {
+    transition:
+        transform 0.2s ease;
+}
+
+.officer-view-details-button:hover svg {
+    transform: translateX(3px);
+}
+
+
+/* =========================================================
+   ERROR
+========================================================= */
+
+.officer-error {
+    width: 100%;
+
+    margin-bottom: 20px;
+
+    padding: 13px 15px;
+
+    border: 1px solid #fecaca;
+
+    border-radius: 9px;
+
+    background: #fef2f2;
+
+    color: #b91c1c;
+
+    font-size: 14px;
+
+    line-height: 1.5;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+.officer-dashboard-loading,
+.officer-complaints-loading,
+.officer-loading {
+    min-height: 260px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 12px;
+
+    color: #64748b;
+
+    font-size: 15px;
+}
+
+
+/* =========================================================
+   LOADING SPINNER
+========================================================= */
+
+.officer-loading-spinner {
+    width: 30px;
+
+    height: 30px;
+
+    border: 3px solid #dbeafe;
+
+    border-top-color: var(--officer-blue);
+
+    border-radius: 50%;
+
+    animation:
+        officerSpinner 0.8s linear infinite;
+}
+
+@keyframes officerSpinner {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+/* =========================================================
+   EMPTY STATE
+========================================================= */
+
+.officer-empty-state,
+.officer-empty {
+    min-height: 260px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+    padding: 40px 20px;
+
+    background: #ffffff;
+
+    border: 1px solid #e5eaf0;
+
+    border-radius: 14px;
+
+    box-sizing: border-box;
+}
+
+.officer-empty-state svg,
+.officer-empty svg {
+    color: var(--officer-blue);
+
+    margin-bottom: 12px;
+}
+
+.officer-empty-state h3,
+.officer-empty h3 {
+    margin: 0 0 7px;
+
+    color: #263244;
+
+    font-size: 19px;
+
+    font-weight: 700;
+}
+
+.officer-empty-state p,
+.officer-empty p {
+    max-width: 480px;
+
+    margin: 0;
+
+    color: #64748b;
+
+    font-size: 14px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   OFFICER PROFILE
+========================================================= */
+
+.officer-sidebar-profile {
+    position: absolute;
+
+    left: 20px;
+
+    right: 20px;
+
+    bottom: 25px;
+
+    z-index: 1001;
+}
+
+.officer-profile-card {
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    width: 100%;
+
+    padding: 14px 16px;
+
+    border-radius: 14px;
+
+    background: #ffffff;
+
+    color: var(--officer-blue);
+
+    box-shadow:
+        0 6px 18px rgba(0, 0, 0, 0.12);
+
+    cursor: pointer;
+
+    box-sizing: border-box;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.officer-profile-card:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 10px 24px rgba(0, 0, 0, 0.18);
+}
+
+.officer-profile-avatar {
+    width: 46px;
+
+    height: 46px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    background: var(--officer-blue);
+
+    color: #ffffff;
+
+    font-size: 18px;
+
+    font-weight: 700;
+}
+
+.officer-profile-card h4 {
+    margin: 0;
+
+    color: var(--officer-blue);
+
+    font-size: 15px;
+
+    font-weight: 700;
+}
+
+.officer-profile-card p {
+    margin: 3px 0 0;
+
+    color: var(--officer-text-muted);
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   PROFILE MENU / LOGOUT POPUP
+========================================================= */
+
+.officer-profile-menu {
+    position: absolute;
+
+    left: 0;
+
+    right: 0;
+
+    bottom: calc(100% + 10px);
+
+    overflow: hidden;
+
+    background: #ffffff;
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 10px 25px rgba(0, 0, 0, 0.18);
+
+    animation:
+        officerFadeIn 0.18s ease;
+
+    z-index: 1002;
+}
+
+.officer-profile-menu button {
+    width: 100%;
+
+    height: 54px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 10px;
+
+    padding: 0 16px;
+
+    margin: 0;
+
+    border: none;
+
+    outline: none;
+
+    border-radius: 12px;
+
+    background: #ffffff !important;
+
+    color: var(--officer-blue) !important;
+
+    font-family: inherit;
+
+    font-size: 16px;
+
+    font-weight: 600;
+
+    line-height: 1;
+
+    text-align: center;
+
+    cursor: pointer;
+
+    box-shadow: none;
+
+    box-sizing: border-box;
+}
+
+.officer-profile-menu button svg {
+    width: 20px;
+
+    height: 20px;
+
+    flex-shrink: 0;
+
+    color: var(--officer-blue);
+
+    stroke: currentColor;
+}
+
+.officer-profile-menu button:hover {
+    background: #eef5ff !important;
+}
+
+@keyframes officerFadeIn {
+    from {
+        opacity: 0;
+
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform: translateY(0);
+    }
+}
+
+
+/* =========================================================
+   MOBILE PROFILE ONLY
+========================================================= */
+
+.officer-mobile-profile-only {
+    display: none;
+}
+
+
+/* =========================================================
+   LOGOUT MODAL
+========================================================= */
+
+.officer-logout-overlay {
+    position: fixed;
+
+    inset: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 15px;
+
+    background: rgba(0, 0, 0, 0.28);
+
+    backdrop-filter: blur(4px);
+
+    z-index: 2147483647;
+
+    box-sizing: border-box;
+}
+
+.officer-logout-modal {
+    width: 370px;
+
+    max-width: 100%;
+
+    padding: 30px;
+
+    background: #ffffff;
+
+    border-radius: 16px;
+
+    text-align: center;
+
+    box-shadow:
+        0 25px 60px rgba(0, 0, 0, 0.22);
+
+    box-sizing: border-box;
+}
+
+.officer-logout-modal h3 {
+    margin: 0;
+
+    color: var(--officer-blue);
+
+    font-size: 22px;
+
+    font-weight: 700;
+}
+
+.officer-logout-modal p {
+    margin: 15px 0 30px;
+
+    color: var(--officer-text-muted);
+
+    font-size: 14px;
+
+    line-height: 1.6;
+}
+
+.officer-logout-buttons {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 14px;
+}
+
+.officer-cancel-btn,
+.officer-logout-confirm-btn {
+    padding: 11px 24px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.officer-cancel-btn {
+    background: #e5e7eb;
+
+    color: #374151;
+}
+
+.officer-cancel-btn:hover {
+    background: #d1d5db;
+}
+
+.officer-logout-confirm-btn {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    background: #dc2626;
+
+    color: #ffffff;
+}
+
+.officer-logout-confirm-btn:hover {
+    background: #b91c1c;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1100px) {
+
+    .officer-complaints-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    .officer-complaint-info {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+
+    .officer-filter-form {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+
+    .officer-search-group {
+        grid-column: span 2;
+    }
+
+
+    .officer-filter-search-button,
+    .officer-clear-button {
+        width: 100%;
+    }
+
+
+    .officer-detail-card-details {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+}
+
+
+/* =========================================================
+   STATUS FILTER - TABLET
+========================================================= */
+
+@media (max-width: 700px) {
+
+    .officer-complaint-status-filters {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        gap: 10px;
+
+        margin:
+            20px 0 16px;
+    }
+
+
+    .officer-status-filter-button {
+        height: 48px;
+
+        padding:
+            0 12px;
+
+        font-size: 13px;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 700px) {
+
+    /* -------------------------
+       OFFICER NAVBAR
+    ------------------------- */
+
+    .officer-navbar {
+        height: 75px;
+
+        padding: 0 18px;
+    }
+
+
+    .officer-navbar-left {
+        gap: 10px;
+    }
+
+
+    .officer-navbar-logo {
+        width: 52px;
+
+        height: 52px;
+
+        padding: 5px;
+    }
+
+
+    /* -------------------------
+       OFFICER SIDEBAR
+    ------------------------- */
+
+    .officer-sidebar {
+        width: 100%;
+
+        height: auto;
+
+        min-height: 0;
+
+        top: 75px;
+
+        left: 0;
+
+        padding: 0;
+
+        background: var(--officer-blue);
+
+        box-shadow:
+            0 6px 14px rgba(0, 0, 0, 0.12);
+
+        box-sizing: border-box;
+    }
+
+
+    /* -------------------------
+       MOBILE NAVIGATION
+    ------------------------- */
+
+    .officer-sidebar-nav {
+        width: 100%;
+
+        display: flex;
+
+        flex-direction: row;
+
+        gap: 8px;
+
+        margin: 0;
+
+        padding: 10px 12px;
+
+        overflow-x: auto;
+
+        overflow-y: hidden;
+
+        scrollbar-width: none;
+
+        -webkit-overflow-scrolling: touch;
+
+        box-sizing: border-box;
+    }
+
+    .officer-sidebar-nav::-webkit-scrollbar {
+        display: none;
+    }
+
+
+    .officer-nav-link {
+        flex: 0 0 auto;
+
+        padding: 11px 14px;
+
+        border-radius: 10px;
+
+        font-size: 13px;
+
+        white-space: nowrap;
+    }
+
+
+    .officer-nav-link svg {
+        width: 17px;
+
+        height: 17px;
+    }
+
+
+    /* -------------------------
+       HIDE DESKTOP PROFILE
+    ------------------------- */
+
+    .officer-sidebar > .officer-sidebar-profile {
+        display: none !important;
+    }
+
+
+    /* -------------------------
+       MAIN CONTENT
+    ------------------------- */
+
+    .officer-main-content {
+        width: 100%;
+
+        margin-left: 0;
+
+        margin-top: 75px;
+
+        min-height:
+            calc(100vh - 75px);
+
+        padding:
+            65px 18px 30px;
+    }
+
+
+    /* -------------------------
+       PAGE HEADER
+    ------------------------- */
+
+    .officer-page-header {
+        margin-bottom: 22px;
+    }
+
+
+    .officer-page-heading-row {
+        gap: 8px;
+    }
+
+
+    .officer-page-heading-row svg {
+        width: 27px;
+
+        height: 27px;
+    }
+
+
+    .officer-page-heading-row h1,
+    .officer-page-header h1 {
+        font-size: 28px;
+    }
+
+
+    .officer-page-header p {
+        font-size: 15px;
+    }
+
+
+    /* -------------------------
+       COMPLAINT SECTION
+    ------------------------- */
+
+    .officer-complaints-section {
+        padding: 20px;
+
+        border-radius: 15px;
+    }
+
+
+    .officer-section-title {
+        gap: 9px;
+    }
+
+
+    .officer-section-title svg {
+        width: 23px;
+
+        height: 23px;
+    }
+
+
+    .officer-section-title h2 {
+        font-size: 22px;
+    }
+
+
+    /* -------------------------
+       COMPLAINT CARD
+    ------------------------- */
+
+    .officer-complaint-card {
+        padding: 20px;
+
+        border-left-width: 4px;
+    }
+
+
+    .officer-complaint-card-header {
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 10px;
+    }
+
+
+    .officer-complaint-title {
+        font-size: 20px;
+    }
+
+
+    .officer-complaint-category {
+        font-size: 14px;
+    }
+
+
+    .officer-complaint-description {
+        font-size: 14px;
+
+        line-height: 1.55;
+    }
+
+
+    /* -------------------------
+       COMPLAINT INFO
+    ------------------------- */
+
+    .officer-complaint-info {
+        grid-template-columns: 1fr;
+
+        gap: 14px;
+    }
+
+
+    .officer-complaint-info-value {
+        font-size: 14px;
+    }
+
+
+    /* -------------------------
+       VIEW DETAILS
+    ------------------------- */
+
+    .officer-complaint-card-footer {
+        justify-content: stretch;
+    }
+
+
+    .officer-complaint-view-btn {
+        width: 100%;
+
+        min-height: 42px;
+
+        font-size: 14px;
+    }
+
+
+    /* -------------------------
+       FILTER
+    ------------------------- */
+
+    .officer-filter-card {
+        padding: 18px;
+
+        border-radius: 13px;
+    }
+
+
+    .officer-filter-form {
+        grid-template-columns: 1fr;
+
+        gap: 10px;
+    }
+
+
+    .officer-search-group {
+        grid-column: auto;
+    }
+
+
+    /* -------------------------
+       DETAIL COMPLAINT CARD
+    ------------------------- */
+
+    .officer-detail-complaint-card {
+        padding: 20px;
+
+        border-left-width: 4px;
+    }
+
+
+    .officer-detail-card-header {
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 10px;
+    }
+
+
+    .officer-detail-title-area h3 {
+        font-size: 20px;
+    }
+
+
+    .officer-detail-description {
+        font-size: 14px;
+
+        line-height: 1.55;
+    }
+
+
+    /* -------------------------
+       DETAIL GRID
+    ------------------------- */
+
+    .officer-detail-card-details {
+        grid-template-columns: 1fr;
+
+        gap: 14px;
+    }
+
+
+    /* -------------------------
+       DETAIL FOOTER
+    ------------------------- */
+
+    .officer-detail-card-footer {
+        flex-direction: column;
+
+        align-items: stretch;
+
+        gap: 14px;
+    }
+
+
+    .officer-support-info {
+        justify-content: flex-start;
+    }
+
+
+    .officer-view-details-button {
+        width: 100%;
+    }
+
+
+    /* -------------------------
+       MOBILE PROFILE
+    ------------------------- */
+
+    .officer-mobile-profile-only {
+        display: flex;
+
+        flex-direction: column;
+
+        gap: 16px;
+
+        width: 100%;
+
+        margin-top: 36px;
+    }
+
+
+    .officer-mobile-profile-only
+    .officer-sidebar-profile {
+        position: relative;
+
+        left: auto;
+
+        right: auto;
+
+        bottom: auto;
+
+        width: 100%;
+    }
+
+
+    .officer-mobile-profile-only
+    .officer-profile-menu {
+        position: absolute;
+
+        left: 0;
+
+        right: 0;
+
+        bottom: calc(100% + 10px);
+
+        top: auto;
+
+        width: 100%;
+
+        margin: 0;
+
+        box-sizing: border-box;
+
+        z-index: 1002;
+    }
+
+
+    .officer-mobile-profile-only
+    .officer-profile-card {
+        width: 100%;
+
+        padding: 10px 14px;
+
+        border-radius: 12px;
+
+        gap: 12px;
+    }
+
+
+    .officer-mobile-profile-only
+    .officer-profile-avatar {
+        width: 40px;
+
+        height: 40px;
+
+        font-size: 16px;
+    }
+
+
+    .officer-mobile-profile-only
+    .officer-profile-card h4 {
+        font-size: 14px;
+    }
+
+
+    .officer-mobile-profile-only
+    .officer-profile-card p {
+        font-size: 12px;
+    }
+
+
+    /* -------------------------
+       LOGOUT MODAL
+    ------------------------- */
+
+    .officer-logout-modal {
+        width: 370px;
+
+        max-width:
+            calc(100vw - 30px);
+
+        padding: 26px 22px;
+    }
+
+
+    .officer-logout-modal h3 {
+        font-size: 21px;
+    }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 500px) {
+
+    .officer-navbar {
+        padding: 0 12px;
+    }
+
+
+    .officer-navbar-left {
+        gap: 8px;
+    }
+
+
+    .officer-navbar-logo {
+        width: 48px;
+
+        height: 48px;
+
+        padding: 4px;
+    }
+
+
+    .officer-main-content {
+        padding:
+            65px 14px 25px;
+    }
+
+
+    .officer-complaints-section {
+        padding: 18px;
+    }
+
+
+    .officer-page-heading-row h1,
+    .officer-page-header h1 {
+        font-size: 26px;
+    }
+
+
+    .officer-page-header p {
+        font-size: 14px;
+    }
+
+
+    .officer-section-title h2 {
+        font-size: 21px;
+    }
+
+
+    .officer-section-title svg {
+        width: 22px;
+
+        height: 22px;
+    }
+
+
+    .officer-complaint-card {
+        padding: 18px;
+    }
+
+
+    .officer-complaint-title {
+        font-size: 19px;
+    }
+
+
+    .officer-complaint-description {
+        font-size: 14px;
+    }
+
+
+    .officer-complaints-count {
+        min-width: 32px;
+
+        height: 32px;
+
+        font-size: 13px;
+    }
+
+
+    .officer-detail-complaint-card {
+        padding: 18px;
+    }
+
+
+    .officer-detail-title-area h3 {
+        font-size: 19px;
+    }
+
+
+    .officer-detail-description {
+        font-size: 14px;
+    }
+
+
+    .officer-support-info {
+        font-size: 13px;
+    }
+
+
+    /* -------------------------
+       STATUS FILTERS
+    ------------------------- */
+
+    .officer-complaint-status-filters {
+        gap: 9px;
+    }
+
+
+    .officer-status-filter-button {
+        height: 46px;
+
+        padding: 0 9px;
+
+        font-size: 12px;
+
+        gap: 5px;
+    }
+
+
+    .officer-status-filter-count {
+        min-width: 20px;
+
+        height: 20px;
+
+        font-size: 10px;
+    }
+
+}
+
+
+/* =========================================================
+   VERY SMALL MOBILE
+========================================================= */
+
+@media (max-width: 350px) {
+
+    .officer-main-content {
+        padding:
+            65px 12px 25px;
+    }
+
+
+    .officer-complaints-section {
+        padding: 14px;
+    }
+
+
+    .officer-complaint-card {
+        padding: 18px;
+    }
+
+
+    .officer-complaint-title {
+        font-size: 18px;
+    }
+
+
+    .officer-complaint-description {
+        font-size: 13px;
+    }
+
+
+    .officer-sidebar-nav {
+        padding: 10px;
+    }
+
+
+    .officer-nav-link {
+        padding: 10px 12px;
+
+        font-size: 12px;
+    }
+
+}
+
+
+
+/* =========================================
+OFFICER COMPLAINT ACTIONS
+========================================= */
+
+.officer-actions-card {
+
+    width: 100%;
+
+    background: #FFFFFF;
+
+    padding: 30px;
+
+    border-radius: 14px;
+
+    box-shadow:
+        0 6px 18px rgba(0, 0, 0, 0.08);
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================
+ACTION HEADER
+========================================= */
+
+.officer-actions-header {
+
+    margin-bottom: 24px;
+}
+
+.officer-actions-eyebrow {
+
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: #0055A4;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.6px;
+}
+
+.officer-actions-header h2 {
+
+    margin: 0 0 7px;
+
+    color: #0055A4;
+
+    font-size: 26px;
+
+    font-weight: 700;
+
+    letter-spacing: -0.3px;
+}
+
+.officer-actions-header p {
+
+    margin: 0;
+
+    color: #6B7280;
+
+    font-size: 15px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================
+DEADLINE
+========================================= */
+
+.officer-actions-deadline {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    padding: 18px 20px;
+
+    margin-bottom: 18px;
+
+    background: #F8FAFC;
+
+    border: 1px solid #E5E7EB;
+
+    border-radius: 10px;
+
+    box-sizing: border-box;
+}
+
+.officer-actions-deadline-icon {
+
+    width: 42px;
+
+    height: 42px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    color: #0055A4;
+
+    background: #FFFFFF;
+
+    border: 1px solid #D7E5F3;
+
+    border-radius: 9px;
+}
+
+.officer-actions-deadline-content {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 3px;
+}
+
+.officer-actions-deadline-content span {
+
+    color: #6B7280;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.4px;
+}
+
+.officer-actions-deadline-content strong {
+
+    color: #172033;
+
+    font-size: 15px;
+
+    font-weight: 600;
+}
+
+.officer-actions-deadline-content small {
+
+    color: #6B7280;
+
+    font-size: 13px;
+
+    font-weight: 500;
+}
+
+
+/* =========================================
+DEADLINE STATES
+========================================= */
+
+.officer-deadline-urgent {
+
+    color: #B45309 !important;
+}
+
+.officer-deadline-expired {
+
+    color: #B91C1C !important;
+}
+
+
+/* =========================================
+DEADLINE WARNING
+========================================= */
+
+.officer-actions-warning {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 11px;
+
+    padding: 14px 16px;
+
+    margin-bottom: 20px;
+
+    background: #FFFBEB;
+
+    border: 1px solid #FDE68A;
+
+    border-radius: 9px;
+
+    color: #92400E;
+
+    box-sizing: border-box;
+}
+
+.officer-actions-warning svg {
+
+    flex-shrink: 0;
+
+    margin-top: 1px;
+}
+
+.officer-actions-warning p {
+
+    margin: 0;
+
+    color: #92400E;
+
+    font-size: 13px;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================
+DEADLINE EXPIRED
+========================================= */
+
+.officer-actions-expired {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 11px;
+
+    padding: 14px 16px;
+
+    margin-bottom: 20px;
+
+    background: #FEF2F2;
+
+    border: 1px solid #FECACA;
+
+    border-radius: 9px;
+
+    color: #B91C1C;
+
+    box-sizing: border-box;
+}
+
+.officer-actions-expired svg {
+
+    flex-shrink: 0;
+
+    margin-top: 1px;
+}
+
+.officer-actions-expired p {
+
+    margin: 0;
+
+    color: #991B1B;
+
+    font-size: 13px;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================
+ACTION BUTTONS
+========================================= */
+
+.officer-actions-buttons {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    flex-wrap: wrap;
+
+    padding-bottom: 25px;
+
+    /*
+       No border-bottom here.
+       This removes the unwanted gray divider
+       between the action buttons and workflow.
+    */
+}
+
+
+/* =========================================
+BASE ACTION BUTTON
+========================================= */
+
+.officer-action-button {
+
+    min-height: 44px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 9px;
+
+    padding: 0 18px;
+
+    border-radius: 9px;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+
+    box-sizing: border-box;
+}
+
+.officer-action-button:hover {
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================
+START WORK
+========================================= */
+
+.officer-action-start {
+
+    border: 1px solid #0055A4;
+
+    background: #0055A4;
+
+    color: #FFFFFF;
+}
+
+.officer-action-start:hover {
+
+    background: #004685;
+
+    border-color: #004685;
+
+    box-shadow:
+        0 5px 12px rgba(0, 85, 164, 0.18);
+}
+
+
+/* =========================================
+RESOLVE
+========================================= */
+
+.officer-action-resolve {
+
+    border: 1px solid #15803D;
+
+    background: #15803D;
+
+    color: #FFFFFF;
+}
+
+.officer-action-resolve:hover {
+
+    background: #166534;
+
+    border-color: #166534;
+
+    box-shadow:
+        0 5px 12px rgba(21, 128, 61, 0.18);
+}
+
+
+/* =========================================
+ESCALATE
+========================================= */
+
+.officer-action-escalate {
+
+    border: 1px solid #D97706;
+
+    background: #FFFFFF;
+
+    color: #B45309;
+}
+
+.officer-action-escalate:hover {
+
+    background: #FFFBEB;
+
+    border-color: #D97706;
+
+    box-shadow:
+        0 5px 12px rgba(217, 119, 6, 0.12);
+}
+
+
+/* =========================================
+OFFICER COMPLAINT ACTIONS
+========================================= */
+
+.officer-actions-card {
+
+width: 100%;
+
+background: #FFFFFF;
+
+padding: 30px;
+
+border-radius: 14px;
+
+box-shadow:
+    0 6px 18px rgba(0, 0, 0, 0.08);
+
+box-sizing: border-box;
+
+
+}
+
+/* =========================================
+ACTION HEADER
+========================================= */
+
+.officer-actions-header {
+
+margin-bottom: 24px;
+
+
+}
+
+.officer-actions-eyebrow {
+
+display: block;
+
+margin-bottom: 7px;
+
+color: #0055A4;
+
+font-size: 13px;
+
+font-weight: 700;
+
+text-transform: uppercase;
+
+letter-spacing: 0.6px;
+
+
+}
+
+.officer-actions-header h2 {
+
+margin: 0 0 7px;
+
+color: #0055A4;
+
+font-size: 26px;
+
+font-weight: 700;
+
+letter-spacing: -0.3px;
+
+
+}
+
+.officer-actions-header p {
+
+margin: 0;
+
+color: #6B7280;
+
+font-size: 15px;
+
+line-height: 1.7;
+
+
+}
+
+/* =========================================
+DEADLINE
+========================================= */
+
+.officer-actions-deadline {
+
+display: flex;
+
+align-items: center;
+
+gap: 14px;
+
+padding: 18px 20px;
+
+margin-bottom: 18px;
+
+background: #F8FAFC;
+
+border: 1px solid #E5E7EB;
+
+border-radius: 10px;
+
+box-sizing: border-box;
+
+
+}
+
+.officer-actions-deadline-icon {
+
+width: 42px;
+
+height: 42px;
+
+display: flex;
+
+align-items: center;
+
+justify-content: center;
+
+flex-shrink: 0;
+
+color: #0055A4;
+
+background: #FFFFFF;
+
+border: 1px solid #D7E5F3;
+
+border-radius: 9px;
+
+
+}
+
+.officer-actions-deadline-content {
+
+display: flex;
+
+flex-direction: column;
+
+gap: 3px;
+
+
+}
+
+.officer-actions-deadline-content span {
+
+color: #6B7280;
+
+font-size: 12px;
+
+font-weight: 600;
+
+text-transform: uppercase;
+
+letter-spacing: 0.4px;
+
+
+}
+
+.officer-actions-deadline-content strong {
+
+color: #172033;
+
+font-size: 15px;
+
+font-weight: 600;
+
+
+}
+
+.officer-actions-deadline-content small {
+
+color: #6B7280;
+
+font-size: 13px;
+
+font-weight: 500;
+
+
+}
+
+/* =========================================
+DEADLINE STATES
+========================================= */
+
+.officer-deadline-urgent {
+
+color: #B45309 !important;
+
+
+}
+
+.officer-deadline-expired {
+
+color: #B91C1C !important;
+
+
+}
+
+/* =========================================
+DEADLINE WARNING
+========================================= */
+
+.officer-actions-warning {
+
+display: flex;
+
+align-items: flex-start;
+
+gap: 11px;
+
+padding: 14px 16px;
+
+margin-bottom: 20px;
+
+background: #FFFBEB;
+
+border: 1px solid #FDE68A;
+
+border-radius: 9px;
+
+color: #92400E;
+
+box-sizing: border-box;
+
+
+}
+
+.officer-actions-warning svg {
+
+flex-shrink: 0;
+
+margin-top: 1px;
+
+
+}
+
+.officer-actions-warning p {
+
+margin: 0;
+
+color: #92400E;
+
+font-size: 13px;
+
+line-height: 1.6;
+
+
+}
+
+/* =========================================
+DEADLINE EXPIRED
+========================================= */
+
+.officer-actions-expired {
+
+display: flex;
+
+align-items: flex-start;
+
+gap: 11px;
+
+padding: 14px 16px;
+
+margin-bottom: 20px;
+
+background: #FEF2F2;
+
+border: 1px solid #FECACA;
+
+border-radius: 9px;
+
+color: #B91C1C;
+
+box-sizing: border-box;
+
+
+}
+
+.officer-actions-expired svg {
+
+flex-shrink: 0;
+
+margin-top: 1px;
+
+
+}
+
+.officer-actions-expired p {
+
+margin: 0;
+
+color: #991B1B;
+
+font-size: 13px;
+
+line-height: 1.6;
+
+
+}
+
+/* =========================================
+ACTION BUTTONS
+========================================= */
+
+.officer-actions-buttons {
+
+display: flex;
+
+align-items: center;
+
+gap: 12px;
+
+flex-wrap: wrap;
+
+padding-bottom: 25px;
+
+/*
+   No border-bottom here.
+   This removes the unwanted gray divider
+   between the action buttons and workflow.
+*/
+
+
+}
+
+/* =========================================
+BASE ACTION BUTTON
+========================================= */
+
+.officer-action-button {
+
+min-height: 44px;
+
+display: inline-flex;
+
+align-items: center;
+
+justify-content: center;
+
+gap: 9px;
+
+padding: 0 18px;
+
+border-radius: 9px;
+
+font-family: inherit;
+
+font-size: 14px;
+
+font-weight: 600;
+
+cursor: pointer;
+
+transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+
+box-sizing: border-box;
+
+
+}
+
+.officer-action-button:hover {
+
+transform: translateY(-1px);
+
+
+}
+
+/* =========================================
+START WORK
+========================================= */
+
+.officer-action-start {
+
+border: 1px solid #0055A4;
+
+background: #0055A4;
+
+color: #FFFFFF;
+
+
+}
+
+.officer-action-start:hover {
+
+background: #004685;
+
+border-color: #004685;
+
+box-shadow:
+    0 5px 12px rgba(0, 85, 164, 0.18);
+
+
+}
+
+/* =========================================
+RESOLVE
+========================================= */
+
+.officer-action-resolve {
+
+border: 1px solid #15803D;
+
+background: #15803D;
+
+color: #FFFFFF;
+
+
+}
+
+.officer-action-resolve:hover {
+
+background: #166534;
+
+border-color: #166534;
+
+box-shadow:
+    0 5px 12px rgba(21, 128, 61, 0.18);
+
+
+}
+
+/* =========================================
+ESCALATE
+========================================= */
+
+.officer-action-escalate {
+
+border: 1px solid #D97706;
+
+background: #FFFFFF;
+
+color: #B45309;
+
+
+}
+
+.officer-action-escalate:hover {
+
+background: #FFFBEB;
+
+border-color: #D97706;
+
+box-shadow:
+    0 5px 12px rgba(217, 119, 6, 0.12);
+
+
+}
+
+/* =========================================
+WORKFLOW
+========================================= */
+
+.officer-actions-workflow {
+
+padding-top: 25px;
+
+
+}
+
+.officer-actions-workflow-title {
+
+margin-bottom: 18px;
+
+
+}
+
+.officer-actions-workflow-title span {
+
+color: #0055A4;
+
+font-size: 16px;
+
+font-weight: 700;
+
+
+}
+
+/* =========================================
+WORKFLOW STEPS
+========================================= */
+
+.officer-actions-workflow-steps {
+
+display: grid;
+
+grid-template-columns:
+    repeat(3, 1fr);
+
+gap: 18px;
+
+
+}
+
+.officer-workflow-step {
+
+display: flex;
+
+align-items: flex-start;
+
+gap: 11px;
+
+padding: 14px;
+
+background: #F8FAFC;
+
+border: 1px solid #E5E7EB;
+
+border-radius: 9px;
+
+box-sizing: border-box;
+
+opacity: 0.65;
+
+
+}
+
+.officer-workflow-step.active {
+
+background: #EFF6FF;
+
+border-color: #BFDBFE;
+
+opacity: 1;
+
+
+}
+
+.officer-workflow-step.completed {
+
+background: #F0FDF4;
+
+border-color: #BBF7D0;
+
+opacity: 1;
+
+
+}
+
+/* =========================================
+WORKFLOW DOT
+========================================= */
+
+.officer-workflow-dot {
+
+width: 9px;
+
+height: 9px;
+
+margin-top: 5px;
+
+flex-shrink: 0;
+
+border-radius: 50%;
+
+background: #9CA3AF;
+
+
+}
+
+.officer-workflow-step.active
+.officer-workflow-dot {
+
+background: #0055A4;
+
+
+}
+
+.officer-workflow-step.completed
+.officer-workflow-dot {
+
+background: #15803D;
+
+
+}
+
+/* =========================================
+WORKFLOW TEXT
+========================================= */
+
+.officer-workflow-step div {
+
+display: flex;
+
+flex-direction: column;
+
+gap: 4px;
+
+
+}
+
+.officer-workflow-step strong {
+
+color: #374151;
+
+font-size: 14px;
+
+font-weight: 600;
+
+
+}
+
+.officer-workflow-step small {
+
+color: #6B7280;
+
+font-size: 12px;
+
+line-height: 1.5;
+
+
+}
+
+/* =========================================
+TABLET
+========================================= */
+
+@media (max-width: 900px) {
+
+.officer-actions-card {
+
+    padding: 26px;
+}
+
+.officer-actions-workflow-steps {
+
+    grid-template-columns: 1fr;
+
+    gap: 12px;
+}
+
+
+}
+
+/* =========================================
+MOBILE
+========================================= */
+
+@media (max-width: 700px) {
+
+.officer-actions-card {
+
+    padding: 22px 20px;
+
+    border-radius: 14px;
+}
+
+.officer-actions-header h2 {
+
+    font-size: 23px;
+}
+
+.officer-actions-header p {
+
+    font-size: 14px;
+}
+
+.officer-actions-deadline {
+
+    padding: 16px;
+}
+
+.officer-actions-buttons {
+
+    flex-direction: column;
+
+    align-items: stretch;
+}
+
+.officer-action-button {
+
+    width: 100%;
+}
+
+.officer-actions-workflow-steps {
+
+    grid-template-columns: 1fr;
+}
+
+
+}
+
+/* =========================================
+SMALL MOBILE
+========================================= */
+
+@media (max-width: 450px) {
+
+.officer-actions-card {
+
+    padding: 20px 16px;
+}
+
+.officer-actions-header h2 {
+
+    font-size: 21px;
+}
+
+.officer-actions-deadline-content strong {
+
+    font-size: 14px;
+}
+
+.officer-actions-deadline-content small {
+
+    font-size: 12px;
+}
+
+.officer-detail-resolution-section {
+
+    padding: 16px;
+
+}
+
+.officer-detail-resolution-note {
+
+    padding: 14px 15px;
+
+}
+
+.officer-detail-resolution-note p {
+
+    font-size: 13px;
+
+}
+
+}
+
+
+/* =========================================
+WORKFLOW
+========================================= */
+
+.officer-actions-workflow {
+
+    padding-top: 25px;
+}
+
+.officer-actions-workflow-title {
+
+    margin-bottom: 18px;
+}
+
+.officer-actions-workflow-title span {
+
+    color: #0055A4;
+
+    font-size: 16px;
+
+    font-weight: 700;
+}
+
+
+/* =========================================
+WORKFLOW STEPS
+========================================= */
+
+.officer-actions-workflow-steps {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 18px;
+}
+
+.officer-workflow-step {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 11px;
+
+    padding: 14px;
+
+    background: #F8FAFC;
+
+    border: 1px solid #E5E7EB;
+
+    border-radius: 9px;
+
+    box-sizing: border-box;
+
+    opacity: 0.65;
+}
+
+.officer-workflow-step.active {
+
+    background: #EFF6FF;
+
+    border-color: #BFDBFE;
+
+    opacity: 1;
+}
+
+.officer-workflow-step.completed {
+
+    background: #F0FDF4;
+
+    border-color: #BBF7D0;
+
+    opacity: 1;
+}
+
+
+/* =========================================
+WORKFLOW DOT
+========================================= */
+
+.officer-workflow-dot {
+
+    width: 9px;
+
+    height: 9px;
+
+    margin-top: 5px;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    background: #9CA3AF;
+}
+
+.officer-workflow-step.active
+.officer-workflow-dot {
+
+    background: #0055A4;
+}
+
+.officer-workflow-step.completed
+.officer-workflow-dot {
+
+    background: #15803D;
+}
+
+
+/* =========================================
+WORKFLOW TEXT
+========================================= */
+
+.officer-workflow-step div {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 4px;
+}
+
+.officer-workflow-step strong {
+
+    color: #374151;
+
+    font-size: 14px;
+
+    font-weight: 600;
+}
+
+.officer-workflow-step small {
+
+    color: #6B7280;
+
+    font-size: 12px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================
+TABLET
+========================================= */
+
+@media (max-width: 900px) {
+
+    .officer-actions-card {
+
+        padding: 26px;
+    }
+
+    .officer-actions-workflow-steps {
+
+        grid-template-columns: 1fr;
+
+        gap: 12px;
+    }
+}
+
+
+/* =========================================
+MOBILE
+========================================= */
+
+@media (max-width: 700px) {
+
+    .officer-actions-card {
+
+        padding: 22px 20px;
+
+        border-radius: 14px;
+    }
+
+    .officer-actions-header h2 {
+
+        font-size: 23px;
+    }
+
+    .officer-actions-header p {
+
+        font-size: 14px;
+    }
+
+    .officer-actions-deadline {
+
+        padding: 16px;
+    }
+
+    .officer-actions-buttons {
+
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+    .officer-action-button {
+
+        width: 100%;
+    }
+
+    .officer-actions-workflow-steps {
+
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* =========================================
+SMALL MOBILE
+========================================= */
+
+@media (max-width: 450px) {
+
+    .officer-actions-card {
+
+        padding: 20px 16px;
+    }
+
+    .officer-actions-header h2 {
+
+        font-size: 21px;
+    }
+
+    .officer-actions-deadline-content strong {
+
+        font-size: 14px;
+    }
+
+    .officer-actions-deadline-content small {
+
+        font-size: 12px;
+    }
+}
+
+
+
+/* =========================================
+   ESCALATION MODAL
+========================================= */
+
+.officer-modal-overlay {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 1000;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 24px;
+
+    background: rgba(15, 23, 42, 0.48);
+
+    backdrop-filter: blur(3px);
+
+    box-sizing: border-box;
+
+}
+
+
+/* =========================================
+   MODAL
+========================================= */
+
+.officer-escalate-modal {
+
+    width: 100%;
+
+    max-width: 620px;
+
+    max-height: calc(100vh - 48px);
+
+    overflow-y: auto;
+
+    background: #FFFFFF;
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 20px 50px rgba(15, 23, 42, 0.20);
+
+    box-sizing: border-box;
+
+}
+
+
+/* =========================================
+   MODAL HEADER
+========================================= */
+
+.officer-modal-header {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding: 25px 28px 22px;
+
+    border-bottom: 1px solid #E5E7EB;
+
+}
+
+
+.officer-modal-heading {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+
+}
+
+
+.officer-modal-icon {
+
+    width: 44px;
+
+    height: 44px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border-radius: 10px;
+
+    background: #FFFFFF;
+
+    color: #0055A4;
+
+    border: 1px solid #D9E8F5;
+
+}
+
+
+.officer-modal-eyebrow {
+
+    display: block;
+
+    margin-bottom: 3px;
+
+    color: #0055A4;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    letter-spacing: 0.3px;
+
+    text-transform: uppercase;
+
+}
+
+
+.officer-modal-heading h2 {
+
+    margin: 0;
+
+    color: #172033;
+
+    font-size: 23px;
+
+    font-weight: 700;
+
+    line-height: 1.3;
+
+}
+
+
+/* =========================================
+   CLOSE BUTTON
+========================================= */
+
+.officer-modal-close {
+
+    width: 36px;
+
+    height: 36px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border: 1px solid #E5E7EB;
+
+    border-radius: 8px;
+
+    background: #FFFFFF;
+
+    color: #6B7280;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease;
+
+}
+
+
+.officer-modal-close:hover {
+
+    background: #F8FAFC;
+
+    border-color: #CBD5E1;
+
+    color: #172033;
+
+}
+
+
+.officer-modal-close:disabled {
+
+    opacity: 0.5;
+
+    cursor: not-allowed;
+
+}
+
+
+/* =========================================
+   COMPLAINT SUMMARY
+========================================= */
+
+.officer-escalate-complaint {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 5px;
+
+    margin: 22px 28px 0;
+
+    padding: 15px 17px;
+
+    background: #F8FAFC;
+
+    border: 1px solid #E5E7EB;
+
+    border-radius: 10px;
+
+}
+
+
+.officer-escalate-complaint span {
+
+    color: #6B7280;
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.4px;
+
+}
+
+
+.officer-escalate-complaint strong {
+
+    color: #0055A4;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+    line-height: 1.5;
+
+}
+
+
+/* =========================================
+   INFORMATION BOX
+========================================= */
+
+.officer-escalate-info {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 10px;
+
+    margin: 16px 28px 0;
+
+    padding: 13px 15px;
+
+    border: 1px solid #BFDBFE;
+
+    border-radius: 9px;
+
+    background: #EFF6FF;
+
+    color: #1D4ED8;
+
+}
+
+
+.officer-escalate-info svg {
+
+    flex-shrink: 0;
+
+    margin-top: 1px;
+
+}
+
+
+.officer-escalate-info p {
+
+    margin: 0;
+
+    color: #1E40AF;
+
+    font-size: 13px;
+
+    line-height: 1.6;
+
+}
+
+
+/* =========================================
+   FORM
+========================================= */
+
+.officer-escalate-form {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 21px;
+
+    padding: 23px 28px 25px;
+
+}
+
+
+/* =========================================
+   DEADLINE
+========================================= */
+
+.officer-escalate-deadline {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding-bottom: 18px;
+
+    border-bottom: 1px solid #EEF0F3;
+
+}
+
+
+.officer-escalate-deadline span {
+
+    color: #6B7280;
+
+    font-size: 13px;
+
+    font-weight: 500;
+
+}
+
+
+.officer-escalate-deadline strong {
+
+    color: #374151;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    text-align: right;
+
+}
+
+
+/* =========================================
+   FORM GROUP
+========================================= */
+
+.officer-form-group {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 7px;
+
+}
+
+
+.officer-form-group label {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 4px;
+
+    color: #374151;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+}
+
+
+.officer-form-group label > span {
+
+    color: #DC2626;
+
+}
+
+
+.officer-form-group label .optional-label {
+
+    margin-left: 5px;
+
+    color: #9CA3AF;
+
+    font-size: 11px;
+
+    font-weight: 500;
+
+}
+
+
+.officer-form-group select {
+
+    width: 100%;
+
+    min-height: 44px;
+
+    padding: 0 13px;
+
+    border: 1px solid #D1D5DB;
+
+    border-radius: 8px;
+
+    outline: none;
+
+    background: #FFFFFF;
+
+    color: #374151;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    cursor: pointer;
+
+    box-sizing: border-box;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+
+}
+
+
+.officer-form-group select:focus {
+
+    border-color: #0055A4;
+
+    box-shadow:
+        0 0 0 3px rgba(0, 85, 164, 0.10);
+
+}
+
+
+.officer-form-group select:disabled {
+
+    background: #F3F4F6;
+
+    cursor: not-allowed;
+
+}
+
+
+/* =========================================
+   TEXTAREA
+========================================= */
+
+.officer-form-group textarea {
+
+    width: 100%;
+
+    min-height: 105px;
+
+    padding: 12px 13px;
+
+    border: 1px solid #D1D5DB;
+
+    border-radius: 8px;
+
+    outline: none;
+
+    resize: vertical;
+
+    background: #FFFFFF;
+
+    color: #374151;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+
+    box-sizing: border-box;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+
+}
+
+
+.officer-form-group textarea::placeholder {
+
+    color: #9CA3AF;
+
+}
+
+
+.officer-form-group textarea:focus {
+
+    border-color: #0055A4;
+
+    box-shadow:
+        0 0 0 3px rgba(0, 85, 164, 0.10);
+
+}
+
+
+.officer-form-group textarea:disabled {
+
+    background: #F3F4F6;
+
+    cursor: not-allowed;
+
+}
+
+
+.officer-form-group small {
+
+    color: #9CA3AF;
+
+    font-size: 11px;
+
+    line-height: 1.5;
+
+}
+
+
+/* =========================================
+   TEXTAREA FOOTER
+========================================= */
+
+.officer-textarea-footer {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+}
+
+
+.officer-textarea-footer span {
+
+    color: #9CA3AF;
+
+    font-size: 11px;
+
+    white-space: nowrap;
+
+}
+
+
+/* =========================================
+   ERROR
+========================================= */
+
+.officer-modal-error {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 9px;
+
+    padding: 12px 14px;
+
+    border: 1px solid #FECACA;
+
+    border-radius: 8px;
+
+    background: #FEF2F2;
+
+    color: #B91C1C;
+
+}
+
+
+.officer-modal-error svg {
+
+    flex-shrink: 0;
+
+    margin-top: 1px;
+
+}
+
+
+.officer-modal-error span {
+
+    font-size: 13px;
+
+    line-height: 1.5;
+
+}
+
+
+/* =========================================
+   MODAL ACTIONS
+========================================= */
+
+.officer-modal-actions {
+
+    display: flex;
+
+    justify-content: flex-end;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding-top: 3px;
+
+}
+
+
+/* =========================================
+   CANCEL
+========================================= */
+
+.officer-modal-cancel {
+
+    min-height: 42px;
+
+    padding: 0 18px;
+
+    border: 1px solid #D1D5DB;
+
+    border-radius: 8px;
+
+    background: #FFFFFF;
+
+    color: #374151;
+
+    font-family: inherit;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease;
+
+}
+
+
+.officer-modal-cancel:hover {
+
+    background: #F8FAFC;
+
+    border-color: #9CA3AF;
+
+}
+
+
+.officer-modal-cancel:disabled {
+
+    opacity: 0.5;
+
+    cursor: not-allowed;
+
+}
+
+
+/* =========================================
+   SUBMIT
+========================================= */
+
+.officer-modal-submit {
+
+    min-height: 42px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    padding: 0 18px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: #0055A4;
+
+    color: #FFFFFF;
+
+    font-family: inherit;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+
+}
+
+
+.officer-modal-submit:hover:not(:disabled) {
+
+    background: #004582;
+
+    transform: translateY(-1px);
+
+}
+
+
+.officer-modal-submit:disabled {
+
+    background: #9CA3AF;
+
+    cursor: not-allowed;
+
+    transform: none;
+
+}
+
+
+/* =========================================
+   BUTTON SPINNER
+========================================= */
+
+.officer-button-spinner {
+
+    width: 15px;
+
+    height: 15px;
+
+    border: 2px solid rgba(255, 255, 255, 0.45);
+
+    border-top-color: #FFFFFF;
+
+    border-radius: 50%;
+
+    animation:
+        officer-spin 0.7s linear infinite;
+
+}
+
+
+@keyframes officer-spin {
+
+    to {
+
+        transform: rotate(360deg);
+
+    }
+
+}
+
+
+/* =========================================
+   FOOTER NOTE
+========================================= */
+
+.officer-modal-footer-note {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    padding: 14px 28px 18px;
+
+    border-top: 1px solid #EEF0F3;
+
+    color: #6B7280;
+
+    font-size: 11px;
+
+    line-height: 1.5;
+
+}
+
+
+.officer-modal-footer-note svg {
+
+    flex-shrink: 0;
+
+    color: #0055A4;
+
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 700px) {
+
+    .officer-modal-overlay {
+
+        padding: 16px;
+
+        align-items: center;
+
+    }
+
+
+    .officer-escalate-modal {
+
+        max-height: calc(100vh - 32px);
+
+        border-radius: 14px;
+
+    }
+
+
+    .officer-modal-header {
+
+        padding: 21px 20px 18px;
+
+    }
+
+
+    .officer-modal-heading h2 {
+
+        font-size: 21px;
+
+    }
+
+
+    .officer-modal-icon {
+
+        width: 40px;
+
+        height: 40px;
+
+    }
+
+
+    .officer-escalate-complaint {
+
+        margin-left: 20px;
+
+        margin-right: 20px;
+
+    }
+
+
+    .officer-escalate-info {
+
+        margin-left: 20px;
+
+        margin-right: 20px;
+
+    }
+
+
+    .officer-escalate-form {
+
+        padding-left: 20px;
+
+        padding-right: 20px;
+
+    }
+
+
+    .officer-modal-footer-note {
+
+        padding-left: 20px;
+
+        padding-right: 20px;
+
+    }
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 500px) {
+
+    .officer-modal-overlay {
+
+        padding: 10px;
+
+    }
+
+
+    .officer-escalate-modal {
+
+        max-height: calc(100vh - 20px);
+
+        border-radius: 12px;
+
+    }
+
+
+    .officer-modal-header {
+
+        padding: 18px 17px 16px;
+
+    }
+
+
+    .officer-modal-heading {
+
+        gap: 10px;
+
+    }
+
+
+    .officer-modal-icon {
+
+        width: 38px;
+
+        height: 38px;
+
+    }
+
+
+    .officer-modal-heading h2 {
+
+        font-size: 19px;
+
+    }
+
+
+    .officer-modal-eyebrow {
+
+        font-size: 10px;
+
+    }
+
+
+    .officer-modal-close {
+
+        width: 32px;
+
+        height: 32px;
+
+    }
+
+
+    .officer-escalate-complaint {
+
+        margin: 16px 17px 0;
+
+        padding: 13px 14px;
+
+    }
+
+
+    .officer-escalate-info {
+
+        margin: 13px 17px 0;
+
+        padding: 12px 13px;
+
+    }
+
+
+    .officer-escalate-info p {
+
+        font-size: 12px;
+
+    }
+
+
+    .officer-escalate-form {
+
+        gap: 18px;
+
+        padding: 19px 17px 20px;
+
+    }
+
+
+    .officer-escalate-deadline {
+
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 5px;
+
+    }
+
+
+    .officer-escalate-deadline strong {
+
+        text-align: left;
+
+    }
+
+
+    .officer-modal-actions {
+
+        flex-direction: column-reverse;
+
+        align-items: stretch;
+
+    }
+
+
+    .officer-modal-cancel,
+    .officer-modal-submit {
+
+        width: 100%;
+
+    }
+
+
+    .officer-modal-footer-note {
+
+        padding: 13px 17px 16px;
+
+    }
+
+}
+
+
+
+/* =========================================================
+   RESOLVE MODAL
+========================================================= */
+
+
+/* =========================================================
+   MODAL OVERLAY
+========================================================= */
+
+.officer-modal-overlay {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 1000;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 24px;
+
+    background: rgba(15, 23, 42, 0.48);
+
+    backdrop-filter: blur(3px);
+
+    box-sizing: border-box;
+
+}
+
+
+/* =========================================================
+   RESOLVE MODAL
+========================================================= */
+
+.officer-resolve-modal {
+
+    width: 100%;
+
+    max-width: 620px;
+
+    max-height: calc(100vh - 48px);
+
+    overflow-y: auto;
+
+    background: #FFFFFF;
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 20px 50px rgba(15, 23, 42, 0.18);
+
+    box-sizing: border-box;
+
+    animation: officerResolveModalAppear 0.2s ease-out;
+
+}
+
+
+@keyframes officerResolveModalAppear {
+
+    from {
+
+        opacity: 0;
+
+        transform: translateY(8px) scale(0.98);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform: translateY(0) scale(1);
+
+    }
+
+}
+
+
+/* =========================================================
+   MODAL HEADER
+========================================================= */
+
+.officer-modal-header {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding: 26px 28px 22px;
+
+    border-bottom: 1px solid #E5E7EB;
+
+}
+
+
+.officer-modal-heading {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+
+    min-width: 0;
+
+}
+
+
+.officer-modal-icon {
+
+    width: 46px;
+
+    height: 46px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 11px;
+
+    box-sizing: border-box;
+
+}
+
+
+.officer-modal-icon-success {
+
+    color: #15803D;
+
+    background: #F0FDF4;
+
+}
+
+
+.officer-modal-eyebrow {
+
+    display: block;
+
+    margin-bottom: 4px;
+
+    color: #0055A4;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.55px;
+
+}
+
+
+.officer-modal-heading h2 {
+
+    margin: 0;
+
+    color: #0055A4;
+
+    font-size: 24px;
+
+    font-weight: 700;
+
+    line-height: 1.25;
+
+}
+
+
+/* =========================================================
+   CLOSE BUTTON
+========================================================= */
+
+.officer-modal-close-button {
+
+    width: 36px;
+
+    height: 36px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 0;
+
+    border: 1px solid #E5E7EB;
+
+    border-radius: 8px;
+
+    background: #FFFFFF;
+
+    color: #6B7280;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease;
+
+}
+
+
+.officer-modal-close-button:hover:not(:disabled) {
+
+    background: #F8FAFC;
+
+    border-color: #D1D5DB;
+
+    color: #374151;
+
+}
+
+
+.officer-modal-close-button:disabled {
+
+    opacity: 0.55;
+
+    cursor: not-allowed;
+
+}
+
+
+/* =========================================================
+   COMPLAINT INFORMATION
+========================================================= */
+
+.officer-resolve-complaint-info {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    margin: 24px 28px 0;
+
+    padding: 15px 16px;
+
+    border: 1px solid #E5E7EB;
+
+    border-radius: 10px;
+
+    background: #F8FAFC;
+
+    box-sizing: border-box;
+
+}
+
+
+.officer-resolve-info-icon {
+
+    width: 38px;
+
+    height: 38px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 9px;
+
+    background: #FFFFFF;
+
+    color: #0055A4;
+
+    border: 1px solid #E2E8F0;
+
+}
+
+
+.officer-resolve-complaint-info > div:last-child {
+
+    min-width: 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 4px;
+
+}
+
+
+.officer-resolve-complaint-info span {
+
+    color: #6B7280;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+}
+
+
+.officer-resolve-complaint-info strong {
+
+    overflow: hidden;
+
+    color: #172033;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    line-height: 1.4;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+
+}
+
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.officer-resolve-form {
+
+    padding: 24px 28px 0;
+
+}
+
+
+.officer-resolve-label {
+
+    display: block;
+
+    margin-bottom: 6px;
+
+    color: #0055A4;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+}
+
+
+.officer-resolve-label span {
+
+    margin-left: 3px;
+
+    color: #DC2626;
+
+}
+
+
+.officer-resolve-help {
+
+    margin: 0 0 11px;
+
+    color: #6B7280;
+
+    font-size: 13px;
+
+    line-height: 1.6;
+
+}
+
+
+.officer-resolve-textarea {
+
+    width: 100%;
+
+    min-height: 140px;
+
+    padding: 13px 14px;
+
+    resize: vertical;
+
+    border: 1px solid #D1D5DB;
+
+    border-radius: 9px;
+
+    outline: none;
+
+    background: #FFFFFF;
+
+    color: #172033;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+
+    box-sizing: border-box;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+
+}
+
+
+.officer-resolve-textarea::placeholder {
+
+    color: #9CA3AF;
+
+}
+
+
+.officer-resolve-textarea:focus {
+
+    border-color: #0055A4;
+
+    box-shadow:
+        0 0 0 3px rgba(0, 85, 164, 0.10);
+
+}
+
+
+.officer-resolve-textarea:disabled {
+
+    background: #F8FAFC;
+
+    cursor: not-allowed;
+
+}
+
+
+.officer-resolve-textarea-error {
+
+    border-color: #DC2626;
+
+}
+
+
+.officer-resolve-textarea-error:focus {
+
+    border-color: #DC2626;
+
+    box-shadow:
+        0 0 0 3px rgba(220, 38, 38, 0.08);
+
+}
+
+
+/* =========================================================
+   TEXTAREA FOOTER
+========================================================= */
+
+.officer-resolve-textarea-footer {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 12px;
+
+    margin-top: 6px;
+
+    color: #9CA3AF;
+
+    font-size: 11px;
+
+}
+
+
+/* =========================================================
+   VALIDATION ERROR
+========================================================= */
+
+.officer-resolve-error {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 8px;
+
+    margin-top: 10px;
+
+    color: #B91C1C;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+
+}
+
+
+.officer-resolve-error svg {
+
+    flex-shrink: 0;
+
+    margin-top: 1px;
+
+}
+
+
+/* =========================================================
+   WARNING
+========================================================= */
+
+.officer-resolve-warning {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 10px;
+
+    margin: 22px 28px 0;
+
+    padding: 13px 15px;
+
+    border: 1px solid #FDE68A;
+
+    border-radius: 9px;
+
+    background: #FFFBEB;
+
+    color: #92400E;
+
+    box-sizing: border-box;
+
+}
+
+
+.officer-resolve-warning svg {
+
+    flex-shrink: 0;
+
+    margin-top: 1px;
+
+}
+
+
+.officer-resolve-warning p {
+
+    margin: 0;
+
+    font-size: 13px;
+
+    line-height: 1.6;
+
+}
+
+
+.officer-resolve-warning strong {
+
+    font-weight: 700;
+
+}
+
+
+/* =========================================================
+   MODAL FOOTER
+========================================================= */
+
+.officer-modal-footer {
+
+    display: flex;
+
+    justify-content: flex-end;
+
+    align-items: center;
+
+    gap: 11px;
+
+    padding: 24px 28px 28px;
+
+}
+
+
+/* =========================================================
+   CANCEL BUTTON
+========================================================= */
+
+.officer-modal-cancel-button {
+
+    height: 42px;
+
+    padding: 0 18px;
+
+    border: 1px solid #D1D5DB;
+
+    border-radius: 8px;
+
+    background: #FFFFFF;
+
+    color: #374151;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease;
+
+}
+
+
+.officer-modal-cancel-button:hover:not(:disabled) {
+
+    background: #F8FAFC;
+
+    border-color: #9CA3AF;
+
+}
+
+
+.officer-modal-cancel-button:disabled {
+
+    opacity: 0.55;
+
+    cursor: not-allowed;
+
+}
+
+
+/* =========================================================
+   CONFIRM BUTTON
+========================================================= */
+
+.officer-modal-confirm-button {
+
+    height: 42px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    padding: 0 18px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: #0055A4;
+
+    color: #FFFFFF;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+
+}
+
+
+.officer-modal-confirm-button:hover:not(:disabled) {
+
+    background: #004481;
+
+    transform: translateY(-1px);
+
+}
+
+
+.officer-modal-confirm-button:disabled {
+
+    opacity: 0.65;
+
+    cursor: not-allowed;
+
+    transform: none;
+
+}
+
+
+/* =========================================================
+   BUTTON LOADING SPINNER
+========================================================= */
+
+.officer-button-spinner {
+
+    width: 15px;
+
+    height: 15px;
+
+    border: 2px solid rgba(255, 255, 255, 0.4);
+
+    border-top-color: #FFFFFF;
+
+    border-radius: 50%;
+
+    animation: officerButtonSpin 0.7s linear infinite;
+
+}
+
+
+@keyframes officerButtonSpin {
+
+    to {
+
+        transform: rotate(360deg);
+
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .officer-modal-overlay {
+
+        align-items: center;
+
+        padding: 14px;
+
+    }
+
+
+    .officer-resolve-modal {
+
+        max-height: calc(100vh - 28px);
+
+        border-radius: 13px;
+
+    }
+
+
+    .officer-modal-header {
+
+        padding: 21px 20px 18px;
+
+    }
+
+
+    .officer-modal-heading {
+
+        gap: 11px;
+
+    }
+
+
+    .officer-modal-icon {
+
+        width: 42px;
+
+        height: 42px;
+
+    }
+
+
+    .officer-modal-eyebrow {
+
+        font-size: 11px;
+
+    }
+
+
+    .officer-modal-heading h2 {
+
+        font-size: 21px;
+
+    }
+
+
+    .officer-modal-close-button {
+
+        width: 34px;
+
+        height: 34px;
+
+    }
+
+
+    .officer-resolve-complaint-info {
+
+        margin: 19px 20px 0;
+
+    }
+
+
+    .officer-resolve-form {
+
+        padding: 20px 20px 0;
+
+    }
+
+
+    .officer-resolve-textarea {
+
+        min-height: 130px;
+
+        font-size: 13px;
+
+    }
+
+
+    .officer-resolve-warning {
+
+        margin: 19px 20px 0;
+
+    }
+
+
+    .officer-modal-footer {
+
+        padding: 20px;
+
+    }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 450px) {
+
+    .officer-modal-overlay {
+
+        padding: 10px;
+
+    }
+
+
+    .officer-resolve-modal {
+
+        max-height: calc(100vh - 20px);
+
+    }
+
+
+    .officer-modal-header {
+
+        padding: 18px 16px 16px;
+
+    }
+
+
+    .officer-modal-heading h2 {
+
+        font-size: 19px;
+
+    }
+
+
+    .officer-modal-icon {
+
+        width: 40px;
+
+        height: 40px;
+
+    }
+
+
+    .officer-resolve-complaint-info {
+
+        margin: 16px 16px 0;
+
+        padding: 13px;
+
+    }
+
+
+    .officer-resolve-form {
+
+        padding: 18px 16px 0;
+
+    }
+
+
+    .officer-resolve-warning {
+
+        margin: 17px 16px 0;
+
+        padding: 12px 13px;
+
+    }
+
+
+    .officer-modal-footer {
+
+        flex-direction: column-reverse;
+
+        align-items: stretch;
+
+        padding: 18px 16px 20px;
+
+    }
+
+
+    .officer-modal-cancel-button,
+    .officer-modal-confirm-button {
+
+        width: 100%;
+
+    }
+
+}
+
+
+
+/* =========================================================
+ASSIGNMENT HISTORY
+========================================================= */
+
+.officer-assignment-history-section {
+
+    width: 100%;
+
+    background: #FFFFFF;
+
+    border-radius: 14px;
+
+    box-shadow:
+        0 6px 18px rgba(0, 0, 0, 0.08);
+
+    box-sizing: border-box;
+
+    overflow: hidden;
+
+}
+
+
+/* =========================================================
+HEADER
+========================================================= */
+
+.officer-assignment-history-header {
+
+    width: 100%;
+
+    min-height: 100px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 24px;
+
+    padding: 22px 28px;
+
+    background: #FFFFFF;
+
+    box-sizing: border-box;
+
+}
+
+
+/* =========================================================
+HEADING
+========================================================= */
+
+.officer-assignment-history-heading {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 20px;
+
+    min-width: 0;
+
+    flex: 1;
+
+    overflow: hidden;
+
+}
+
+
+/* =========================================================
+HISTORY ICON
+========================================================= */
+
+.officer-assignment-history-icon {
+
+    width: 56px;
+
+    height: 56px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 11px;
+
+    background: #FFFFFF;
+
+    border: 1px solid #E2E8F0;
+
+    color: #0055A4;
+
+    box-sizing: border-box;
+
+}
+
+
+/* =========================================================
+HEADING TEXT
+========================================================= */
+
+.officer-assignment-history-title {
+
+    min-width: 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    overflow: hidden;
+
+}
+
+
+/* =========================================================
+EYEBROW
+========================================================= */
+
+.officer-assignment-history-eyebrow {
+
+    display: block;
+
+    margin: 0 0 5px;
+
+    color: #0055A4;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.5px;
+
+    line-height: 1.2;
+
+}
+
+
+/* =========================================================
+TITLE
+========================================================= */
+
+.officer-assignment-history-title h2 {
+
+    margin: 0;
+
+    color: #172033;
+
+    font-size: 32px;
+
+    font-weight: 700;
+
+    line-height: 1.15;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    min-width: 0;
+
+}
+
+
+/* =========================================================
+DROPDOWN / EVENT COUNT
+========================================================= */
+
+.officer-assignment-history-toggle {
+
+    flex: 0 0 120px;
+
+    width: 120px;
+
+    min-width: 120px;
+
+    height: 42px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    padding: 0 14px;
+
+    border: none;
+
+    border-radius: 999px;
+
+    background: #EFF6FF;
+
+    color: #0055A4;
+
+    font-family: inherit;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    line-height: 1;
+
+    white-space: nowrap;
+
+    cursor: pointer;
+
+    box-sizing: border-box;
+
+    margin-left: auto;
+
+    flex-shrink: 0;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+
+}
+
+
+.officer-assignment-history-toggle:hover {
+
+    background: #DBEAFE;
+
+}
+
+
+.officer-assignment-history-toggle:active {
+
+    transform: scale(0.98);
+
+}
+
+
+.officer-assignment-history-toggle svg {
+
+    width: 18px;
+
+    height: 18px;
+
+    flex-shrink: 0;
+
+    color: #0055A4;
+
+    transition:
+        transform 0.2s ease;
+
+}
+
+
+/* Arrow points upward when expanded */
+
+.officer-assignment-history-toggle svg.is-open {
+
+    transform: rotate(180deg);
+
+}
+
+
+/* =========================================================
+HISTORY CONTENT
+========================================================= */
+
+.officer-assignment-history-content {
+
+    width: 100%;
+
+    box-sizing: border-box;
+
+}
+
+
+/* =========================================================
+TIMELINE
+========================================================= */
+
+.officer-assignment-timeline {
+
+    width: 100%;
+
+    padding: 28px;
+
+    box-sizing: border-box;
+
+}
+
+
+/* =========================================================
+EVENT
+========================================================= */
+
+.officer-assignment-event {
+
+    display: grid;
+
+    grid-template-columns:
+        48px minmax(0, 1fr);
+
+    column-gap: 18px;
+
+    width: 100%;
+
+}
+
+
+/* =========================================================
+TIMELINE COLUMN
+========================================================= */
+
+.officer-assignment-timeline-column {
+
+    position: relative;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    width: 48px;
+
+}
+
+
+/* =========================================================
+EVENT DOT
+========================================================= */
+
+.officer-assignment-event-dot {
+
+    position: relative;
+
+    z-index: 2;
+
+    width: 38px;
+
+    height: 38px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border: 1px solid #CFE0F0;
+
+    border-radius: 50%;
+
+    background: #FFFFFF;
+
+    color: #0055A4;
+
+    box-sizing: border-box;
+
+}
+
+
+.officer-assignment-event-dot.escalation {
+
+    border-color: #FECACA;
+
+    background: #FEF2F2;
+
+    color: #B91C1C;
+
+}
+
+
+/* =========================================================
+TIMELINE LINE
+========================================================= */
+
+.officer-assignment-timeline-line {
+
+    width: 1px;
+
+    flex: 1;
+
+    min-height: 35px;
+
+    margin-top: 0;
+
+    background: #DCE3EA;
+
+}
+
+
+/* =========================================================
+EVENT CONTENT
+========================================================= */
+
+.officer-assignment-event-content {
+
+    min-width: 0;
+
+    padding: 0 0 32px;
+
+}
+
+
+/* Correct final-event selector */
+
+.officer-assignment-event.last
+.officer-assignment-event-content {
+
+    padding-bottom: 0;
+
+}
+
+
+/* =========================================================
+EVENT TOP
+========================================================= */
+
+.officer-assignment-event-top {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    width: 100%;
+
+}
+
+
+/* =========================================================
+EVENT TYPE
+========================================================= */
+
+.officer-assignment-event-type {
+
+    display: inline-flex;
+
+    margin: 0 0 5px;
+
+    color: #0055A4;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.45px;
+
+    line-height: 1.3;
+
+}
+
+
+.officer-assignment-event-type.escalation {
+
+    color: #B91C1C;
+
+}
+
+
+/* =========================================================
+EVENT TITLE
+========================================================= */
+
+.officer-assignment-event-top h3 {
+
+    margin: 0;
+
+    color: #172033;
+
+    font-size: 18px;
+
+    font-weight: 650;
+
+    line-height: 1.35;
+
+}
+
+
+/* =========================================================
+EVENT DATE
+========================================================= */
+
+.officer-assignment-event-date {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    flex-shrink: 0;
+
+    color: #6B7280;
+
+    font-size: 12px;
+
+    line-height: 1.5;
+
+    white-space: nowrap;
+
+}
+
+
+/* =========================================================
+OFFICER INFORMATION
+========================================================= */
+
+.officer-assignment-officer {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 11px;
+
+    width: fit-content;
+
+    margin-top: 15px;
+
+    padding: 11px 14px;
+
+    border: 1px solid #E5E7EB;
+
+    border-radius: 9px;
+
+    background: #F8FAFC;
+
+    box-sizing: border-box;
+
+}
+
+
+.officer-assignment-officer-icon {
+
+    width: 34px;
+
+    height: 34px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 8px;
+
+    background: #FFFFFF;
+
+    color: #0055A4;
+
+    border: 1px solid #E2E8F0;
+
+}
+
+
+.officer-assignment-officer > div:last-child {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 2px;
+
+    min-width: 0;
+
+}
+
+
+.officer-assignment-officer span {
+
+    color: #9CA3AF;
+
+    font-size: 10px;
+
+    font-weight: 600;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.35px;
+
+    line-height: 1.3;
+
+}
+
+
+.officer-assignment-officer strong {
+
+    color: #172033;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    line-height: 1.4;
+
+}
+
+
+.officer-assignment-officer small {
+
+    color: #6B7280;
+
+    font-size: 12px;
+
+    line-height: 1.4;
+
+}
+
+
+/* =========================================================
+DESCRIPTION
+========================================================= */
+
+.officer-assignment-event-description {
+
+    max-width: 800px;
+
+    margin: 14px 0 0;
+
+    color: #6B7280;
+
+    font-size: 14px;
+
+    line-height: 1.7;
+
+}
+
+
+/* =========================================================
+LEVEL TRANSITION
+========================================================= */
+
+.officer-assignment-transition {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    width: fit-content;
+
+    margin-top: 15px;
+
+    padding: 12px 15px;
+
+    border: 1px solid #E5E7EB;
+
+    border-radius: 9px;
+
+    background: #FFFFFF;
+
+    box-sizing: border-box;
+
+}
+
+
+.officer-assignment-transition > div {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 3px;
+
+    min-width: 130px;
+
+}
+
+
+.officer-assignment-transition span {
+
+    color: #9CA3AF;
+
+    font-size: 10px;
+
+    font-weight: 600;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.35px;
+
+}
+
+
+.officer-assignment-transition strong {
+
+    color: #374151;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+}
+
+
+.officer-assignment-transition > svg {
+
+    flex-shrink: 0;
+
+    color: #0055A4;
+
+}
+
+
+/* =========================================================
+EMPTY STATE
+========================================================= */
+
+.officer-assignment-history-empty {
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 48px 20px;
+
+    border: 1px dashed #D1D5DB;
+
+    border-radius: 10px;
+
+    background: #F8FAFC;
+
+    text-align: center;
+
+    box-sizing: border-box;
+
+}
+
+
+.officer-assignment-history-empty > svg {
+
+    margin-bottom: 13px;
+
+    color: #9CA3AF;
+
+}
+
+
+.officer-assignment-history-empty h3 {
+
+    margin: 0 0 7px;
+
+    color: #374151;
+
+    font-size: 18px;
+
+    font-weight: 600;
+
+}
+
+
+.officer-assignment-history-empty p {
+
+    max-width: 440px;
+
+    margin: 0;
+
+    color: #6B7280;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+
+}
+
+
+/* =========================================================
+REMOVE OLD CONFLICTING SPACING
+========================================================= */
+
+.officer-detail-timestamps {
+
+    margin-bottom: 0;
+
+}
+
+
+.officer-assignment-history-card {
+
+    margin: 0;
+
+}
+
+
+.officer-assignment-history-card
+.officer-complaint-actions {
+
+    margin-top: 0;
+
+}
+
+
+/* =========================================================
+TABLET
+========================================================= */
+
+@media (max-width: 700px) {
+
+    .officer-assignment-history-header {
+
+        min-height: 120px;
+
+        padding: 20px 22px;
+
+        gap: 18px;
+
+    }
+
+
+    .officer-assignment-history-heading {
+
+        gap: 15px;
+
+        min-width: 0;
+
+        overflow: hidden;
+
+    }
+
+
+    .officer-assignment-history-icon {
+
+        width: 50px;
+
+        height: 50px;
+
+    }
+
+
+    .officer-assignment-history-title {
+
+        min-width: 0;
+
+        overflow: hidden;
+
+    }
+
+
+    .officer-assignment-history-title h2 {
+
+        font-size: 26px;
+
+        overflow: hidden;
+
+        text-overflow: ellipsis;
+
+        white-space: nowrap;
+
+    }
+
+
+    /* Fixed dropdown width */
+
+    .officer-assignment-history-toggle {
+
+        flex: 0 0 105px;
+
+        width: 105px;
+
+        min-width: 105px;
+
+        height: 40px;
+
+        padding: 0 12px;
+
+        font-size: 12px;
+
+        flex-shrink: 0;
+
+    }
+
+
+    .officer-assignment-history-toggle svg {
+
+        width: 17px;
+
+        height: 17px;
+
+    }
+
+
+    .officer-assignment-timeline {
+
+        padding: 24px 22px;
+
+    }
+
+
+    .officer-assignment-event {
+
+        grid-template-columns:
+            42px minmax(0, 1fr);
+
+        column-gap: 14px;
+
+    }
+
+
+    .officer-assignment-timeline-column {
+
+        width: 42px;
+
+    }
+
+
+    .officer-assignment-event-dot {
+
+        width: 34px;
+
+        height: 34px;
+
+    }
+
+
+    .officer-assignment-event-top {
+
+        flex-direction: column;
+
+        gap: 7px;
+
+    }
+
+
+    .officer-assignment-event-date {
+
+        font-size: 11px;
+
+    }
+
+
+    .officer-assignment-officer {
+
+        width: 100%;
+
+    }
+
+
+    .officer-assignment-transition {
+
+        width: 100%;
+
+    }
+
+
+    .officer-assignment-transition > div {
+
+        min-width: 0;
+
+        flex: 1;
+
+    }
+
+}
+
+
+/* =========================================================
+MOBILE
+========================================================= */
+
+@media (max-width: 450px) {
+
+    .officer-assignment-history-section {
+
+        margin-bottom: 20px;
+
+    }
+
+
+    .officer-assignment-history-header {
+
+        min-height: 110px;
+
+        padding: 18px 16px;
+
+        gap: 10px;
+
+    }
+
+
+    .officer-assignment-history-heading {
+
+        gap: 12px;
+
+        flex: 1 1 auto;
+
+        min-width: 0;
+
+        overflow: hidden;
+
+    }
+
+
+    .officer-assignment-history-icon {
+
+        width: 44px;
+
+        height: 44px;
+
+        border-radius: 9px;
+
+    }
+
+
+    .officer-assignment-history-title {
+
+        min-width: 0;
+
+        max-width: 100%;
+
+        overflow: hidden;
+
+    }
+
+
+    .officer-assignment-history-title h2 {
+
+        font-size: 21px;
+
+        line-height: 1.15;
+
+        white-space: nowrap;
+
+        overflow: hidden;
+
+        text-overflow: ellipsis;
+
+    }
+
+
+    .officer-assignment-history-eyebrow {
+
+        margin-bottom: 4px;
+
+        font-size: 10px;
+
+        white-space: nowrap;
+
+        overflow: hidden;
+
+        text-overflow: ellipsis;
+
+    }
+
+
+    /* Smaller mobile dropdown */
+
+    .officer-assignment-history-toggle {
+
+        flex: 0 0 92px;
+
+        width: 92px;
+
+        min-width: 92px;
+
+        height: 38px;
+
+        padding: 0 9px;
+
+        gap: 6px;
+
+        font-size: 11px;
+
+        flex-shrink: 0;
+
+    }
+
+
+    .officer-assignment-history-toggle svg {
+
+        width: 16px;
+
+        height: 16px;
+
+    }
+
+
+    .officer-assignment-timeline {
+
+        padding: 20px 16px;
+
+    }
+
+
+    .officer-assignment-event {
+
+        grid-template-columns:
+            34px minmax(0, 1fr);
+
+        column-gap: 10px;
+
+    }
+
+
+    .officer-assignment-timeline-column {
+
+        width: 34px;
+
+    }
+
+
+    .officer-assignment-event-dot {
+
+        width: 31px;
+
+        height: 31px;
+
+    }
+
+
+    .officer-assignment-event-top h3 {
+
+        font-size: 16px;
+
+    }
+
+
+    .officer-assignment-event-description {
+
+        font-size: 13px;
+
+        line-height: 1.6;
+
+    }
+
+
+    .officer-assignment-officer {
+
+        padding: 10px 11px;
+
+    }
+
+
+    .officer-assignment-transition {
+
+        flex-direction: column;
+
+        align-items: stretch;
+
+        gap: 8px;
+
+    }
+
+
+    .officer-assignment-transition > svg {
+
+        transform: rotate(90deg);
+
+        align-self: center;
+
+    }
+
+
+    .officer-assignment-history-empty {
+
+        padding: 38px 16px;
+
+    }
+
+}
+
+
+/* =========================================================
+VERY SMALL MOBILE
+========================================================= */
+
+@media (max-width: 350px) {
+
+    .officer-assignment-history-header {
+
+        padding: 16px 14px;
+
+        gap: 8px;
+
+    }
+
+
+    .officer-assignment-history-heading {
+
+        gap: 9px;
+
+    }
+
+
+    .officer-assignment-history-icon {
+
+        width: 40px;
+
+        height: 40px;
+
+    }
+
+
+    .officer-assignment-history-title h2 {
+
+        font-size: 19px;
+
+    }
+
+
+    .officer-assignment-history-toggle {
+
+        flex: 0 0 86px;
+
+        width: 86px;
+
+        min-width: 86px;
+
+        height: 36px;
+
+        padding: 0 7px;
+
+        gap: 5px;
+
+        font-size: 10px;
+
+    }
+
+
+    .officer-assignment-history-toggle svg {
+
+        width: 15px;
+
+        height: 15px;
+
+    }
+
+
+    .officer-assignment-timeline {
+
+        padding: 18px 14px;
+
+    }
+
+}
+
+
+
+/* =========================================
+   NOTIFICATION CONTAINER
+========================================= */
+
+.officer-notification {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+
+    flex-shrink: 0;
+}
+
+
+/* =========================================
+   NOTIFICATION BELL
+========================================= */
+
+.officer-notification-button {
+    position: relative;
+
+    width: 40px;
+    height: 40px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+    margin: 0;
+
+    border: none;
+    outline: none;
+
+    background: transparent;
+
+    color: #0055A4;
+
+    cursor: pointer;
+
+    border-radius: 8px;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease;
+}
+
+
+/* =========================================
+   BELL HOVER
+========================================= */
+
+.officer-notification-button:hover {
+    background: #EAF3FF;
+    color: #0055A4;
+}
+
+
+/* =========================================
+   BELL ICON
+========================================= */
+
+.officer-notification-button svg {
+    width: 22px;
+    height: 22px;
+
+    color: currentColor;
+    stroke: currentColor;
+
+    flex-shrink: 0;
+}
+
+
+/* =========================================
+   UNREAD COUNT
+========================================= */
+
+.officer-notification-count {
+    position: absolute;
+
+    top: 1px;
+    right: 0;
+
+    min-width: 16px;
+    height: 16px;
+
+    padding: 0 4px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 999px;
+
+    background: #0055A4;
+    color: #FFFFFF;
+
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 1;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================
+   NOTIFICATION DROPDOWN
+========================================= */
+
+.officer-notification-dropdown {
+    position: absolute;
+
+    top: calc(100% + 6px);
+    right: 0;
+
+    width: 340px;
+    max-width: calc(100vw - 32px);
+
+    background: #FFFFFF;
+
+    border: 1px solid #E5E7EB;
+    border-radius: 14px;
+
+    box-shadow:
+        0 10px 28px rgba(0, 0, 0, 0.10);
+
+    overflow: hidden;
+
+    z-index: 1000;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================
+   DROPDOWN HEADER
+========================================= */
+
+.officer-notification-header {
+    padding: 18px 20px;
+
+    border-bottom: 1px solid #E5E7EB;
+
+    background: #FFFFFF;
+
+    box-sizing: border-box;
+}
+
+.officer-notification-header strong {
+    display: block;
+
+    margin: 0;
+
+    color: #0055A4;
+
+    font-size: 19px;
+    font-weight: 700;
+
+    line-height: 1.3;
+}
+
+
+/* =========================================
+   NOTIFICATION LIST
+========================================= */
+
+.officer-notification-list {
+    width: 100%;
+
+    max-height: 360px;
+
+    overflow-y: auto;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================
+   SINGLE NOTIFICATION
+========================================= */
+
+.officer-notification-item {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 16px;
+
+    padding: 17px 20px;
+
+    border: none;
+    border-bottom: 1px solid #EEF2F7;
+
+    background: #FFFFFF;
+
+    color: #172033;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    box-sizing: border-box;
+
+    transition: background 0.2s ease;
+}
+
+.officer-notification-item:last-child {
+    border-bottom: none;
+}
+
+.officer-notification-item:hover {
+    background: #F8FAFC;
+}
+
+
+/* =========================================
+   UNREAD NOTIFICATION
+========================================= */
+
+.officer-notification-item.unread {
+    border-left: 3px solid #0055A4;
+
+    padding-left: 17px;
+}
+
+
+/* =========================================
+   NOTIFICATION CONTENT
+========================================= */
+
+.officer-notification-content {
+    min-width: 0;
+
+    flex: 1;
+}
+
+
+/* =========================================
+   NOTIFICATION TITLE
+========================================= */
+
+.officer-notification-content strong {
+    display: block;
+
+    margin: 0 0 7px;
+
+    color: #0055A4;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    line-height: 1.4;
+}
+
+
+/* =========================================
+   NOTIFICATION MESSAGE
+========================================= */
+
+.officer-notification-content p {
+    margin: 0;
+
+    color: #4B5563;
+
+    font-size: 13px;
+    line-height: 1.55;
+
+    word-break: break-word;
+}
+
+
+/* =========================================
+   ARROW
+========================================= */
+
+.officer-notification-item > svg {
+    width: 17px;
+    height: 17px;
+
+    flex-shrink: 0;
+
+    color: #0055A4;
+    stroke: currentColor;
+}
+
+
+/* =========================================
+   NO NOTIFICATIONS
+========================================= */
+
+.officer-no-notifications {
+    padding: 28px 20px;
+
+    color: #6B7280;
+
+    font-size: 14px;
+    line-height: 1.5;
+
+    text-align: center;
+
+    background: #FFFFFF;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 700px) {
+
+    .officer-notification-dropdown {
+        width: 320px;
+
+        max-width: calc(100vw - 30px);
+    }
+
+}
+
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 450px) {
+
+    .officer-notification-dropdown {
+        width: 300px;
+
+        max-width: calc(100vw - 24px);
+    }
+
+    .officer-notification-header {
+        padding: 16px 18px;
+    }
+
+    .officer-notification-header strong {
+        font-size: 18px;
+    }
+
+    .officer-notification-item {
+        padding: 16px 18px;
+
+        gap: 12px;
+    }
+
+    .officer-notification-item.unread {
+        padding-left: 15px;
+    }
+
+    .officer-notification-content strong {
+        font-size: 13px;
+    }
+
+    .officer-notification-content p {
+        font-size: 12.5px;
+    }
+
+}
+
+
+/* =========================================
+   VERY SMALL MOBILE
+========================================= */
+
+@media (max-width: 350px) {
+
+    .officer-notification-dropdown {
+        width: 280px;
+
+        max-width: calc(100vw - 20px);
+    }
+
+    .officer-notification-header {
+        padding: 15px 16px;
+    }
+
+    .officer-notification-item {
+        padding: 15px 16px;
+    }
+
+    .officer-notification-item.unread {
+        padding-left: 13px;
+    }
+
+}

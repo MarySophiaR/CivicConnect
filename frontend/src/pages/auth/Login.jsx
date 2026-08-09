@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import API from "../../api/axios";
 import { toast } from "react-toastify";
+import { Eye, EyeOff } from "lucide-react";
 import logo from "../../assets/logo.png";
 
 function Login() {
@@ -13,6 +14,8 @@ function Login() {
         email: "",
         password: ""
     });
+
+    const [showPassword, setShowPassword] = useState(false);
 
     const handleChange = (e) => {
 
@@ -90,71 +93,117 @@ function Login() {
     };
 
     return (
-      <div className="login-page">
-        <div className="login-card">
-          {/* Left Section */}
+        <div className="login-page">
 
-          <div className="login-left">
-            <img src={logo} alt="CivicConnect Logo" className="login-logo" />
+            <div className="login-card">
 
-            <h1 className="brand-logo">
-              <span className="brand-initial">C</span>
-              <span className="brand-rest">ivic</span>
-              <span className="brand-initial">C</span>
-              <span className="brand-rest">onnect</span>
-            </h1>
+                {/* Left Section */}
 
-            <p>Smart Civic Issue Reporting Portal</p>
-          </div>
+                <div className="login-left">
 
-          {/* Right Section */}
+                    <img
+                        src={logo}
+                        alt="CivicConnect Logo"
+                        className="login-logo"
+                    />
 
-          <div className="login-right">
-            <h2>Welcome Back</h2>
+                    <h1 className="brand-logo">
 
-            <p className="subtitle">
-              Sign in to CivicConnect and continue reporting civic issues.
-            </p>
+                        <span className="brand-initial">C</span>
+                        <span className="brand-rest">ivic</span>
+                        <span className="brand-initial">C</span>
+                        <span className="brand-rest">onnect</span>
 
-            <form onSubmit={handleSubmit}>
-              <div className="input-group">
-                <label>Email</label>
+                    </h1>
 
-                <input
-                  type="email"
-                  name="email"
-                  placeholder="Enter your email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
+                    <p>
+                        Smart Civic Issue Reporting Portal
+                    </p>
 
-              <div className="input-group">
-                <label>Password</label>
+                </div>
 
-                <input
-                  type="password"
-                  name="password"
-                  placeholder="Enter your password"
-                  value={formData.password}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
+                {/* Right Section */}
 
-              <button type="submit">Login to CivicConnect</button>
-            </form>
+                <div className="login-right">
 
-            <p className="register-link">
-              New to CivicConnect?
-              <Link to="/register"> Create an Account</Link>
-            </p>
-          </div>
+                    <h2>Welcome Back</h2>
+
+                    <p className="subtitle">
+                        Sign in to CivicConnect and continue reporting civic issues.
+                    </p>
+
+                    <form onSubmit={handleSubmit}>
+
+                        <div className="input-group">
+
+                            <label>Email</label>
+
+                            <input
+                                type="email"
+                                name="email"
+                                placeholder="Enter your email"
+                                value={formData.email}
+                                onChange={handleChange}
+                                required
+                            />
+
+                        </div>
+
+                        <div className="input-group">
+
+                            <label>Password</label>
+
+                            <div className="password-input-wrapper">
+
+                                <input
+                                    type={showPassword ? "text" : "password"}
+                                    name="password"
+                                    placeholder="Enter your password"
+                                    value={formData.password}
+                                    onChange={handleChange}
+                                    required
+                                />
+
+                                <button
+                                    type="button"
+                                    className="password-toggle"
+                                    onClick={() =>
+                                        setShowPassword(!showPassword)
+                                    }
+                                    aria-label={
+                                        showPassword
+                                            ? "Hide password"
+                                            : "Show password"
+                                    }
+                                >
+                                    {showPassword ? (
+                                        <Eye size={20} />
+                                    ) : (
+                                        <EyeOff size={20} />
+                                    )}
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                        <button type="submit">
+                            Login to CivicConnect
+                        </button>
+
+                    </form>
+
+                    <p className="register-link">
+                        New to CivicConnect?
+                        <Link to="/register"> Create an Account</Link>
+                    </p>
+
+                </div>
+
+            </div>
+
         </div>
-      </div>
     );
-
 }
 
 export default Login;

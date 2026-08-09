@@ -153,6 +153,10 @@
 
     box-shadow:0 6px 18px rgba(0,0,0,.08);
 
+    width:100%;
+
+    box-sizing:border-box;
+
 }
 
 .recent-heading{
@@ -170,6 +174,28 @@
     font-size:26px;
 
     font-weight:700;
+
+}
+
+/* -------------------- */
+/* Complaint Table Wrapper */
+/* -------------------- */
+
+.complaint-table-wrapper{
+
+    width:100%;
+
+    max-width:100%;
+
+    overflow-x:auto;
+
+    overflow-y:hidden;
+
+    -webkit-overflow-scrolling:touch;
+
+    scrollbar-width:thin;
+
+    box-sizing:border-box;
 
 }
 
@@ -203,6 +229,8 @@
 
     font-weight:600;
 
+    white-space:nowrap;
+
 }
 
 .complaint-table td{
@@ -214,6 +242,8 @@
     color:#374151;
 
     font-size:15px;
+
+    white-space:nowrap;
 
 }
 
@@ -242,36 +272,57 @@
 }
 
 .complaint-table th svg{
+
     margin-right:8px;
+
     vertical-align:middle;
+
 }
 
 .status-badge{
+
     display:inline-block;
+
     padding:6px 12px;
+
     border-radius:999px;
+
     font-size:13px;
+
     font-weight:600;
+
 }
 
 .status-badge.pending{
+
     background:#FEF3C7;
+
     color:#92400E;
+
 }
 
 .status-badge.assigned{
+
     background:#DBEAFE;
+
     color:#1D4ED8;
+
 }
 
 .status-badge.progress{
+
     background:#E0F2FE;
+
     color:#0369A1;
+
 }
 
 .status-badge.resolved{
+
     background:#DCFCE7;
+
     color:#166534;
+
 }
 
 /* -------------------- */
@@ -333,5 +384,442 @@
     color:#6B7280;
 
     line-height:1.5;
+
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width:1000px){
+
+    .stats-grid{
+
+        grid-template-columns:repeat(2,1fr);
+
+        gap:20px;
+
+    }
+
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width:700px){
+
+    .dashboard{
+
+        gap:28px;
+
+    }
+
+    .dashboard-title{
+
+        font-size:30px;
+
+    }
+
+    .dashboard-subtitle{
+
+        font-size:17px;
+
+    }
+
+    .dashboard-description{
+
+        font-size:14px;
+
+        line-height:1.7;
+
+        margin-bottom:28px;
+
+    }
+
+
+    /* --------------------
+       Statistics
+    -------------------- */
+
+    .stats-grid{
+
+        grid-template-columns:1fr;
+
+        gap:16px;
+
+    }
+
+    .stat-card{
+
+        padding:24px;
+
+    }
+
+    .stat-card h3{
+
+        font-size:15px;
+
+    }
+
+    .stat-card span{
+
+        font-size:34px;
+
+    }
+
+
+    /* --------------------
+       Recent Complaints
+    -------------------- */
+
+    .recent-section{
+
+        width:100%;
+
+        max-width:100%;
+
+        padding:22px 18px;
+
+        box-sizing:border-box;
+
+        overflow:hidden;
+
+    }
+
+    .recent-heading{
+
+        font-size:23px;
+
+        margin-bottom:18px;
+
+    }
+
+    /*
+       The wrapper becomes the
+       horizontal scroll area.
+    */
+
+    .complaint-table-wrapper{
+
+        display:block;
+
+        width:100%;
+
+        max-width:100%;
+
+        overflow-x:auto;
+
+        overflow-y:hidden;
+
+        -webkit-overflow-scrolling:touch;
+
+        scrollbar-width:thin;
+
+        box-sizing:border-box;
+
+    }
+
+    .complaint-table{
+
+        width:max-content;
+
+        min-width:700px;
+
+        border-collapse:collapse;
+
+    }
+
+    .complaint-table th{
+
+        padding:13px 14px;
+
+        font-size:14px;
+
+        white-space:nowrap;
+
+    }
+
+    .complaint-table td{
+
+        padding:14px;
+
+        font-size:14px;
+
+        white-space:nowrap;
+
+    }
+
+    .complaint-table th svg{
+
+        margin-right:6px;
+
+    }
+
+    .no-data{
+
+        padding:40px 20px;
+
+        font-size:14px;
+
+    }
+
+
+    /* --------------------
+       Prediction
+    -------------------- */
+
+    .prediction-card{
+
+        padding:20px;
+
+    }
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width:450px){
+
+    .dashboard{
+
+        gap:24px;
+
+    }
+
+    .dashboard-title{
+
+        font-size:26px;
+
+    }
+
+    .dashboard-subtitle{
+
+        font-size:16px;
+
+    }
+
+    .dashboard-description{
+
+        font-size:13px;
+
+        line-height:1.6;
+
+        margin-bottom:24px;
+
+    }
+
+
+    /* --------------------
+       Statistics
+    -------------------- */
+
+    .stat-card{
+
+        padding:22px 20px;
+
+    }
+
+    .stat-card h3{
+
+        font-size:14px;
+
+    }
+
+    .stat-card span{
+
+        font-size:32px;
+
+    }
+
+
+    /* --------------------
+       Recent Complaints
+    -------------------- */
+
+    .recent-section{
+
+        width:100%;
+
+        max-width:100%;
+
+        padding:20px 15px;
+
+        border-radius:12px;
+
+        box-sizing:border-box;
+
+        overflow:hidden;
+
+    }
+
+    .recent-heading{
+
+        font-size:21px;
+
+        gap:8px;
+
+        margin-bottom:18px;
+
+    }
+
+    .complaint-table-wrapper{
+
+        width:100%;
+
+        max-width:100%;
+
+        overflow-x:auto;
+
+        overflow-y:hidden;
+
+        -webkit-overflow-scrolling:touch;
+
+        scrollbar-width:thin;
+
+        box-sizing:border-box;
+
+    }
+
+    .complaint-table{
+
+        width:max-content;
+
+        min-width:650px;
+
+    }
+
+    .complaint-table th{
+
+        padding:12px 14px;
+
+        font-size:13px;
+
+        white-space:nowrap;
+
+    }
+
+    .complaint-table td{
+
+        padding:13px 14px;
+
+        font-size:13px;
+
+        white-space:nowrap;
+
+    }
+
+    .complaint-table th svg{
+
+        margin-right:5px;
+
+    }
+
+    .no-data{
+
+        padding:35px 20px;
+
+        font-size:14px;
+
+    }
+
+
+    /* --------------------
+       Prediction
+    -------------------- */
+
+    .prediction-card{
+
+        padding:18px;
+
+        border-radius:12px;
+
+    }
+
+    .prediction-card h3{
+
+        font-size:18px;
+
+    }
+
+    .prediction-select{
+
+        padding:11px;
+
+        font-size:14px;
+
+    }
+
+}
+
+
+/* =========================================
+   VERY SMALL MOBILE
+========================================= */
+
+@media (max-width:350px){
+
+    .recent-section{
+
+        padding:18px 12px;
+
+    }
+
+    .recent-heading{
+
+        font-size:20px;
+
+    }
+
+    .complaint-table-wrapper{
+
+    width:100%;
+
+    max-width:100%;
+
+    overflow-x:auto;
+
+    overflow-y:hidden;
+
+    -webkit-overflow-scrolling:touch;
+
+    scrollbar-width:thin;
+
+    box-sizing:border-box;
+
+    touch-action:pan-x;
+
+    }
+
+    .complaint-table{
+
+    width:max-content;
+
+    min-width:650px;
+
+    border-collapse:collapse;
+
+    }
+
+    .complaint-table th{
+
+        padding:11px 12px;
+
+        font-size:12px;
+
+    }
+
+    .complaint-table td{
+
+        padding:12px;
+
+        font-size:12px;
+
+    }
 
 }

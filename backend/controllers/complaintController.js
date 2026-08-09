@@ -6,6 +6,9 @@ const { getDistance } = require("geolib");
 const fs = require("fs");
 const path = require("path");
 
+const ESCALATION_REASONS =
+  require("../config/escalationReasons");
+
 // =================================
 // HELPER: Format Image Path
 // =================================
@@ -14,9 +17,13 @@ const formatImagePath = (fileObj) => {
 
   const fileName =
     fileObj.filename ||
-    (fileObj.path ? path.basename(fileObj.path) : "");
+    (fileObj.path
+      ? path.basename(fileObj.path)
+      : "");
 
-  return fileName ? `uploads/${fileName}` : "";
+  return fileName
+    ? `uploads/${fileName}`
+    : "";
 };
 
 // =================================
@@ -52,26 +59,12 @@ const predictComplaint = async (req, res) => {
       });
     }
 
-    console.log("\n=================================");
-    console.log("ML PREDICTION REQUEST");
-    console.log(
-      "Original filename:",
-      req.file.originalname
-    );
-    console.log("MIME type:", req.file.mimetype);
-    console.log("File size:", req.file.size);
-    console.log("=================================\n");
-
     const prediction = await predictImage(
       req.file.buffer,
       req.file.originalname,
       req.file.mimetype
     );
 
-    console.log(
-      "ML Prediction:",
-      prediction
-    );
 
     return res.status(200).json({
       category: prediction.category,
@@ -135,7 +128,7 @@ const createComplaint = async (req, res) => {
     // Get logged-in citizen
     // ---------------------------------
     const reportedBy =
-      req.user._id || req.user.id;
+      req.user?._id || req.user?.id;
 
     if (!reportedBy) {
       deleteFile(uploadedFilePath);
@@ -299,10 +292,8 @@ const createComplaint = async (req, res) => {
               : "";
 
           if (
-            existingCity ===
-              normalizedCity &&
-            existingArea ===
-              normalizedArea
+            existingCity === normalizedCity &&
+            existingArea === normalizedArea
           ) {
             duplicateComplaint = existing;
             break;
@@ -314,92 +305,106 @@ const createComplaint = async (req, res) => {
     // =================================
     // HANDLE DUPLICATE
     // =================================
+
     if (duplicateComplaint) {
       console.log(
-        `[DUPLICATE] Existing complaint found: ${duplicateComplaint._id}`,
+        `[DUPLICATE] Existing complaint found: ${duplicateComplaint._id}`
       );
 
-      // Delete newly uploaded image because
-      // this complaint will NOT be created.
       deleteFile(uploadedFilePath);
 
-      const supporters = Array.isArray(duplicateComplaint.supporters)
+      const supporters = Array.isArray(
+        duplicateComplaint.supporters
+      )
         ? duplicateComplaint.supporters
         : [];
 
-      const alreadySupported = supporters.some((support) => {
-        if (support?.citizen) {
-          return support.citizen.toString() === reportedBy.toString();
-        }
+      const alreadySupported =
+        supporters.some((support) => {
+          if (support?.citizen) {
+            return (
+              support.citizen.toString() ===
+              reportedBy.toString()
+            );
+          }
 
-        return support?.toString?.() === reportedBy.toString();
-      });
+          return (
+            support?.toString?.() ===
+            reportedBy.toString()
+          );
+        });
 
-      // ---------------------------------
-      // Calculate how many calendar days ago
-      // the original complaint was reported
-      // ---------------------------------
-      const createdAt = new Date(duplicateComplaint.createdAt);
+      const createdAt = new Date(
+        duplicateComplaint.createdAt
+      );
 
       const today = new Date();
 
       const createdDate = new Date(
         createdAt.getFullYear(),
         createdAt.getMonth(),
-        createdAt.getDate(),
+        createdAt.getDate()
       );
 
       const currentDate = new Date(
         today.getFullYear(),
         today.getMonth(),
-        today.getDate(),
+        today.getDate()
       );
 
-      const diffTime = currentDate.getTime() - createdDate.getTime();
+      const diffTime =
+        currentDate.getTime() -
+        createdDate.getTime();
 
-      const daysAgo = Math.max(0, Math.floor(diffTime / (1000 * 60 * 60 * 24)));
+      const daysAgo = Math.max(
+        0,
+        Math.floor(
+          diffTime /
+            (1000 * 60 * 60 * 24)
+        )
+      );
 
-      // ---------------------------------
-      // Already supported
-      // ---------------------------------
       if (alreadySupported) {
         return res.status(200).json({
           duplicate: true,
           isDuplicate: true,
           alreadySupported: true,
-          status: duplicateComplaint.status,
+          status:
+            duplicateComplaint.status,
           daysAgo,
           message:
             "This issue has already been reported and you have already supported it.",
-          complaintId: duplicateComplaint._id,
-          supportCount: duplicateComplaint.supportCount || 1,
+          complaintId:
+            duplicateComplaint._id,
+          supportCount:
+            duplicateComplaint.supportCount ||
+            1,
         });
       }
 
-      // ---------------------------------
-      // Add community support
-      // ---------------------------------
-      const updatedComplaint = await Complaint.findByIdAndUpdate(
-        duplicateComplaint._id,
-        {
-          $push: {
-            supporters: {
-              citizen: reportedBy,
+      const updatedComplaint =
+        await Complaint.findByIdAndUpdate(
+          duplicateComplaint._id,
+          {
+            $push: {
+              supporters: {
+                citizen: reportedBy,
+              },
+            },
+            $inc: {
+              supportCount: 1,
             },
           },
-          $inc: {
-            supportCount: 1,
-          },
-        },
-        {
-          new: true,
-          runValidators: false,
-        },
-      );
+          {
+            new: true,
+            runValidators: false,
+          }
+        );
 
       if (!updatedComplaint) {
         return res.status(404).json({
-          message: "Duplicate complaint could not be updated.",
+          message:
+            "Duplicate complaint could not be updated.",
         });
       }
 
@@ -407,18 +412,22 @@ const createComplaint = async (req, res) => {
         duplicate: true,
         isDuplicate: true,
         alreadySupported: false,
-        status: updatedComplaint.status,
+        status:
+          updatedComplaint.status,
         daysAgo,
         message:
           "This issue has already been reported. Your report has been added as community support.",
-        complaintId: updatedComplaint._id,
-        supportCount: updatedComplaint.supportCount,
+        complaintId:
+          updatedComplaint._id,
+        supportCount:
+          updatedComplaint.supportCount,
       });
     }
 
     // =================================
     // ASSIGN TO JUNIOR ENGINEER
     // =================================
+
     const juniorEngineer =
       await User.findOne({
         role: "juniorEngineer",
@@ -437,8 +446,7 @@ const createComplaint = async (req, res) => {
     // Calculate SLA deadline
     // ---------------------------------
     const slaDays =
-      WORKFLOW?.juniorEngineer
-        ?.slaDays || 3;
+      WORKFLOW?.juniorEngineer?.slaDays || 3;
 
     const deadline = new Date();
 
@@ -449,6 +457,7 @@ const createComplaint = async (req, res) => {
     // =================================
     // CREATE COMPLAINT
     // =================================
+
     const complaint =
       new Complaint({
         title,
@@ -509,7 +518,6 @@ const createComplaint = async (req, res) => {
 
     await complaint.save();
 
-    // Image successfully saved
     uploadedFilePath = null;
 
     console.log(
@@ -527,8 +535,6 @@ const createComplaint = async (req, res) => {
       complaint,
     });
   } catch (error) {
-    // Delete uploaded image if complaint
-    // creation failed.
     if (uploadedFilePath) {
       deleteFile(uploadedFilePath);
     }
@@ -548,20 +554,6 @@ const createComplaint = async (req, res) => {
 // =================================
 // UPDATE / EDIT COMPLAINT
 // =================================
-// Citizen can edit ONLY:
-// - title
-// - description
-//
-// Citizen CANNOT edit:
-// - image
-// - category
-// - location
-// - status
-// - assigned officer
-// - current level
-// - deadline
-// - support count
-// =================================
 const updateComplaint = async (
   req,
   res
@@ -571,11 +563,8 @@ const updateComplaint = async (
       req.params.id;
 
     const userId =
-      req.user._id || req.user.id;
+      req.user?._id || req.user?.id;
 
-    // ---------------------------------
-    // Authentication check
-    // ---------------------------------
     if (!userId) {
       return res.status(401).json({
         message:
@@ -583,9 +572,6 @@ const updateComplaint = async (
       });
     }
 
-    // ---------------------------------
-    // Get complaint belonging to user
-    // ---------------------------------
     const complaint =
       await Complaint.findOne({
         _id: complaintId,
@@ -599,9 +585,6 @@ const updateComplaint = async (
       });
     }
 
-    // ---------------------------------
-    // Check whether editing is allowed
-    // ---------------------------------
     if (
       !["Pending", "Assigned"].includes(
         complaint.status
@@ -613,17 +596,11 @@ const updateComplaint = async (
       });
     }
 
-    // ---------------------------------
-    // Get fields
-    // ---------------------------------
     const {
       title,
       description,
     } = req.body;
 
-    // ---------------------------------
-    // Validate title
-    // ---------------------------------
     if (
       typeof title !== "string" ||
       !title.trim()
@@ -634,12 +611,8 @@ const updateComplaint = async (
       });
     }
 
-    // ---------------------------------
-    // Validate description
-    // ---------------------------------
     if (
-      typeof description !==
-        "string" ||
+      typeof description !== "string" ||
       !description.trim()
     ) {
       return res.status(400).json({
@@ -648,9 +621,6 @@ const updateComplaint = async (
       });
     }
 
-    // ---------------------------------
-    // Update ONLY allowed fields
-    // ---------------------------------
     complaint.title =
       title.trim();
 
@@ -658,10 +628,6 @@ const updateComplaint = async (
       description.trim();
 
     await complaint.save();
-
-    console.log(
-      `[SUCCESS] Complaint updated: ${complaint._id}`
-    );
 
     return res.status(200).json({
       message:
@@ -690,7 +656,7 @@ const getMyComplaints = async (
 ) => {
   try {
     const userId =
-      req.user._id || req.user.id;
+      req.user?._id || req.user?.id;
 
     const complaints =
       await Complaint.find({
@@ -700,42 +666,38 @@ const getMyComplaints = async (
       });
 
     const updatedComplaints =
-      complaints.map(
-        (complaint) => {
-          const today =
-            new Date();
+      complaints.map((complaint) => {
+        const today = new Date();
 
-          const deadline =
-            new Date(
-              complaint.deadline
-            );
+        const deadline =
+          new Date(
+            complaint.deadline
+          );
 
-          const diffTime =
-            deadline - today;
+        const diffTime =
+          deadline - today;
 
-          const daysLeft =
-            Math.ceil(
-              diffTime /
-                (1000 *
-                  60 *
-                  60 *
-                  24)
-            );
+        const daysLeft =
+          Math.ceil(
+            diffTime /
+              (1000 *
+                60 *
+                60 *
+                24)
+          );
 
-          const complaintObj =
-            complaint.toObject();
+        const complaintObj =
+          complaint.toObject();
 
-          return {
-            ...complaintObj,
+        return {
+          ...complaintObj,
 
-            image:
-              complaintObj.image ||
-              "",
+          image:
+            complaintObj.image || "",
 
-            daysLeft,
-          };
-        }
-      );
+          daysLeft,
+        };
+      });
 
     return res.status(200).json({
       count: complaints.length,
@@ -774,9 +736,32 @@ const getAllComplaints = async (
 
     const query = {};
 
-    // ---------------------------------
-    // Search
-    // ---------------------------------
+    const officerRoles = [
+      "juniorEngineer",
+      "assistantExecutiveEngineer",
+      "executiveEngineer",
+    ];
+
+    const userRole =
+      req.user?.role;
+
+    const userId =
+      req.user?._id ||
+      req.user?.id;
+
+    if (
+      officerRoles.includes(userRole)
+    ) {
+      if (!userId) {
+        return res.status(401).json({
+          message:
+            "User authentication information is missing.",
+        });
+      }
+
+      query.assignedTo = userId;
+    }
+
     if (search) {
       query.$or = [
         {
@@ -794,12 +779,8 @@ const getAllComplaints = async (
       ];
     }
 
-    // ---------------------------------
-    // Filters
-    // ---------------------------------
     if (category) {
-      query.category =
-        category;
+      query.category = category;
     }
 
     if (status) {
@@ -811,9 +792,6 @@ const getAllComplaints = async (
         currentLevel;
     }
 
-    // ---------------------------------
-    // Sorting
-    // ---------------------------------
     let sortOption = {};
 
     switch (sort) {
@@ -835,9 +813,6 @@ const getAllComplaints = async (
         };
     }
 
-    // ---------------------------------
-    // Pagination
-    // ---------------------------------
     const currentPage =
       Math.max(
         Number(page) || 1,
@@ -857,17 +832,11 @@ const getAllComplaints = async (
       (currentPage - 1) *
       pageSize;
 
-    // ---------------------------------
-    // Count
-    // ---------------------------------
     const totalComplaints =
       await Complaint.countDocuments(
         query
       );
 
-    // ---------------------------------
-    // Fetch complaints
-    // ---------------------------------
     const complaints =
       await Complaint.find(query)
         .populate(
@@ -884,14 +853,11 @@ const getAllComplaints = async (
 
     return res.status(200).json({
       totalComplaints,
-
       currentPage,
-
       totalPages: Math.ceil(
         totalComplaints /
           pageSize
       ),
-
       complaints,
     });
   } catch (error) {
@@ -966,7 +932,8 @@ const getDashboardStats = async (
 ) => {
   try {
     const reportedBy =
-      req.user._id || req.user.id;
+      req.user?._id ||
+      req.user?.id;
 
     const total =
       await Complaint.countDocuments({
@@ -1020,6 +987,840 @@ const getDashboardStats = async (
 };
 
 // =================================
+// START WORK
+// =================================
+const startComplaintWork = async (
+  req,
+  res
+) => {
+  try {
+    const complaintId =
+      req.params.id;
+
+    const userId =
+      req.user?._id ||
+      req.user?.id;
+
+    const userRole =
+      req.user?.role;
+
+    const officerRoles = [
+      "juniorEngineer",
+      "assistantExecutiveEngineer",
+      "executiveEngineer",
+    ];
+
+    // =================================
+    // VERIFY ROLE
+    // =================================
+
+    if (
+      !officerRoles.includes(
+        userRole
+      )
+    ) {
+      return res.status(403).json({
+        message:
+          "Only assigned officers can start complaint work.",
+      });
+    }
+
+    // =================================
+    // VERIFY USER
+    // =================================
+
+    if (!userId) {
+      return res.status(401).json({
+        message:
+          "User authentication information is missing.",
+      });
+    }
+
+    // =================================
+    // FIND COMPLAINT
+    // =================================
+
+    const complaint =
+      await Complaint.findById(
+        complaintId
+      );
+
+    if (!complaint) {
+      return res.status(404).json({
+        message:
+          "Complaint not found.",
+      });
+    }
+
+    // =================================
+    // VERIFY CURRENT OFFICER
+    // =================================
+
+    if (
+      !complaint.assignedTo ||
+      complaint.assignedTo.toString() !==
+        userId.toString()
+    ) {
+      return res.status(403).json({
+        message:
+          "You are not assigned to this complaint.",
+      });
+    }
+
+    // =================================
+    // VERIFY LEVEL
+    // =================================
+
+    if (
+      complaint.currentLevel !==
+      userRole
+    ) {
+      return res.status(403).json({
+        message:
+          "Your officer level does not match the current complaint level.",
+      });
+    }
+
+    // =================================
+    // STATUS CHECK
+    // =================================
+
+    if (
+      complaint.status !==
+      "Assigned"
+    ) {
+      return res.status(400).json({
+        message:
+          "This complaint cannot be started in its current status.",
+      });
+    }
+
+    // =================================
+    // DEADLINE CHECK
+    // =================================
+
+    if (
+      complaint.deadline &&
+      new Date() >=
+        new Date(
+          complaint.deadline
+        )
+    ) {
+      return res.status(400).json({
+        message:
+          "The complaint deadline has already been reached. Automatic escalation will be handled by the system.",
+      });
+    }
+
+    // =================================
+    // CURRENT ASSIGNMENT
+    // =================================
+
+    const currentAssignment =
+      complaint.assignmentHistory[
+        complaint.assignmentHistory.length - 1
+      ];
+
+    if (!currentAssignment) {
+      return res.status(400).json({
+        message:
+          "Assignment history is missing.",
+      });
+    }
+
+    // =================================
+    // PREVENT DUPLICATE START
+    // =================================
+
+    if (
+      currentAssignment.startedAt
+    ) {
+      return res.status(400).json({
+        message:
+          "Work has already been started for this assignment.",
+      });
+    }
+
+    // =================================
+    // START WORK
+    // =================================
+
+    const now = new Date();
+
+    currentAssignment.startedAt =
+      now;
+
+    complaint.status =
+      "In Progress";
+
+    await complaint.save();
+
+    return res.status(200).json({
+      message:
+        "Complaint work started successfully.",
+      complaint,
+    });
+  } catch (error) {
+    console.error(
+      "Start Complaint Work Error:",
+      error
+    );
+
+    return res.status(500).json({
+      message:
+        "Server Error",
+      error:
+        error.message,
+    });
+  }
+};
+
+// =================================
+// RESOLVE COMPLAINT
+// =================================
+const resolveComplaint = async (
+  req,
+  res
+) => {
+  try {
+    const complaintId =
+      req.params.id;
+
+    const userId =
+      req.user?._id ||
+      req.user?.id;
+
+    const userRole =
+      req.user?.role;
+
+    const officerRoles = [
+      "juniorEngineer",
+      "assistantExecutiveEngineer",
+      "executiveEngineer",
+    ];
+
+    // =================================
+    // VERIFY ROLE
+    // =================================
+
+    if (
+      !officerRoles.includes(
+        userRole
+      )
+    ) {
+      return res.status(403).json({
+        message:
+          "Only officers can resolve complaints.",
+      });
+    }
+
+    // =================================
+    // VERIFY USER
+    // =================================
+
+    if (!userId) {
+      return res.status(401).json({
+        message:
+          "User authentication information is missing.",
+      });
+    }
+
+    // =================================
+    // RESOLUTION REMARKS
+    // =================================
+
+    const {
+      resolutionRemarks,
+    } = req.body;
+
+    if (
+      typeof resolutionRemarks !==
+        "string" ||
+      !resolutionRemarks.trim()
+    ) {
+      return res.status(400).json({
+        message:
+          "Resolution remarks are required.",
+      });
+    }
+
+    // =================================
+    // FIND COMPLAINT
+    // =================================
+
+    const complaint =
+      await Complaint.findById(
+        complaintId
+      );
+
+    if (!complaint) {
+      return res.status(404).json({
+        message:
+          "Complaint not found.",
+      });
+    }
+
+    // =================================
+    // VERIFY ASSIGNED OFFICER
+    // =================================
+
+    if (
+      !complaint.assignedTo ||
+      complaint.assignedTo.toString() !==
+        userId.toString()
+    ) {
+      return res.status(403).json({
+        message:
+          "You are not assigned to this complaint.",
+      });
+    }
+
+    // =================================
+    // VERIFY LEVEL
+    // =================================
+
+    if (
+      complaint.currentLevel !==
+      userRole
+    ) {
+      return res.status(403).json({
+        message:
+          "Your officer level does not match the current complaint level.",
+      });
+    }
+
+    // =================================
+    // STATUS CHECK
+    // =================================
+
+    if (
+      complaint.status !==
+      "In Progress"
+    ) {
+      return res.status(400).json({
+        message:
+          "Complaint must be in progress before it can be resolved.",
+      });
+    }
+
+    // =================================
+    // CURRENT ASSIGNMENT
+    // =================================
+
+    const currentAssignment =
+      complaint.assignmentHistory[
+        complaint.assignmentHistory.length - 1
+      ];
+
+    if (!currentAssignment) {
+      return res.status(400).json({
+        message:
+          "Assignment history is missing.",
+      });
+    }
+
+    // =================================
+    // RESOLVE
+    // =================================
+
+    const now = new Date();
+
+    complaint.status =
+      "Resolved";
+
+    complaint.resolvedBy =
+      userId;
+
+    complaint.resolvedAt =
+      now;
+
+    complaint.resolutionRemarks =
+      resolutionRemarks.trim();
+
+    // =================================
+    // CLOSE ASSIGNMENT
+    // =================================
+
+    currentAssignment.resolved =
+      true;
+
+    currentAssignment.resolvedAt =
+      now;
+
+    currentAssignment.endedAt =
+      now;
+
+    currentAssignment.endReason =
+      "resolved";
+
+    await complaint.save();
+
+    return res.status(200).json({
+      message:
+        "Complaint resolved successfully.",
+      complaint,
+    });
+  } catch (error) {
+    console.error(
+      "Resolve Complaint Error:",
+      error
+    );
+
+    return res.status(500).json({
+      message:
+        "Server Error",
+      error:
+        error.message,
+    });
+  }
+};
+
+// =================================
+// MANUAL ESCALATION
+// =================================
+
+const escalateComplaint = async (req, res) => {
+  try {
+    const complaintId = req.params.id;
+
+    const userId =
+      req.user?._id ||
+      req.user?.id;
+
+    const userRole =
+      req.user?.role;
+
+    // =================================
+    // ONLY JE AND AEE CAN MANUALLY
+    // ESCALATE
+    // =================================
+
+    const escalationRoles = [
+      "juniorEngineer",
+      "assistantExecutiveEngineer",
+    ];
+
+    if (
+      !escalationRoles.includes(userRole)
+    ) {
+      return res.status(403).json({
+        message:
+          "Only Junior Engineers and Assistant Executive Engineers can manually escalate complaints.",
+      });
+    }
+
+    // =================================
+    // VERIFY USER
+    // =================================
+
+    if (!userId) {
+      return res.status(401).json({
+        message:
+          "User authentication information is missing.",
+      });
+    }
+
+    // =================================
+    // GET REASON
+    // =================================
+
+    const reasonCode =
+      req.body?.reasonCode;
+
+    const note =
+      typeof req.body?.note === "string"
+        ? req.body.note.trim()
+        : "";
+
+    // =================================
+    // VALIDATE REASON
+    // =================================
+
+    if (
+      typeof reasonCode !== "string" ||
+      !reasonCode.trim()
+    ) {
+      return res.status(400).json({
+        message:
+          "Please select a valid escalation reason.",
+      });
+    }
+
+    const validReason =
+      ESCALATION_REASONS.find(
+        (reason) =>
+          reason.code ===
+          reasonCode.trim()
+      );
+
+    if (!validReason) {
+      return res.status(400).json({
+        message:
+          "Please select a valid escalation reason.",
+      });
+    }
+
+    // =================================
+    // FIND COMPLAINT
+    // =================================
+
+    const complaint =
+      await Complaint.findById(
+        complaintId
+      );
+
+    if (!complaint) {
+      return res.status(404).json({
+        message:
+          "Complaint not found.",
+      });
+    }
+
+    // =================================
+    // VERIFY CURRENT LEVEL
+    // =================================
+
+    if (
+      complaint.currentLevel !==
+      userRole
+    ) {
+      return res.status(403).json({
+        message:
+          "Your officer level does not match the current complaint level.",
+      });
+    }
+
+    // =================================
+    // VERIFY ASSIGNED OFFICER
+    // =================================
+
+    if (
+      !complaint.assignedTo ||
+      complaint.assignedTo.toString() !==
+        userId.toString()
+    ) {
+      return res.status(403).json({
+        message:
+          "You are not assigned to this complaint.",
+      });
+    }
+
+    // =================================
+    // STATUS CHECK
+    // =================================
+
+    if (
+      ![
+        "Assigned",
+        "In Progress",
+      ].includes(complaint.status)
+    ) {
+      return res.status(400).json({
+        message:
+          "This complaint cannot be escalated in its current status.",
+      });
+    }
+
+    // =================================
+    // DEADLINE CHECK
+    // =================================
+
+    if (!complaint.deadline) {
+      return res.status(400).json({
+        message:
+          "Complaint deadline is not available.",
+      });
+    }
+
+    const now = new Date();
+
+    if (
+      now >=
+      new Date(complaint.deadline)
+    ) {
+      return res.status(400).json({
+        message:
+          "Manual escalation is no longer available because the deadline has been reached. The system will handle automatic escalation.",
+      });
+    }
+
+    // =================================
+    // CURRENT LEVEL
+    // =================================
+
+    const currentLevel =
+      complaint.currentLevel;
+
+    // =================================
+    // GET CURRENT WORKFLOW
+    // =================================
+
+    const currentWorkflow =
+      WORKFLOW[currentLevel];
+
+    if (!currentWorkflow) {
+      return res.status(400).json({
+        message:
+          "Workflow configuration not found.",
+      });
+    }
+
+    // =================================
+    // GET NEXT LEVEL
+    // =================================
+
+    const nextLevel =
+      currentWorkflow.next;
+
+    // =================================
+    // FINAL LEVEL CHECK
+    // =================================
+
+    if (!nextLevel) {
+      return res.status(400).json({
+        message:
+          "This complaint has already reached the highest officer level.",
+      });
+    }
+
+    // =================================
+    // BLOCK EE
+    // =================================
+
+    if (
+      currentLevel ===
+      "executiveEngineer"
+    ) {
+      return res.status(400).json({
+        message:
+          "Executive Engineer is the highest officer level for complaint handling. Further manual escalation is not allowed.",
+      });
+    }
+
+    // =================================
+    // VALID ESCALATION PATH
+    // =================================
+
+    const allowedNextLevels = {
+      juniorEngineer:
+        "assistantExecutiveEngineer",
+
+      assistantExecutiveEngineer:
+        "executiveEngineer",
+    };
+
+    if (
+      allowedNextLevels[currentLevel] !==
+      nextLevel
+    ) {
+      return res.status(400).json({
+        message:
+          "Invalid escalation path.",
+      });
+    }
+
+    // =================================
+    // FIND NEXT OFFICER
+    // =================================
+
+    const nextOfficer =
+      await User.findOne({
+        role: nextLevel,
+      });
+
+    if (!nextOfficer) {
+      return res.status(404).json({
+        message:
+          "No officer is currently available for the next level.",
+      });
+    }
+
+    // =================================
+    // CURRENT ASSIGNMENT
+    // =================================
+
+    const currentAssignment =
+      complaint.assignmentHistory[
+        complaint.assignmentHistory.length - 1
+      ];
+
+    if (!currentAssignment) {
+      return res.status(400).json({
+        message:
+          "Assignment history is missing.",
+      });
+    }
+
+    // =================================
+    // CLOSE CURRENT ASSIGNMENT
+    // =================================
+    //
+    // IMPORTANT:
+    //
+    // DO NOT set resolved = true.
+    //
+    // Escalation means the assignment ended,
+    // NOT that the complaint was resolved.
+    //
+
+    currentAssignment.endedAt =
+      now;
+
+    currentAssignment.endReason =
+      "manual_escalation";
+
+    // Keep resolved false.
+
+    currentAssignment.resolved =
+      false;
+
+    // =================================
+    // RECORD MANUAL ESCALATION
+    // =================================
+
+    if (
+      !Array.isArray(
+        complaint.escalationHistory
+      )
+    ) {
+      complaint.escalationHistory = [];
+    }
+
+    complaint.escalationHistory.push({
+      from: currentLevel,
+
+      to: nextLevel,
+
+      reason:
+        validReason.label,
+
+      escalatedAt:
+        now,
+
+      type: "manual",
+
+      note,
+    });
+
+    // =================================
+    // NEW DEADLINE
+    // =================================
+
+    const nextSlaDays =
+      WORKFLOW[nextLevel]
+        ?.slaDays || 3;
+
+    const newDeadline =
+      new Date(now);
+
+    newDeadline.setDate(
+      newDeadline.getDate() +
+        nextSlaDays
+    );
+
+    // =================================
+    // REASSIGN
+    // =================================
+
+    complaint.currentLevel =
+      nextLevel;
+
+    complaint.assignedTo =
+      nextOfficer._id;
+
+    complaint.status =
+      "Assigned";
+
+    complaint.deadline =
+      newDeadline;
+
+    // =================================
+    // NEW ASSIGNMENT HISTORY
+    // =================================
+
+    complaint.assignmentHistory.push({
+      officer:
+        nextOfficer._id,
+
+      level:
+        nextLevel,
+
+      assignedAt:
+        now,
+
+      startedAt:
+        null,
+
+      resolvedAt:
+        null,
+
+      endedAt:
+        null,
+
+      endReason:
+        null,
+
+      resolved:
+        false,
+    });
+
+    // =================================
+    // SAVE
+    // =================================
+
+    await complaint.save();
+
+    // =================================
+    // RESPONSE
+    // =================================
+
+    return res.status(200).json({
+      success: true,
+
+      message:
+        "Complaint escalated successfully.",
+
+      complaint,
+
+      escalation: {
+        from:
+          currentLevel,
+
+        to:
+          nextLevel,
+
+        assignedTo:
+          nextOfficer._id,
+
+        assignedOfficer:
+          nextOfficer.name,
+
+        newDeadline,
+
+        reason:
+          validReason.label,
+
+        type: "manual",
+      },
+    });
+
+  } catch (error) {
+    console.error(
+      "Escalate Complaint Error:",
+      error
+    );
+
+    return res.status(500).json({
+      message:
+        "Failed to escalate complaint.",
+
+      error:
+        error.message,
+    });
+  }
+};
+
+// =================================
 // EXPORTS
 // =================================
 module.exports = {
@@ -1030,4 +1831,7 @@ module.exports = {
   getAllComplaints,
   getComplaintDetails,
   getDashboardStats,
+  startComplaintWork,
+  resolveComplaint,
+  escalateComplaint,
 };

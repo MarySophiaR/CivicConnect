@@ -13,7 +13,7 @@
     display:flex;
     align-items:center;
 
-    padding:0 30px;
+    padding:0 16px;
 
     box-shadow:0 2px 8px rgba(0,0,0,0.08);
 
@@ -27,7 +27,7 @@
 
     align-items:center;
 
-    gap:14px;
+    gap:6px;
 
 }
 
@@ -60,5 +60,79 @@
 .navbar-right{
 
     margin-left:auto;
+
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 600px){
+
+    .navbar{
+
+        height:75px;
+
+        padding:0 18px;
+
+    }
+
+    .navbar-left{
+
+        gap:10px;
+
+    }
+
+    .navbar-logo{
+
+        width:52px;
+        height:52px;
+
+        padding:5px;
+
+    }
+
+    .brand-logo-navbar{
+
+        font-size:24px;
+
+    }
+
+}
+
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 400px){
+
+    .navbar{
+
+        padding:0 12px;
+
+    }
+
+    .navbar-left{
+
+        gap:8px;
+
+    }
+
+    .navbar-logo{
+
+        width:48px;
+        height:48px;
+
+        padding:4px;
+
+    }
+
+    .brand-logo-navbar{
+
+        font-size:22px;
+
+    }
 
 }

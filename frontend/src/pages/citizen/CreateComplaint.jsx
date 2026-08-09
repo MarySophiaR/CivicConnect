@@ -68,52 +68,120 @@ function CreateComplaint() {
         const longitude = position.coords.longitude;
 
         try {
-          const response = await fetch(
-            `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}&accept-language=en&addressdetails=1`
+          // ==========================================
+          // 1. Get address from OpenStreetMap/Nominatim
+          // ==========================================
+
+          const nominatimResponse = await fetch(
+            `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}&accept-language=en&addressdetails=1`,
+            {
+              headers: {
+                Accept: "application/json",
+              },
+            },
           );
 
-          const data = await response.json();
-          const addressData = data.address || {};
+          const nominatimData = await nominatimResponse.json();
+
+          const addressData = nominatimData.address || {};
+
+          // ==========================================
+          // 2. Get pincode from Nominatim
+          // ==========================================
+
+          let pincode = addressData.postcode || "";
+
+          // ==========================================
+          // 3. If Nominatim doesn't give pincode,
+          //    use BigDataCloud reverse geocoding
+          // ==========================================
+
+          if (!pincode) {
+            try {
+              const fallbackResponse = await fetch(
+                `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=en`,
+              );
+
+              const fallbackData = await fallbackResponse.json();
+
+              pincode = fallbackData.postcode || fallbackData.postalCode || "";
+            } catch (fallbackError) {
+              console.error("Pincode fallback error:", fallbackError);
+            }
+          }
+
+          // ==========================================
+          // 4. Update form
+          // ==========================================
 
           setFormData((prev) => ({
             ...prev,
+
             latitude,
             longitude,
+
             state: addressData.state || prev.state,
+
             district:
-              addressData.state_district ||
-              addressData.county ||
-              prev.district,
+              addressData.state_district || addressData.county || prev.district,
+
             city:
               addressData.city ||
               addressData.town ||
               addressData.village ||
               addressData.municipality ||
               prev.city,
+
             area:
               addressData.suburb ||
               addressData.neighbourhood ||
               addressData.hamlet ||
               addressData.quarter ||
               prev.area,
-            pincode: addressData.postcode || prev.pincode,
+
+            pincode: pincode || prev.pincode,
           }));
 
-          toast.success("Location captured successfully.");
+          // ==========================================
+          // 5. Inform user
+          // ==========================================
+
+          if (pincode) {
+            toast.success("Location captured successfully.");
+          } 
         } catch (error) {
-          console.error(error);
-          toast.error("Unable to fetch address.");
+          toast.error("Unable to fetch address from current location.");
         }
       },
+
       (error) => {
-        console.error(error);
-        toast.error("Unable to fetch location.");
+        console.error("Geolocation error:", error);
+
+        switch (error.code) {
+          case error.PERMISSION_DENIED:
+            toast.error(
+              "Location permission was denied. Please allow location access.",
+            );
+            break;
+
+          case error.POSITION_UNAVAILABLE:
+            toast.error("Current location is unavailable.");
+            break;
+
+          case error.TIMEOUT:
+            toast.error("Location request timed out. Please try again.");
+            break;
+
+          default:
+            toast.error("Unable to fetch current location.");
+        }
       },
+
       {
         enableHighAccuracy: true,
-        timeout: 10000,
+        timeout: 15000,
         maximumAge: 0,
-      }
+      },
     );
   };
 
@@ -267,8 +335,9 @@ function CreateComplaint() {
 
   return (
     <Layout>
+      <h1 className="title">Report Complaint</h1>
+
       <div className="complaint-container">
-        <h1>Report Complaint</h1>
 
         <form
           className="complaint-form"
