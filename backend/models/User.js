@@ -1,42 +1,125 @@
 const mongoose = require("mongoose");
 
 const userSchema = new mongoose.Schema(
-    {
-        name: {
-            type: String,
-            required: true,
-            trim: true
-        },
+  {
+    /* =========================================================
+       BASIC USER INFORMATION
+    ========================================================= */
 
-        email: {
-            type: String,
-            required: true,
-            unique: true,
-            lowercase: true,
-            trim: true
-        },
-
-        password: {
-            type: String,
-            required: true
-        },
-
-        role: {
-            type: String,
-            enum: [
-            "citizen",
-            "systemAdmin",
-            "juniorEngineer",
-            "assistantExecutiveEngineer",
-            "executiveEngineer",
-            "municipalCommissioner"
-            ],
-            default: "citizen"
-        }
+    name: {
+      type: String,
+      required: true,
+      trim: true,
     },
-    {
-        timestamps: true
-    }
+
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+      lowercase: true,
+      trim: true,
+    },
+
+    password: {
+      type: String,
+      required: true,
+    },
+
+
+    /* =========================================================
+       EMPLOYEE ID
+       ========================================================= */
+
+    employeeId: {
+      type: String,
+      trim: true,
+      uppercase: true,
+      default: null,
+    },
+
+
+    /* =========================================================
+       USER ROLE
+    ========================================================= */
+
+    role: {
+      type: String,
+      enum: [
+        "citizen",
+        "systemAdmin",
+        "juniorEngineer",
+        "assistantExecutiveEngineer",
+        "executiveEngineer",
+        "municipalCommissioner",
+      ],
+      default: "citizen",
+    },
+
+
+    /* =========================================================
+       MUNICIPALITIES
+    ========================================================= */
+
+    municipalities: {
+      type: [String],
+      default: [],
+      set: (values) =>
+        Array.isArray(values)
+          ? [
+              ...new Set(
+                values
+                  .map((value) => String(value).trim())
+                  .filter(Boolean)
+              ),
+            ]
+          : [],
+    },
+
+
+    /* =========================================================
+       WARD NUMBERS
+    ========================================================= */
+
+    wardNumbers: {
+      type: [Number],
+      default: [],
+    },
+
+
+    /* =========================================================
+       ACCOUNT STATUS
+    ========================================================= */
+
+    isActive: {
+      type: Boolean,
+      default: true,
+    },
+  },
+  {
+    timestamps: true,
+  }
 );
 
-module.exports = mongoose.model("User", userSchema);
+
+/* =========================================================
+   INDEX
+========================================================= */
+
+userSchema.index(
+  { employeeId: 1 },
+  {
+    unique: true,
+    sparse: true,
+  }
+);
+
+
+/* =========================================================
+   EXPORT USER MODEL
+========================================================= */
+
+module.exports =
+  mongoose.model(
+    "User",
+    userSchema
+  );

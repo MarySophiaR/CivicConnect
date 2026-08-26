@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import Layout from "../../components/Layout";
-import Sidebar from "../../components/Sidebar";
+import Layout from "../../components/citizen/Layout";
+import Sidebar from "../../components/citizen/Sidebar";
 import API from "../../api/axios";
 import {
     ClipboardList,

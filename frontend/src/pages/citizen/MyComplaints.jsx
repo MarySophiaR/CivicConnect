@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Layout from "../../components/Layout";
+import Layout from "../../components/citizen/Layout";
 import ComplaintCard from "../../components/citizen/ComplaintCard";
 import API from "../../api/axios";
 import "../../styles/myComplaints.css";

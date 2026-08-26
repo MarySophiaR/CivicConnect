@@ -1,60 +1,25 @@
-const bcrypt = require("bcryptjs");
-
-const User = require("../models/User");
+const Complaint = require("../models/Complaint");
 
 // ---------------------------------
-// Create Officer
+// Get All Complaints for MC
 // ---------------------------------
-const createOfficer = async (req, res) => {
+const getAssignedComplaints = async (req, res) => {
 
     try {
 
-        const {
-            name,
-            email,
-            password,
-            role
-        } = req.body;
-
-        // Only officer roles are allowed
-        const allowedRoles = [
-            "wardOfficer",
-            "municipalOfficer",
-            "districtOfficer"
-        ];
-
-        if (!allowedRoles.includes(role)) {
-            return res.status(400).json({
-                message: "Invalid officer role."
+        const complaints = await Complaint.find({})
+            .populate("reportedBy", "name email")
+            .populate("assignedTo", "name email role")
+            .sort({
+                createdAt: -1
             });
-        }
 
-        // Check existing email
-        const existingUser = await User.findOne({ email });
+        return res.status(200).json({
 
-        if (existingUser) {
-            return res.status(400).json({
-                message: "User already exists."
-            });
-        }
+            totalComplaints: complaints.length,
 
-        // Hash password
-        const hashedPassword = await bcrypt.hash(password, 10);
+            complaints
 
-        // Create officer
-        const officer = new User({
-            name,
-            email,
-            password: hashedPassword,
-            role
-        });
-
-        // Save
-        await officer.save();
-
-        return res.status(201).json({
-            message: "Officer created successfully.",
-            officer
         });
 
     } catch (error) {
@@ -70,5 +35,5 @@ const createOfficer = async (req, res) => {
 };
 
 module.exports = {
-    createOfficer
+    getAssignedComplaints
 };

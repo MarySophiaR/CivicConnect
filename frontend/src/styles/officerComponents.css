@@ -86,9 +86,9 @@
   box-sizing: border-box;
 }
 
-/* =========================================
+/* =========================================================
    NAVBAR RIGHT
-========================================= */
+========================================================= */
 
 .officer-navbar-right {
     margin-left: auto;
@@ -103,9 +103,9 @@
 }
 
 
-/* =========================================
+/* =========================================================
    NOTIFICATION CONTAINER
-========================================= */
+========================================================= */
 
 .officer-notification-container {
     position: relative;
@@ -116,211 +116,925 @@
 
 
 /* =========================================================
-   OFFICER SIDEBAR
+   RESPONSIVE MEDIA QUERIES FOR OFFICER NAVBAR
 ========================================================= */
+
+@media (max-width: 700px) {
+
+    .officer-navbar {
+        height: 70px;
+        padding: 0 12px;
+    }
+
+    .officer-navbar-logo {
+        width: 50px;
+        height: 50px;
+        padding: 4px;
+    }
+
+    .officer-navbar-right {
+        padding-right: 6px;
+    }
+
+}
+
+
+@media (max-width: 450px) {
+
+    .officer-navbar {
+        height: 65px;
+        padding: 0 10px;
+    }
+
+    .officer-navbar-logo {
+        width: 44px;
+        height: 44px;
+        padding: 3px;
+    }
+
+    .officer-navbar-right {
+        padding-right: 4px;
+    }
+
+}
+
+
+@media (max-width: 350px) {
+
+    .officer-navbar {
+        height: 60px;
+        padding: 0 8px;
+    }
+
+    .officer-navbar-logo {
+        width: 40px;
+        height: 40px;
+        padding: 2px;
+    }
+
+    .officer-navbar-right {
+        padding-right: 2px;
+    }
+
+}
+
+
+/* =========================================
+   OFFICER SIDEBAR
+========================================= */
 
 .officer-sidebar {
-   width:260px;
-
-    height:calc(100vh - 75px);
-
-    background:#0055A4;
-
-    color:white;
-
-    padding:30px 20px;
-
-    position:fixed;
-
-    left:0;
-
-    top:75px;
-
-    box-sizing:border-box;
-
-    z-index:999;
+    width: 260px;
+    height: calc(100vh - 75px);
+    background: #0055A4;
+    color: white;
+    padding: 30px 20px;
+    position: fixed;
+    left: 0;
+    top: 75px;
+    box-sizing: border-box;
+    z-index: 999;
 }
 
 
-/* =========================================================
+/* =========================================
    SIDEBAR NAVIGATION
-========================================================= */
+========================================= */
 
 .officer-sidebar-nav {
-  display:flex;
-
-    flex-direction:column;
-
-    gap:15px;
-
-    margin-top:5px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 5px;
 }
 
 
-/* =========================================================
-   SIDEBAR LINK
-========================================================= */
-
 .officer-nav-link {
-  display:flex;
-
-    align-items:center;
-
-    gap:12px;
-
-    padding:14px 18px;
-
-    border-radius:12px;
-
-    text-decoration:none;
-
-    font-size:16px;
-
-    font-weight:600;
-
-    color:white;
-
-    background:rgba(255,255,255,.10);
-
-    transition:.25s;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 18px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 600;
+    color: white;
+    background: rgba(255, 255, 255, .10);
+    transition: .25s;
 }
 
 
 .officer-nav-link svg {
-  width:18px;
-
-    height:18px;
-
-    flex-shrink:0;
-
-    opacity:.85;
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    opacity: .85;
 }
 
 
 .officer-nav-link:hover {
-  background:rgba(255,255,255,.18);
+    background: rgba(255, 255, 255, .18);
 }
 
 
 .officer-nav-link.active {
-  background:white;
-
-    color:#0055A4;
-
-    box-shadow:0 8px 18px rgba(0,0,0,.18);
+    background: white;
+    color: #0055A4;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, .18);
 }
 
 
-/* =========================================================
-   OFFICER LAYOUT
-========================================================= */
+/* =========================================
+   PROFILE
+========================================= */
+
+.officer-sidebar-profile {
+    position: absolute;
+    left: 20px;
+    right: 20px;
+    bottom: 25px;
+}
+
+
+.officer-profile-card {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 16px;
+    border-radius: 14px;
+    cursor: pointer;
+    transition: .25s;
+    background: white;
+    color: #0055A4;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, .12);
+}
+
+
+.officer-profile-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, .18);
+}
+
+
+.officer-profile-avatar {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: #0055A4;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+
+.officer-profile-card h4 {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 700;
+    color: #0055A4;
+}
+
+
+.officer-profile-card p {
+    margin: 3px 0 0;
+    font-size: 13px;
+    color: #6B7280;
+}
+
+
+/* =========================================
+   PROFILE POPUP
+========================================= */
+
+.officer-profile-menu {
+    position: absolute;
+    bottom: calc(100% + 10px);
+    left: 0;
+    right: 0;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, .18);
+    animation: fadeOfficerProfileIn .18s ease;
+    z-index: 1001;
+}
+
+
+.officer-profile-menu button {
+    width: 100%;
+    height: 54px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 0 16px;
+    margin: 0;
+    border: none;
+    outline: none;
+    border-radius: 12px;
+    background: #FFFFFF !important;
+    color: #0055A4 !important;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1;
+    cursor: pointer;
+    box-shadow: none;
+}
+
+
+.officer-profile-menu button svg {
+    flex-shrink: 0;
+}
+
+
+.officer-profile-menu button:hover {
+    background: #EEF5FF !important;
+}
+
+
+@keyframes fadeOfficerProfileIn {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* =========================================
+   MOBILE (max-width: 700px)
+========================================= */
+
+@media (max-width: 700px) {
+
+    .officer-sidebar {
+        width: 100%;
+        height: auto;
+        min-height: 0;
+        padding: 0;
+        position: fixed;
+        top: 75px;
+        left: 0;
+        background: #0055A4;
+        z-index: 999;
+    }
+
+
+    .officer-sidebar-nav {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        gap: 8px;
+        margin: 0;
+        padding: 10px 12px;
+        box-sizing: border-box;
+        overflow-x: auto;
+        overflow-y: hidden;
+        scrollbar-width: none;
+        -webkit-overflow-scrolling: touch;
+    }
+
+
+    .officer-sidebar-nav::-webkit-scrollbar {
+        display: none;
+    }
+
+
+    .officer-nav-link {
+        flex: 0 0 auto;
+        padding: 11px 14px;
+        border-radius: 10px;
+        font-size: 13px;
+        white-space: nowrap;
+    }
+
+
+    .officer-nav-link svg {
+        width: 17px;
+        height: 17px;
+    }
+
+
+    .officer-sidebar > .officer-sidebar-profile {
+        display: none;
+    }
+
+
+    .officer-mobile-profile-only {
+        width: 100%;
+        display: block;
+    }
+
+
+    .officer-mobile-profile-only .officer-sidebar-profile {
+        position: relative;
+        left: auto;
+        right: auto;
+        bottom: auto;
+        width: 100%;
+        margin: 20px 0 0;
+        box-sizing: border-box;
+    }
+
+
+    .officer-mobile-profile-only .officer-profile-card {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 10px 14px;
+        border-radius: 12px;
+        gap: 12px;
+    }
+
+
+    .officer-mobile-profile-only .officer-profile-avatar {
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+    }
+
+
+    .officer-mobile-profile-only .officer-profile-card h4 {
+        font-size: 14px;
+    }
+
+
+    .officer-mobile-profile-only .officer-profile-card p {
+        font-size: 12px;
+    }
+
+
+    .officer-mobile-profile-only .officer-profile-menu {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: calc(100% + 10px);
+        top: auto;
+        width: 100%;
+        box-sizing: border-box;
+        z-index: 1001;
+    }
+
+
+    .officer-mobile-profile-only .officer-profile-menu button {
+        height: 54px;
+        font-size: 15px;
+    }
+
+}
+
+
+/* =========================================
+   SMALL MOBILE (max-width: 500px)
+========================================= */
+
+@media (max-width: 500px) {
+
+    .officer-sidebar-nav {
+        gap: 8px;
+        padding: 10px 12px;
+    }
+
+
+    .officer-nav-link {
+        padding: 11px 14px;
+        font-size: 13px;
+    }
+
+
+    .officer-mobile-profile-only .officer-sidebar-profile {
+        margin-top: 18px;
+    }
+
+
+    .officer-mobile-profile-only .officer-profile-card {
+        padding: 9px 12px;
+    }
+
+
+    .officer-mobile-profile-only .officer-profile-avatar {
+        width: 38px;
+        height: 38px;
+        font-size: 15px;
+    }
+
+}
+
+
+/* =========================================
+   VERY SMALL MOBILE (max-width: 350px)
+========================================= */
+
+@media (max-width: 350px) {
+
+    .officer-sidebar-nav {
+        padding: 10px;
+    }
+
+
+    .officer-nav-link {
+        padding: 10px 12px;
+        font-size: 12px;
+    }
+
+
+    .officer-mobile-profile-only .officer-sidebar-profile {
+        margin-top: 16px;
+    }
+
+
+    .officer-mobile-profile-only .officer-profile-card {
+        padding: 8px 10px;
+    }
+
+
+    .officer-mobile-profile-only .officer-profile-menu button {
+        height: 50px;
+        font-size: 14px;
+    }
+
+}
+
+
+/* =========================================
+   OFFICER MAIN LAYOUT
+========================================= */
 
 .officer-layout {
-  width: 100%;
-
-  min-height: 100vh;
-
-  background: var(--officer-bg);
+    width: 100%;
+    min-height: 100vh;
+    background: #F8FAFC;
 }
 
 
-/* =========================================================
-   MAIN CONTENT
-========================================================= */
+/* =========================================
+   OFFICER LAYOUT BODY
+========================================= */
+
+.officer-layout-body {
+    display: flex;
+    width: 100%;
+}
+
+
+/* =========================================
+   OFFICER MAIN CONTENT
+========================================= */
 
 .officer-main-content {
-  width: calc(100% - 260px);
-
-  min-height: calc(100vh - 75px);
-
-  margin-left: 260px;
-
-  margin-top: 58px;
-
-  padding: 30px;
-
-  background: var(--officer-bg);
-
-  box-sizing: border-box;
-
-  overflow-x: hidden;
+    margin-left: 260px;
+    margin-top: 58px;
+    width: calc(100% - 260px);
+    min-height: calc(100vh - 58px);
+    padding: 30px; 
+    background: #F8FAFC;
+    overflow-x: hidden;
+    box-sizing: border-box;
 }
 
 
-/* =========================================================
-   PAGE CONTAINER
-========================================================= */
+/* =========================================
+   OFFICER MOBILE PROFILE CONTAINER
+========================================= */
 
-.officer-page-container {
-  width: 100%;
-
-  max-width: 1400px;
-
-  margin: 0 auto;
-
-  box-sizing: border-box;
+.officer-mobile-profile-container {
+    display: none;
 }
 
 
-/* =========================================================
-   PAGE HEADER
-========================================================= */
+/* =========================================
+   OFFICER LOGOUT CONFIRMATION OVERLAY
+========================================= */
 
-.officer-page-header {
-  margin-bottom: 26px;
+.officer-logout-overlay {
+    position: fixed;
+
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 15px;
+
+    box-sizing: border-box;
+
+    background: rgba(0, 0, 0, 0.28);
+
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+
+    /*
+        Keep this above every sidebar/navbar/profile element.
+    */
+    z-index: 2147483647;
+
+    /*
+        Make sure the overlay can receive clicks.
+    */
+    pointer-events: auto;
+
+    /*
+        Explicit visibility.
+    */
+    visibility: visible;
+    opacity: 1;
 }
 
 
-/* =========================================================
-   PAGE HEADING ROW
-========================================================= */
+/* =========================================
+   OFFICER LOGOUT MODAL
+========================================= */
 
-.officer-page-heading-row {
-  display: flex;
+.officer-logout-modal {
+    position: relative;
 
-  align-items: center;
+    width: 370px;
 
-  gap: 10px;
+    max-width: 100%;
 
-  margin-bottom: 6px;
+    background: #FFFFFF;
+
+    border-radius: 16px;
+
+    padding: 30px;
+
+    text-align: center;
+
+    box-shadow: 
+        0 25px 60px rgba(0, 0, 0, 0.22);
+
+    box-sizing: border-box;
+
+    /*
+        Keep modal above overlay content.
+    */
+    z-index: 2147483647;
+
+    pointer-events: auto;
+
+    animation: fadeOfficerModal 0.22s ease;
 }
 
 
-.officer-page-heading-row svg {
-  width: 30px;
-  height: 30px;
+/* =========================================
+   MODAL ANIMATION
+========================================= */
 
-  color: var(--officer-blue);
+@keyframes fadeOfficerModal {
 
-  flex-shrink: 0;
+    from {
+        opacity: 0;
 
-  stroke: currentColor;
+        transform: 
+            translateY(8px) 
+            scale(0.96);
+    }
+
+    to {
+        opacity: 1;
+
+        transform: 
+            translateY(0) 
+            scale(1);
+    }
+
 }
 
 
-.officer-page-heading-row h1,
-.officer-page-header h1 {
-  margin: 0 0 8px;
+/* =========================================
+   MODAL TITLE
+========================================= */
 
-  color: var(--officer-blue);
+.officer-logout-modal h3 {
+    margin: 0;
 
-  font-size: 32px;
+    color: #0055A4;
 
-  font-weight: 700;
+    font-size: 24px;
 
-  line-height: 1.25;
+    font-weight: 700;
 }
 
 
-.officer-page-header p {
-  margin-bottom: 32px;
+/* =========================================
+   MODAL MESSAGE
+========================================= */
 
-  color: var(--officer-text-muted);
+.officer-logout-modal p {
+    margin: 15px 0 30px;
 
-  font-size: 15px;
+    color: #6B7280;
 
-  line-height: 1.5;
+    font-size: 15px;
+
+    line-height: 1.6;
 }
+
+
+/* =========================================
+   MODAL BUTTONS
+========================================= */
+
+.officer-logout-buttons {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 14px;
+
+    width: 100%;
+}
+
+
+/* =========================================
+   CANCEL BUTTON
+========================================= */
+
+.officer-cancel-btn {
+    border: none;
+
+    background: #E5E7EB;
+
+    color: #374151;
+
+    padding: 11px 24px;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    transition: 0.25s;
+
+    box-sizing: border-box;
+}
+
+
+.officer-cancel-btn:hover {
+    background: #D1D5DB;
+}
+
+
+/* =========================================
+   CONFIRM LOGOUT BUTTON
+========================================= */
+
+.officer-logout-confirm-btn {
+    border: none;
+
+    background: #DC2626;
+
+    color: #FFFFFF;
+
+    padding: 11px 24px;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    transition: 0.25s;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    box-sizing: border-box;
+}
+
+
+.officer-logout-confirm-btn:hover {
+    background: #B91C1C;
+}
+
+
+.officer-logout-confirm-btn svg {
+    flex-shrink: 0;
+}
+
+
+/* =========================================
+   MOBILE (max-width: 700px)
+========================================= */
+
+@media (max-width: 700px) {
+
+    .officer-layout {
+        width: 100%;
+        min-height: 100vh;
+        overflow-x: hidden;
+    }
+
+
+    .officer-layout-body {
+        display: block;
+        width: 100%;
+    }
+
+
+    .officer-main-content {
+        margin-left: 0;
+        margin-top: 70px;
+        width: 100%;
+        min-height: calc(100vh - 70px);
+        
+        /* Space for mobile navigation */
+        padding: 65px 18px 30px;
+
+        box-sizing: border-box;
+        overflow-x: hidden;
+    }
+
+
+    /* =====================================
+       DASHBOARD MOBILE PROFILE
+    ===================================== */
+
+    .officer-mobile-profile-container {
+        display: block;
+        width: 100%;
+        margin-top: 20px;
+        box-sizing: border-box;
+    }
+
+
+    /* =====================================
+       LOGOUT MODAL
+    ===================================== */
+
+    .officer-logout-overlay {
+        padding: 15px;
+    }
+
+
+    .officer-logout-modal {
+        width: 370px;
+        max-width: calc(100vw - 30px);
+        padding: 26px 22px;
+        border-radius: 15px;
+    }
+
+
+    .officer-logout-modal h3 {
+        font-size: 22px;
+    }
+
+
+    .officer-logout-modal p {
+        font-size: 14px;
+        margin: 14px 0 25px;
+    }
+
+
+    .officer-logout-buttons {
+        gap: 10px;
+    }
+
+
+    .officer-cancel-btn,
+    .officer-logout-confirm-btn {
+        padding: 10px 18px;
+        font-size: 14px;
+    }
+
+}
+
+
+/* =========================================
+   SMALL MOBILE (max-width: 400px)
+========================================= */
+
+@media (max-width: 400px) {
+
+    .officer-main-content {
+        margin-left: 0;
+        margin-top: 65px;
+        width: 100%;
+        min-height: calc(100vh - 65px);
+        padding: 65px 14px 30px;
+    }
+
+
+    .officer-mobile-profile-container {
+        margin-top: 18px;
+    }
+
+
+    .officer-logout-overlay {
+        padding: 12px;
+    }
+
+
+    .officer-logout-modal {
+        width: 100%;
+        max-width: calc(100vw - 24px);
+        padding: 24px 18px;
+        border-radius: 14px;
+    }
+
+
+    .officer-logout-modal h3 {
+        font-size: 20px;
+    }
+
+
+    .officer-logout-modal p {
+        font-size: 13px;
+        margin: 13px 0 23px;
+    }
+
+
+    .officer-logout-buttons {
+        gap: 8px;
+    }
+
+
+    .officer-cancel-btn,
+    .officer-logout-confirm-btn {
+        padding: 10px 16px;
+        font-size: 13px;
+    }
+
+}
+
+
+/* =========================================
+   VERY SMALL MOBILE (max-width: 350px)
+========================================= */
+
+@media (max-width: 350px) {
+
+    .officer-main-content {
+        margin-top: 60px;
+        min-height: calc(100vh - 60px);
+        padding: 65px 12px 30px;
+    }
+
+
+    .officer-mobile-profile-container {
+        margin-top: 16px;
+    }
+
+
+    .officer-logout-overlay {
+        padding: 10px;
+    }
+
+
+    .officer-logout-modal {
+        max-width: calc(100vw - 20px);
+        padding: 22px 15px;
+    }
+
+
+    .officer-logout-modal h3 {
+        font-size: 19px;
+    }
+
+
+    .officer-logout-modal p {
+        font-size: 12px;
+        margin: 12px 0 20px;
+    }
+
+
+    .officer-logout-buttons {
+        gap: 7px;
+    }
+
+
+    .officer-cancel-btn,
+    .officer-logout-confirm-btn {
+        padding: 9px 13px;
+        font-size: 12px;
+    }
+
+}
+
 
 
 /* =========================================================
@@ -1746,472 +2460,6 @@
 }
 
 
-/* =========================================================
-   ERROR
-========================================================= */
-
-.officer-error {
-    width: 100%;
-
-    margin-bottom: 20px;
-
-    padding: 13px 15px;
-
-    border: 1px solid #fecaca;
-
-    border-radius: 9px;
-
-    background: #fef2f2;
-
-    color: #b91c1c;
-
-    font-size: 14px;
-
-    line-height: 1.5;
-
-    box-sizing: border-box;
-}
-
-
-/* =========================================================
-   LOADING
-========================================================= */
-
-.officer-dashboard-loading,
-.officer-complaints-loading,
-.officer-loading {
-    min-height: 260px;
-
-    display: flex;
-
-    flex-direction: column;
-
-    align-items: center;
-
-    justify-content: center;
-
-    gap: 12px;
-
-    color: #64748b;
-
-    font-size: 15px;
-}
-
-
-/* =========================================================
-   LOADING SPINNER
-========================================================= */
-
-.officer-loading-spinner {
-    width: 30px;
-
-    height: 30px;
-
-    border: 3px solid #dbeafe;
-
-    border-top-color: var(--officer-blue);
-
-    border-radius: 50%;
-
-    animation:
-        officerSpinner 0.8s linear infinite;
-}
-
-@keyframes officerSpinner {
-    to {
-        transform: rotate(360deg);
-    }
-}
-
-
-/* =========================================================
-   EMPTY STATE
-========================================================= */
-
-.officer-empty-state,
-.officer-empty {
-    min-height: 260px;
-
-    display: flex;
-
-    flex-direction: column;
-
-    align-items: center;
-
-    justify-content: center;
-
-    text-align: center;
-
-    padding: 40px 20px;
-
-    background: #ffffff;
-
-    border: 1px solid #e5eaf0;
-
-    border-radius: 14px;
-
-    box-sizing: border-box;
-}
-
-.officer-empty-state svg,
-.officer-empty svg {
-    color: var(--officer-blue);
-
-    margin-bottom: 12px;
-}
-
-.officer-empty-state h3,
-.officer-empty h3 {
-    margin: 0 0 7px;
-
-    color: #263244;
-
-    font-size: 19px;
-
-    font-weight: 700;
-}
-
-.officer-empty-state p,
-.officer-empty p {
-    max-width: 480px;
-
-    margin: 0;
-
-    color: #64748b;
-
-    font-size: 14px;
-
-    line-height: 1.5;
-}
-
-
-/* =========================================================
-   OFFICER PROFILE
-========================================================= */
-
-.officer-sidebar-profile {
-    position: absolute;
-
-    left: 20px;
-
-    right: 20px;
-
-    bottom: 25px;
-
-    z-index: 1001;
-}
-
-.officer-profile-card {
-    display: flex;
-
-    align-items: center;
-
-    gap: 14px;
-
-    width: 100%;
-
-    padding: 14px 16px;
-
-    border-radius: 14px;
-
-    background: #ffffff;
-
-    color: var(--officer-blue);
-
-    box-shadow:
-        0 6px 18px rgba(0, 0, 0, 0.12);
-
-    cursor: pointer;
-
-    box-sizing: border-box;
-
-    transition:
-        transform 0.2s ease,
-        box-shadow 0.2s ease;
-}
-
-.officer-profile-card:hover {
-    transform: translateY(-2px);
-
-    box-shadow:
-        0 10px 24px rgba(0, 0, 0, 0.18);
-}
-
-.officer-profile-avatar {
-    width: 46px;
-
-    height: 46px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    flex-shrink: 0;
-
-    border-radius: 50%;
-
-    background: var(--officer-blue);
-
-    color: #ffffff;
-
-    font-size: 18px;
-
-    font-weight: 700;
-}
-
-.officer-profile-card h4 {
-    margin: 0;
-
-    color: var(--officer-blue);
-
-    font-size: 15px;
-
-    font-weight: 700;
-}
-
-.officer-profile-card p {
-    margin: 3px 0 0;
-
-    color: var(--officer-text-muted);
-
-    font-size: 13px;
-}
-
-
-/* =========================================================
-   PROFILE MENU / LOGOUT POPUP
-========================================================= */
-
-.officer-profile-menu {
-    position: absolute;
-
-    left: 0;
-
-    right: 0;
-
-    bottom: calc(100% + 10px);
-
-    overflow: hidden;
-
-    background: #ffffff;
-
-    border-radius: 12px;
-
-    box-shadow:
-        0 10px 25px rgba(0, 0, 0, 0.18);
-
-    animation:
-        officerFadeIn 0.18s ease;
-
-    z-index: 1002;
-}
-
-.officer-profile-menu button {
-    width: 100%;
-
-    height: 54px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    gap: 10px;
-
-    padding: 0 16px;
-
-    margin: 0;
-
-    border: none;
-
-    outline: none;
-
-    border-radius: 12px;
-
-    background: #ffffff !important;
-
-    color: var(--officer-blue) !important;
-
-    font-family: inherit;
-
-    font-size: 16px;
-
-    font-weight: 600;
-
-    line-height: 1;
-
-    text-align: center;
-
-    cursor: pointer;
-
-    box-shadow: none;
-
-    box-sizing: border-box;
-}
-
-.officer-profile-menu button svg {
-    width: 20px;
-
-    height: 20px;
-
-    flex-shrink: 0;
-
-    color: var(--officer-blue);
-
-    stroke: currentColor;
-}
-
-.officer-profile-menu button:hover {
-    background: #eef5ff !important;
-}
-
-@keyframes officerFadeIn {
-    from {
-        opacity: 0;
-
-        transform: translateY(8px);
-    }
-
-    to {
-        opacity: 1;
-
-        transform: translateY(0);
-    }
-}
-
-
-/* =========================================================
-   MOBILE PROFILE ONLY
-========================================================= */
-
-.officer-mobile-profile-only {
-    display: none;
-}
-
-
-/* =========================================================
-   LOGOUT MODAL
-========================================================= */
-
-.officer-logout-overlay {
-    position: fixed;
-
-    inset: 0;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    padding: 15px;
-
-    background: rgba(0, 0, 0, 0.28);
-
-    backdrop-filter: blur(4px);
-
-    z-index: 2147483647;
-
-    box-sizing: border-box;
-}
-
-.officer-logout-modal {
-    width: 370px;
-
-    max-width: 100%;
-
-    padding: 30px;
-
-    background: #ffffff;
-
-    border-radius: 16px;
-
-    text-align: center;
-
-    box-shadow:
-        0 25px 60px rgba(0, 0, 0, 0.22);
-
-    box-sizing: border-box;
-}
-
-.officer-logout-modal h3 {
-    margin: 0;
-
-    color: var(--officer-blue);
-
-    font-size: 22px;
-
-    font-weight: 700;
-}
-
-.officer-logout-modal p {
-    margin: 15px 0 30px;
-
-    color: var(--officer-text-muted);
-
-    font-size: 14px;
-
-    line-height: 1.6;
-}
-
-.officer-logout-buttons {
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    gap: 14px;
-}
-
-.officer-cancel-btn,
-.officer-logout-confirm-btn {
-    padding: 11px 24px;
-
-    border: none;
-
-    border-radius: 8px;
-
-    font-family: inherit;
-
-    font-size: 14px;
-
-    font-weight: 600;
-
-    cursor: pointer;
-}
-
-.officer-cancel-btn {
-    background: #e5e7eb;
-
-    color: #374151;
-}
-
-.officer-cancel-btn:hover {
-    background: #d1d5db;
-}
-
-.officer-logout-confirm-btn {
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    gap: 8px;
-
-    background: #dc2626;
-
-    color: #ffffff;
-}
-
-.officer-logout-confirm-btn:hover {
-    background: #b91c1c;
-}
-
 
 /* =========================================================
    TABLET
@@ -2289,169 +2537,6 @@
 ========================================================= */
 
 @media (max-width: 700px) {
-
-    /* -------------------------
-       OFFICER NAVBAR
-    ------------------------- */
-
-    .officer-navbar {
-        height: 75px;
-
-        padding: 0 18px;
-    }
-
-
-    .officer-navbar-left {
-        gap: 10px;
-    }
-
-
-    .officer-navbar-logo {
-        width: 52px;
-
-        height: 52px;
-
-        padding: 5px;
-    }
-
-
-    /* -------------------------
-       OFFICER SIDEBAR
-    ------------------------- */
-
-    .officer-sidebar {
-        width: 100%;
-
-        height: auto;
-
-        min-height: 0;
-
-        top: 75px;
-
-        left: 0;
-
-        padding: 0;
-
-        background: var(--officer-blue);
-
-        box-shadow:
-            0 6px 14px rgba(0, 0, 0, 0.12);
-
-        box-sizing: border-box;
-    }
-
-
-    /* -------------------------
-       MOBILE NAVIGATION
-    ------------------------- */
-
-    .officer-sidebar-nav {
-        width: 100%;
-
-        display: flex;
-
-        flex-direction: row;
-
-        gap: 8px;
-
-        margin: 0;
-
-        padding: 10px 12px;
-
-        overflow-x: auto;
-
-        overflow-y: hidden;
-
-        scrollbar-width: none;
-
-        -webkit-overflow-scrolling: touch;
-
-        box-sizing: border-box;
-    }
-
-    .officer-sidebar-nav::-webkit-scrollbar {
-        display: none;
-    }
-
-
-    .officer-nav-link {
-        flex: 0 0 auto;
-
-        padding: 11px 14px;
-
-        border-radius: 10px;
-
-        font-size: 13px;
-
-        white-space: nowrap;
-    }
-
-
-    .officer-nav-link svg {
-        width: 17px;
-
-        height: 17px;
-    }
-
-
-    /* -------------------------
-       HIDE DESKTOP PROFILE
-    ------------------------- */
-
-    .officer-sidebar > .officer-sidebar-profile {
-        display: none !important;
-    }
-
-
-    /* -------------------------
-       MAIN CONTENT
-    ------------------------- */
-
-    .officer-main-content {
-        width: 100%;
-
-        margin-left: 0;
-
-        margin-top: 75px;
-
-        min-height:
-            calc(100vh - 75px);
-
-        padding:
-            65px 18px 30px;
-    }
-
-
-    /* -------------------------
-       PAGE HEADER
-    ------------------------- */
-
-    .officer-page-header {
-        margin-bottom: 22px;
-    }
-
-
-    .officer-page-heading-row {
-        gap: 8px;
-    }
-
-
-    .officer-page-heading-row svg {
-        width: 27px;
-
-        height: 27px;
-    }
-
-
-    .officer-page-heading-row h1,
-    .officer-page-header h1 {
-        font-size: 28px;
-    }
-
-
-    .officer-page-header p {
-        font-size: 15px;
-    }
 
 
     /* -------------------------
@@ -2641,112 +2726,6 @@
         width: 100%;
     }
 
-
-    /* -------------------------
-       MOBILE PROFILE
-    ------------------------- */
-
-    .officer-mobile-profile-only {
-        display: flex;
-
-        flex-direction: column;
-
-        gap: 16px;
-
-        width: 100%;
-
-        margin-top: 36px;
-    }
-
-
-    .officer-mobile-profile-only
-    .officer-sidebar-profile {
-        position: relative;
-
-        left: auto;
-
-        right: auto;
-
-        bottom: auto;
-
-        width: 100%;
-    }
-
-
-    .officer-mobile-profile-only
-    .officer-profile-menu {
-        position: absolute;
-
-        left: 0;
-
-        right: 0;
-
-        bottom: calc(100% + 10px);
-
-        top: auto;
-
-        width: 100%;
-
-        margin: 0;
-
-        box-sizing: border-box;
-
-        z-index: 1002;
-    }
-
-
-    .officer-mobile-profile-only
-    .officer-profile-card {
-        width: 100%;
-
-        padding: 10px 14px;
-
-        border-radius: 12px;
-
-        gap: 12px;
-    }
-
-
-    .officer-mobile-profile-only
-    .officer-profile-avatar {
-        width: 40px;
-
-        height: 40px;
-
-        font-size: 16px;
-    }
-
-
-    .officer-mobile-profile-only
-    .officer-profile-card h4 {
-        font-size: 14px;
-    }
-
-
-    .officer-mobile-profile-only
-    .officer-profile-card p {
-        font-size: 12px;
-    }
-
-
-    /* -------------------------
-       LOGOUT MODAL
-    ------------------------- */
-
-    .officer-logout-modal {
-        width: 370px;
-
-        max-width:
-            calc(100vw - 30px);
-
-        padding: 26px 22px;
-    }
-
-
-    .officer-logout-modal h3 {
-        font-size: 21px;
-    }
-
 }
 
 
@@ -2756,44 +2735,8 @@
 
 @media (max-width: 500px) {
 
-    .officer-navbar {
-        padding: 0 12px;
-    }
-
-
-    .officer-navbar-left {
-        gap: 8px;
-    }
-
-
-    .officer-navbar-logo {
-        width: 48px;
-
-        height: 48px;
-
-        padding: 4px;
-    }
-
-
-    .officer-main-content {
-        padding:
-            65px 14px 25px;
-    }
-
-
     .officer-complaints-section {
         padding: 18px;
-    }
-
-
-    .officer-page-heading-row h1,
-    .officer-page-header h1 {
-        font-size: 26px;
-    }
-
-
-    .officer-page-header p {
-        font-size: 14px;
     }
 
 
@@ -2890,11 +2833,6 @@
 
 @media (max-width: 350px) {
 
-    .officer-main-content {
-        padding:
-            65px 12px 25px;
-    }
-
 
     .officer-complaints-section {
         padding: 14px;
@@ -2913,18 +2851,6 @@
 
     .officer-complaint-description {
         font-size: 13px;
-    }
-
-
-    .officer-sidebar-nav {
-        padding: 10px;
-    }
-
-
-    .officer-nav-link {
-        padding: 10px 12px;
-
-        font-size: 12px;
     }
 
 }
@@ -6439,7 +6365,7 @@ TITLE
 
     margin: 0;
 
-    color: #172033;
+    color: #0055A4;
 
     font-size: 32px;
 
@@ -7543,16 +7469,16 @@ VERY SMALL MOBILE
 
 
 
+
+
 /* =========================================
    NOTIFICATION CONTAINER
 ========================================= */
 
 .officer-notification {
     position: relative;
-
     display: flex;
     align-items: center;
-
     flex-shrink: 0;
 }
 
@@ -7563,55 +7489,32 @@ VERY SMALL MOBILE
 
 .officer-notification-button {
     position: relative;
-
     width: 40px;
     height: 40px;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     padding: 0;
     margin: 0;
-
     border: none;
     outline: none;
-
     background: transparent;
-
     color: #0055A4;
-
     cursor: pointer;
-
     border-radius: 8px;
-
-    transition:
-        background 0.2s ease,
-        color 0.2s ease;
+    transition: background 0.2s ease, color 0.2s ease;
 }
-
-
-/* =========================================
-   BELL HOVER
-========================================= */
 
 .officer-notification-button:hover {
     background: #EAF3FF;
     color: #0055A4;
 }
 
-
-/* =========================================
-   BELL ICON
-========================================= */
-
 .officer-notification-button svg {
     width: 22px;
     height: 22px;
-
     color: currentColor;
     stroke: currentColor;
-
     flex-shrink: 0;
 }
 
@@ -7622,28 +7525,20 @@ VERY SMALL MOBILE
 
 .officer-notification-count {
     position: absolute;
-
     top: 1px;
     right: 0;
-
     min-width: 16px;
     height: 16px;
-
     padding: 0 4px;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     border-radius: 999px;
-
     background: #0055A4;
     color: #FFFFFF;
-
     font-size: 10px;
     font-weight: 700;
     line-height: 1;
-
     box-sizing: border-box;
 }
 
@@ -7654,25 +7549,16 @@ VERY SMALL MOBILE
 
 .officer-notification-dropdown {
     position: absolute;
-
-    top: calc(100% + 6px);
+    top: calc(100% + 10px);
     right: 0;
-
-    width: 340px;
+    width: 380px;
     max-width: calc(100vw - 32px);
-
     background: #FFFFFF;
-
-    border: 1px solid #E5E7EB;
-    border-radius: 14px;
-
-    box-shadow:
-        0 10px 28px rgba(0, 0, 0, 0.10);
-
+    border: 1px solid #E2E8F0;
+    border-radius: 16px;
+    box-shadow: 0 12px 32px rgba(15, 23, 42, 0.12);
     overflow: hidden;
-
     z-index: 1000;
-
     box-sizing: border-box;
 }
 
@@ -7682,26 +7568,31 @@ VERY SMALL MOBILE
 ========================================= */
 
 .officer-notification-header {
-    padding: 18px 20px;
-
-    border-bottom: 1px solid #E5E7EB;
-
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 20px 12px;
+    border-bottom: 1px solid #F1F5F9;
     background: #FFFFFF;
-
     box-sizing: border-box;
 }
 
 .officer-notification-header strong {
     display: block;
-
     margin: 0;
-
-    color: #0055A4;
-
-    font-size: 19px;
+    color: #0F172A;
+    font-size: 18px;
     font-weight: 700;
+    letter-spacing: -0.2px;
+}
 
-    line-height: 1.3;
+.unread-header-badge {
+    font-size: 0.725rem;
+    background-color: #FEF2F2;
+    color: #EF4444;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-weight: 600;
 }
 
 
@@ -7711,123 +7602,193 @@ VERY SMALL MOBILE
 
 .officer-notification-list {
     width: 100%;
-
-    max-height: 360px;
-
+    max-height: 380px;
     overflow-y: auto;
-
+    padding: 4px 10px 10px;
     box-sizing: border-box;
 }
 
 
 /* =========================================
-   SINGLE NOTIFICATION
+   SINGLE NOTIFICATION ITEM CARD
 ========================================= */
 
 .officer-notification-item {
+    position: relative;
     width: 100%;
-
     display: flex;
     align-items: center;
-    justify-content: space-between;
-
-    gap: 16px;
-
-    padding: 17px 20px;
-
-    border: none;
-    border-bottom: 1px solid #EEF2F7;
-
+    gap: 12px;
+    padding: 14px 14px;
+    margin-bottom: 8px;
+    border: 1px solid #F1F5F9;
+    border-radius: 12px;
     background: #FFFFFF;
-
-    color: #172033;
-
+    color: #1E293B;
     text-align: left;
-
     cursor: pointer;
-
     box-sizing: border-box;
-
-    transition: background 0.2s ease;
+    transition: all 0.15s ease;
 }
 
 .officer-notification-item:last-child {
-    border-bottom: none;
+    margin-bottom: 0;
 }
 
 .officer-notification-item:hover {
     background: #F8FAFC;
+    border-color: #E2E8F0;
 }
-
-
-/* =========================================
-   UNREAD NOTIFICATION
-========================================= */
 
 .officer-notification-item.unread {
-    border-left: 3px solid #0055A4;
+    background: #F0F7FF;
+    border-color: #BAE6FD;
+}
 
-    padding-left: 17px;
+.officer-notification-item.unread:hover {
+    background: #E0F2FE;
 }
 
 
 /* =========================================
-   NOTIFICATION CONTENT
+   LEFT UNREAD DOT INDICATOR
+========================================= */
+
+.alert-left-indicator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 10px;
+    flex-shrink: 0;
+}
+
+.officer-notification-unread-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #0055A4;
+    flex-shrink: 0;
+}
+
+
+/* =========================================
+   NOTIFICATION CONTENT AREA
 ========================================= */
 
 .officer-notification-content {
     min-width: 0;
-
     flex: 1;
 }
 
-
-/* =========================================
-   NOTIFICATION TITLE
-========================================= */
-
-.officer-notification-content strong {
-    display: block;
-
-    margin: 0 0 7px;
-
-    color: #0055A4;
-
-    font-size: 14px;
-    font-weight: 700;
-
-    line-height: 1.4;
+.alert-top-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 6px;
 }
 
 
 /* =========================================
-   NOTIFICATION MESSAGE
+   BADGES & TIMESTAMP
 ========================================= */
 
-.officer-notification-content p {
+.alert-badge {
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+}
+
+.alert-badge-blue {
+    background-color: #E0F2FE;
+    color: #0284C7;
+}
+
+.alert-badge-orange {
+    background-color: #FFEDD5;
+    color: #EA580C;
+}
+
+.alert-badge-green {
+    background-color: #DCFCE7;
+    color: #16A34A;
+}
+
+.alert-badge-yellow {
+    background-color: #FEF9C3;
+    color: #CA8A04;
+}
+
+.alert-badge-red {
+    background-color: #FEE2E2;
+    color: #DC2626;
+}
+
+.alert-badge-gray {
+    background-color: #F1F5F9;
+    color: #475569;
+}
+
+.alert-time {
+    font-size: 0.75rem;
+    color: #64748B;
+    font-weight: 500;
+}
+
+
+/* =========================================
+   TITLES & TEXT
+========================================= */
+
+.alert-title-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 4px;
+}
+
+.officer-notification-content strong,
+.alert-title-text {
+    display: block;
     margin: 0;
+    color: #0055A4;
+    font-size: 0.875rem;
+    font-weight: 600;
+    line-height: 1.35;
+}
 
-    color: #4B5563;
-
-    font-size: 13px;
-    line-height: 1.55;
-
+.officer-notification-content p,
+.alert-message-text {
+    margin: 0;
+    color: #475569;
+    font-size: 0.8rem;
+    line-height: 1.45;
     word-break: break-word;
 }
 
 
 /* =========================================
-   ARROW
+   RIGHT ACTION ARROW
 ========================================= */
 
-.officer-notification-item > svg {
-    width: 17px;
-    height: 17px;
-
+.alert-right-action {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     flex-shrink: 0;
+}
 
+.alert-right-action svg {
+    color: #94A3B8;
+    transition: color 0.15s ease, transform 0.15s ease;
+}
+
+.officer-notification-item:hover .alert-right-action svg {
     color: #0055A4;
-    stroke: currentColor;
+    transform: translateX(2px);
 }
 
 
@@ -7836,99 +7797,29 @@ VERY SMALL MOBILE
 ========================================= */
 
 .officer-no-notifications {
-    padding: 28px 20px;
-
-    color: #6B7280;
-
-    font-size: 14px;
-    line-height: 1.5;
-
+    padding: 32px 20px;
+    color: #64748B;
+    font-size: 0.875rem;
     text-align: center;
-
     background: #FFFFFF;
-
-    box-sizing: border-box;
 }
 
 
 /* =========================================
-   MOBILE
-========================================= */
-
-@media (max-width: 700px) {
-
-    .officer-notification-dropdown {
-        width: 320px;
-
-        max-width: calc(100vw - 30px);
-    }
-
-}
-
-
-/* =========================================
-   SMALL MOBILE
+   RESPONSIVE BREAKPOINTS
 ========================================= */
 
 @media (max-width: 450px) {
-
     .officer-notification-dropdown {
-        width: 300px;
-
+        width: 320px;
         max-width: calc(100vw - 24px);
     }
 
-    .officer-notification-header {
-        padding: 16px 18px;
-    }
-
-    .officer-notification-header strong {
-        font-size: 18px;
+    .officer-notification-list {
+        padding: 4px 8px 8px;
     }
 
     .officer-notification-item {
-        padding: 16px 18px;
-
-        gap: 12px;
+        padding: 12px;
     }
-
-    .officer-notification-item.unread {
-        padding-left: 15px;
-    }
-
-    .officer-notification-content strong {
-        font-size: 13px;
-    }
-
-    .officer-notification-content p {
-        font-size: 12.5px;
-    }
-
-}
-
-
-/* =========================================
-   VERY SMALL MOBILE
-========================================= */
-
-@media (max-width: 350px) {
-
-    .officer-notification-dropdown {
-        width: 280px;
-
-        max-width: calc(100vw - 20px);
-    }
-
-    .officer-notification-header {
-        padding: 15px 16px;
-    }
-
-    .officer-notification-item {
-        padding: 15px 16px;
-    }
-
-    .officer-notification-item.unread {
-        padding-left: 13px;
-    }
-
 }

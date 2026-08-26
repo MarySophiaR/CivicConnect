@@ -1,138 +1,141 @@
-.navbar{
+/* =========================================================
+   OFFICER NAVBAR
+========================================================= */
 
-    position:fixed;
+.citizen-navbar {
+  position: fixed;
 
-    top:0;
-    left:0;
-    right:0;
+  top: 0;
+  left: 0;
+  right: 0;
 
-    height:75px;
+  height: 75px;
 
-    background:white;
+  background: white;
 
-    display:flex;
-    align-items:center;
+  display: flex;
+  align-items: center;
 
-    padding:0 16px;
+  padding: 0 16px;
 
-    box-shadow:0 2px 8px rgba(0,0,0,0.08);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 
-    z-index:1000;
+  z-index: 1000;
 
-}
-
-.navbar-left{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:6px;
-
-}
-
-.navbar-logo{
-
-    width:60px;
-    height:60px;
-
-    object-fit:contain;
-
-    padding:6px;
-
-    background:#FFFFFF;
-
-    /* box-shadow:0 2px 6px rgba(0,0,0,0.06); */
-
-    flex-shrink:0;
-
+  box-sizing: border-box;
 }
 
 
-.brand-logo-navbar{
+/* =========================================================
+   NAVBAR LEFT
+========================================================= */
 
-    color:#0055A4;
+.citizen-navbar-left {
+  display: flex;
 
-    margin:0;
+  align-items: center;
 
+  gap: 6px;
 }
 
-.navbar-right{
 
-    margin-left:auto;
+/* =========================================================
+   NAVBAR LOGO
+========================================================= */
 
+.citizen-navbar-logo {
+  width: 60px;
+  height: 60px;
+
+  object-fit: contain;
+
+  padding: 6px;
+
+  background: #ffffff;
+
+  flex-shrink: 0;
+
+  box-sizing: border-box;
 }
-
 
 /* =========================================
-   RESPONSIVE
+   NAVBAR RIGHT
 ========================================= */
 
-@media (max-width: 600px){
+.citizen-navbar-right {
+    margin-left: auto;
 
-    .navbar{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
 
-        height:75px;
+    padding-right: 12px;
 
-        padding:0 18px;
-
-    }
-
-    .navbar-left{
-
-        gap:10px;
-
-    }
-
-    .navbar-logo{
-
-        width:52px;
-        height:52px;
-
-        padding:5px;
-
-    }
-
-    .brand-logo-navbar{
-
-        font-size:24px;
-
-    }
-
+    box-sizing: border-box;
 }
 
 
 /* =========================================
+   NOTIFICATION CONTAINER
+========================================= */
+
+.citizen-notification-container {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 700px) {
+
+
+
+    .citizen-navbar {
+        height: 75px;
+
+        padding: 0 18px;
+    }
+
+
+    .citizen-navbar-left {
+        gap: 10px;
+    }
+
+
+    .citizen-navbar-logo {
+        width: 52px;
+
+        height: 52px;
+
+        padding: 5px;
+    }
+}
+
+/* =========================================================
    SMALL MOBILE
-========================================= */
+========================================================= */
 
-@media (max-width: 400px){
+@media (max-width: 500px) {
 
-    .navbar{
-
-        padding:0 12px;
-
+    .citizen-navbar {
+        padding: 0 12px;
     }
 
-    .navbar-left{
 
-        gap:8px;
-
+    .citizen-navbar-left {
+        gap: 8px;
     }
 
-    .navbar-logo{
 
-        width:48px;
-        height:48px;
+    .citizen-navbar-logo {
+        width: 48px;
 
-        padding:4px;
+        height: 48px;
 
+        padding: 4px;
     }
-
-    .brand-logo-navbar{
-
-        font-size:22px;
-
-    }
-
 }

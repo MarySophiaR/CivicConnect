@@ -127,8 +127,7 @@ router.post(
   verifyToken,
   authorizeRoles(
     "juniorEngineer",
-    "assistantExecutiveEngineer",
-    "executiveEngineer"
+    "assistantExecutiveEngineer"
   ),
   escalateComplaint
 );

@@ -1,25 +1,60 @@
-# Python
-ml-service/.venv/
-ml-service/__pycache__/
-*.pyc
+# =========================================
+# Environment Variables
+# =========================================
+.env
+.env.*
+!.env.example
 
-# Node
+
+# =========================================
+# Node.js
+# =========================================
 backend/node_modules/
 frontend/node_modules/
+node_modules/
 
-# Environment
-.env
 
-# OS
-.DS_Store
-Thumbs.db
-
-# VS Code
-.vscode/
-
-# Python cache
+# =========================================
+# Python
+# =========================================
+ml-service/.venv/
+ml-service/venv/
+ml-service/__pycache__/
+*.pyc
 *.pyo
 *.pyd
 
+
+# =========================================
+# Build / Generated Files
+# =========================================
+frontend/dist/
+frontend/build/
+backend/dist/
+
+
+# =========================================
 # Logs
+# =========================================
 *.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+
+# =========================================
+# Operating System
+# =========================================
+.DS_Store
+Thumbs.db
+
+
+# =========================================
+# VS Code / IDE
+# =========================================
+.vscode/
+.idea/
+
+
+# User-uploaded complaint images
+backend/uploads/

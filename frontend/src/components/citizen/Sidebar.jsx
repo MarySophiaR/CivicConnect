@@ -1,4 +1,4 @@
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 
 import {
@@ -8,7 +8,7 @@ import {
     LogOut
 } from "lucide-react";
 
-import "../styles/sidebar.css";
+import "../../styles/sidebar.css";
 
 
 function Sidebar({
@@ -16,6 +16,7 @@ function Sidebar({
 }) {
 
     const navigate = useNavigate();
+    const location = useLocation();
 
     const [showMenu, setShowMenu] = useState(false);
 
@@ -332,7 +333,9 @@ function Sidebar({
 
                     <NavLink
                         to="/citizen/dashboard"
-                        className="sidebar-link"
+                        className={({ isActive }) =>
+                            `sidebar-link ${isActive ? "active" : ""}`
+                        }
                     >
 
                         <LayoutDashboard
@@ -348,7 +351,9 @@ function Sidebar({
 
                     <NavLink
                         to="/citizen/create-complaint"
-                        className="sidebar-link"
+                        className={({ isActive }) =>
+                            `sidebar-link ${isActive ? "active" : ""}`
+                        }
                     >
 
                         <FilePlus2
@@ -364,7 +369,7 @@ function Sidebar({
 
                     <NavLink
                         to="/citizen/my-complaints"
-                        className="sidebar-link"
+                        className={`sidebar-link ${location.pathname.includes("/citizen/my-complaints") || location.pathname.includes("/citizen/complaint/") ? "active" : ""}`}
                     >
 
                         <ClipboardList

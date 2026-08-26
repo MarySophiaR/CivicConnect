@@ -4,9 +4,7 @@ const verifyToken = require("../middleware/authMiddleware");
 const authorizeRoles = require("../middleware/authorizeRoles");
 
 const {
-    getAssignedComplaints,
-    startWork,
-    resolveComplaint
+    getAssignedComplaints
 } = require("../controllers/executiveEngineerController");
 
 const router = express.Router();
@@ -21,24 +19,5 @@ router.get(
     getAssignedComplaints
 );
 
-// ---------------------------------
-// Start Work
-// ---------------------------------
-router.put(
-    "/start-work/:id",
-    verifyToken,
-    authorizeRoles("executiveEngineer"),
-    startWork
-);
-
-// ---------------------------------
-// Resolve Complaint
-// ---------------------------------
-router.put(
-    "/resolve/:id",
-    verifyToken,
-    authorizeRoles("executiveEngineer"),
-    resolveComplaint
-);
 
 module.exports = router;

@@ -19,7 +19,6 @@ import "../../styles/officerDashboard.css";
 function OfficerDashboard({ role: propRole }) {
 
     const [complaints, setComplaints] = useState([]);
-
     const [loading, setLoading] = useState(true);
 
     const [stats, setStats] = useState({
@@ -39,7 +38,6 @@ function OfficerDashboard({ role: propRole }) {
         let currentRole = propRole;
 
         if (!currentRole) {
-
             try {
 
                 const storedUser =
@@ -60,11 +58,9 @@ function OfficerDashboard({ role: propRole }) {
                 );
 
             }
-
         }
 
         return currentRole;
-
     };
 
 
@@ -81,39 +77,27 @@ function OfficerDashboard({ role: propRole }) {
                 .toLowerCase()
                 .replace(/[\s_-]+/g, "");
 
-
         switch (normalizedRole) {
 
             case "juniorengineer":
             case "je":
-
                 return "Junior Engineer";
-
 
             case "assistantexecutiveengineer":
             case "aee":
-
                 return "Assistant Executive Engineer";
-
 
             case "executiveengineer":
             case "ee":
-
                 return "Executive Engineer";
-
 
             case "municipalcommissioner":
             case "mc":
-
                 return "Municipal Commissioner";
 
-
             default:
-
                 return currentRole || "Officer";
-
         }
-
     };
 
 
@@ -133,39 +117,27 @@ function OfficerDashboard({ role: propRole }) {
                 .toLowerCase()
                 .replace(/[\s_-]+/g, "");
 
-
         switch (normalizedRole) {
 
             case "juniorengineer":
             case "je":
-
                 return "/dashboard/junior-engineer";
-
 
             case "assistantexecutiveengineer":
             case "aee":
-
                 return "/dashboard/assistant-executive-engineer";
-
 
             case "executiveengineer":
             case "ee":
-
                 return "/dashboard/executive-engineer";
-
 
             case "municipalcommissioner":
             case "mc":
-
                 return "/dashboard/municipal-commissioner";
 
-
             default:
-
                 return null;
-
         }
-
     };
 
 
@@ -174,9 +146,7 @@ function OfficerDashboard({ role: propRole }) {
     ========================================= */
 
     useEffect(() => {
-
         fetchDashboardData();
-
     }, []);
 
 
@@ -188,7 +158,7 @@ function OfficerDashboard({ role: propRole }) {
 
 
             /* =================================
-               1. GET CORRECT DASHBOARD ENDPOINT
+               1. GET DASHBOARD ENDPOINT
             ================================= */
 
             const dashboardEndpoint =
@@ -202,7 +172,6 @@ function OfficerDashboard({ role: propRole }) {
                 );
 
                 return;
-
             }
 
 
@@ -213,12 +182,11 @@ function OfficerDashboard({ role: propRole }) {
 
 
             /* =================================
-               2. FETCH COUNTS FROM BACKEND
+               2. FETCH COUNTS
             ================================= */
 
             const dashboardResponse =
                 await API.get(dashboardEndpoint);
-
 
             const dashboardData =
                 dashboardResponse.data;
@@ -231,7 +199,7 @@ function OfficerDashboard({ role: propRole }) {
 
 
             /* =================================
-               3. STORE BACKEND COUNTS
+               3. STORE COUNTS
             ================================= */
 
             setStats({
@@ -247,17 +215,15 @@ function OfficerDashboard({ role: propRole }) {
 
                 resolved:
                     dashboardData.resolved ?? 0
-
             });
 
 
             /* =================================
-               4. FETCH COMPLAINTS FOR TABLE
+               4. FETCH COMPLAINTS
             ================================= */
 
             const complaintsResponse =
                 await API.get("/complaints/all");
-
 
             const complaintsData =
                 complaintsResponse.data;
@@ -285,9 +251,7 @@ function OfficerDashboard({ role: propRole }) {
         } finally {
 
             setLoading(false);
-
         }
-
     };
 
 
@@ -307,7 +271,6 @@ function OfficerDashboard({ role: propRole }) {
                 year: "numeric"
             }
         );
-
     };
 
 
@@ -336,9 +299,7 @@ function OfficerDashboard({ role: propRole }) {
 
             default:
                 return "status-default";
-
         }
-
     };
 
 
@@ -349,19 +310,18 @@ function OfficerDashboard({ role: propRole }) {
     if (loading) {
 
         return (
-
             <OfficerLayout role={propRole}>
 
-                <div className="officer-dashboard-loading">
+                <div className="officer-page-container">
 
-                    Loading dashboard...
+                    <div className="officer-dashboard-loading">
+                        Loading dashboard...
+                    </div>
 
                 </div>
 
             </OfficerLayout>
-
         );
-
     }
 
 
@@ -373,14 +333,14 @@ function OfficerDashboard({ role: propRole }) {
 
         <OfficerLayout role={propRole}>
 
-            <div className="officer-dashboard-page">
 
+            <div className="officer-page-container">
 
                 {/* =================================
-                    HEADER
+                    PAGE HEADER
                 ================================= */}
 
-                <div className="officer-dashboard-header">
+                <header className="officer-page-header">
 
                     <h1>
                         {roleName} Dashboard
@@ -390,7 +350,7 @@ function OfficerDashboard({ role: propRole }) {
                         Monitor and manage assigned civic complaints.
                     </p>
 
-                </div>
+                </header>
 
 
                 {/* =================================
@@ -490,10 +450,7 @@ function OfficerDashboard({ role: propRole }) {
                     COMPLAINTS
                 ================================= */}
 
-                <div className="officer-complaints-section">
-
-
-                    {/* SECTION HEADER */}
+                <section className="officer-dashboard-complaints-section">
 
                     <h2 className="officer-section-heading">
 
@@ -638,9 +595,7 @@ function OfficerDashboard({ role: propRole }) {
                                                 {/* CATEGORY */}
 
                                                 <td>
-
                                                     {complaint.category}
-
                                                 </td>
 
 
@@ -653,9 +608,7 @@ function OfficerDashboard({ role: propRole }) {
                                                             complaint.status
                                                         )}`}
                                                     >
-
                                                         {complaint.status}
-
                                                     </span>
 
                                                 </td>
@@ -694,15 +647,12 @@ function OfficerDashboard({ role: propRole }) {
 
                     )}
 
-                </div>
-
+                </section>
 
             </div>
 
         </OfficerLayout>
-
     );
-
 }
 
 

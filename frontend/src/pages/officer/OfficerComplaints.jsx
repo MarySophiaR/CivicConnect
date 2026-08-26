@@ -9,6 +9,7 @@ import { ClipboardList } from "lucide-react";
 
 import "../../styles/officerComponents.css";
 
+
 function OfficerComplaints({ role: propRole }) {
 
     const navigate = useNavigate();
@@ -18,11 +19,8 @@ function OfficerComplaints({ role: propRole }) {
     ========================================================= */
 
     const [complaints, setComplaints] = useState([]);
-
     const [loading, setLoading] = useState(true);
-
-    const [activeStatus, setActiveStatus] =
-        useState("all");
+    const [activeStatus, setActiveStatus] = useState("all");
 
 
     /* =========================================================
@@ -34,11 +32,6 @@ function OfficerComplaints({ role: propRole }) {
         let currentRole = propRole;
 
 
-        /*
-         * If role was not passed as a prop,
-         * get it from localStorage.
-         */
-
         if (!currentRole) {
 
             try {
@@ -47,7 +40,6 @@ function OfficerComplaints({ role: propRole }) {
                     JSON.parse(
                         localStorage.getItem("user") || "{}"
                     );
-
 
                 currentRole =
                     storedUser.role ||
@@ -62,20 +54,8 @@ function OfficerComplaints({ role: propRole }) {
                 );
 
             }
-
         }
 
-
-        /*
-         * Normalize role.
-         *
-         * Supports:
-         *
-         * juniorEngineer
-         * Junior Engineer
-         * junior-engineer
-         * JE
-         */
 
         const normalizedRole =
             String(currentRole)
@@ -89,27 +69,21 @@ function OfficerComplaints({ role: propRole }) {
             case "je":
                 return "Junior Engineer";
 
-
             case "assistantexecutiveengineer":
             case "aee":
                 return "Assistant Executive Engineer";
-
 
             case "executiveengineer":
             case "ee":
                 return "Executive Engineer";
 
-
             case "municipalcommissioner":
             case "mc":
                 return "Municipal Commissioner";
 
-
             default:
                 return currentRole || "Officer";
-
         }
-
     };
 
 
@@ -121,9 +95,7 @@ function OfficerComplaints({ role: propRole }) {
     ========================================================= */
 
     useEffect(() => {
-
         fetchComplaints();
-
     }, []);
 
 
@@ -135,9 +107,7 @@ function OfficerComplaints({ role: propRole }) {
 
 
             const response =
-                await API.get(
-                    "/complaints/all"
-                );
+                await API.get("/complaints/all");
 
 
             setComplaints(
@@ -159,9 +129,7 @@ function OfficerComplaints({ role: propRole }) {
         } finally {
 
             setLoading(false);
-
         }
-
     };
 
 
@@ -169,9 +137,7 @@ function OfficerComplaints({ role: propRole }) {
        VIEW PARTICULAR COMPLAINT
     ========================================================= */
 
-    const handleViewDetails = (
-        complaintId
-    ) => {
+    const handleViewDetails = (complaintId) => {
 
         if (!complaintId) {
 
@@ -180,26 +146,10 @@ function OfficerComplaints({ role: propRole }) {
             );
 
             return;
-
         }
 
 
-        /*
-         * Relative navigation.
-         *
-         * Example:
-         *
-         * /assistant-executive-engineer/complaints
-         *
-         * becomes:
-         *
-         * /assistant-executive-engineer/complaints/:id
-         */
-
-        navigate(
-            `${complaintId}`
-        );
-
+        navigate(`${complaintId}`);
     };
 
 
@@ -210,13 +160,11 @@ function OfficerComplaints({ role: propRole }) {
     const getComplaintStatus = (complaint) => {
 
         return String(
-            complaint?.status ||
-            ""
+            complaint?.status || ""
         )
             .toLowerCase()
             .trim()
             .replace(/[\s_-]+/g, "-");
-
     };
 
 
@@ -229,9 +177,8 @@ function OfficerComplaints({ role: propRole }) {
             ? complaints
             : complaints.filter(
                 (complaint) =>
-                    getComplaintStatus(
-                        complaint
-                    ) === activeStatus
+                    getComplaintStatus(complaint) ===
+                    activeStatus
             );
 
 
@@ -242,24 +189,19 @@ function OfficerComplaints({ role: propRole }) {
     const getStatusCount = (status) => {
 
         if (status === "all") {
-
             return complaints.length;
-
         }
 
 
         return complaints.filter(
             (complaint) =>
-                getComplaintStatus(
-                    complaint
-                ) === status
+                getComplaintStatus(complaint) === status
         ).length;
-
     };
 
 
     /* =========================================================
-       LOADING STATE
+       LOADING
     ========================================================= */
 
     if (loading) {
@@ -268,16 +210,16 @@ function OfficerComplaints({ role: propRole }) {
 
             <OfficerLayout role={propRole}>
 
-                <div className="officer-dashboard-loading">
+                <div className="officer-page-container">
 
-                    Loading complaints...
+                    <div className="officer-dashboard-loading">
+                        Loading complaints...
+                    </div>
 
                 </div>
 
             </OfficerLayout>
-
         );
-
     }
 
 
@@ -289,19 +231,19 @@ function OfficerComplaints({ role: propRole }) {
 
         <OfficerLayout role={propRole}>
 
+            {/* SAME PAGE CONTAINER AS DASHBOARD */}
+
             <div className="officer-page-container">
 
-
-                {/* =================================================
+                {/* =================================
                     PAGE HEADER
-                ================================================= */}
+                ================================= */}
 
                 <header className="officer-page-header">
 
                     <h1>
                         {roleName} Complaints
                     </h1>
-
 
                     <p>
                         View and manage complaints assigned to you.
@@ -310,19 +252,18 @@ function OfficerComplaints({ role: propRole }) {
                 </header>
 
 
-                {/* =================================================
+                {/* =================================
                     COMPLAINTS SECTION
-                ================================================= */}
+                ================================= */}
 
                 <section className="officer-complaints-section">
 
 
-                    {/* =================================================
+                    {/* =================================
                         SECTION HEADER
-                    ================================================= */}
+                    ================================= */}
 
                     <div className="officer-section-header">
-
 
                         <div className="officer-section-title">
 
@@ -332,26 +273,18 @@ function OfficerComplaints({ role: propRole }) {
                                 aria-hidden="true"
                             />
 
-
                             <h2>
                                 Complaints
                             </h2>
 
                         </div>
 
-
-                        {/* <span className="officer-complaints-count">
-
-                            {complaints.length}
-
-                        </span> */}
-
                     </div>
 
 
-                    {/* =================================================
-                        STATUS FILTER BUTTONS
-                    ================================================= */}
+                    {/* =================================
+                        STATUS FILTERS
+                    ================================= */}
 
                     <div
                         className="officer-complaint-status-filters"
@@ -478,9 +411,9 @@ function OfficerComplaints({ role: propRole }) {
                     </div>
 
 
-                    {/* =================================================
-                        EMPTY STATE
-                    ================================================= */}
+                    {/* =================================
+                        EMPTY STATE / GRID
+                    ================================= */}
 
                     {filteredComplaints.length === 0 ? (
 
@@ -492,19 +425,19 @@ function OfficerComplaints({ role: propRole }) {
                                 aria-hidden="true"
                             />
 
-
                             <h3>
                                 No complaints found
                             </h3>
-
 
                             <p>
 
                                 {activeStatus === "all"
                                     ? "There are currently no complaints assigned to you."
-                                    : `There are currently no ${activeStatus === "in-progress"
-                                        ? "in-progress"
-                                        : activeStatus
+                                    : `There are currently no ${
+                                        activeStatus ===
+                                        "in-progress"
+                                            ? "in-progress"
+                                            : activeStatus
                                     } complaints.`}
 
                             </p>
@@ -513,22 +446,14 @@ function OfficerComplaints({ role: propRole }) {
 
                     ) : (
 
-                        /* =================================================
-                           COMPLAINT GRID
-                        ================================================= */
-
                         <div className="officer-complaints-grid">
 
                             {filteredComplaints.map(
                                 (complaint) => (
 
                                     <OfficerComplaintCard
-                                        key={
-                                            complaint._id
-                                        }
-                                        complaint={
-                                            complaint
-                                        }
+                                        key={complaint._id}
+                                        complaint={complaint}
                                         onViewDetails={
                                             handleViewDetails
                                         }
@@ -543,13 +468,11 @@ function OfficerComplaints({ role: propRole }) {
 
                 </section>
 
-
             </div>
 
         </OfficerLayout>
-
     );
-
 }
+
 
 export default OfficerComplaints;

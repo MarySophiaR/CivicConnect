@@ -1,1510 +1,1063 @@
 /* =========================================================
-OFFICER COMPLAINT DETAILS PAGE
+   OFFICER COMPLAINT DETAILS PAGE
 ========================================================= */
 
 .officer-page-container {
-
     width: 100%;
-
     max-width: 100%;
-
     margin: 0;
-
     padding: 0;
-
     box-sizing: border-box;
 }
 
-
 /* =========================================================
-BACK TO COMPLAINTS
+   BACK TO COMPLAINTS
 ========================================================= */
 
 .officer-detail-back-button {
-
     width: 100%;
-
-    min-height: 54px;
-
+    max-width: 100%;
+    min-height: 42px;
     display: flex;
-
     align-items: center;
-
-    justify-content: center;
-
+    justify-content: flex-start;
     gap: 8px;
-
-    margin: 0 0 20px;
-
-    padding: 0 22px;
-
+    margin: 0 0 14px;
+    padding: 0 2px;
     border: none;
-
-    border-radius: 12px;
-
-    background: #0055A4;
-
-    color: #FFFFFF;
-
+    border-radius: 8px;
+    background: transparent;
+    color: #0055A4;
     font-family: inherit;
-
-    font-size: 16px;
-
+    font-size: 14px;
     font-weight: 600;
-
+    line-height: 1;
+    text-align: left;
     cursor: pointer;
-
     box-sizing: border-box;
-
     transition:
         background 0.2s ease,
+        color 0.2s ease,
         transform 0.2s ease;
 }
 
+/* =========================================================
+   BACK BUTTON HOVER
+========================================================= */
+
 .officer-detail-back-button:hover {
-
-    background: #004583;
-
-    transform: translateY(-1px);
+    background: #EEF5FF;
+    color: #0055A4;
+    transform: translateX(-2px);
 }
 
+/* =========================================================
+   BACK BUTTON FOCUS
+========================================================= */
+
+.officer-detail-back-button:focus-visible {
+    outline: none;
+    box-shadow:
+        0 0 0 3px rgba(0, 85, 164, 0.14);
+}
+
+/* =========================================================
+   BACK BUTTON ICON
+========================================================= */
+
 .officer-detail-back-button svg {
-
-    width: 20px;
-
-    height: 20px;
-
     flex-shrink: 0;
 }
 
-
 /* =========================================================
-PAGE HEADER
+   PAGE HEADER CARD
 ========================================================= */
 
 .officer-detail-page-header {
-
     width: 100%;
-
     display: flex;
-
-    align-items: flex-start;
-
+    align-items: center;
     justify-content: space-between;
-
     gap: 30px;
-
-    margin-bottom: 20px;
+    margin: 0 0 20px;
+    padding: 24px 28px;
+    background: #FFFFFF;
+    border-radius: 14px;
+    box-shadow:
+        0 6px 18px rgba(0, 0, 0, 0.08);
+    box-sizing: border-box;
 }
 
-
 /* =========================================================
-HEADING AREA
+   HEADING AREA
 ========================================================= */
 
 .officer-detail-heading {
-
     display: flex;
-
     align-items: flex-start;
-
-    gap: 14px;
-
+    gap: 24px;
     min-width: 0;
 }
 
-
 /* =========================================================
-COMPLAINT ICON
-Blue icon + white background
+   TITLE + DESCRIPTION CONTENT
+
+   Starts from the top beside the image.
+   No artificial height.
 ========================================================= */
 
-.officer-detail-heading-icon {
-
-    width: 46px;
-
-    height: 46px;
-
+.officer-detail-heading > div:last-child {
+    min-width: 0;
     display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    flex-shrink: 0;
-
-    background: #FFFFFF;
-
-    border-radius: 10px;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 4px 0;
 }
-
-.officer-detail-heading-icon svg {
-
-    width: 26px;
-
-    height: 26px;
-
-    color: #0055A4;
-
-    stroke-width: 2;
-}
-
 
 /* =========================================================
-EYEBROW / SUBTITLE
+   COMPLAINT IMAGE CONTAINER
+
+   Fixed 260px image.
+========================================================= */
+
+.officer-detail-image-container {
+    width: 260px;
+    min-width: 260px;
+    height: 260px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    overflow: hidden;
+    align-self: center;
+    background: #FFFFFF;
+    border-radius: 13px;
+    border: 2px solid #EEF2F7;
+    box-sizing: border-box;
+    cursor: default;
+}
+
+/* =========================================================
+   COMPLAINT IMAGE
+========================================================= */
+
+.officer-detail-complaint-image {
+    width: 260px;
+    min-width: 260px;
+    height: 260px;
+    display: block;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 13px;
+    box-sizing: border-box;
+}
+
+/* =========================================================
+   IMAGE FALLBACK
+========================================================= */
+
+.officer-detail-image-fallback {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #EFF6FF;
+    color: #0055A4;
+    box-sizing: border-box;
+    border-radius: 11px;
+}
+
+/* =========================================================
+   IMAGE FALLBACK ICON
+========================================================= */
+
+.officer-detail-image-fallback svg {
+    width: 40px;
+    height: 40px;
+    color: #0055A4;
+    stroke-width: 1.7;
+}
+
+/* =========================================================
+   COMPLAINT DETAILS HEADING
 ========================================================= */
 
 .officer-detail-eyebrow {
-
-    display: block;
-
-    margin: 0 0 7px;
-
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 0 22px;
     color: #0055A4;
-
-    font-size: 15px;
-
-    font-weight: 600;
-
-    line-height: 1.5;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1.3;
 }
 
+/* =========================================================
+   COMPLAINT DETAILS ICON
+========================================================= */
+
+.officer-detail-eyebrow .officer-detail-heading-icon {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    background: transparent;
+    border-radius: 8px;
+}
+
+.officer-detail-eyebrow .officer-detail-heading-icon svg {
+    width: 24px;
+    height: 24px;
+    color: #0055A4;
+    stroke-width: 2;
+}
 
 /* =========================================================
-MAIN COMPLAINT TITLE
+   MAIN COMPLAINT TITLE
 ========================================================= */
 
 .officer-detail-heading h1 {
-
-    margin: 0;
-
+    margin: 0 0 28px;
     color: #172033;
-
-    font-size: 36px;
-
+    font-size: 28px;
     font-weight: 700;
-
     line-height: 1.25;
-
     letter-spacing: -0.5px;
 }
 
+/* =========================================================
+   TITLE / DESCRIPTION LABEL
+
+   JSX uses className="heading"
+========================================================= */
+
+.officer-detail-heading .heading {
+    display: block;
+    margin: 0 0 7px;
+    color: #374151;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.4;
+}
 
 /* =========================================================
-STATUS
+   COMPLAINT DESCRIPTION
+========================================================= */
+
+.officer-detail-heading p {
+    margin: 0;
+    max-width: 850px;
+    color: #374151;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.55;
+}
+
+/* =========================================================
+   STATUS
 ========================================================= */
 
 .officer-complaint-status {
-
     display: inline-flex;
-
     align-items: center;
-
     justify-content: center;
-
+    align-self: flex-start;
     flex-shrink: 0;
-
     padding: 6px 13px;
-
     border-radius: 999px;
-
     font-size: 13px;
-
     font-weight: 600;
-
+    line-height: 1.4;
     white-space: nowrap;
-
-    margin-top: 4px;
+    margin: 0;
+    box-sizing: border-box;
 }
 
-
 /* =========================================================
-STATUS COLORS
+   STATUS COLORS
 ========================================================= */
 
 .officer-complaint-status.pending {
-
     background: #FEF3C7;
-
     color: #92400E;
 }
 
 .officer-complaint-status.assigned {
-
     background: #DBEAFE;
-
     color: #1D4ED8;
 }
 
 .officer-complaint-status.in-progress {
-
     background: #E0F2FE;
-
     color: #0369A1;
 }
 
 .officer-complaint-status.escalated {
-
     background: #FEE2E2;
-
     color: #B91C1C;
 }
 
 .officer-complaint-status.resolved {
-
     background: #DCFCE7;
-
     color: #166534;
 }
 
 .officer-complaint-status.default {
-
     background: #F3F4F6;
-
     color: #374151;
 }
 
-
 /* =========================================================
-MAIN DETAILS BOX
-Description + information
+   MAIN DETAILS BOX
 ========================================================= */
 
 .officer-detail-main-card {
-
     width: 100%;
-
     display: flex;
-
     flex-direction: column;
-
     gap: 20px;
-
     background: transparent;
-
     padding: 0;
-
     margin: 0 0 20px;
-
     box-sizing: border-box;
 }
 
-
 /* =========================================================
-FIRST BOX
-Description + information grid
+   DESCRIPTION SECTION
 ========================================================= */
 
 .officer-detail-description-section {
-
     width: 100%;
-
     background: #FFFFFF;
-
     padding: 28px;
-
     border-radius: 14px;
-
     box-shadow:
         0 6px 18px rgba(0, 0, 0, 0.08);
-
     box-sizing: border-box;
 }
 
-
-/* =========================================================
-DESCRIPTION HEADING
-========================================================= */
-
 .officer-detail-description-section h2 {
-
     margin: 0 0 10px;
-
     color: #0055A4;
-
     font-size: 26px;
-
     font-weight: 700;
-
     line-height: 1.3;
 }
 
-
-/* =========================================================
-DESCRIPTION TEXT
-========================================================= */
-
 .officer-detail-description-section p {
-
     margin: 0;
-
     color: #374151;
-
     font-size: 15px;
-
     line-height: 1.8;
 }
 
-
 /* =========================================================
-INFORMATION GRID
+   INFORMATION GRID
 ========================================================= */
 
 .officer-detail-info-grid {
-
     width: 100%;
-
     display: grid;
-
     grid-template-columns: repeat(3, 1fr);
-
     gap: 25px;
-
     background: #FFFFFF;
-
     padding: 28px;
-
     border-radius: 14px;
-
     box-shadow:
         0 6px 18px rgba(0, 0, 0, 0.08);
-
     box-sizing: border-box;
 }
 
-
-/* =========================================================
-INFORMATION ITEM
-========================================================= */
-
 .officer-detail-info-item {
-
     min-width: 0;
-
     display: flex;
-
     align-items: flex-start;
-
     gap: 12px;
-
     padding: 4px 0;
 }
 
-
-/* =========================================================
-INFORMATION ICON
-========================================================= */
-
 .officer-detail-info-icon {
-
     width: 40px;
-
     height: 40px;
-
     display: flex;
-
     align-items: center;
-
     justify-content: center;
-
     flex-shrink: 0;
-
     background: #FFFFFF;
-
     border-radius: 9px;
 }
 
 .officer-detail-info-icon svg {
-
     width: 22px;
-
     height: 22px;
-
     color: #0055A4;
-
     stroke-width: 2;
 }
 
-
-/* =========================================================
-INFORMATION LABEL
-========================================================= */
-
 .officer-detail-info-item span {
-
     display: block;
-
     margin: 0 0 5px;
-
     color: #6B7280;
-
     font-size: 13px;
-
     font-weight: 500;
-
     line-height: 1.4;
 }
 
-
-/* =========================================================
-INFORMATION VALUE
-========================================================= */
-
 .officer-detail-info-item strong {
-
     display: block;
-
     color: #172033;
-
     font-size: 15px;
-
     font-weight: 600;
-
     line-height: 1.5;
-
     word-break: break-word;
 }
 
-
 /* =========================================================
-CATEGORY
+   CATEGORY
 ========================================================= */
 
 .officer-detail-category {
-
     width: fit-content;
-
     display: inline-block !important;
-
     padding: 5px 10px;
-
     border-radius: 7px;
-
     font-size: 13px !important;
-
     font-weight: 600 !important;
-
     text-transform: capitalize;
 }
 
-
-/* =========================================================
-CATEGORY COLORS
-========================================================= */
-
 .officer-category-pothole {
-
     background: #FEF3C7;
-
     color: #92400E !important;
 }
 
 .officer-category-drainage {
-
     background: #DBEAFE;
-
     color: #1D4ED8 !important;
 }
 
 .officer-category-garbage {
-
     background: #DCFCE7;
-
     color: #166534 !important;
 }
 
 .officer-category-default {
-
     background: #F3F4F6;
-
     color: #374151 !important;
 }
 
-
 /* =========================================================
-LOCATION BOX
+   LOCATION
 ========================================================= */
 
 .officer-detail-location-section {
     width: 100%;
-
     background: #FFFFFF;
-
     padding: 28px;
-
     border-radius: 14px;
-
     box-shadow:
         0 6px 18px rgba(0, 0, 0, 0.08);
-
     box-sizing: border-box;
-
     margin: 0;
 }
 
-
-/* =========================================================
-LOCATION HEADING
-========================================================= */
-
 .officer-detail-section-heading {
-
     display: flex;
-
     align-items: center;
-
     gap: 10px;
-
     margin: 0 0 18px;
 }
 
 .officer-detail-section-heading svg {
-
     width: 22px;
-
     height: 22px;
-
     color: #0055A4;
-
     stroke-width: 2;
-
     flex-shrink: 0;
 }
 
 .officer-detail-section-heading h2 {
-
     margin: 0;
-
     color: #0055A4;
-
     font-size: 26px;
-
     font-weight: 700;
-
     line-height: 1.3;
 }
 
-
-/* =========================================================
-ADDRESS
-========================================================= */
-
 .officer-detail-address {
-
     margin: 0 0 20px;
-
     color: #374151;
-
     font-size: 15px;
-
     line-height: 1.8;
 }
 
-
-/* =========================================================
-COORDINATES
-========================================================= */
-
 .officer-detail-coordinates {
-
     display: flex;
-
     flex-wrap: wrap;
-
     gap: 12px 35px;
-
     padding-top: 17px;
-
     border-top: 1px solid #E5E7EB;
 }
 
 .officer-detail-coordinates span {
-
     color: #6B7280;
-
     font-size: 14px;
-
     line-height: 1.6;
 }
 
 .officer-detail-coordinates span::first-line {
-
     color: #374151;
 }
 
-
 /* =========================================================
-UPDATED BOX
+   UPDATED BOX
 ========================================================= */
 
 .officer-detail-timestamps {
     width: 100%;
-
     background: #FFFFFF;
-
     padding: 24px 28px;
-
     border-radius: 14px;
-
     box-shadow:
         0 6px 18px rgba(0, 0, 0, 0.08);
-
     box-sizing: border-box;
-
     margin: 0;
 }
 
-
-/* =========================================================
-TIMESTAMP CONTENT
-========================================================= */
-
-.officer-detail-timestamps>div {
-
+.officer-detail-timestamps > div {
     display: flex;
-
     align-items: center;
-
     gap: 12px;
 }
 
-
-/* =========================================================
-TIMESTAMP ICON
-========================================================= */
-
 .officer-detail-timestamps svg {
-
     width: 22px;
-
     height: 22px;
-
     color: #0055A4;
-
     stroke-width: 2;
-
     flex-shrink: 0;
 }
 
-
-/* =========================================================
-TIMESTAMP LABEL
-========================================================= */
-
 .officer-detail-timestamps span {
-
     display: block;
-
     margin: 0 0 4px;
-
     color: #6B7280;
-
     font-size: 13px;
-
     font-weight: 500;
 }
 
-
-/* =========================================================
-TIMESTAMP VALUE
-========================================================= */
-
 .officer-detail-timestamps strong {
-
     display: block;
-
     color: #172033;
-
     font-size: 15px;
-
     font-weight: 600;
 }
 
 /* =========================================================
-ASSIGNMENT HISTORY
+   ASSIGNMENT HISTORY
 ========================================================= */
 
 .officer-assignment-history-section {
     width: 100%;
-
     margin: 0 0 20px;
-
     background: #FFFFFF;
-
     border-radius: 14px;
-
     box-shadow:
         0 6px 18px rgba(0, 0, 0, 0.08);
-
     box-sizing: border-box;
-
     overflow: hidden;
 }
 
-
 /* =========================================================
-COMPLAINT STATUS ACTION BOX
+   ACTION CARD
 ========================================================= */
 
 .officer-detail-action-card {
     width: 100%;
-
     display: flex;
-
     align-items: center;
-
     justify-content: space-between;
-
     gap: 25px;
-
     margin: 0;
-
     padding: 28px;
-
     background: #FFFFFF;
-
     border-radius: 14px;
-
     box-shadow:
         0 6px 18px rgba(0, 0, 0, 0.08);
-
     box-sizing: border-box;
 }
 
-
-/* =========================================================
-ACTION HEADING
-========================================================= */
-
 .officer-detail-action-card h2 {
-
     margin: 0 0 7px;
-
     color: #0055A4;
-
     font-size: 26px;
-
     font-weight: 700;
-
     line-height: 1.3;
 }
 
-
-/* =========================================================
-ACTION TEXT
-========================================================= */
-
 .officer-detail-action-card p {
-
     margin: 0;
-
     color: #6B7280;
-
     font-size: 15px;
-
     line-height: 1.6;
 }
 
 .officer-detail-action-card p strong {
-
     color: #172033;
-
     font-weight: 600;
 }
 
-
 /* =========================================================
-LOADING
+   LOADING
 ========================================================= */
 
 .officer-detail-loading {
-
     min-height: 60vh;
-
     display: flex;
-
     flex-direction: column;
-
     align-items: center;
-
     justify-content: center;
-
     gap: 14px;
-
     color: #6B7280;
-
     font-size: 15px;
 }
 
-
-/* =========================================================
-LOADING SPINNER
-========================================================= */
-
 .officer-loading-spinner {
-
     width: 30px;
-
     height: 30px;
-
     border: 3px solid #DBEAFE;
-
     border-top-color: #0055A4;
-
     border-radius: 50%;
-
     animation: officer-detail-spin 0.8s linear infinite;
 }
 
 @keyframes officer-detail-spin {
-
     to {
-
         transform: rotate(360deg);
-
     }
 }
 
-
 /* =========================================================
-ERROR PAGE
+   ERROR PAGE
 ========================================================= */
 
 .officer-detail-error-page {
-
     min-height: 60vh;
-
     display: flex;
-
     flex-direction: column;
-
     align-items: center;
-
     justify-content: center;
-
     text-align: center;
-
     padding: 40px;
-
     background: #FFFFFF;
-
     border-radius: 14px;
-
     box-shadow:
         0 6px 18px rgba(0, 0, 0, 0.08);
-
     box-sizing: border-box;
 }
 
-
-/* =========================================================
-ERROR ICON
-========================================================= */
-
 .officer-detail-error-icon {
-
     width: 64px;
-
     height: 64px;
-
     display: flex;
-
     align-items: center;
-
     justify-content: center;
-
     margin-bottom: 18px;
-
     background: #EFF6FF;
-
     border-radius: 12px;
 }
 
 .officer-detail-error-icon svg {
-
     color: #0055A4;
 }
 
-
-/* =========================================================
-ERROR HEADING
-========================================================= */
-
 .officer-detail-error-page h2 {
-
     margin: 0 0 8px;
-
     color: #0055A4;
-
     font-size: 26px;
-
     font-weight: 700;
 }
 
-
-/* =========================================================
-ERROR TEXT
-========================================================= */
-
 .officer-detail-error-page p {
-
     max-width: 600px;
-
     margin: 0 0 22px;
-
     color: #6B7280;
-
     font-size: 15px;
-
     line-height: 1.7;
 }
 
-
-/* =========================================================
-ERROR BACK BUTTON
-========================================================= */
-
 .officer-back-button {
-
     display: inline-flex;
-
     align-items: center;
-
     justify-content: center;
-
     gap: 8px;
-
     min-height: 42px;
-
     padding: 0 18px;
-
     border: none;
-
     border-radius: 8px;
-
     background: #0055A4;
-
     color: #FFFFFF;
-
     font-family: inherit;
-
     font-size: 14px;
-
     font-weight: 600;
-
     cursor: pointer;
-
     transition: background 0.2s ease;
 }
 
 .officer-back-button:hover {
-
     background: #004583;
 }
 
-
 /* =========================================================
-MOBILE
+   MOBILE
 ========================================================= */
 
 @media (max-width: 700px) {
-
     .officer-detail-back-button {
-
         min-height: 56px;
-
-        margin-bottom: 20px;
-
+        margin-bottom: 16px;
         font-size: 15px;
-
     }
-
-
-    /* -----------------------------
-       PAGE HEADER
-    ----------------------------- */
 
     .officer-detail-page-header {
-
         flex-direction: column;
-
         align-items: flex-start;
-
-        gap: 14px;
-
+        gap: 18px;
         margin-bottom: 20px;
-
+        padding: 22px 24px;
+        border-radius: 14px;
     }
-
 
     .officer-detail-heading {
-
-        gap: 11px;
-
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 14px;
+        width: 100%;
     }
 
+    .officer-detail-heading > div:last-child {
+        width: 100%;
+        min-height: 0;
+        padding: 0;
+    }
+
+    .officer-detail-image-container {
+        width: 260px;
+        min-width: 260px;
+        height: 260px;
+        align-self: center;
+        border-radius: 13px;
+    }
+
+    .officer-detail-complaint-image {
+        width: 260px;
+        min-width: 260px;
+        height: 260px;
+        border-radius: 13px;
+    }
+
+    .officer-detail-image-fallback {
+        border-radius: 11px;
+    }
+
+    .officer-detail-image-fallback svg {
+        width: 40px;
+        height: 40px;
+    }
 
     .officer-detail-heading-icon {
-
         width: 42px;
-
         height: 42px;
-
     }
-
 
     .officer-detail-heading-icon svg {
-
         width: 23px;
-
         height: 23px;
-
     }
-
 
     .officer-detail-eyebrow {
-
         font-size: 14px;
-
         margin-bottom: 5px;
-
     }
-
 
     .officer-detail-heading h1 {
-
         font-size: 30px;
-
         line-height: 1.3;
-
     }
-
 
     .officer-complaint-status {
-
         margin-top: 0;
-
         font-size: 12px;
-
         padding: 6px 11px;
-
     }
-
-
-    /* -----------------------------
-       DETAILS
-    ----------------------------- */
 
     .officer-detail-main-card {
-
         gap: 20px;
-
         margin-bottom: 20px;
-
     }
-
 
     .officer-detail-description-section {
-
         padding: 24px;
-
         border-radius: 14px;
-
     }
-
 
     .officer-detail-description-section h2 {
-
         font-size: 23px;
-
     }
-
 
     .officer-detail-description-section p {
-
         font-size: 14px;
-
         line-height: 1.7;
-
     }
-
-
-    /* -----------------------------
-       INFORMATION
-    ----------------------------- */
 
     .officer-detail-info-grid {
-
         grid-template-columns: 1fr;
-
         gap: 18px;
-
         padding: 24px;
-
         border-radius: 14px;
-
     }
-
 
     .officer-detail-info-icon {
-
         width: 38px;
-
         height: 38px;
-
     }
-
 
     .officer-detail-info-icon svg {
-
         width: 21px;
-
         height: 21px;
-
     }
-
 
     .officer-detail-info-item span {
-
         font-size: 12px;
-
     }
-
 
     .officer-detail-info-item strong {
-
         font-size: 14px;
-
     }
-
-
-    /* -----------------------------
-       LOCATION
-    ----------------------------- */
 
     .officer-detail-location-section {
-
         padding: 24px;
-
         border-radius: 14px;
-
         margin: 0;
-
     }
-
 
     .officer-detail-section-heading {
-
         margin-bottom: 15px;
-
     }
-
 
     .officer-detail-section-heading h2 {
-
         font-size: 23px;
-
     }
-
 
     .officer-detail-address {
-
         font-size: 14px;
-
         line-height: 1.7;
-
     }
-
 
     .officer-detail-coordinates {
-
         flex-direction: column;
-
         gap: 6px;
-
     }
-
 
     .officer-detail-coordinates span {
-
         font-size: 13px;
-
     }
-
-
-    /* -----------------------------
-       UPDATED
-    ----------------------------- */
 
     .officer-detail-timestamps {
-
         padding: 22px 24px;
-
         border-radius: 14px;
-
         margin: 0;
-
     }
-
 
     .officer-detail-timestamps span {
-
         font-size: 12px;
-
     }
-
 
     .officer-detail-timestamps strong {
-
         font-size: 14px;
-
     }
-
-
-    /* -----------------------------
-       ASSIGNMENT HISTORY
-    ----------------------------- */
 
     .officer-assignment-history-section {
-
         margin: 0 0 20px;
-
     }
-
-
-    /* -----------------------------
-       ACTION
-    ----------------------------- */
 
     .officer-detail-action-card {
-
         flex-direction: column;
-
         align-items: flex-start;
-
         gap: 15px;
-
         margin: 0;
-
         padding: 24px;
-
         border-radius: 14px;
-
     }
-
 
     .officer-detail-action-card h2 {
-
         font-size: 23px;
-
     }
-
 
     .officer-detail-action-card p {
-
         font-size: 14px;
-
     }
-
 }
 
-
 /* =========================================================
-SMALL MOBILE
+   SMALL MOBILE
 ========================================================= */
 
 @media (max-width: 450px) {
-
     .officer-detail-back-button {
-
         min-height: 52px;
-
-        margin-bottom: 20px;
-
+        margin-bottom: 16px;
         font-size: 14px;
-
     }
 
+    .officer-detail-page-header {
+        padding: 20px;
+        border-radius: 14px;
+    }
 
     .officer-detail-heading {
-
-        gap: 9px;
-
+        gap: 12px;
     }
 
+    .officer-detail-image-container {
+        width: 220px;
+        min-width: 220px;
+        height: 220px;
+        border-radius: 13px;
+    }
+
+    .officer-detail-complaint-image {
+        width: 220px;
+        min-width: 220px;
+        height: 220px;
+        border-radius: 13px;
+    }
+
+    .officer-detail-image-fallback svg {
+        width: 34px;
+        height: 34px;
+    }
 
     .officer-detail-heading-icon {
-
         width: 38px;
-
         height: 38px;
-
         border-radius: 8px;
-
     }
-
 
     .officer-detail-heading-icon svg {
-
         width: 21px;
-
         height: 21px;
-
     }
-
 
     .officer-detail-eyebrow {
-
         font-size: 13px;
-
     }
-
 
     .officer-detail-heading h1 {
-
         font-size: 26px;
-
     }
-
 
     .officer-detail-description-section {
-
         padding: 20px;
-
     }
-
 
     .officer-detail-description-section h2 {
-
         font-size: 21px;
-
     }
-
 
     .officer-detail-info-grid {
-
         padding: 20px;
-
         gap: 16px;
-
     }
-
 
     .officer-detail-location-section {
-
         padding: 20px;
-
         margin: 0;
-
     }
-
 
     .officer-detail-section-heading h2 {
-
         font-size: 21px;
-
     }
-
 
     .officer-detail-timestamps {
-
         padding: 20px;
-
         margin: 0;
-
     }
-
 
     .officer-assignment-history-section {
-
         margin: 0 0 20px;
-
     }
-
 
     .officer-detail-action-card {
-
         padding: 20px;
-
         margin: 0;
-
     }
-
 
     .officer-detail-action-card h2 {
-
         font-size: 21px;
-
     }
-
 }
 
-
 /* =========================================================
-VERY SMALL MOBILE
+   VERY SMALL MOBILE
 ========================================================= */
 
 @media (max-width: 350px) {
-
     .officer-detail-heading h1 {
-
         font-size: 24px;
-
     }
-
 
     .officer-detail-description-section h2 {
-
         font-size: 20px;
-
     }
-
 
     .officer-detail-section-heading h2 {
-
         font-size: 20px;
-
     }
-
 
     .officer-detail-info-grid {
-
         padding: 18px;
-
     }
-
 
     .officer-detail-location-section {
-
         padding: 18px;
-
         margin: 0;
-
     }
-
 
     .officer-detail-timestamps {
-
         padding: 18px;
-
         margin: 0;
-
     }
-
 
     .officer-assignment-history-section {
-
         margin: 0;
-
     }
-
 
     .officer-detail-action-card {
-
         padding: 18px;
-
         margin: 0;
-
     }
 
+    .officer-detail-image-container {
+        width: 180px;
+        min-width: 180px;
+        height: 180px;
+        border-radius: 12px;
+    }
+
+    .officer-detail-complaint-image {
+        width: 180px;
+        min-width: 180px;
+        height: 180px;
+        border-radius: 12px;
+    }
+
+    .officer-detail-image-fallback svg {
+        width: 30px;
+        height: 30px;
+    }
 }

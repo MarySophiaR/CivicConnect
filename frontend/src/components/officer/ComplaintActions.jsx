@@ -26,15 +26,6 @@ function ComplaintActions({
   // CURRENT LEVEL / LOGGED-IN ROLE
   // =====================================================
 
-  /*
-   * IMPORTANT:
-   * The complaint's currentLevel tells us where the complaint
-   * currently is in the workflow.
-   *
-   * The logged-in user's role tells us who is viewing it.
-   *
-   * Therefore, MC detection MUST use user.role.
-   */
 
   const userRole = String(user?.role || "").trim();
 
@@ -65,14 +56,7 @@ function ComplaintActions({
     complaintLevel === "assistantExecutiveEngineer" ||
     assignedRole === "assistantExecutiveEngineer";
 
-  /*
-   * Only JE and AEE can manually escalate.
-   *
-   * JE  -> AEE
-   * AEE -> EE
-   * EE  -> NO
-   * MC  -> NO
-   */
+
   const canManuallyEscalate =
     (isJE || isAEE) && !isMC;
 

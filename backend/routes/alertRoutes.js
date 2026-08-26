@@ -10,7 +10,8 @@ const {
 
 const router = express.Router();
 
-const officerRoles = [
+const allNotificationRoles = [
+    "citizen",
     "juniorEngineer",
     "assistantExecutiveEngineer",
     "executiveEngineer",
@@ -18,18 +19,26 @@ const officerRoles = [
 ];
 
 
+// =========================================================
+// GET USER ALERTS
+// =========================================================
+
 router.get(
     "/",
     verifyToken,
-    authorizeRoles(...officerRoles),
+    authorizeRoles(...allNotificationRoles),
     getMyAlerts
 );
 
 
+// =========================================================
+// MARK ALERT AS READ
+// =========================================================
+
 router.patch(
     "/:id/read",
     verifyToken,
-    authorizeRoles(...officerRoles),
+    authorizeRoles(...allNotificationRoles),
     markAlertAsRead
 );
 

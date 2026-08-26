@@ -4,17 +4,20 @@ const verifyToken = require("../middleware/authMiddleware");
 const authorizeRoles = require("../middleware/authorizeRoles");
 
 const {
-    createOfficer
+    getAssignedComplaints
 } = require("../controllers/municipalCommissionerController");
 
 const router = express.Router();
 
-// Create Officer
-router.post(
-    "/create-officer",
+// ---------------------------------
+// Get Complaints
+// ---------------------------------
+
+router.get(
+    "/complaints",
     verifyToken,
     authorizeRoles("municipalCommissioner"),
-    createOfficer
+    getAssignedComplaints
 );
 
 module.exports = router;

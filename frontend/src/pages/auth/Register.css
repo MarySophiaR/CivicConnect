@@ -1,413 +1,376 @@
-.register-page{
-width:100%;
-height:100vh;
-background:#F8FAFC;
-
-display:flex;
-justify-content:center;
-align-items:center;
-
-padding:30px;
+.register-page {
+    width: 100%;
+    height: 100vh;
+    background: #F8FAFC;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
 }
 
-.register-card{
-
-width:950px;
-max-width:100%;
-
-background:white;
-
-border-radius:15px;
-
-overflow:hidden;
-
-display:flex;
-
-box-shadow:0 10px 30px rgba(0,0,0,0.08);
+.register-card {
+    width: 950px;
+    max-width: 100%;
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    display: flex;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
 }
 
-.register-left{
-
-flex:1;
-
-background:#0055A4;
-
-color:white;
-
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-
-padding:50px;
-
-text-align:center;
+.register-left {
+    flex: 1;
+    background: #0055A4;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+    text-align: center;
 }
 
-.logo-placeholder{
-
-width:120px;
-height:120px;
-
-border-radius:50%;
-
-background:white;
-
-color:#0055A4;
-
-display:flex;
-justify-content:center;
-align-items:center;
-
-font-weight:600;
-
-margin-bottom:22px;
+.logo-placeholder {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: white;
+    color: #0055A4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+    margin-bottom: 22px;
 }
 
-.register-logo{
-
-width:100px;
-height:100px;
-
-object-fit:contain;
-
-border-radius:6px;
-
-margin-bottom:14px;
+.register-logo {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    border-radius: 6px;
+    margin-bottom: 14px;
 }
 
-.register-left .brand-logo{
-
-color:white;
-
-margin-bottom:10px;
+.register-left .brand-logo {
+    color: white;
+    margin-bottom: 10px;
 }
 
-.register-left p{
-
-font-size:15px;
-
-line-height:1.5;
-
-margin-top:4px;
+.register-left p {
+    font-size: 15px;
+    line-height: 1.5;
+    margin-top: 4px;
 }
 
-.register-right{
-
-flex:1;
-
-padding:60px;
+.register-right {
+    flex: 1;
+    padding: 60px;
 }
 
-.register-right h2{
-
-font-size:32px;
-
-margin-bottom:8px;
+.register-right h2 {
+    font-size: 32px;
+    margin-bottom: 8px;
 }
 
-.subtitle{
-
-color:#6B7280;
-
-margin-bottom:35px;
-}
-
-.input-group{
-
-display:flex;
-
-flex-direction:column;
-
-margin-bottom:20px;
-}
-
-.input-group label{
-
-margin-bottom:8px;
-
-font-weight:500;
-}
-
-.input-group input{
-
-padding:14px;
-
-border:1px solid #D1D5DB;
-
-border-radius:10px;
-
-outline:none;
-
-font-size:15px;
-}
-
-.input-group input:focus{
-
-border-color:#0055A4;
+.subtitle {
+    color: #6B7280;
+    margin-bottom: 30px;
 }
 
 /* =========================================
-PASSWORD INPUT
+   CITIZEN / OFFICER SELECTOR
 ========================================= */
 
-.password-input-wrapper{
-
-position:relative;
-
-width:100%;
+.account-type-selector {
+    width: 100%;
+    display: flex;
+    background: #0055A4;
+    border-radius: 10px;
+    padding: 4px;
+    margin-bottom: 32px;
+    box-sizing: border-box;
 }
 
-.password-input-wrapper input{
-
-width:100%;
-
-padding-right:48px;
-
-box-sizing:border-box;
+.account-type-button {
+    flex: 1;
+    padding: 12px 15px;
+    background: transparent;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    margin: 0;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    width: 50%;
 }
 
-.password-toggle{
-
-position:absolute;
-
-right:12px;
-
-top:50%;
-
-transform:translateY(-50%);
-
-width:auto;
-
-padding:0;
-
-margin:0;
-
-background:transparent;
-
-color:#6B7280;
-
-border:none;
-
-display:flex;
-
-align-items:center;
-
-justify-content:center;
-
-cursor:pointer;
+.account-type-button:hover {
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
 }
 
-.password-toggle:hover{
-
-background:transparent;
-
-color:#6B7280;
+/* Selected option turns white background */
+.account-type-button.active {
+    background: white;
+    color: #0055A4;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
 }
 
-button{
-
-width:100%;
-
-padding:15px;
-
-background:#0055A4;
-
-color:white;
-
-border:none;
-
-border-radius:10px;
-
-font-size:16px;
-
-font-weight:600;
-
-margin-top:10px;
-
-transition:0.3s;
+.account-type-button.active:hover {
+    background: white;
+    color: #0055A4;
 }
 
-button:hover{
-
-background:#004080;
+.input-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
 }
 
-.login-link{
-
-margin-top:25px;
-
-text-align:center;
-
-color:#6B7280;
+.input-group label {
+    margin-bottom: 8px;
+    font-weight: 500;
 }
 
-.login-link a{
-
-color:#0055A4;
-
-font-weight:600;
-
-text-decoration:none;
+.input-group input {
+    padding: 14px;
+    border: 1px solid #D1D5DB;
+    border-radius: 10px;
+    outline: none;
+    font-size: 15px;
 }
 
-.login-link a:hover{
-
-opacity:0.85;
-}
-
-.brand-logo{
-color: white;
-font-weight: 600;
+.input-group input:focus {
+    border-color: #0055A4;
 }
 
 /* =========================================
-RESPONSIVE
+   PASSWORD INPUT
+========================================= */
+
+.password-input-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.password-input-wrapper input {
+    width: 100%;
+    padding-right: 48px;
+    box-sizing: border-box;
+}
+
+.password-toggle {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: auto;
+    padding: 0;
+    margin: 0;
+    background: transparent;
+    color: #6B7280;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.password-toggle:hover {
+    background: transparent;
+    color: #6B7280;
+}
+
+button {
+    width: 100%;
+    padding: 15px;
+    background: #0055A4;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 10px;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #004080;
+}
+
+.login-link {
+    margin-top: 25px;
+    text-align: center;
+    color: #6B7280;
+}
+
+.login-link a {
+    color: #0055A4;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.login-link a:hover {
+    opacity: 0.85;
+}
+
+.brand-logo {
+    color: white;
+    font-weight: 600;
+}
+
+/* =========================================
+   RESPONSIVE
 ========================================= */
 
 /* Tablets */
-@media (max-width: 800px){
+@media (max-width: 800px) {
+    .register-page {
+        height: auto;
+        min-height: 100vh;
+        padding: 25px 18px;
+    }
 
-.register-page{
-    height:auto;
-    min-height:100vh;
-    padding:25px 18px;
-}
+    .register-card {
+        width: 100%;
+        max-width: 600px;
+        flex-direction: column;
+    }
 
-.register-card{
-    width:100%;
-    max-width:600px;
-    flex-direction:column;
-}
+    .register-left {
+        padding: 35px 25px;
+    }
 
-.register-left{
-    padding:35px 25px;
-}
+    .logo-placeholder {
+        width: 100px;
+        height: 100px;
+        margin-bottom: 18px;
+    }
 
-.logo-placeholder{
-    width:100px;
-    height:100px;
-    margin-bottom:18px;
-}
+    .register-logo {
+        width: 85px;
+        height: 85px;
+        margin-bottom: 12px;
+    }
 
-.register-logo{
-    width:85px;
-    height:85px;
-    margin-bottom:12px;
-}
+    .register-left .brand-logo {
+        font-size: 30px;
+    }
 
-.register-left .brand-logo{
-    font-size:30px;
-}
+    .register-left p {
+        font-size: 14px;
+    }
 
-.register-left p{
-    font-size:14px;
-}
+    .register-right {
+        padding: 40px 35px;
+    }
 
-.register-right{
-    padding:40px 35px;
-}
-
-.register-right h2{
-    font-size:28px;
-}
-
+    .register-right h2 {
+        font-size: 28px;
+    }
 }
 
 /* Mobile */
-@media (max-width: 500px){
+@media (max-width: 500px) {
+    .register-page {
+        padding: 18px 12px;
+    }
 
-.register-page{
-    padding:18px 12px;
-}
+    .register-card {
+        border-radius: 12px;
+    }
 
-.register-card{
-    border-radius:12px;
-}
+    .register-left {
+        padding: 30px 20px;
+    }
 
-.register-left{
-    padding:30px 20px;
-}
+    .logo-placeholder {
+        width: 85px;
+        height: 85px;
+        margin-bottom: 15px;
+    }
 
-.logo-placeholder{
-    width:85px;
-    height:85px;
-    margin-bottom:15px;
-}
+    .register-logo {
+        width: 72px;
+        height: 72px;
+    }
 
-.register-logo{
-    width:72px;
-    height:72px;
-}
+    .register-left .brand-logo {
+        font-size: 28px;
+    }
 
-.register-left .brand-logo{
-    font-size:28px;
-}
+    .register-left p {
+        font-size: 13px;
+        line-height: 1.5;
+    }
 
-.register-left p{
-    font-size:13px;
-    line-height:1.5;
-}
+    .register-right {
+        padding: 30px 22px;
+    }
 
-.register-right{
-    padding:30px 22px;
-}
+    .register-right h2 {
+        font-size: 25px;
+    }
 
-.register-right h2{
-    font-size:25px;
-}
+    .subtitle {
+        font-size: 14px;
+        margin-bottom: 24px;
+    }
 
-.subtitle{
-    font-size:14px;
-    margin-bottom:28px;
-}
+    .account-type-selector {
+        margin-bottom: 28px;
+    }
 
-.input-group{
-    margin-bottom:18px;
-}
+    .input-group {
+        margin-bottom: 18px;
+    }
 
-.input-group label{
-    font-size:14px;
-}
+    .input-group label {
+        font-size: 14px;
+    }
 
-.input-group input{
-    padding:13px;
-    font-size:14px;
-}
+    .input-group input {
+        padding: 13px;
+        font-size: 14px;
+    }
 
-button{
-    padding:14px;
-    font-size:15px;
-}
+    button {
+        padding: 14px;
+        font-size: 15px;
+    }
 
-.login-link{
-    margin-top:20px;
-    font-size:14px;
-}
+    .account-type-button {
+        padding: 11px 10px;
+        font-size: 14px;
+    }
 
+    .login-link {
+        margin-top: 20px;
+        font-size: 14px;
+    }
 }
 
 /* Very small screens */
-@media (max-width: 350px){
+@media (max-width: 350px) {
+    .register-page {
+        padding: 12px 8px;
+    }
 
-.register-page{
-    padding:12px 8px;
-}
+    .register-left {
+        padding: 25px 15px;
+    }
 
-.register-left{
-    padding:25px 15px;
-}
+    .register-right {
+        padding: 25px 16px;
+    }
 
-.register-right{
-    padding:25px 16px;
-}
+    .register-right h2 {
+        font-size: 23px;
+    }
 
-.register-right h2{
-    font-size:23px;
-}
-
-.register-left .brand-logo{
-    font-size:26px;
-}
-
+    .register-left .brand-logo {
+        font-size: 26px;
+    }
 }

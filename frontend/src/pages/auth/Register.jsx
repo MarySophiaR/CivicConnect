@@ -7,36 +7,67 @@ import { Eye, EyeOff } from "lucide-react";
 import logo from "../../assets/logo.png";
 
 function Register() {
-
     const navigate = useNavigate();
+
+    const [accountType, setAccountType] = useState("citizen");
 
     const [formData, setFormData] = useState({
         name: "",
         email: "",
+        employeeId: "",
         password: ""
     });
 
     const [showPassword, setShowPassword] = useState(false);
 
     const handleChange = (e) => {
-
         setFormData({
             ...formData,
             [e.target.name]: e.target.value
         });
+    };
 
+    const handleAccountTypeChange = (type) => {
+        setAccountType(type);
+
+        setFormData({
+            name: "",
+            email: "",
+            employeeId: "",
+            password: ""
+        });
+
+        setShowPassword(false);
     };
 
     const handleSubmit = async (e) => {
-
         e.preventDefault();
 
         try {
+            const registerData =
+                accountType === "citizen"
+                    ? {
+                          name: formData.name,
+                          email: formData.email,
+                          password: formData.password
+                      }
+                    : {
+                          name: formData.name,
+                          email: formData.email,
+                          employeeId: formData.employeeId,
+                          password: formData.password
+                      };
 
-            const response = await API.post("/auth/register", formData);
+            const response = await API.post(
+                "/auth/register",
+                registerData
+            );
 
             // Store Token
-            localStorage.setItem("token", response.data.token);
+            localStorage.setItem(
+                "token",
+                response.data.token
+            );
 
             // Store User
             localStorage.setItem(
@@ -47,11 +78,9 @@ function Register() {
             toast.success(response.data.message);
 
             setTimeout(() => {
-
                 const role = response.data.user.role;
 
                 switch (role) {
-
                     case "citizen":
                         navigate("/citizen/dashboard");
                         break;
@@ -78,30 +107,21 @@ function Register() {
 
                     default:
                         navigate("/");
-
                 }
-
             }, 1000);
-
         } catch (error) {
-
             toast.error(
-                error.response?.data?.message || "Registration Failed"
+                error.response?.data?.message ||
+                "Registration Failed"
             );
-
         }
-
     };
 
     return (
         <div className="register-page">
-
             <div className="register-card">
-
                 {/* Left Section */}
-
                 <div className="register-left">
-
                     <img
                         src={logo}
                         alt="CivicConnect Logo"
@@ -109,23 +129,18 @@ function Register() {
                     />
 
                     <h1 className="brand-logo">
-
                         <span className="brand-initial">
                             CivicConnect
                         </span>
-
                     </h1>
 
                     <p>
                         Smart Civic Issue Reporting Portal
                     </p>
-
                 </div>
 
                 {/* Right Section */}
-
                 <div className="register-right">
-
                     <h2>Create Your Account</h2>
 
                     <p className="subtitle">
@@ -133,12 +148,41 @@ function Register() {
                         community.
                     </p>
 
+                    {/* Citizen / Officer Selection */}
+                    <div className="account-type-selector">
+                        <button
+                            type="button"
+                            className={
+                                accountType === "citizen"
+                                    ? "account-type-button active"
+                                    : "account-type-button"
+                            }
+                            onClick={() =>
+                                handleAccountTypeChange("citizen")
+                            }
+                        >
+                            Citizen
+                        </button>
+
+                        <button
+                            type="button"
+                            className={
+                                accountType === "officer"
+                                    ? "account-type-button active"
+                                    : "account-type-button"
+                            }
+                            onClick={() =>
+                                handleAccountTypeChange("officer")
+                            }
+                        >
+                            Officer
+                        </button>
+                    </div>
+
                     <form onSubmit={handleSubmit}>
-
+                        {/* Full Name */}
                         <div className="input-group">
-
                             <label>Full Name</label>
-
                             <input
                                 type="text"
                                 name="name"
@@ -147,13 +191,26 @@ function Register() {
                                 onChange={handleChange}
                                 required
                             />
-
                         </div>
 
+                        {/* Officer Employee ID */}
+                        {accountType === "officer" && (
+                            <div className="input-group">
+                                <label>Employee ID</label>
+                                <input
+                                    type="text"
+                                    name="employeeId"
+                                    placeholder="Enter your employee ID"
+                                    value={formData.employeeId}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </div>
+                        )}
+
+                        {/* Email */}
                         <div className="input-group">
-
                             <label>Email</label>
-
                             <input
                                 type="email"
                                 name="email"
@@ -162,17 +219,18 @@ function Register() {
                                 onChange={handleChange}
                                 required
                             />
-
                         </div>
 
+                        {/* Password */}
                         <div className="input-group">
-
                             <label>Password</label>
-
                             <div className="password-input-wrapper">
-
                                 <input
-                                    type={showPassword ? "text" : "password"}
+                                    type={
+                                        showPassword
+                                            ? "text"
+                                            : "password"
+                                    }
                                     name="password"
                                     placeholder="Create a password"
                                     value={formData.password}
@@ -188,36 +246,32 @@ function Register() {
                                     }
                                     aria-label={
                                         showPassword
-                                            ? "Hide password"
-                                            : "Show password"
+                                            ? "Show password"
+                                            : "Hide password"
                                     }
                                 >
                                     {showPassword ? (
-                                        <Eye size={20} />
-                                    ) : (
                                         <EyeOff size={20} />
+                                    ) : (
+                                        <Eye size={20} />
                                     )}
                                 </button>
-
                             </div>
-
                         </div>
 
                         <button type="submit">
-                            Create Account
+                            {accountType === "citizen"
+                                ? "Create Account"
+                                : "Register as Officer"}
                         </button>
-
                     </form>
 
                     <p className="login-link">
                         Already a CivicConnect member?
                         <Link to="/"> Sign In</Link>
                     </p>
-
                 </div>
-
             </div>
-
         </div>
     );
 }

@@ -25,18 +25,12 @@
 
 .main-content {
     margin-left: 260px;
-    margin-top: 75px;
-
+    margin-top: 58px;
     width: calc(100% - 260px);
-
-    min-height: calc(100vh - 75px);
-
-    padding: 6px 30px 30px;
-
+    min-height: calc(100vh - 58px);
+    padding: 30px; 
     background: #F8FAFC;
-
     overflow-x: hidden;
-
     box-sizing: border-box;
 }
 

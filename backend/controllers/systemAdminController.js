@@ -1,116 +1,72 @@
-const bcrypt = require("bcryptjs");
 const User = require("../models/User");
 
-// ---------------------------------
-// Create Officer
-// ---------------------------------
-const createOfficer = async (req, res) => {
 
-    try {
+// =========================================================
+// OFFICER ROLES
+// =========================================================
 
-        const {
-            name,
-            email,
-            password,
-            role
-        } = req.body;
+const officerRoles = [
+    "juniorEngineer",
+    "assistantExecutiveEngineer",
+    "executiveEngineer",
+    "municipalCommissioner"
+];
 
-        // -------------------------
-        // Validate Role
-        // -------------------------
-        const allowedRoles = [
-            "juniorEngineer",
-            "assistantExecutiveEngineer",
-            "executiveEngineer",
-            "municipalCommissioner"
-        ];
 
-        if (!allowedRoles.includes(role)) {
-            return res.status(400).json({
-                message: "Invalid officer role."
-            });
-        }
+// =========================================================
+// GET ALL OFFICERS
+// =========================================================
 
-        // -------------------------
-        // Check Existing Email
-        // -------------------------
-        const existingUser = await User.findOne({
-            email
-        });
-
-        if (existingUser) {
-            return res.status(400).json({
-                message: "Email already registered."
-            });
-        }
-
-        // -------------------------
-        // Hash Password
-        // -------------------------
-        const hashedPassword = await bcrypt.hash(password, 10);
-
-        // -------------------------
-        // Create Officer
-        // -------------------------
-        const officer = await User.create({
-            name,
-            email,
-            password: hashedPassword,
-            role
-        });
-
-        return res.status(201).json({
-
-            message: "Officer created successfully.",
-
-            officer: {
-                id: officer._id,
-                name: officer.name,
-                email: officer.email,
-                role: officer.role
-            }
-
-        });
-
-    } catch (error) {
-
-        console.error(error);
-
-        return res.status(500).json({
-            message: "Server Error"
-        });
-
-    }
-
-};
-
-// ---------------------------------
-// Get All Officers
-// ---------------------------------
 const getAllOfficers = async (req, res) => {
 
     try {
 
-        const officers = await User.find({
+        const officers =
+            await User.find({
 
-            role: {
-                $in: [
-                    "juniorEngineer",
-                    "assistantExecutiveEngineer",
-                    "executiveEngineer",
-                    "municipalCommissioner"
-                ]
-            }
+                role: {
+                    $in: officerRoles
+                }
 
-        })
-        .select("-password")
-        .sort({
-            createdAt: -1
-        });
+            })
+            .select("-password")
+            .sort({
+                createdAt: -1
+            });
+
+
+        // =====================================================
+        // ACTIVE OFFICERS
+        // =====================================================
+
+        const activeOfficers =
+            officers.filter(
+                (officer) =>
+                    officer.isActive !== false
+            ).length;
+
+
+        // =====================================================
+        // INACTIVE OFFICERS
+        // =====================================================
+
+        const inactiveOfficers =
+            officers.length -
+            activeOfficers;
+
+
+        // =====================================================
+        // RESPONSE
+        // =====================================================
 
         return res.status(200).json({
 
-            totalOfficers: officers.length,
+            totalOfficers:
+                officers.length,
+
+            activeOfficers,
+
+            inactiveOfficers,
 
             officers
 
@@ -118,7 +74,10 @@ const getAllOfficers = async (req, res) => {
 
     } catch (error) {
 
-        console.error(error);
+        console.error(
+            "Get All Officers Error:",
+            error
+        );
 
         return res.status(500).json({
             message: "Server Error"
@@ -128,60 +87,152 @@ const getAllOfficers = async (req, res) => {
 
 };
 
-// ---------------------------------
-// Get Officer Counts
-// ---------------------------------
+
+// =========================================================
+// GET OFFICER COUNTS
+// =========================================================
+
 const getOfficerCounts = async (req, res) => {
 
     try {
 
-        const officerCounts = await User.aggregate([
+        // =====================================================
+        // GET ALL OFFICERS
+        // =====================================================
 
-            {
-                $match: {
-                    role: {
-                        $in: [
-                            "juniorEngineer",
-                            "assistantExecutiveEngineer",
-                            "executiveEngineer",
-                            "municipalCommissioner"
-                        ]
-                    }
+        const officers =
+            await User.find({
+
+                role: {
+                    $in: officerRoles
                 }
-            },
 
-            {
-                $group: {
-                    _id: "$role",
-                    count: {
-                        $sum: 1
-                    }
-                }
-            }
+            })
+            .select("role isActive");
 
-        ]);
+
+        // =====================================================
+        // DEFAULT COUNTS
+        // =====================================================
 
         const result = {
+
+            // -----------------------------
+            // OVERALL COUNTS
+            // -----------------------------
+
             totalOfficers: 0,
+
+            activeOfficers: 0,
+
+            inactiveOfficers: 0,
+
+
+            // -----------------------------
+            // ROLE COUNTS
+            // -----------------------------
+
             juniorEngineer: 0,
+
             assistantExecutiveEngineer: 0,
+
             executiveEngineer: 0,
+
             municipalCommissioner: 0
+
         };
 
-        officerCounts.forEach((officer) => {
 
-            result[officer._id] = officer.count;
+        // =====================================================
+        // CALCULATE COUNTS
+        // =====================================================
 
-            result.totalOfficers += officer.count;
+        officers.forEach((officer) => {
+
+            // -------------------------------------------------
+            // TOTAL
+            // -------------------------------------------------
+
+            result.totalOfficers++;
+
+
+            // -------------------------------------------------
+            // ROLE
+            // -------------------------------------------------
+
+            if (
+                officer.role ===
+                "juniorEngineer"
+            ) {
+
+                result.juniorEngineer++;
+
+            }
+
+
+            else if (
+                officer.role ===
+                "assistantExecutiveEngineer"
+            ) {
+
+                result.assistantExecutiveEngineer++;
+
+            }
+
+
+            else if (
+                officer.role ===
+                "executiveEngineer"
+            ) {
+
+                result.executiveEngineer++;
+
+            }
+
+
+            else if (
+                officer.role ===
+                "municipalCommissioner"
+            ) {
+
+                result.municipalCommissioner++;
+
+            }
+
+
+            // -------------------------------------------------
+            // STATUS
+            // -------------------------------------------------
+
+            if (
+                officer.isActive !== false
+            ) {
+
+                result.activeOfficers++;
+
+            }
+
+            else {
+
+                result.inactiveOfficers++;
+
+            }
 
         });
+
+
+        // =====================================================
+        // RESPONSE
+        // =====================================================
 
         return res.status(200).json(result);
 
     } catch (error) {
 
-        console.error(error);
+        console.error(
+            "Get Officer Counts Error:",
+            error
+        );
 
         return res.status(500).json({
             message: "Server Error"
@@ -191,8 +242,288 @@ const getOfficerCounts = async (req, res) => {
 
 };
 
+
+// =========================================================
+// DEACTIVATE OFFICER
+// =========================================================
+
+const deactivateOfficer = async (
+    req,
+    res
+) => {
+
+    try {
+
+        const { id } =
+            req.params;
+
+
+        // =====================================================
+        // FIND OFFICER
+        // =====================================================
+
+        const officer =
+            await User.findOne({
+
+                _id: id,
+
+                role: {
+                    $in: officerRoles
+                }
+
+            });
+
+
+        if (!officer) {
+
+            return res.status(404).json({
+
+                message:
+                    "Officer not found."
+
+            });
+
+        }
+
+
+        // =====================================================
+        // CHECK ALREADY INACTIVE
+        // =====================================================
+
+        if (
+            officer.isActive === false
+        ) {
+
+            return res.status(400).json({
+
+                message:
+                    "Officer account is already deactivated."
+
+            });
+
+        }
+
+
+        // =====================================================
+        // CHECK MINIMUM ACTIVE OFFICER CONSTRAINT
+        // =====================================================
+        // Ensure at least 1 active officer remains per role per ward & municipality
+        if (Array.isArray(officer.municipalities) && Array.isArray(officer.wardNumbers)) {
+            for (const municipality of officer.municipalities) {
+                for (const wardNumber of officer.wardNumbers) {
+                    const activePeerCount = await User.countDocuments({
+                        _id: { $ne: officer._id }, // Exclude the officer being deactivated
+                        role: officer.role,
+                        isActive: true,
+                        municipalities: municipality,
+                        wardNumbers: wardNumber,
+                    });
+
+                    if (activePeerCount === 0) {
+                        return res.status(400).json({
+                            message: `Cannot deactivate this officer. At least one active ${officer.role} must remain assigned to Ward ${wardNumber} in ${municipality}.`
+                        });
+                    }
+                }
+            }
+        }
+
+
+        // =====================================================
+        // DEACTIVATE
+        // =====================================================
+
+        officer.isActive = false;
+
+        await officer.save();
+
+
+        // =====================================================
+        // RESPONSE
+        // =====================================================
+
+        return res.status(200).json({
+
+            message:
+                "Officer account deactivated successfully.",
+
+            officer: {
+
+                _id:
+                    officer._id,
+
+                id:
+                    officer._id,
+
+                name:
+                    officer.name,
+
+                email:
+                    officer.email,
+
+                role:
+                    officer.role,
+
+                isActive:
+                    officer.isActive
+
+            }
+
+        });
+
+    } catch (error) {
+
+        console.error(
+            "Deactivate Officer Error:",
+            error
+        );
+
+        return res.status(500).json({
+
+            message:
+                "Server Error"
+
+        });
+
+    }
+
+};
+
+
+// =========================================================
+// ACTIVATE OFFICER
+// =========================================================
+
+const activateOfficer = async (
+    req,
+    res
+) => {
+
+    try {
+
+        const { id } =
+            req.params;
+
+
+        // =====================================================
+        // FIND OFFICER
+        // =====================================================
+
+        const officer =
+            await User.findOne({
+
+                _id: id,
+
+                role: {
+                    $in: officerRoles
+                }
+
+            });
+
+
+        if (!officer) {
+
+            return res.status(404).json({
+
+                message:
+                    "Officer not found."
+
+            });
+
+        }
+
+
+        // =====================================================
+        // CHECK ALREADY ACTIVE
+        // =====================================================
+
+        if (
+            officer.isActive === true
+        ) {
+
+            return res.status(400).json({
+
+                message:
+                    "Officer account is already active."
+
+            });
+
+        }
+
+
+        // =====================================================
+        // ACTIVATE
+        // =====================================================
+
+        officer.isActive = true;
+
+        await officer.save();
+
+
+        // =====================================================
+        // RESPONSE
+        // =====================================================
+
+        return res.status(200).json({
+
+            message:
+                "Officer account activated successfully.",
+
+            officer: {
+
+                _id:
+                    officer._id,
+
+                id:
+                    officer._id,
+
+                name:
+                    officer.name,
+
+                email:
+                    officer.email,
+
+                role:
+                    officer.role,
+
+                isActive:
+                    officer.isActive
+
+            }
+
+        });
+
+    } catch (error) {
+
+        console.error(
+            "Activate Officer Error:",
+            error
+        );
+
+        return res.status(500).json({
+
+            message:
+                "Server Error"
+
+        });
+
+    }
+
+};
+
+
+// =========================================================
+// EXPORT
+// =========================================================
+
 module.exports = {
-    createOfficer,
+
     getAllOfficers,
-    getOfficerCounts
+
+    getOfficerCounts,
+
+    deactivateOfficer,
+
+    activateOfficer
+
 };

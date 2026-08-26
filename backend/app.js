@@ -9,6 +9,11 @@ require("dotenv").config();
 
 const connectDB = require("./config/db");
 
+const {
+  connectEmployeeDB
+} = require("./config/employeeDB");
+
+
 /* =========================================================
    ROUTES
 ========================================================= */
@@ -42,6 +47,7 @@ const systemAdminRoutes = require(
 
 const alertRoutes =
   require("./routes/alertRoutes");
+
 
 /* =========================================================
    JOBS
@@ -141,10 +147,46 @@ app.use((req, res, next) => {
 
 
 /* =========================================================
-   CONNECT DATABASE
+   CONNECT DATABASES
 ========================================================= */
 
-connectDB();
+const startDatabaseConnections = async () => {
+
+  try {
+
+    /* -----------------------------------------
+       MAIN DATABASE
+    ----------------------------------------- */
+
+    await connectDB();
+
+
+    /* -----------------------------------------
+       GOVERNMENT EMPLOYEE DATABASE
+    ----------------------------------------- */
+
+    await connectEmployeeDB();
+
+
+    console.log(
+      "All databases connected successfully."
+    );
+
+  } catch (error) {
+
+    console.error(
+      "Database startup failed."
+    );
+
+    console.error(
+      error.message
+    );
+
+    process.exit(1);
+
+  }
+
+};
 
 
 /* =========================================================
@@ -241,7 +283,6 @@ app.use(
 
 /* ---------------------------------------------------------
    COMPLAINTS
-
 --------------------------------------------------------- */
 
 app.use(
@@ -299,6 +340,7 @@ app.use(
   municipalCommissionerRoutes
 );
 
+
 /* ---------------------------------------------------------
    ALERTS
 --------------------------------------------------------- */
@@ -307,6 +349,7 @@ app.use(
   "/api/alerts",
   alertRoutes
 );
+
 
 /* ---------------------------------------------------------
    DASHBOARD
@@ -341,7 +384,6 @@ app.get(
 
 app.use(
   (req, res) => {
-
 
     res.status(404).json({
 
@@ -392,25 +434,53 @@ app.use(
 
 
 /* =========================================================
-   SERVER
+   SERVER START
 ========================================================= */
 
 const PORT =
   process.env.PORT || 5001;
 
-app.listen(
-  PORT,
-  () => {
 
-    console.log(
-      `Server running on http://localhost:${PORT}`
-    );
+const startServer = async () => {
 
-    /* -------------------------------------------------------
-       START SLA ESCALATION JOB
-    ------------------------------------------------------- */
+  await startDatabaseConnections();
 
-    escalationJob();
 
-  }
-);
+  app.listen(
+    PORT,
+    () => {
+
+      console.log(
+        `Server running on http://localhost:${PORT}`
+      );
+
+
+      /* -------------------------------------------------------
+         START SLA ESCALATION JOB
+      ------------------------------------------------------- */
+
+      escalationJob();
+
+    }
+  );
+
+};
+
+
+/* =========================================================
+   START APPLICATION
+========================================================= */
+
+startServer().catch((error) => {
+
+  console.error(
+    "Server startup failed:"
+  );
+
+  console.error(
+    error.message
+  );
+
+  process.exit(1);
+
+});

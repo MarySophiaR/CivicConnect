@@ -10,8 +10,11 @@ function Login() {
 
     const navigate = useNavigate();
 
+    const [accountType, setAccountType] = useState("citizen");
+
     const [formData, setFormData] = useState({
         email: "",
+        employeeId: "",
         password: ""
     });
 
@@ -26,15 +29,41 @@ function Login() {
 
     };
 
+    const handleAccountTypeChange = (type) => {
+
+        setAccountType(type);
+
+        setFormData({
+            email: "",
+            employeeId: "",
+            password: ""
+        });
+
+        setShowPassword(false);
+    };
+
     const handleSubmit = async (e) => {
 
         e.preventDefault();
 
         try {
 
+            const loginData =
+              accountType === "citizen"
+                ? {
+                    accountType: "citizen",
+                    email: formData.email,
+                    password: formData.password,
+                  }
+                : {
+                    accountType: "officer",
+                    employeeId: formData.employeeId,
+                    password: formData.password,
+                  };
+
             const response = await API.post(
                 "/auth/login",
-                formData
+                loginData
             );
 
             localStorage.setItem(
@@ -132,22 +161,85 @@ function Login() {
                         Sign in to CivicConnect and continue reporting civic issues.
                     </p>
 
+                    {/* Citizen / Officer Selection */}
+
+                    <div className="account-type-selector">
+
+                        <button
+                            type="button"
+                            className={
+                                accountType === "citizen"
+                                    ? "account-type-button active"
+                                    : "account-type-button"
+                            }
+                            onClick={() =>
+                                handleAccountTypeChange("citizen")
+                            }
+                        >
+                            Citizen
+                        </button>
+
+                        <button
+                            type="button"
+                            className={
+                                accountType === "officer"
+                                    ? "account-type-button active"
+                                    : "account-type-button"
+                            }
+                            onClick={() =>
+                                handleAccountTypeChange("officer")
+                            }
+                        >
+                            Officer
+                        </button>
+
+                    </div>
+
                     <form onSubmit={handleSubmit}>
 
-                        <div className="input-group">
+                        {/* Citizen Email */}
 
-                            <label>Email</label>
+                        {accountType === "citizen" && (
 
-                            <input
-                                type="email"
-                                name="email"
-                                placeholder="Enter your email"
-                                value={formData.email}
-                                onChange={handleChange}
-                                required
-                            />
+                            <div className="input-group">
 
-                        </div>
+                                <label>Email</label>
+
+                                <input
+                                    type="email"
+                                    name="email"
+                                    placeholder="Enter your email"
+                                    value={formData.email}
+                                    onChange={handleChange}
+                                    required
+                                />
+
+                            </div>
+
+                        )}
+
+                        {/* Officer Employee ID */}
+
+                        {accountType === "officer" && (
+
+                            <div className="input-group">
+
+                                <label>Employee ID</label>
+
+                                <input
+                                    type="text"
+                                    name="employeeId"
+                                    placeholder="Enter your employee ID"
+                                    value={formData.employeeId}
+                                    onChange={handleChange}
+                                    required
+                                />
+
+                            </div>
+
+                        )}
+
+                        {/* Password */}
 
                         <div className="input-group">
 
@@ -156,7 +248,11 @@ function Login() {
                             <div className="password-input-wrapper">
 
                                 <input
-                                    type={showPassword ? "text" : "password"}
+                                    type={
+                                        showPassword
+                                            ? "text"
+                                            : "password"
+                                    }
                                     name="password"
                                     placeholder="Enter your password"
                                     value={formData.password}
@@ -172,15 +268,17 @@ function Login() {
                                     }
                                     aria-label={
                                         showPassword
-                                            ? "Hide password"
-                                            : "Show password"
+                                            ? "Show password"
+                                            : "Hide password"
                                     }
                                 >
+
                                     {showPassword ? (
-                                        <Eye size={20} />
-                                    ) : (
                                         <EyeOff size={20} />
+                                    ) : (
+                                        <Eye size={20} />
                                     )}
+
                                 </button>
 
                             </div>
@@ -188,14 +286,23 @@ function Login() {
                         </div>
 
                         <button type="submit">
-                            Login to CivicConnect
+
+                            {accountType === "citizen"
+                                ? "Login to CivicConnect"
+                                : "Login as Officer"}
+
                         </button>
 
                     </form>
 
                     <p className="register-link">
+
                         New to CivicConnect?
-                        <Link to="/register"> Create an Account</Link>
+
+                        <Link to="/register">
+                            {" "}Create an Account
+                        </Link>
+
                     </p>
 
                 </div>

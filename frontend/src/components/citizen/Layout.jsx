@@ -6,7 +6,7 @@ import Sidebar from "./Sidebar";
 
 import { LogOut } from "lucide-react";
 
-import "../styles/layout.css";
+import "../../styles/layout.css";
 
 
 function Layout({ children }) {
@@ -17,7 +17,7 @@ function Layout({ children }) {
 
 
     /* =========================================
-       LOGOUT MODAL STATE
+        LOGOUT MODAL STATE
     ========================================= */
 
     const [showLogoutModal, setShowLogoutModal] =
@@ -25,7 +25,7 @@ function Layout({ children }) {
 
 
     /* =========================================
-       CONFIRM LOGOUT
+        CONFIRM LOGOUT
     ========================================= */
 
     const handleLogout = () => {
@@ -42,10 +42,10 @@ function Layout({ children }) {
 
 
     /* =========================================
-       DASHBOARD CHECK
-       
-       Mobile profile should appear ONLY
-       on the citizen dashboard.
+        DASHBOARD CHECK
+        
+        Mobile profile should appear ONLY
+        on the citizen dashboard.
     ========================================= */
 
     const isDashboard =
@@ -90,13 +90,12 @@ function Layout({ children }) {
 
                 <main className="main-content">
 
+                    {/* Renders the current page component passed as children */}
                     {children}
 
 
                     {/* =================================
                         MOBILE DASHBOARD PROFILE
-
-                        ONLY on citizen dashboard.
                     ================================= */}
 
                     {isDashboard && (
@@ -122,13 +121,6 @@ function Layout({ children }) {
 
             {/* =========================================
                 MAIN LOGOUT CONFIRMATION MODAL
-
-                This is the ONLY logout confirmation
-                modal in the citizen layout.
-
-                Works for:
-                - Desktop profile
-                - Mobile dashboard profile
             ========================================= */}
 
             {showLogoutModal && (

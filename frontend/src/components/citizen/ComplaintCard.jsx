@@ -1,4 +1,4 @@
-import "./ComplaintCard.css";
+import "../../styles/ComplaintCard.css";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 import {

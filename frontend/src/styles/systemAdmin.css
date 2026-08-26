@@ -1,0 +1,1824 @@
+/* =========================================================
+   SYSTEM ADMINISTRATOR DASHBOARD
+========================================================= */
+
+
+/* =========================================================
+   MAIN DASHBOARD PAGE
+========================================================= */
+
+.system-admin-page {
+    width: 100%;
+    max-width: 100%;
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+    color: #1F2937;
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* =========================================================
+   DASHBOARD HEADER
+========================================================= */
+
+.system-admin-dashboard-header {
+    width: 100%;
+    margin: 0 0 40px; /* Aligned with standard layout spacing */
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   DASHBOARD HEADER CONTENT
+========================================================= */
+
+.system-admin-dashboard-header-content {
+    width: 100%;
+    max-width: 100%;
+    margin-top : 4px;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   DASHBOARD TITLE
+========================================================= */
+
+.system-admin-dashboard-header-content h1 {
+    margin: 0 0 8px;
+    color: #0055A4;
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: -0.5px;
+    word-break: normal;
+}
+
+
+/* =========================================================
+   MUNICIPALITY NAME
+========================================================= */
+
+.system-admin-dashboard-header-content h2 {
+    margin: 0 0 10px;
+    color: #374151;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1.3;
+    letter-spacing: -0.2px;
+    word-break: normal;
+}
+
+
+/* =========================================================
+   DASHBOARD DESCRIPTION
+========================================================= */
+
+.system-admin-dashboard-header-content p {
+    max-width: 720px;
+    margin: 0;
+    color: #6B7280;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.7;
+    word-break: normal;
+}
+
+
+/* =========================================================
+   DASHBOARD STATISTICS
+========================================================= */
+
+.system-admin-statistics {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   TABLET / SMALL DESKTOP
+   1100px
+========================================================= */
+
+@media (max-width: 1100px) {
+    .system-admin-dashboard-header {
+        margin-bottom: 35px;
+    }
+
+    .system-admin-dashboard-header-content h1 {
+        font-size: 30px;
+    }
+
+    .system-admin-dashboard-header-content h2 {
+        font-size: 19px;
+    }
+
+    .system-admin-dashboard-header-content p {
+        font-size: 15px;
+    }
+}
+
+
+/* =========================================================
+   TABLET
+   900px
+========================================================= */
+
+@media (max-width: 900px) {
+    .system-admin-dashboard-header {
+        margin-bottom: 30px;
+    }
+
+    .system-admin-dashboard-header-content h1 {
+        font-size: 28px;
+        letter-spacing: -0.4px;
+    }
+
+    .system-admin-dashboard-header-content h2 {
+        font-size: 18px;
+        letter-spacing: -0.2px;
+    }
+
+    .system-admin-dashboard-header-content p {
+        max-width: 100%;
+        font-size: 14px;
+        line-height: 1.65;
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+   700px
+========================================================= */
+
+@media (max-width: 700px) {
+    .system-admin-page {
+        width: 100%;
+        overflow-x: hidden;
+    }
+
+    .system-admin-dashboard-header {
+        width: 100%;
+        margin-bottom: 24px;
+    }
+
+    .system-admin-dashboard-header-content {
+        width: 100%;
+    }
+
+    .system-admin-dashboard-header-content h1 {
+        margin-bottom: 6px;
+        font-size: 26px;
+        line-height: 1.25;
+        letter-spacing: -0.3px;
+    }
+
+    .system-admin-dashboard-header-content h2 {
+        margin-bottom: 6px;
+        font-size: 17px;
+        line-height: 1.3;
+    }
+
+    .system-admin-dashboard-header-content p {
+        font-size: 13px;
+        line-height: 1.6;
+    }
+
+    .system-admin-statistics {
+        width: 100%;
+    }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   450px
+========================================================= */
+
+@media (max-width: 450px) {
+    .system-admin-dashboard-header {
+        margin-bottom: 20px;
+    }
+
+    .system-admin-dashboard-header-content h1 {
+        font-size: 24px;
+    }
+
+    .system-admin-dashboard-header-content h2 {
+        font-size: 16px;
+    }
+
+    .system-admin-dashboard-header-content p {
+        font-size: 13px;
+    }
+}
+
+
+/* =========================================================
+   VERY SMALL MOBILE
+   350px
+========================================================= */
+
+@media (max-width: 350px) {
+    .system-admin-dashboard-header {
+        margin-bottom: 18px;
+    }
+
+    .system-admin-dashboard-header-content h1 {
+        font-size: 21px;
+        letter-spacing: -0.2px;
+    }
+
+    .system-admin-dashboard-header-content h2 {
+        font-size: 15px;
+    }
+
+    .system-admin-dashboard-header-content p {
+        font-size: 12px;
+    }
+}
+
+
+
+/* =========================================================
+   CIVICCONNECT
+   SYSTEM ADMIN — OFFICERS PAGE
+========================================================= */
+
+
+/* =========================================================
+   SYSTEM ADMIN PAGE
+========================================================= */
+
+.system-admin-page {
+
+    width: 100%;
+    max-width: 100%;
+
+    min-width: 0;
+    min-height: 100vh;
+
+    margin: 0;
+    padding: 28px 30px 40px;
+
+    background: #F8FAFC;
+
+    color: #1F2937;
+
+    box-sizing: border-box;
+
+    overflow-x: hidden;
+}
+
+
+/* =========================================================
+   PAGE HEADER
+========================================================= */
+
+.system-admin-header {
+
+    width: 100%;
+    max-width: 100%;
+
+    margin: 0 0 26px;
+    padding: 0;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   HEADER LEFT
+========================================================= */
+
+.system-admin-header-left {
+
+    width: 100%;
+    max-width: 100%;
+
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 18px;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   BACK BUTTON
+========================================================= */
+
+.system-admin-back-button {
+
+    width: 100%;
+    max-width: 100%;
+
+    min-height: 42px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: flex-start;
+
+    gap: 8px;
+
+    margin: 0;
+    padding: 0 2px;
+
+    border: none;
+    border-radius: 8px;
+
+    background: transparent;
+
+    color: #0055A4;
+
+    font-family: inherit;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    line-height: 1;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    box-sizing: border-box;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+/* =========================================================
+   BACK BUTTON HOVER
+========================================================= */
+
+.system-admin-back-button:hover {
+
+    background: #EEF5FF;
+
+    color: #0055A4;
+
+    transform: translateX(-2px);
+}
+
+
+/* =========================================================
+   BACK BUTTON FOCUS
+========================================================= */
+
+.system-admin-back-button:focus-visible {
+
+    outline: none;
+
+    box-shadow:
+        0 0 0 3px rgba(0, 85, 164, 0.14);
+}
+
+
+/* =========================================================
+   BACK BUTTON ICON
+========================================================= */
+
+.system-admin-back-button svg {
+
+    flex-shrink: 0;
+}
+
+
+/* =========================================================
+   PAGE TITLE BLOCK
+========================================================= */
+
+.system-admin-title-block {
+
+    width: 100%;
+    max-width: 100%;
+
+    min-width: 0;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   PAGE TITLE
+========================================================= */
+
+.system-admin-title-block h1 {
+
+    margin: 0;
+
+    color: #0055A4;
+
+    font-size: 32px;
+    font-weight: 700;
+
+    line-height: 1.2;
+
+    letter-spacing: -0.5px;
+
+    overflow-wrap: break-word;
+}
+
+
+/* =========================================================
+   PAGE DESCRIPTION
+========================================================= */
+
+.system-admin-title-block p {
+
+    margin: 7px 0 0;
+
+    max-width: 800px;
+
+    color: #64748B;
+
+    font-size: 15px;
+    font-weight: 400;
+
+    line-height: 1.6;
+
+    overflow-wrap: break-word;
+}
+
+
+/* =========================================================
+   MAIN CONTENT SECTION
+========================================================= */
+
+.system-admin-content-section {
+
+    width: 100%;
+    max-width: 100%;
+
+    min-width: 0;
+
+    margin: 0;
+    padding: 0;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   OFFICER LIST CONTAINER
+   Matches OfficerList.jsx
+========================================================= */
+
+.officer-list-container {
+
+    width: 100%;
+    max-width: 100%;
+
+    min-width: 0;
+
+    margin: 0;
+    padding: 0;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   OFFICER LIST HEADER
+========================================================= */
+
+.officer-list-header {
+
+    width: 100%;
+
+    display: flex;
+
+    align-items: flex-start;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    margin: 0 0 18px;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   OFFICER LIST HEADER TITLE
+========================================================= */
+
+.officer-list-header h2 {
+
+    margin: 0;
+
+    color: #0055A4;
+
+    font-size: 25px;
+    font-weight: 700;
+
+    line-height: 1.25;
+
+    letter-spacing: -0.3px;
+}
+
+
+/* =========================================================
+   OFFICER LIST HEADER DESCRIPTION
+========================================================= */
+
+.officer-list-header p {
+
+    margin: 5px 0 0;
+
+    color: #64748B;
+
+    font-size: 14px;
+
+    line-height: 1.55;
+}
+
+
+/* =========================================================
+   TOTAL OFFICERS
+========================================================= */
+
+.officer-list-total {
+
+    flex-shrink: 0;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    padding: 9px 14px;
+
+    border-radius: 10px;
+
+    background: #EEF5FF;
+
+    color: #64748B;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    white-space: nowrap;
+
+    box-sizing: border-box;
+}
+
+
+.officer-list-total strong {
+
+    color: #0055A4;
+
+    font-size: 15px;
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   FILTER BAR
+========================================================= */
+
+.officer-list-filters {
+
+    width: 100%;
+    max-width: 100%;
+
+    min-width: 0;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        235px
+        210px;
+
+    gap: 12px;
+
+    margin: 0 0 20px;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   SEARCH WRAPPER
+========================================================= */
+
+.officer-search-wrapper {
+
+    width: 100%;
+    min-width: 0;
+
+    height: 48px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 11px;
+
+    padding: 0 15px;
+
+    border: 1px solid #D7DEE7;
+
+    border-radius: 10px;
+
+    background: #FFFFFF;
+
+    color: #0055A4;
+
+    box-sizing: border-box;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+/* =========================================================
+   SEARCH FOCUS
+========================================================= */
+
+.officer-search-wrapper:focus-within {
+
+    border-color: #0055A4;
+
+    box-shadow:
+        0 0 0 3px rgba(0, 85, 164, 0.08);
+}
+
+
+/* =========================================================
+   SEARCH ICON
+========================================================= */
+
+.officer-search-wrapper svg {
+
+    flex-shrink: 0;
+
+    color: #0055A4;
+}
+
+
+/* =========================================================
+   SEARCH INPUT
+========================================================= */
+
+.officer-search-wrapper input {
+
+    width: 100%;
+    min-width: 0;
+
+    height: 100%;
+
+    padding: 0;
+
+    border: none;
+    outline: none;
+
+    background: transparent;
+
+    color: #1F2937;
+
+    font-family: inherit;
+
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   SEARCH PLACEHOLDER
+========================================================= */
+
+.officer-search-wrapper input::placeholder {
+
+    color: #94A3B8;
+}
+
+
+/* =========================================================
+   FILTER WRAPPER
+========================================================= */
+
+.officer-filter-wrapper {
+
+    width: 100%;
+    min-width: 0;
+
+    height: 48px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    padding: 0 14px;
+
+    border: 1px solid #D7DEE7;
+
+    border-radius: 10px;
+
+    background: #FFFFFF;
+
+    color: #0055A4;
+
+    box-sizing: border-box;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+/* =========================================================
+   FILTER FOCUS
+========================================================= */
+
+.officer-filter-wrapper:focus-within {
+
+    border-color: #0055A4;
+
+    box-shadow:
+        0 0 0 3px rgba(0, 85, 164, 0.08);
+}
+
+
+/* =========================================================
+   FILTER ICON
+========================================================= */
+
+.officer-filter-wrapper svg {
+
+    flex-shrink: 0;
+
+    color: #0055A4;
+}
+
+
+/* =========================================================
+   FILTER SELECT
+========================================================= */
+
+.officer-filter-wrapper select {
+
+    width: 100%;
+    min-width: 0;
+
+    height: 100%;
+
+    padding: 0 2px;
+
+    border: none;
+    outline: none;
+
+    background: #FFFFFF;
+
+    color: #334155;
+
+    font-family: inherit;
+
+    font-size: 14px;
+    font-weight: 500;
+
+    cursor: pointer;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   TABLE WRAPPER
+========================================================= */
+
+.officer-table-wrapper {
+
+    width: 100%;
+    max-width: 100%;
+
+    min-width: 0;
+
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    border: 1px solid #E2E8F0;
+
+    border-radius: 12px;
+
+    background: #FFFFFF;
+
+    box-sizing: border-box;
+
+    -webkit-overflow-scrolling: touch;
+
+    scrollbar-width: thin;
+}
+
+
+/* =========================================================
+   TABLE
+========================================================= */
+
+.officer-table {
+
+    width: 100%;
+
+    min-width: 850px;
+
+    border-collapse: collapse;
+
+    table-layout: auto;
+
+    background: #FFFFFF;
+}
+
+
+/* =========================================================
+   TABLE HEADER
+========================================================= */
+
+.officer-table thead th {
+
+    padding: 15px 20px;
+
+    background: #F8FAFC;
+
+    color: #334155;
+
+    border-bottom: 1px solid #E2E8F0;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    line-height: 1.3;
+
+    text-align: left;
+
+    white-space: nowrap;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   TABLE BODY
+========================================================= */
+
+.officer-table tbody td {
+
+    padding: 16px 20px;
+
+    background: #FFFFFF;
+
+    color: #475569;
+
+    border-bottom: 1px solid #E8EDF3;
+
+    font-size: 13px;
+
+    vertical-align: middle;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   LAST TABLE ROW
+========================================================= */
+
+.officer-table tbody tr:last-child td {
+
+    border-bottom: none;
+}
+
+
+/* =========================================================
+   TABLE ROW HOVER
+========================================================= */
+
+.officer-table tbody tr {
+
+    transition:
+        background 0.15s ease;
+}
+
+
+.officer-table tbody tr:hover td {
+
+    background: #FAFCFF;
+}
+
+
+/* =========================================================
+   OFFICER TABLE USER
+========================================================= */
+
+.officer-table-user {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    min-width: 210px;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   OFFICER AVATAR
+========================================================= */
+
+.officer-table-avatar {
+
+    width: 42px;
+    height: 42px;
+
+    min-width: 42px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #0055A4;
+
+    color: #FFFFFF;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    flex-shrink: 0;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   OFFICER USER INFORMATION
+========================================================= */
+
+.officer-table-user > div:last-child {
+
+    min-width: 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 3px;
+}
+
+
+/* =========================================================
+   OFFICER NAME
+========================================================= */
+
+.officer-table-user strong {
+
+    color: #1E293B;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    line-height: 1.35;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+}
+
+
+/* =========================================================
+   OFFICER EMAIL
+========================================================= */
+
+.officer-table-user span {
+
+    color: #64748B;
+
+    font-size: 12px;
+
+    line-height: 1.35;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+}
+
+
+/* =========================================================
+   ROLE BADGE
+========================================================= */
+
+.officer-role-badge {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    padding: 7px 11px;
+
+    border-radius: 8px;
+
+    background: #EEF5FF;
+
+    color: #0055A4;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    line-height: 1.2;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   STATUS BADGE
+========================================================= */
+
+.officer-status-badge {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    padding: 7px 11px;
+
+    border-radius: 8px;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    line-height: 1.2;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   ACTIVE STATUS
+========================================================= */
+
+.officer-status-badge.active {
+
+    background: #ECFDF3;
+
+    color: #15803D;
+}
+
+
+/* =========================================================
+   INACTIVE STATUS
+========================================================= */
+
+.officer-status-badge.inactive {
+
+    background: #FEF2F2;
+
+    color: #DC2626;
+}
+
+
+/* =========================================================
+   DEACTIVATE BUTTON
+========================================================= */
+
+.officer-deactivate-btn {
+
+    min-width: 130px;
+
+    height: 40px;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 7px;
+
+    padding: 0 14px;
+
+    border: 1px solid #FECACA;
+
+    border-radius: 8px;
+
+    background: #FFF8F8;
+
+    color: #DC2626;
+
+    font-family: inherit;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    box-sizing: border-box;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.officer-deactivate-btn:hover {
+
+    background: #FEF2F2;
+
+    border-color: #FCA5A5;
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   ACTIVATE BUTTON
+========================================================= */
+
+.officer-activate-btn {
+
+    min-width: 120px;
+
+    height: 40px;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 7px;
+
+    padding: 0 14px;
+
+    border: 1px solid #BBF7D0;
+
+    border-radius: 8px;
+
+    background: #F7FFF9;
+
+    color: #15803D;
+
+    font-family: inherit;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    box-sizing: border-box;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.officer-activate-btn:hover {
+
+    background: #F0FDF4;
+
+    border-color: #86EFAC;
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   LOADING / EMPTY STATE
+========================================================= */
+
+.officer-list-state {
+
+    width: 100%;
+    min-height: 220px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 40px 20px;
+
+    text-align: center;
+
+    color: #64748B;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   STATE TITLE
+========================================================= */
+
+.officer-list-state h3 {
+
+    margin: 12px 0 5px;
+
+    color: #334155;
+
+    font-size: 17px;
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   STATE DESCRIPTION
+========================================================= */
+
+.officer-list-state p {
+
+    margin: 0;
+
+    max-width: 430px;
+
+    color: #94A3B8;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   SPINNER
+========================================================= */
+
+.system-admin-spinner {
+
+    color: #0055A4;
+
+    animation:
+        systemAdminSpin 1s linear infinite;
+}
+
+
+@keyframes systemAdminSpin {
+
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+/* =========================================================
+   TABLET — 1200px
+========================================================= */
+
+@media (max-width: 1200px) {
+
+    .system-admin-page {
+
+        padding: 26px 26px 36px;
+    }
+
+
+    .system-admin-title-block h1 {
+
+        font-size: 30px;
+    }
+
+
+    .officer-list-filters {
+
+        grid-template-columns:
+            minmax(0, 1fr)
+            210px
+            190px;
+    }
+
+
+    .officer-table {
+
+        min-width: 820px;
+    }
+
+}
+
+
+/* =========================================================
+   TABLET — 1000px
+========================================================= */
+
+@media (max-width: 1000px) {
+
+    .system-admin-page {
+
+        padding: 24px 22px 34px;
+    }
+
+
+    .system-admin-header {
+
+        margin-bottom: 24px;
+    }
+
+
+    .system-admin-title-block h1 {
+
+        font-size: 28px;
+    }
+
+
+    .officer-list-header h2 {
+
+        font-size: 23px;
+    }
+
+
+    .officer-list-filters {
+
+        grid-template-columns:
+            minmax(0, 1fr)
+            200px;
+
+        gap: 10px;
+    }
+
+
+    .officer-filter-wrapper:last-child {
+
+        grid-column: 2;
+    }
+
+}
+
+
+/* =========================================================
+   TABLET — 800px
+========================================================= */
+
+@media (max-width: 800px) {
+
+    .system-admin-page {
+
+        padding: 22px 18px 30px;
+    }
+
+
+    .system-admin-title-block h1 {
+
+        font-size: 26px;
+    }
+
+
+    .officer-list-header {
+
+        align-items: flex-start;
+    }
+
+
+    .officer-list-header h2 {
+
+        font-size: 22px;
+    }
+
+
+    .officer-list-filters {
+
+        grid-template-columns:
+            minmax(0, 1fr)
+            minmax(170px, 0.45fr);
+    }
+
+
+    .officer-table {
+
+        min-width: 780px;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE — 700px
+========================================================= */
+
+@media (max-width: 700px) {
+
+    .system-admin-page {
+
+        width: 100%;
+        max-width: 100%;
+
+        padding: 20px 14px 28px;
+
+        overflow-x: hidden;
+    }
+
+
+    .system-admin-header {
+
+        width: 100%;
+
+        margin-bottom: 20px;
+    }
+
+
+    .system-admin-header-left {
+
+        gap: 12px;
+    }
+
+
+    .system-admin-back-button {
+
+        min-height: 38px;
+
+        padding: 0 2px;
+
+        font-size: 13px;
+    }
+
+
+    .system-admin-title-block h1 {
+
+        font-size: 24px;
+
+        letter-spacing: -0.3px;
+    }
+
+
+    .system-admin-title-block p {
+
+        margin-top: 6px;
+
+        font-size: 13px;
+
+        line-height: 1.55;
+    }
+
+
+    .officer-list-header {
+
+        flex-direction: column;
+
+        gap: 12px;
+
+        margin-bottom: 16px;
+    }
+
+
+    .officer-list-header h2 {
+
+        font-size: 21px;
+    }
+
+
+    .officer-list-header p {
+
+        font-size: 13px;
+    }
+
+
+    .officer-list-total {
+
+        align-self: flex-start;
+
+        padding: 8px 12px;
+
+        font-size: 12px;
+    }
+
+
+    .officer-list-filters {
+
+        display: flex;
+
+        flex-direction: column;
+
+        gap: 9px;
+
+        margin-bottom: 16px;
+    }
+
+
+    .officer-search-wrapper,
+    .officer-filter-wrapper {
+
+        width: 100%;
+
+        height: 45px;
+    }
+
+
+    .officer-table-wrapper {
+
+        width: 100%;
+        max-width: 100%;
+
+        border-radius: 10px;
+    }
+
+
+    .officer-table {
+
+        min-width: 760px;
+    }
+
+
+    .officer-table thead th {
+
+        padding: 13px 15px;
+
+        font-size: 11px;
+    }
+
+
+    .officer-table tbody td {
+
+        padding: 13px 15px;
+
+        font-size: 12px;
+    }
+
+
+    .officer-table-avatar {
+
+        width: 38px;
+        height: 38px;
+
+        min-width: 38px;
+    }
+
+
+    .officer-table-user {
+
+        gap: 10px;
+
+        min-width: 190px;
+    }
+
+
+    .officer-table-user strong {
+
+        font-size: 13px;
+    }
+
+
+    .officer-table-user span {
+
+        font-size: 11px;
+    }
+
+
+    .officer-role-badge,
+    .officer-status-badge {
+
+        padding: 6px 9px;
+
+        font-size: 10px;
+    }
+
+
+    .officer-deactivate-btn,
+    .officer-activate-btn {
+
+        height: 37px;
+
+        min-width: 110px;
+
+        font-size: 11px;
+    }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE — 450px
+========================================================= */
+
+@media (max-width: 450px) {
+
+    .system-admin-page {
+
+        padding: 18px 11px 24px;
+    }
+
+
+    .system-admin-title-block h1 {
+
+        font-size: 22px;
+    }
+
+
+    .system-admin-title-block p {
+
+        font-size: 12px;
+    }
+
+
+    .system-admin-back-button {
+
+        min-height: 36px;
+
+        font-size: 12px;
+
+        gap: 6px;
+    }
+
+
+    .officer-list-header h2 {
+
+        font-size: 20px;
+    }
+
+
+    .officer-list-header p {
+
+        font-size: 12px;
+    }
+
+
+    .officer-list-total {
+
+        font-size: 11px;
+    }
+
+
+    .officer-list-filters {
+
+        gap: 8px;
+    }
+
+
+    .officer-search-wrapper,
+    .officer-filter-wrapper {
+
+        height: 43px;
+
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+
+    .officer-search-wrapper input,
+    .officer-filter-wrapper select {
+
+        font-size: 12px;
+    }
+
+
+    .officer-table {
+
+        min-width: 720px;
+    }
+
+
+    .officer-table thead th {
+
+        padding: 11px 12px;
+
+        font-size: 10px;
+    }
+
+
+    .officer-table tbody td {
+
+        padding: 11px 12px;
+
+        font-size: 11px;
+    }
+
+
+    .officer-table-avatar {
+
+        width: 35px;
+        height: 35px;
+
+        min-width: 35px;
+
+        font-size: 10px;
+    }
+
+
+    .officer-table-user {
+
+        min-width: 175px;
+
+        gap: 8px;
+    }
+
+
+    .officer-table-user strong {
+
+        font-size: 12px;
+    }
+
+
+    .officer-table-user span {
+
+        font-size: 10px;
+    }
+
+
+    .officer-role-badge,
+    .officer-status-badge {
+
+        padding: 5px 8px;
+
+        font-size: 9px;
+    }
+
+
+    .officer-deactivate-btn,
+    .officer-activate-btn {
+
+        height: 34px;
+
+        min-width: 100px;
+
+        padding: 0 10px;
+
+        font-size: 10px;
+    }
+
+}
+
+
+/* =========================================================
+   VERY SMALL MOBILE — 350px
+========================================================= */
+
+@media (max-width: 350px) {
+
+    .system-admin-page {
+
+        padding: 16px 9px 22px;
+    }
+
+
+    .system-admin-title-block h1 {
+
+        font-size: 20px;
+    }
+
+
+    .system-admin-title-block p {
+
+        font-size: 11.5px;
+    }
+
+
+    .system-admin-back-button {
+
+        font-size: 11px;
+    }
+
+
+    .officer-list-header h2 {
+
+        font-size: 19px;
+    }
+
+
+    .officer-list-header p {
+
+        font-size: 11.5px;
+    }
+
+
+    .officer-table {
+
+        min-width: 700px;
+    }
+
+}

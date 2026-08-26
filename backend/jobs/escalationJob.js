@@ -1,292 +1,99 @@
 const cron = require("node-cron");
-
 const Complaint = require("../models/Complaint");
 const Alert = require("../models/Alert");
-const User = require("../models/User");
-
 const {
-    autoEscalateComplaint,
+  autoEscalateComplaint,
+  createAssignmentAlert,
+  createDeadlineAlert,
+  createOverdueAlert,
+  createMcAttentionAlert,
 } = require("../services/escalationService");
 
+const DEADLINE_NEAR_MS = 24 * 60 * 60 * 1000; // 24 hours
+const EE_FOLLOW_UP_MS = 24 * 60 * 60 * 1000;  // 24 hours after EE deadline
 
-const DEADLINE_NEAR_HOURS = 24;
-const EE_FOLLOW_UP_HOURS = 24;
+let isEscalationJobRunning = false;
 
-const DEADLINE_NEAR_MS =
-    DEADLINE_NEAR_HOURS *
-    60 *
-    60 *
-    1000;
+/* =========================================================
+   CHECK & PROCESS WARNING ALERTS / AUTO-ESCALATIONS
+========================================================= */
+const processComplaintAlerts = async (complaint, now) => {
+  if (!complaint || complaint.status === "Resolved") return;
 
-const EE_FOLLOW_UP_MS =
-    EE_FOLLOW_UP_HOURS *
-    60 *
-    60 *
-    1000;
-
-
-/* CREATE DEADLINE ALERT */
-
-const createDeadlineAlert = async (complaint) => {
-    if (!complaint.assignedTo) {
-        return null;
-    }
-
-    const existingAlert = await Alert.findOne({
-        complaint: complaint._id,
-        recipient: complaint.assignedTo,
-        type: "DEADLINE_NEAR",
+  // 1. ASSIGNMENT ALERT (Only send if an assignment alert hasn't already been sent for this specific officer)
+  if (complaint.assignedTo) {
+    const existingAssignmentAlert = await Alert.findOne({
+      complaint: complaint._id,
+      recipient: complaint.assignedTo,
+      type: "ASSIGNMENT",
     });
 
-    if (existingAlert) {
-        return existingAlert;
+    if (!existingAssignmentAlert) {
+      await createAssignmentAlert({
+        complaint,
+        officerId: complaint.assignedTo,
+      });
     }
+  }
 
-    return Alert.create({
-        recipient: complaint.assignedTo,
-        complaint: complaint._id,
-        type: "DEADLINE_NEAR",
-        title: "Complaint Deadline Near",
-        message:
-            `The deadline for "${complaint.title}" is approaching. Please take action.`,
-    });
+  if (!complaint.deadline) return;
+
+  const deadline = new Date(complaint.deadline);
+  const timeUntilDeadline = deadline.getTime() - now.getTime();
+
+  // 2. DEADLINE NEAR WARNING (SLA deadline within 24 hours)
+  if (timeUntilDeadline > 0 && timeUntilDeadline <= DEADLINE_NEAR_MS) {
+    await createDeadlineAlert(complaint);
+    return;
+  }
+
+  // 3. DEADLINE EXPIRED
+  if (timeUntilDeadline <= 0) {
+    if (complaint.currentLevel === "executiveEngineer") {
+      // Executive Engineer has no higher officer to auto-escalate to
+      await createOverdueAlert(complaint);
+
+      const timePassedDeadline = Math.abs(timeUntilDeadline);
+      if (timePassedDeadline >= EE_FOLLOW_UP_MS) {
+        // 4. EE OVERDUE > 24H -> INFORM MUNICIPAL COMMISSIONER
+        await createMcAttentionAlert(complaint);
+      }
+    } else {
+      // Auto-escalate Junior Engineer / AEE to higher officer level
+      // Note: autoEscalateComplaint automatically generates AUTO_ESCALATION alert internally
+      await autoEscalateComplaint(complaint, now);
+    }
+  }
 };
 
-
-/* CREATE EE OVERDUE ALERT */
-
-const createEEOverdueAlert = async (complaint) => {
-    if (!complaint.assignedTo) {
-        return null;
-    }
-
-    const existingAlert = await Alert.findOne({
-        complaint: complaint._id,
-        recipient: complaint.assignedTo,
-        type: "OVERDUE",
-    });
-
-    if (existingAlert) {
-        return existingAlert;
-    }
-
-    return Alert.create({
-        recipient: complaint.assignedTo,
-        complaint: complaint._id,
-        type: "OVERDUE",
-        title: "Complaint Overdue",
-        message:
-            `The deadline for "${complaint.title}" has passed. Please take the required action.`,
-    });
-};
-
-
-/* CREATE MC ALERT */
-
-const createMCAlert = async (complaint) => {
-    const mc = await User.findOne({
-        role: "municipalCommissioner",
-    });
-
-    if (!mc) {
-        return null;
-    }
-
-    const existingAlert = await Alert.findOne({
-        complaint: complaint._id,
-        recipient: mc._id,
-        type: "ADMINISTRATIVE_ATTENTION",
-    });
-
-    if (existingAlert) {
-        return existingAlert;
-    }
-
-    return Alert.create({
-        recipient: mc._id,
-        complaint: complaint._id,
-        type: "ADMINISTRATIVE_ATTENTION",
-        title: "Administrative Attention Required",
-        message:
-            `Complaint "${complaint.title}" remains unresolved after the EE follow-up period. Please review the matter.`,
-    });
-};
-
-
-/* PROCESS DEADLINE NEAR */
-
-const processDeadlineNear = async (
-    complaint,
-    now
-) => {
-    if (
-        ![
-            "Assigned",
-            "In Progress",
-        ].includes(complaint.status)
-    ) {
-        return;
-    }
-
-    if (!complaint.deadline) {
-        return;
-    }
-
-    const timeLeft =
-        new Date(complaint.deadline).getTime() -
-        now.getTime();
-
-    if (
-        timeLeft <= 0 ||
-        timeLeft > DEADLINE_NEAR_MS
-    ) {
-        return;
-    }
-
-    await createDeadlineAlert(
-        complaint
-    );
-};
-
-
-/* PROCESS EE OVERDUE */
-
-const processEEOverdue = async (
-    complaint,
-    now
-) => {
-    if (
-        complaint.currentLevel !==
-        "executiveEngineer"
-    ) {
-        return;
-    }
-
-    if (
-        ![
-            "Assigned",
-            "In Progress",
-        ].includes(complaint.status)
-    ) {
-        return;
-    }
-
-    await createEEOverdueAlert(
-        complaint
-    );
-
-    const overdueAlert =
-        await Alert.findOne({
-            complaint: complaint._id,
-            recipient: complaint.assignedTo,
-            type: "OVERDUE",
-        });
-
-    if (!overdueAlert) {
-        return;
-    }
-
-    const followUpDeadline =
-        new Date(
-            overdueAlert.createdAt.getTime() +
-            EE_FOLLOW_UP_MS
-        );
-
-    if (
-        now <
-        followUpDeadline
-    ) {
-        return;
-    }
-
-    const latest =
-        await Complaint.findById(
-            complaint._id
-        );
-
-    if (!latest) {
-        return;
-    }
-
-    if (
-        latest.status === "Resolved"
-    ) {
-        return;
-    }
-
-    if (
-        latest.currentLevel !==
-        "executiveEngineer"
-    ) {
-        return;
-    }
-
-    await createMCAlert(
-        latest
-    );
-};
-
-
-/* MAIN JOB */
-
+/* =========================================================
+   CRON SCHEDULE (Runs every 15 minutes)
+========================================================= */
 const escalationJob = () => {
-    cron.schedule(
-        "* * * * *",
-        async () => {
-            try {
-                const now = new Date();
+  cron.schedule("*/15 * * * *", async () => {
+    if (isEscalationJobRunning) return;
 
-                const activeComplaints =
-                    await Complaint.find({
-                        status: {
-                            $in: [
-                                "Assigned",
-                                "In Progress",
-                            ],
-                        },
-                        deadline: {
-                            $ne: null,
-                        },
-                    });
+    isEscalationJobRunning = true;
+    const now = new Date();
 
-                for (
-                    const complaint
-                    of activeComplaints
-                ) {
-                    if (
-                        complaint.deadline >
-                        now
-                    ) {
-                        await processDeadlineNear(
-                            complaint,
-                            now
-                        );
+    try {
+      const activeComplaints = await Complaint.find({
+        status: { $ne: "Resolved" },
+      });
 
-                        continue;
-                    }
-
-                    if (
-                        complaint.currentLevel ===
-                        "executiveEngineer"
-                    ) {
-                        await processEEOverdue(
-                            complaint,
-                            now
-                        );
-
-                        continue;
-                    }
-
-                    await autoEscalateComplaint(
-                        complaint
-                    );
-                }
-            } catch (error) {
-                // Keep scheduler running.
-            }
+      for (const complaint of activeComplaints) {
+        try {
+          await processComplaintAlerts(complaint, now);
+        } catch (error) {
+          // Handled silently
         }
-    );
+      }
+    } catch (error) {
+      // Handled silently
+    } finally {
+      isEscalationJobRunning = false;
+    }
+  });
 };
 
-module.exports =
-    escalationJob;
+module.exports = escalationJob;
