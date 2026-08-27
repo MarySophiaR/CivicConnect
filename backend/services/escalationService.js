@@ -291,7 +291,7 @@ const createMcAttentionAlert = async (complaint) => {
     complaint: complaint._id,
     type: "MC_ATTENTION",
     title: "Administrative Attention Required",
-    message: `Administrative Alert: Complaint "${complaint.title}" at Executive Engineer level is overdue by over 24 hours in ${complaint.municipality}.`,
+    message: `Administrative Alert: Complaint "${complaint.title}" in Ward ${complaint.ward} (Executive Engineer level) is overdue by over 24 hours.`,
     escalationAt: new Date(),
   });
 };
