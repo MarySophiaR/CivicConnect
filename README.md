@@ -613,13 +613,7 @@ The project focuses on making the complaint lifecycle more structured by combini
 
 ### Complaint Report
 
-![Complaint Report](screenshots/complaint-report.png)
-
----
-
-### Complaints Page
-
-![Complaints Page](screenshots/complaints-page.png)
+![Complaint Report](screenshots/citizen-complaint-report.png)
 
 ---
 
@@ -629,21 +623,27 @@ The project focuses on making the complaint lifecycle more structured by combini
 
 ---
 
-### Citizen Notification
-
-![Citizen Notification](screenshots/notification.png)
-
----
-
 ### Officer Dashboard
 
 ![Officer Dashboard](screenshots/officer-dashboard.png)
 
 ---
 
+### Officer Complaints Page
+
+![Officer Complaints Page](screenshots/officer-complaints-page.png)
+
+---
+
 ### Officer Actions
 
 ![Officer Actions](screenshots/officer-actions.png)
+
+---
+
+### Officer Notification
+
+![Officer Notification](screenshots/officer-notification.png)
 
 ---
 
