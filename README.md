@@ -641,9 +641,9 @@ The project focuses on making the complaint lifecycle more structured by combini
 
 ---
 
-### Officer Notification
+### Officer Warning Notification
 
-![Officer Notification](screenshots/officer-notification.png)
+![Officer Warning Notification](screenshots/officer-warning-notification.png)
 
 ---
 
