@@ -54,7 +54,3 @@ Thumbs.db
 # =========================================
 .vscode/
 .idea/
-
-
-# User-uploaded complaint images
-backend/uploads/
