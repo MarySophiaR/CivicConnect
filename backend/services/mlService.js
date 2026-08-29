@@ -23,7 +23,7 @@ const predictImage = async (fileBuffer, originalname, mimetype) => {
       },
       maxContentLength: Infinity,
       maxBodyLength: Infinity,
-      timeout: 30000,
+      timeout: 90000,
     });
 
     return response.data;
