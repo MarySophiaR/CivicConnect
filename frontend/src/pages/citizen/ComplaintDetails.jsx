@@ -4,7 +4,7 @@ import Layout from "../../components/citizen/Layout";
 import API from "../../api/axios";
 import "../../styles/complaintDetails.css";
 
-import MapPreview from "../../components/MapPreview";
+import MapPreview from "../../components/Mappreview.jsx";
 
 import {
   FaMapMarkerAlt,

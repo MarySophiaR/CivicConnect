@@ -22,7 +22,7 @@ import ComplaintActions from "../../components/officer/ComplaintActions";
 import AssignmentHistory from "../../components/officer/AssignmentHistory";
 import EscalateModal from "../../components/officer/EscalateModal";
 import ResolveModal from "../../components/officer/ResolveModal";
-import MapPreview from "../../components/MapPreview";
+import MapPreview from "../../components/Mappreview.jsx";
 
 import API from "../../api/axios";
 
