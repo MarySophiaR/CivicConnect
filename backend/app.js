@@ -69,7 +69,8 @@ const app = express();
 
 const corsOptions = {
   origin: [
-    "https://civicconnect-frontend-pvnv.onrender.com",
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
   ],
 
   credentials: true,
@@ -108,7 +109,7 @@ app.use((req, res, next) => {
     res.header(
       "Access-Control-Allow-Origin",
       req.headers.origin ||
-        "https://civicconnect-frontend-pvnv.onrender.com"
+        "http://localhost:5173"
     );
 
     res.header(
@@ -216,7 +217,7 @@ const limiter = rateLimit({
 
   windowMs: 15 * 60 * 1000,
 
-  max: 100,
+  max: 1000,
 
   message: {
     message:
@@ -445,7 +446,7 @@ const startServer = async () => {
   await startDatabaseConnections();
 
 
-  app.listen(PORT, "0.0.0.0", () => {
+  app.listen(PORT, () => {
 
       console.log(
         `Server running on http://localhost:${PORT}`

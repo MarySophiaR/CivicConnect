@@ -49,7 +49,7 @@ function ComplaintCard({ complaint }) {
 
     // Extract only the filename (handles Windows backslashes & Linux forward slashes)
     const filename = path.split(/[/\\]/).pop();
-    return `https://civicconnect-backend-8fhz.onrender.com/uploads/${filename}`;
+    return `http://localhost:5001/uploads/${filename}`;
   };
 
   const imageUrl = getImageUrl(rawImagePath);

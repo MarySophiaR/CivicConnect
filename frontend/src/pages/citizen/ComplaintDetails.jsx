@@ -61,7 +61,7 @@ function ComplaintDetails() {
       return imagePath;
     }
     const filename = imagePath.split(/[/\\]/).pop();
-    return `https://civicconnect-backend-8fhz.onrender.com/uploads/${filename}`;
+    return `http://localhost:5001/uploads/${filename}`;
   };
 
   /* =========================================================

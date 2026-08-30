@@ -146,7 +146,7 @@ function OfficerComplaintDetails() {
     ? complaint.image.startsWith("http://") ||
       complaint.image.startsWith("https://")
       ? complaint.image
-      : `https://civicconnect-backend-8fhz.onrender.com/uploads/${complaint.image.split(/[/\\]/).pop()}`
+      : `http://localhost:5001/uploads/${complaint.image.split(/[/\\]/).pop()}`
     : "";
 
   /* =========================================================

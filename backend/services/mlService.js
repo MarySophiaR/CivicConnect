@@ -1,8 +1,8 @@
 const axios = require("axios");
 const FormData = require("form-data");
 
-
-const ML_SERVICE_URL="https://civicconnect-ml-2b2a.onrender.com/predict";
+const ML_SERVICE_URL =
+  process.env.ML_SERVICE_URL || "http://127.0.0.1:5000/predict";
 
 const predictImage = async (fileBuffer, originalname, mimetype) => {
   try {
@@ -23,7 +23,7 @@ const predictImage = async (fileBuffer, originalname, mimetype) => {
       },
       maxContentLength: Infinity,
       maxBodyLength: Infinity,
-      timeout: 90000,
+      timeout: 30000,
     });
 
     return response.data;

@@ -836,54 +836,7 @@ const createComplaint = async (req, res) => {
     // File successfully associated with complaint.
     uploadedFilePath = null;
 
-    // =========================================================
-    // LOG ASSIGNMENT
-    // =========================================================
-
-    console.log(
-      "\n========================================"
-    );
-
-    console.log(
-      "[INITIAL JE ASSIGNMENT]"
-    );
-
-    console.log(
-      `Complaint ID: ${complaint._id}`
-    );
-
-    console.log(
-      `Municipality: ${normalizedMunicipality}`
-    );
-
-    console.log(
-      `Ward: ${normalizedWard}`
-    );
-
-    console.log(
-      `Assigned JE: ${assignedOfficer.name}`
-    );
-
-    console.log(
-      `Employee ID: ${assignedOfficer.employeeId || "N/A"}`
-    );
-
-    console.log(
-      `Active workload before assignment: ${assignment.activeComplaintCount}`
-    );
-
-    console.log(
-      `Assigned At: ${new Date().toLocaleString("en-IN")}`
-    );
-
-    console.log(
-      "Officer Status: ACTIVE"
-    );
-
-    console.log(
-      "========================================\n"
-    );
-
+    
     // =========================================================
     // RESPONSE
     // =========================================================
