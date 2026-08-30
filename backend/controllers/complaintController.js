@@ -836,7 +836,15 @@ const createComplaint = async (req, res) => {
     // File successfully associated with complaint.
     uploadedFilePath = null;
 
-    
+    // =========================================================
+    // ASSIGNMENT ALERT FOR THE JE THE COMPLAINT WAS ASSIGNED TO
+    // =========================================================
+
+    await createAssignmentAlert({
+      complaint,
+      officerId: assignedOfficer._id,
+    });
+
     // =========================================================
     // RESPONSE
     // =========================================================

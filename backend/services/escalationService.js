@@ -45,7 +45,7 @@ const autoEscalateComplaint = async (complaint, now = new Date()) => {
 
   const nextLevel = currentWorkflow.next;
 
-  // Find least loaded officer for next level
+  // Find least loaded officer for next level matching municipality and ward
   const officers = await User.find({
     role: nextLevel,
     isActive: true,
@@ -56,7 +56,7 @@ const autoEscalateComplaint = async (complaint, now = new Date()) => {
   }).select("_id name");
 
   if (!officers.length) {
-    console.error(`[AUTO ESCALATION FAILED] No officer for ${nextLevel} in ward ${complaint.wardNumber}`);
+    console.error(`[AUTO ESCALATION FAILED] No officer for ${nextLevel} in ward ${complaint.wardNumber} under municipality ${complaint.municipality}`);
     return null;
   }
 
@@ -139,6 +139,21 @@ const createAssignmentAlert = async ({ complaint, officerId }) => {
     return null;
   }
 
+  // Verify that the assigned officer actually belongs to the complaint's ward and municipality
+  const validOfficer = await User.findOne({
+    _id: officerId,
+    role: { $in: [/^je$/i, /^juniorengineer$/i, /^junior engineer$/i] },
+    isActive: true,
+    municipalities: {
+      $in: [new RegExp(`^${normalizeMunicipality(complaint.municipality)}$`, "i")],
+    },
+    wardNumbers: { $in: [Number(complaint.wardNumber)] },
+  });
+
+  if (!validOfficer) {
+    return null;
+  }
+
   // Prevent creating duplicate assignment alerts
   const existingAlert = await Alert.findOne({
     recipient: officerId,
@@ -163,6 +178,24 @@ const createAssignmentAlert = async ({ complaint, officerId }) => {
 const createManualEscalationAlert = async ({ complaint, fromOfficer, toOfficer, reason, note }) => {
   if (!complaint || !toOfficer) return null;
 
+  // Verify that the target officer handles the complaint's municipality/ward scope.
+  // Only the Municipal Commissioner is municipality-wide; AEE/EE must still match the ward.
+  const validOfficer = await User.findOne({
+    _id: toOfficer,
+    isActive: true,
+    municipalities: {
+      $in: [new RegExp(`^${normalizeMunicipality(complaint.municipality)}$`, "i")],
+    },
+    $or: [
+      { wardNumbers: { $in: [Number(complaint.wardNumber)] } },
+      { role: "municipalCommissioner" },
+    ],
+  });
+
+  if (!validOfficer) {
+    return null;
+  }
+
   // Prevent duplicate active assignment alert if an escalation alert is being created
   await Alert.deleteMany({
     recipient: toOfficer,
@@ -185,6 +218,24 @@ const createManualEscalationAlert = async ({ complaint, fromOfficer, toOfficer, 
 // =========================================================
 const createAutoEscalationAlert = async ({ complaint, toOfficer, fromLevel, toLevel }) => {
   if (!complaint || !toOfficer) return null;
+
+  // Verify that the auto-escalated officer covers this municipality/ward scope.
+  // Only the Municipal Commissioner is municipality-wide; AEE/EE must still match the ward.
+  const validOfficer = await User.findOne({
+    _id: toOfficer,
+    isActive: true,
+    municipalities: {
+      $in: [new RegExp(`^${normalizeMunicipality(complaint.municipality)}$`, "i")],
+    },
+    $or: [
+      { wardNumbers: { $in: [Number(complaint.wardNumber)] } },
+      { role: "municipalCommissioner" },
+    ],
+  });
+
+  if (!validOfficer) {
+    return null;
+  }
 
   // Prevent duplicate active assignment alert if an auto-escalation alert is being created
   await Alert.deleteMany({
@@ -228,6 +279,22 @@ const createResolvedAlert = async ({ complaint, resolvedBy, remarks }) => {
 const createDeadlineAlert = async (complaint) => {
   if (!complaint || !complaint.assignedTo) return null;
 
+  // Verify assigned officer belongs to the complaint's municipality/ward.
+  // Only the Municipal Commissioner is municipality-wide; AEE/EE must still match the ward.
+  const validOfficer = await User.findOne({
+    _id: complaint.assignedTo,
+    isActive: true,
+    municipalities: {
+      $in: [new RegExp(`^${normalizeMunicipality(complaint.municipality)}$`, "i")],
+    },
+    $or: [
+      { wardNumbers: { $in: [Number(complaint.wardNumber)] } },
+      { role: "municipalCommissioner" },
+    ],
+  });
+
+  if (!validOfficer) return null;
+
   const existingAlert = await Alert.findOne({
     complaint: complaint._id,
     recipient: complaint.assignedTo,
@@ -250,6 +317,22 @@ const createDeadlineAlert = async (complaint) => {
 // =========================================================
 const createOverdueAlert = async (complaint) => {
   if (!complaint || !complaint.assignedTo) return null;
+
+  // Verify assigned officer belongs to the complaint's municipality/ward.
+  // Only the Municipal Commissioner is municipality-wide; AEE/EE must still match the ward.
+  const validOfficer = await User.findOne({
+    _id: complaint.assignedTo,
+    isActive: true,
+    municipalities: {
+      $in: [new RegExp(`^${normalizeMunicipality(complaint.municipality)}$`, "i")],
+    },
+    $or: [
+      { wardNumbers: { $in: [Number(complaint.wardNumber)] } },
+      { role: "municipalCommissioner" },
+    ],
+  });
+
+  if (!validOfficer) return null;
 
   const existingAlert = await Alert.findOne({
     complaint: complaint._id,
@@ -291,7 +374,7 @@ const createMcAttentionAlert = async (complaint) => {
     complaint: complaint._id,
     type: "MC_ATTENTION",
     title: "Administrative Attention Required",
-    message: `Administrative Alert: Complaint "${complaint.title}" in Ward ${complaint.ward} (Executive Engineer level) is overdue by over 24 hours.`,
+    message: `Administrative Alert: Complaint "${complaint.title}" in Ward ${complaint.wardNumber || complaint.ward} (Executive Engineer level) is overdue by over 24 hours.`,
     escalationAt: new Date(),
   });
 };
