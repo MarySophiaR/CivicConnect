@@ -1268,6 +1268,8 @@ const startComplaintWork = async (req, res) => {
 // =========================================================
 
 const resolveComplaint = async (req, res) => {
+  let uploadedResolutionImagePath = null;
+
   try {
     const complaintId = req.params.id;
     const userId = req.user?._id || req.user?.id;
@@ -1293,9 +1295,30 @@ const resolveComplaint = async (req, res) => {
       });
     }
 
+    // ---------------------------------------------------------
+    // RESOLUTION EVIDENCE IMAGE (required)
+    // Same upload pattern as the complaint's original image in
+    // createComplaint — stored via multer, path cleaned with
+    // the existing formatImagePath helper. Required as proof
+    // that the reported issue was actually resolved.
+    // ---------------------------------------------------------
+
+    if (!req.file) {
+      return res.status(400).json({
+        message: "A resolution evidence image is required.",
+      });
+    }
+
+    uploadedResolutionImagePath = req.file.path;
+    const resolutionImagePath = formatImagePath(req.file);
+
     const complaint = await Complaint.findById(complaintId);
 
     if (!complaint) {
+      if (uploadedResolutionImagePath) {
+        deleteFile(uploadedResolutionImagePath);
+      }
+
       return res.status(404).json({
         message: "Complaint not found.",
       });
@@ -1305,12 +1328,20 @@ const resolveComplaint = async (req, res) => {
       !complaint.assignedTo ||
       complaint.assignedTo.toString() !== userId.toString()
     ) {
+      if (uploadedResolutionImagePath) {
+        deleteFile(uploadedResolutionImagePath);
+      }
+
       return res.status(403).json({
         message: "You are not assigned to this complaint.",
       });
     }
 
     if (complaint.currentLevel !== userRole) {
+      if (uploadedResolutionImagePath) {
+        deleteFile(uploadedResolutionImagePath);
+      }
+
       return res.status(403).json({
         message:
           "Your officer level does not match the current complaint level.",
@@ -1318,6 +1349,10 @@ const resolveComplaint = async (req, res) => {
     }
 
     if (complaint.status !== "In Progress") {
+      if (uploadedResolutionImagePath) {
+        deleteFile(uploadedResolutionImagePath);
+      }
+
       return res.status(400).json({
         message: "Complaint must be in progress before it can be resolved.",
       });
@@ -1327,6 +1362,10 @@ const resolveComplaint = async (req, res) => {
       complaint.assignmentHistory[complaint.assignmentHistory.length - 1];
 
     if (!currentAssignment) {
+      if (uploadedResolutionImagePath) {
+        deleteFile(uploadedResolutionImagePath);
+      }
+
       return res.status(400).json({
         message: "Assignment history is missing.",
       });
@@ -1338,6 +1377,10 @@ const resolveComplaint = async (req, res) => {
     complaint.resolvedBy = userId;
     complaint.resolvedAt = now;
     complaint.resolutionRemarks = resolutionRemarks.trim();
+
+    if (resolutionImagePath) {
+      complaint.resolutionImage = resolutionImagePath;
+    }
 
     currentAssignment.resolved = true;
     currentAssignment.resolvedAt = now;
@@ -1357,6 +1400,10 @@ const resolveComplaint = async (req, res) => {
       complaint,
     });
   } catch (error) {
+    if (uploadedResolutionImagePath) {
+      deleteFile(uploadedResolutionImagePath);
+    }
+
     return res.status(500).json({
       message: "Server Error",
       error: error.message,

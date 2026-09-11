@@ -1,10 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import {
   CheckCircle2,
   X,
   AlertCircle,
   FileCheck2,
+  ImagePlus,
+  Trash2,
 } from "lucide-react";
 
 import "../../styles/officerComponents.css";
@@ -28,6 +30,14 @@ function ResolveModal({
   const [error, setError] =
     useState("");
 
+  const [resolutionImage, setResolutionImage] =
+    useState(null);
+
+  const [resolutionImagePreview, setResolutionImagePreview] =
+    useState("");
+
+  const fileInputRef = useRef(null);
+
 
   /* =========================================================
      RESET WHEN MODAL OPENS
@@ -41,9 +51,38 @@ function ResolveModal({
 
       setError("");
 
+      setResolutionImage(null);
+
+      setResolutionImagePreview("");
+
+      if (fileInputRef.current) {
+
+        fileInputRef.current.value = "";
+
+      }
+
     }
 
   }, [isOpen]);
+
+
+  /* =========================================================
+     CLEAN UP OBJECT URL ON CHANGE / UNMOUNT
+  ========================================================= */
+
+  useEffect(() => {
+
+    return () => {
+
+      if (resolutionImagePreview) {
+
+        URL.revokeObjectURL(resolutionImagePreview);
+
+      }
+
+    };
+
+  }, [resolutionImagePreview]);
 
 
   /* =========================================================
@@ -129,6 +168,91 @@ function ResolveModal({
 
 
   /* =========================================================
+     HANDLE EVIDENCE IMAGE SELECT
+  ========================================================= */
+
+  const handleImageChange = (event) => {
+
+    const file = event.target.files?.[0];
+
+    if (!file) {
+
+      return;
+
+    }
+
+
+    if (!file.type.startsWith("image/")) {
+
+      setError("Please select a valid image file.");
+
+      event.target.value = "";
+
+      return;
+
+    }
+
+
+    const maxSizeBytes = 5 * 1024 * 1024; // 5MB
+
+    if (file.size > maxSizeBytes) {
+
+      setError("Image must be smaller than 5MB.");
+
+      event.target.value = "";
+
+      return;
+
+    }
+
+
+    if (error) {
+
+      setError("");
+
+    }
+
+
+    if (resolutionImagePreview) {
+
+      URL.revokeObjectURL(resolutionImagePreview);
+
+    }
+
+
+    setResolutionImage(file);
+
+    setResolutionImagePreview(URL.createObjectURL(file));
+
+  };
+
+
+  /* =========================================================
+     HANDLE REMOVE EVIDENCE IMAGE
+  ========================================================= */
+
+  const handleRemoveImage = () => {
+
+    if (resolutionImagePreview) {
+
+      URL.revokeObjectURL(resolutionImagePreview);
+
+    }
+
+    setResolutionImage(null);
+
+    setResolutionImagePreview("");
+
+    if (fileInputRef.current) {
+
+      fileInputRef.current.value = "";
+
+    }
+
+  };
+
+
+  /* =========================================================
      HANDLE CONFIRM
   ========================================================= */
 
@@ -139,7 +263,7 @@ function ResolveModal({
 
 
     /* -----------------------------------------
-       REQUIRED VALIDATION
+       REQUIRED VALIDATION — REMARKS
     ----------------------------------------- */
 
     if (!trimmedResolution) {
@@ -163,6 +287,21 @@ function ResolveModal({
 
       setError(
         "Please provide a little more detail about the resolution."
+      );
+
+      return;
+
+    }
+
+
+    /* -----------------------------------------
+       REQUIRED VALIDATION — EVIDENCE IMAGE
+    ----------------------------------------- */
+
+    if (!resolutionImage) {
+
+      setError(
+        "Please upload a photo showing the resolved issue as proof."
       );
 
       return;
@@ -202,14 +341,18 @@ function ResolveModal({
        * The parent component expects:
        *
        * resolutionData.resolutionRemarks
+       * resolutionData.resolutionImage (required File)
        *
-       * Therefore we send resolutionRemarks here.
+       * Therefore we send both here.
        */
 
       await onConfirm({
 
         resolutionRemarks:
           trimmedResolution,
+
+        resolutionImage:
+          resolutionImage,
 
       });
 
@@ -437,6 +580,130 @@ function ResolveModal({
             </span>
 
           </div>
+
+
+          {/* =================================================
+              EVIDENCE IMAGE UPLOAD (REQUIRED)
+          ================================================= */}
+
+          <label
+            htmlFor="complaint-resolution-image"
+            className="officer-resolve-label"
+            style={{ marginTop: "16px" }}
+          >
+
+            Resolution Evidence
+
+            <span>
+              *
+            </span>
+
+          </label>
+
+
+          <p className="officer-resolve-help">
+
+            Upload a photo showing the resolved issue. This
+            is required as proof of resolution.
+
+          </p>
+
+
+          {!resolutionImagePreview ? (
+
+            <label
+              htmlFor="complaint-resolution-image"
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: "8px",
+                border: error && !resolutionImage
+                  ? "1.5px dashed #d92d20"
+                  : "1.5px dashed #c7c7c7",
+                borderRadius: "8px",
+                padding: "18px",
+                cursor: loading ? "not-allowed" : "pointer",
+                color: "#555",
+                fontSize: "14px",
+                opacity: loading ? 0.6 : 1,
+              }}
+            >
+
+              <ImagePlus size={18} strokeWidth={1.9} />
+
+              Click to upload an image
+
+            </label>
+
+          ) : (
+
+            <div
+              style={{
+                position: "relative",
+                display: "inline-block",
+                width: "220px",
+                marginTop: "4px",
+              }}
+            >
+
+              <img
+                src={resolutionImagePreview}
+                alt="Resolution evidence preview"
+                style={{
+                  maxWidth: "220px",
+                  maxHeight: "160px",
+                  borderRadius: "8px",
+                  display: "block",
+                  objectFit: "cover",
+                }}
+              />
+
+              <button
+                type="button"
+                onClick={handleRemoveImage}
+                disabled={loading}
+                aria-label="Remove uploaded image"
+                style={{
+                  position: "absolute",
+                  top: "8px",
+                  right: "8px",
+                  width: "28px",
+                  height: "28px",
+                  minWidth: "28px",
+                  maxWidth: "28px",
+                  boxSizing: "border-box",
+                  background: "rgba(0,0,0,0.65)",
+                  border: "none",
+                  borderRadius: "50%",
+                  padding: "0",
+                  margin: 0,
+                  cursor: loading ? "not-allowed" : "pointer",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  flex: "none",
+                }}
+              >
+
+                <Trash2 size={14} color="#fff" strokeWidth={2} />
+
+              </button>
+
+            </div>
+
+          )}
+
+
+          <input
+            id="complaint-resolution-image"
+            type="file"
+            accept="image/*"
+            ref={fileInputRef}
+            onChange={handleImageChange}
+            disabled={loading}
+            style={{ display: "none" }}
+          />
 
 
           {/* =================================================

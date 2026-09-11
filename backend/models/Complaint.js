@@ -62,6 +62,7 @@ const complaintSchema = new mongoose.Schema({
   resolvedBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
   resolvedAt: Date,
   resolutionRemarks: String,
+  resolutionImage: String,
   reportedBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
   escalationHistory: []
 }, { timestamps: true });

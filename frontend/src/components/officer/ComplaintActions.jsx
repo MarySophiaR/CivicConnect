@@ -301,9 +301,7 @@ function ComplaintActions({
     <section className="officer-actions-card">
       <div className="officer-actions-header">
         <div>
-          <span className="officer-actions-eyebrow">
-            Complaint Actions
-          </span>
+          <span className="officer-actions-eyebrow">Complaint Actions</span>
 
           <h2>Manage Complaint</h2>
         </div>
@@ -322,9 +320,7 @@ function ComplaintActions({
 
             <strong>
               {resolvedDate
-                ? formatDateTime(
-                    resolvedDate
-                  )
+                ? formatDateTime(resolvedDate)
                 : "Resolution time not available"}
             </strong>
 
@@ -337,217 +333,211 @@ function ComplaintActions({
                 ? complaint.resolutionRemarks
                 : "No resolution note provided."}
             </p>
+
+            {complaint.resolutionImage && (
+              <>
+                <span className="officer-resolution-note-label">
+                  Resolution Evidence
+                </span>
+
+                <img
+                  src={
+                    complaint.resolutionImage.startsWith("http://") ||
+                    complaint.resolutionImage.startsWith("https://")
+                      ? complaint.resolutionImage
+                      : `http://localhost:5001/uploads/${complaint.resolutionImage
+                          .split(/[/\\]/)
+                          .pop()}`
+                  }
+                  alt="Resolution evidence"
+                  style={{
+                    maxWidth: "420px",
+                    maxHeight: "300px",
+                    width: "100%",
+                    height: "auto",
+                    borderRadius: "8px",
+                    objectFit: "cover",
+                    display: "block",
+                    marginTop: "6px",
+                  }}
+                  onError={(event) => {
+                    event.currentTarget.style.display = "none";
+                  }}
+                />
+              </>
+            )}
           </div>
         </div>
       )}
 
       {/* ESCALATED VIEW */}
 
-      {!isResolved &&
-        wasEscalated && (
+      {!isResolved && wasEscalated && (
+        <div className="officer-actions-deadline">
+          <div className="officer-actions-deadline-icon">
+            <ArrowUpRight size={20} />
+          </div>
+
+          <div className="officer-actions-deadline-content">
+            <span>Complaint Escalated</span>
+
+            <strong>
+              {escalationDate
+                ? `Escalated at ${formatDateTime(escalationDate)}`
+                : "Escalation time not available"}
+            </strong>
+
+            <small>{escalationType}</small>
+
+            {lastEscalation?.reason && (
+              <small>Reason: {lastEscalation.reason}</small>
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* ACTIVE DEADLINE */}
+
+      {!isResolved && !wasEscalated && (
+        <>
           <div className="officer-actions-deadline">
             <div className="officer-actions-deadline-icon">
-              <ArrowUpRight size={20} />
+              {timeRemaining?.urgent ? (
+                <AlertTriangle size={20} />
+              ) : (
+                <Clock3 size={20} />
+              )}
             </div>
 
             <div className="officer-actions-deadline-content">
-              <span>
-                Complaint Escalated
-              </span>
+              <span>Complaint Deadline</span>
 
               <strong>
-                {escalationDate
-                  ? `Escalated at ${formatDateTime(
-                      escalationDate
-                    )}`
-                  : "Escalation time not available"}
+                {hasValidDeadline
+                  ? formatDateTime(deadline)
+                  : "Deadline not available"}
               </strong>
 
-              <small>
-                {escalationType}
-              </small>
-
-              {lastEscalation?.reason && (
-                <small>
-                  Reason:{" "}
-                  {lastEscalation.reason}
+              {timeRemaining && (
+                <small
+                  className={
+                    timeRemaining.expired
+                      ? "officer-deadline-expired"
+                      : timeRemaining.urgent
+                        ? "officer-deadline-urgent"
+                        : ""
+                  }
+                >
+                  {timeRemaining.text}
                 </small>
               )}
             </div>
           </div>
-        )}
 
-      {/* ACTIVE DEADLINE */}
+          {/* DEADLINE WARNING */}
 
-      {!isResolved &&
-        !wasEscalated && (
-          <>
-            <div className="officer-actions-deadline">
-              <div className="officer-actions-deadline-icon">
-                {timeRemaining?.urgent ? (
-                  <AlertTriangle size={20} />
-                ) : (
-                  <Clock3 size={20} />
-                )}
-              </div>
+          {isBeforeDeadline && timeRemaining?.urgent && (
+            <div className="officer-actions-warning">
+              <AlertTriangle size={18} />
 
-              <div className="officer-actions-deadline-content">
-                <span>
-                  Complaint Deadline
-                </span>
-
-                <strong>
-                  {hasValidDeadline
-                    ? formatDateTime(
-                        deadline
-                      )
-                    : "Deadline not available"}
-                </strong>
-
-                {timeRemaining && (
-                  <small
-                    className={
-                      timeRemaining.expired
-                        ? "officer-deadline-expired"
-                        : timeRemaining.urgent
-                        ? "officer-deadline-urgent"
-                        : ""
-                    }
-                  >
-                    {timeRemaining.text}
-                  </small>
-                )}
-              </div>
+              <p>
+                The complaint deadline is approaching. Please complete the work
+                or use the available escalation option if required.
+              </p>
             </div>
+          )}
 
-            {/* DEADLINE WARNING */}
+          {/* DEADLINE PASSED */}
 
-            {isBeforeDeadline &&
-              timeRemaining?.urgent && (
-                <div className="officer-actions-warning">
-                  <AlertTriangle size={18} />
+          {isDeadlinePassed && (
+            <div className="officer-actions-expired">
+              <Clock3 size={18} />
 
-                  <p>
-                    The complaint deadline is approaching.
-                    Please complete the work or use the
-                    available escalation option if required.
-                  </p>
-                </div>
-              )}
-
-            {/* DEADLINE PASSED */}
-
-            {isDeadlinePassed && (
-              <div className="officer-actions-expired">
-                <Clock3 size={18} />
-
-                <p>
-                  The complaint deadline has been reached.
-                  Automatic escalation will be handled by
-                  the system according to the workflow.
-                </p>
-              </div>
-            )}
-          </>
-        )}
+              <p>
+                The complaint deadline has been reached. Automatic escalation
+                will be handled by the system according to the workflow.
+              </p>
+            </div>
+          )}
+        </>
+      )}
 
       {/* ACTION BUTTONS */}
 
-      {!isResolved &&
-        !wasEscalated && (
-          <div className="officer-actions-buttons">
+      {!isResolved && !wasEscalated && (
+        <div className="officer-actions-buttons">
+          {/* START WORK */}
 
-            {/* START WORK */}
+          {canStartWork && (
+            <button
+              type="button"
+              className="officer-action-button officer-action-start"
+              onClick={handleStartWork}
+              disabled={actionLoading}
+            >
+              <Play size={18} fill="currentColor" />
 
-            {canStartWork && (
-              <button
-                type="button"
-                className="officer-action-button officer-action-start"
-                onClick={handleStartWork}
-                disabled={actionLoading}
-              >
-                <Play
-                  size={18}
-                  fill="currentColor"
-                />
+              <span>{actionLoading ? "Starting..." : "Start Work"}</span>
+            </button>
+          )}
 
-                <span>
-                  {actionLoading
-                    ? "Starting..."
-                    : "Start Work"}
-                </span>
-              </button>
-            )}
+          {/* RESOLVE */}
 
-            {/* RESOLVE */}
+          {canResolve && (
+            <button
+              type="button"
+              className="officer-action-button officer-action-resolve"
+              onClick={handleResolve}
+              disabled={actionLoading}
+            >
+              <CheckCircle2 size={18} />
 
-            {canResolve && (
-              <button
-                type="button"
-                className="officer-action-button officer-action-resolve"
-                onClick={handleResolve}
-                disabled={actionLoading}
-              >
-                <CheckCircle2 size={18} />
+              <span>Resolve Complaint</span>
+            </button>
+          )}
 
-                <span>
-                  Resolve Complaint
-                </span>
-              </button>
-            )}
+          {/* MANUAL ESCALATION */}
 
-            {/* MANUAL ESCALATION */}
+          {canEscalate && (
+            <button
+              type="button"
+              className="officer-action-button officer-action-escalate"
+              onClick={handleEscalate}
+              disabled={actionLoading}
+            >
+              <ArrowUpCircle size={18} />
 
-            {canEscalate && (
-              <button
-                type="button"
-                className="officer-action-button officer-action-escalate"
-                onClick={handleEscalate}
-                disabled={actionLoading}
-              >
-                <ArrowUpCircle size={18} />
-
-                <span>
-                  Request Escalation
-                </span>
-              </button>
-            )}
-          </div>
-        )}
+              <span>Request Escalation</span>
+            </button>
+          )}
+        </div>
+      )}
 
       {/* WORKFLOW TRACKER */}
 
       <div className="officer-actions-workflow">
         <div className="officer-actions-workflow-title">
-          <span>
-            Current Workflow
-          </span>
+          <span>Current Workflow</span>
         </div>
 
         <div className="officer-actions-workflow-steps">
-
           {/* ASSIGNED */}
 
           <div
             className={
               status === "Assigned"
                 ? "officer-workflow-step active"
-                : status === "In Progress" ||
-                  status === "Resolved"
-                ? "officer-workflow-step completed"
-                : "officer-workflow-step"
+                : status === "In Progress" || status === "Resolved"
+                  ? "officer-workflow-step completed"
+                  : "officer-workflow-step"
             }
           >
             <span className="officer-workflow-dot" />
 
             <div>
-              <strong>
-                Assigned
-              </strong>
+              <strong>Assigned</strong>
 
-              <small>
-                Complaint assigned to officer
-              </small>
+              <small>Complaint assigned to officer</small>
             </div>
           </div>
 
@@ -558,20 +548,16 @@ function ComplaintActions({
               status === "In Progress"
                 ? "officer-workflow-step active"
                 : status === "Resolved"
-                ? "officer-workflow-step completed"
-                : "officer-workflow-step"
+                  ? "officer-workflow-step completed"
+                  : "officer-workflow-step"
             }
           >
             <span className="officer-workflow-dot" />
 
             <div>
-              <strong>
-                In Progress
-              </strong>
+              <strong>In Progress</strong>
 
-              <small>
-                Officer has started working
-              </small>
+              <small>Officer has started working</small>
             </div>
           </div>
 
@@ -587,16 +573,11 @@ function ComplaintActions({
             <span className="officer-workflow-dot" />
 
             <div>
-              <strong>
-                Resolved
-              </strong>
+              <strong>Resolved</strong>
 
-              <small>
-                Complaint successfully resolved
-              </small>
+              <small>Complaint successfully resolved</small>
             </div>
           </div>
-
         </div>
       </div>
     </section>

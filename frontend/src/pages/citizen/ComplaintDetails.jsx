@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import Layout from "../../components/citizen/Layout";
 import API from "../../api/axios";
 import "../../styles/complaintDetails.css";
@@ -15,14 +15,21 @@ import {
   FaClock,
   FaMapMarkedAlt,
   FaHistory,
-  FaArrowUp,
+  FaChevronDown,
+  FaChevronUp,
+  FaArrowLeft,
+  FaHourglassEnd,
 } from "react-icons/fa";
 
 function ComplaintDetails() {
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const [complaint, setComplaint] = useState(null);
   const [loading, setLoading] = useState(true);
+
+  /* Single toggle state for the unified workflow history block */
+  const [showWorkflowHistory, setShowWorkflowHistory] = useState(false);
 
   useEffect(() => {
     fetchComplaint();
@@ -81,8 +88,7 @@ function ComplaintDetails() {
       : null;
 
   /* =========================================================
-     EXTRACT COORDINATES (for map preview only — does not
-     affect any existing field, display, or logic above)
+     EXTRACT COORDINATES (for map preview only)
   ========================================================= */
   const latitude =
     complaint.latitude ??
@@ -117,9 +123,45 @@ function ComplaintDetails() {
 
   const officer = complaint.assignedTo?.name || "Not Assigned";
 
+  /* =========================================================
+     COMBINE & NORMALIZE WORKFLOW EVENTS (Chronological sort)
+  ========================================================= */
+  const assignmentEvents = (complaint.assignmentHistory || []).map((item) => ({
+    type: "ASSIGNMENT",
+    id: item._id,
+    date: new Date(item.assignedAt),
+    officer: item.officer?.name || "N/A",
+    level: item.level,
+  }));
+
+  const escalationEvents = (complaint.escalationHistory || []).map((item) => ({
+    type: "ESCALATION",
+    id: item._id,
+    date: new Date(item.escalatedAt || item.createdAt || Date.now()),
+    from: item.from,
+    to: item.to,
+    reason: item.reason,
+  }));
+
+  const combinedEvents = [...assignmentEvents, ...escalationEvents].sort(
+    (a, b) => a.date - b.date
+  );
+
+  const totalEventsCount = combinedEvents.length;
+
   return (
     <Layout>
       <div className="complaint-details-container">
+        {/* =========================================================
+            BACK TO COMPLAINTS BUTTON
+        ========================================================= */}
+        <button
+          type="button"
+          onClick={() => navigate(-1)}
+        >
+          <FaArrowLeft size={14} /> Back to Complaints
+        </button>
+
         <h1>Complaint Details</h1>
 
         <div className="details-top">
@@ -190,7 +232,6 @@ function ComplaintDetails() {
           <p><strong>State:</strong> {complaint.address?.state || "-"}</p>
           <p><strong>Pincode:</strong> {complaint.address?.pincode || "-"}</p>
 
-          {/* Map preview — pin only, no navigate button for citizens */}
           <MapPreview
             latitude={latitude}
             longitude={longitude}
@@ -208,39 +249,118 @@ function ComplaintDetails() {
           />
         </div>
 
-        <div className="section">
-          <h3>
-            <FaHistory /> Assignment History
-          </h3>
-          {!complaint.assignmentHistory || complaint.assignmentHistory.length === 0 ? (
-            <p>No assignment history.</p>
-          ) : (
-            complaint.assignmentHistory.map((item) => (
-              <div className="history-card" key={item._id}>
-                <p><strong>Officer:</strong> {item.officer?.name || "N/A"}</p>
-                <p><strong>Level:</strong> {item.level}</p>
-                <p><strong>Assigned On:</strong> {new Date(item.assignedAt).toLocaleString()}</p>
+        {/* =========================================================
+            UNIFIED WORKFLOW HISTORY BLOCK (Assignment + Escalation)
+        ========================================================= */}
+        <div className="section dropdown-section">
+          <div 
+            className="dropdown-header" 
+            onClick={() => setShowWorkflowHistory(!showWorkflowHistory)}
+          >
+            <div className="dropdown-title-wrapper">
+              <div className="dropdown-icon-container">
+                <FaHistory size={18} />
               </div>
-            ))
+              <div>
+                <span className="workflow-subtitle">
+                  Complaint Workflow
+                </span>
+                <h3>
+                  Assignment & Escalation History
+                </h3>
+              </div>
+            </div>
+
+            <div className="dropdown-badge-wrapper">
+              <span className="event-count-badge">
+                {totalEventsCount} {totalEventsCount === 1 ? "Event" : "Events"} {showWorkflowHistory ? <FaChevronUp size={10} /> : <FaChevronDown size={10} />}
+              </span>
+            </div>
+          </div>
+
+          {showWorkflowHistory && (
+            <div className="dropdown-content">
+              {totalEventsCount === 0 ? (
+                <p>No workflow history found.</p>
+              ) : (
+                <div className="workflow-timeline">
+                  {combinedEvents.map((item, index) => (
+                    <div 
+                      key={item.id || index} 
+                      className={`history-card ${item.type === "ESCALATION" ? "escalation-card" : "assignment-card"}`}
+                    >
+                      <div className="history-card-header">
+                        <span className={`history-type-label ${item.type === "ESCALATION" ? "escalation-label" : "assignment-label"}`}>
+                          {item.type}
+                        </span>
+                        <span className="history-date">
+                          {item.date.toLocaleString()}
+                        </span>
+                      </div>
+
+                      {item.type === "ASSIGNMENT" ? (
+                        <div>
+                          <p className="history-main-text">
+                            Assigned to {item.level}
+                          </p>
+                          <p className="history-sub-text">
+                            Officer: <strong>{item.officer}</strong>
+                          </p>
+                        </div>
+                      ) : (
+                        <div>
+                          <p className="history-main-text">
+                            Escalated from {item.from} to {item.to}
+                          </p>
+                          <p className="history-sub-text">
+                            Reason: <strong>{item.reason || "N/A"}</strong>
+                          </p>
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
           )}
         </div>
 
-        <div className="section">
-          <h3>
-            <FaArrowUp /> Escalation History
-          </h3>
-          {!complaint.escalationHistory || complaint.escalationHistory.length === 0 ? (
-            <p>No escalations.</p>
-          ) : (
-            complaint.escalationHistory.map((item) => (
-              <div className="history-card" key={item._id}>
-                <p><strong>From:</strong> {item.from}</p>
-                <p><strong>To:</strong> {item.to}</p>
-                <p><strong>Reason:</strong> {item.reason}</p>
+        {/* =========================================================
+            RESOLUTION BLOCK
+        ========================================================= */}
+        {(complaint.status === "Resolved" || complaint.resolutionRemarks || complaint.resolutionImage) && (
+          <div className="section resolution-section">
+            <h3>
+              <FaHourglassEnd /> Resolution Details
+            </h3>
+            
+            <p>
+              <strong>Resolved At:</strong>{" "}
+              {complaint.resolvedAt ? new Date(complaint.resolvedAt).toLocaleString() : "N/A"}
+            </p>
+            
+            <p>
+              <strong>Resolution Remarks:</strong>{" "}
+              {complaint.resolutionRemarks || "No remarks provided."}
+            </p>
+
+            {complaint.resolutionImage && (
+              <div className="resolution-image-container">
+                <p><strong>Resolution Evidence:</strong></p>
+                <img
+                  src={getImageUrl(complaint.resolutionImage)}
+                  alt="Resolution Evidence"
+                  className="resolution-evidence-image"
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src = "https://via.placeholder.com/300?text=Image+Not+Found";
+                  }}
+                />
               </div>
-            ))
-          )}
-        </div>
+            )}
+          </div>
+        )}
+
       </div>
     </Layout>
   );

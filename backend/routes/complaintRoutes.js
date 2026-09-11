@@ -114,9 +114,9 @@ router.post(
     "assistantExecutiveEngineer",
     "executiveEngineer"
   ),
+  uploadDisk.single("resolutionImage"),
   resolveComplaint
 );
-
 
 // =================================
 // MANUAL ESCALATION

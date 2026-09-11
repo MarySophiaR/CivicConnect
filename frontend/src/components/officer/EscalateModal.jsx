@@ -342,6 +342,7 @@ function EscalateModal({
             <X
               size={20}
               strokeWidth={2}
+              style={{ width: "20px", height: "20px", minWidth: "20px", minHeight: "20px" }}
             />
           </button>
         </div>

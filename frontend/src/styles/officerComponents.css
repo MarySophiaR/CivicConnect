@@ -863,7 +863,7 @@
         min-height: calc(100vh - 70px);
         
         /* Space for mobile navigation */
-        padding: 65px 18px 30px;
+         padding: 65px 18px 30px; 
 
         box-sizing: border-box;
         overflow-x: hidden;
@@ -2937,7 +2937,7 @@ DEADLINE
 
     display: flex;
 
-    align-items: center;
+    align-items: flex-start;
 
     gap: 14px;
 
@@ -3140,12 +3140,6 @@ ACTION BUTTONS
     flex-wrap: wrap;
 
     padding-bottom: 25px;
-
-    /*
-       No border-bottom here.
-       This removes the unwanted gray divider
-       between the action buttons and workflow.
-    */
 }
 
 
@@ -3261,738 +3255,6 @@ ESCALATE
 
     box-shadow:
         0 5px 12px rgba(217, 119, 6, 0.12);
-}
-
-
-/* =========================================
-OFFICER COMPLAINT ACTIONS
-========================================= */
-
-.officer-actions-card {
-
-width: 100%;
-
-background: #FFFFFF;
-
-padding: 30px;
-
-border-radius: 14px;
-
-box-shadow:
-    0 6px 18px rgba(0, 0, 0, 0.08);
-
-box-sizing: border-box;
-
-
-}
-
-/* =========================================
-ACTION HEADER
-========================================= */
-
-.officer-actions-header {
-
-margin-bottom: 24px;
-
-
-}
-
-.officer-actions-eyebrow {
-
-display: block;
-
-margin-bottom: 7px;
-
-color: #0055A4;
-
-font-size: 13px;
-
-font-weight: 700;
-
-text-transform: uppercase;
-
-letter-spacing: 0.6px;
-
-
-}
-
-.officer-actions-header h2 {
-
-margin: 0 0 7px;
-
-color: #0055A4;
-
-font-size: 26px;
-
-font-weight: 700;
-
-letter-spacing: -0.3px;
-
-
-}
-
-.officer-actions-header p {
-
-margin: 0;
-
-color: #6B7280;
-
-font-size: 15px;
-
-line-height: 1.7;
-
-
-}
-
-/* =========================================
-DEADLINE
-========================================= */
-
-.officer-actions-deadline {
-
-display: flex;
-
-align-items: center;
-
-gap: 14px;
-
-padding: 18px 20px;
-
-margin-bottom: 18px;
-
-background: #F8FAFC;
-
-border: 1px solid #E5E7EB;
-
-border-radius: 10px;
-
-box-sizing: border-box;
-
-
-}
-
-.officer-actions-deadline-icon {
-
-width: 42px;
-
-height: 42px;
-
-display: flex;
-
-align-items: center;
-
-justify-content: center;
-
-flex-shrink: 0;
-
-color: #0055A4;
-
-background: #FFFFFF;
-
-border: 1px solid #D7E5F3;
-
-border-radius: 9px;
-
-
-}
-
-.officer-actions-deadline-content {
-
-display: flex;
-
-flex-direction: column;
-
-gap: 3px;
-
-
-}
-
-.officer-actions-deadline-content span {
-
-color: #6B7280;
-
-font-size: 12px;
-
-font-weight: 600;
-
-text-transform: uppercase;
-
-letter-spacing: 0.4px;
-
-
-}
-
-.officer-actions-deadline-content strong {
-
-color: #172033;
-
-font-size: 15px;
-
-font-weight: 600;
-
-
-}
-
-.officer-actions-deadline-content small {
-
-color: #6B7280;
-
-font-size: 13px;
-
-font-weight: 500;
-
-
-}
-
-/* =========================================
-DEADLINE STATES
-========================================= */
-
-.officer-deadline-urgent {
-
-color: #B45309 !important;
-
-
-}
-
-.officer-deadline-expired {
-
-color: #B91C1C !important;
-
-
-}
-
-/* =========================================
-DEADLINE WARNING
-========================================= */
-
-.officer-actions-warning {
-
-display: flex;
-
-align-items: flex-start;
-
-gap: 11px;
-
-padding: 14px 16px;
-
-margin-bottom: 20px;
-
-background: #FFFBEB;
-
-border: 1px solid #FDE68A;
-
-border-radius: 9px;
-
-color: #92400E;
-
-box-sizing: border-box;
-
-
-}
-
-.officer-actions-warning svg {
-
-flex-shrink: 0;
-
-margin-top: 1px;
-
-
-}
-
-.officer-actions-warning p {
-
-margin: 0;
-
-color: #92400E;
-
-font-size: 13px;
-
-line-height: 1.6;
-
-
-}
-
-/* =========================================
-DEADLINE EXPIRED
-========================================= */
-
-.officer-actions-expired {
-
-display: flex;
-
-align-items: flex-start;
-
-gap: 11px;
-
-padding: 14px 16px;
-
-margin-bottom: 20px;
-
-background: #FEF2F2;
-
-border: 1px solid #FECACA;
-
-border-radius: 9px;
-
-color: #B91C1C;
-
-box-sizing: border-box;
-
-
-}
-
-.officer-actions-expired svg {
-
-flex-shrink: 0;
-
-margin-top: 1px;
-
-
-}
-
-.officer-actions-expired p {
-
-margin: 0;
-
-color: #991B1B;
-
-font-size: 13px;
-
-line-height: 1.6;
-
-
-}
-
-/* =========================================
-ACTION BUTTONS
-========================================= */
-
-.officer-actions-buttons {
-
-display: flex;
-
-align-items: center;
-
-gap: 12px;
-
-flex-wrap: wrap;
-
-padding-bottom: 25px;
-
-/*
-   No border-bottom here.
-   This removes the unwanted gray divider
-   between the action buttons and workflow.
-*/
-
-
-}
-
-/* =========================================
-BASE ACTION BUTTON
-========================================= */
-
-.officer-action-button {
-
-min-height: 44px;
-
-display: inline-flex;
-
-align-items: center;
-
-justify-content: center;
-
-gap: 9px;
-
-padding: 0 18px;
-
-border-radius: 9px;
-
-font-family: inherit;
-
-font-size: 14px;
-
-font-weight: 600;
-
-cursor: pointer;
-
-transition:
-    background 0.2s ease,
-    border-color 0.2s ease,
-    transform 0.2s ease,
-    box-shadow 0.2s ease;
-
-box-sizing: border-box;
-
-
-}
-
-.officer-action-button:hover {
-
-transform: translateY(-1px);
-
-
-}
-
-/* =========================================
-START WORK
-========================================= */
-
-.officer-action-start {
-
-border: 1px solid #0055A4;
-
-background: #0055A4;
-
-color: #FFFFFF;
-
-
-}
-
-.officer-action-start:hover {
-
-background: #004685;
-
-border-color: #004685;
-
-box-shadow:
-    0 5px 12px rgba(0, 85, 164, 0.18);
-
-
-}
-
-/* =========================================
-RESOLVE
-========================================= */
-
-.officer-action-resolve {
-
-border: 1px solid #15803D;
-
-background: #15803D;
-
-color: #FFFFFF;
-
-
-}
-
-.officer-action-resolve:hover {
-
-background: #166534;
-
-border-color: #166534;
-
-box-shadow:
-    0 5px 12px rgba(21, 128, 61, 0.18);
-
-
-}
-
-/* =========================================
-ESCALATE
-========================================= */
-
-.officer-action-escalate {
-
-border: 1px solid #D97706;
-
-background: #FFFFFF;
-
-color: #B45309;
-
-
-}
-
-.officer-action-escalate:hover {
-
-background: #FFFBEB;
-
-border-color: #D97706;
-
-box-shadow:
-    0 5px 12px rgba(217, 119, 6, 0.12);
-
-
-}
-
-/* =========================================
-WORKFLOW
-========================================= */
-
-.officer-actions-workflow {
-
-padding-top: 25px;
-
-
-}
-
-.officer-actions-workflow-title {
-
-margin-bottom: 18px;
-
-
-}
-
-.officer-actions-workflow-title span {
-
-color: #0055A4;
-
-font-size: 16px;
-
-font-weight: 700;
-
-
-}
-
-/* =========================================
-WORKFLOW STEPS
-========================================= */
-
-.officer-actions-workflow-steps {
-
-display: grid;
-
-grid-template-columns:
-    repeat(3, 1fr);
-
-gap: 18px;
-
-
-}
-
-.officer-workflow-step {
-
-display: flex;
-
-align-items: flex-start;
-
-gap: 11px;
-
-padding: 14px;
-
-background: #F8FAFC;
-
-border: 1px solid #E5E7EB;
-
-border-radius: 9px;
-
-box-sizing: border-box;
-
-opacity: 0.65;
-
-
-}
-
-.officer-workflow-step.active {
-
-background: #EFF6FF;
-
-border-color: #BFDBFE;
-
-opacity: 1;
-
-
-}
-
-.officer-workflow-step.completed {
-
-background: #F0FDF4;
-
-border-color: #BBF7D0;
-
-opacity: 1;
-
-
-}
-
-/* =========================================
-WORKFLOW DOT
-========================================= */
-
-.officer-workflow-dot {
-
-width: 9px;
-
-height: 9px;
-
-margin-top: 5px;
-
-flex-shrink: 0;
-
-border-radius: 50%;
-
-background: #9CA3AF;
-
-
-}
-
-.officer-workflow-step.active
-.officer-workflow-dot {
-
-background: #0055A4;
-
-
-}
-
-.officer-workflow-step.completed
-.officer-workflow-dot {
-
-background: #15803D;
-
-
-}
-
-/* =========================================
-WORKFLOW TEXT
-========================================= */
-
-.officer-workflow-step div {
-
-display: flex;
-
-flex-direction: column;
-
-gap: 4px;
-
-
-}
-
-.officer-workflow-step strong {
-
-color: #374151;
-
-font-size: 14px;
-
-font-weight: 600;
-
-
-}
-
-.officer-workflow-step small {
-
-color: #6B7280;
-
-font-size: 12px;
-
-line-height: 1.5;
-
-
-}
-
-/* =========================================
-TABLET
-========================================= */
-
-@media (max-width: 900px) {
-
-.officer-actions-card {
-
-    padding: 26px;
-}
-
-.officer-actions-workflow-steps {
-
-    grid-template-columns: 1fr;
-
-    gap: 12px;
-}
-
-
-}
-
-/* =========================================
-MOBILE
-========================================= */
-
-@media (max-width: 700px) {
-
-.officer-actions-card {
-
-    padding: 22px 20px;
-
-    border-radius: 14px;
-}
-
-.officer-actions-header h2 {
-
-    font-size: 23px;
-}
-
-.officer-actions-header p {
-
-    font-size: 14px;
-}
-
-.officer-actions-deadline {
-
-    padding: 16px;
-}
-
-.officer-actions-buttons {
-
-    flex-direction: column;
-
-    align-items: stretch;
-}
-
-.officer-action-button {
-
-    width: 100%;
-}
-
-.officer-actions-workflow-steps {
-
-    grid-template-columns: 1fr;
-}
-
-
-}
-
-/* =========================================
-SMALL MOBILE
-========================================= */
-
-@media (max-width: 450px) {
-
-.officer-actions-card {
-
-    padding: 20px 16px;
-}
-
-.officer-actions-header h2 {
-
-    font-size: 21px;
-}
-
-.officer-actions-deadline-content strong {
-
-    font-size: 14px;
-}
-
-.officer-actions-deadline-content small {
-
-    font-size: 12px;
-}
-
-.officer-detail-resolution-section {
-
-    padding: 16px;
-
-}
-
-.officer-detail-resolution-note {
-
-    padding: 14px 15px;
-
-}
-
-.officer-detail-resolution-note p {
-
-    font-size: 13px;
-
-}
-
 }
 
 
@@ -4229,6 +3491,21 @@ SMALL MOBILE
     .officer-actions-deadline-content small {
 
         font-size: 12px;
+    }
+
+    .officer-detail-resolution-section {
+
+        padding: 16px;
+    }
+
+    .officer-detail-resolution-note {
+
+        padding: 14px 15px;
+    }
+
+    .officer-detail-resolution-note p {
+
+        font-size: 13px;
     }
 }
 
@@ -7065,7 +6342,8 @@ TABLET
 
         min-width: 0;
 
-        overflow: hidden;
+        overflow: visible; /* Changed to allow full title visibility */
+        flex: 1;
 
     }
 
@@ -7074,11 +6352,12 @@ TABLET
 
         font-size: 26px;
 
-        overflow: hidden;
+        overflow: visible; /* Removed ellipsis and nowrap to display fully */
+        text-overflow: clip;
 
-        text-overflow: ellipsis;
+        white-space: normal; 
 
-        white-space: nowrap;
+        word-break: break-word;
 
     }
 
@@ -7241,7 +6520,8 @@ MOBILE
 
         max-width: 100%;
 
-        overflow: hidden;
+        overflow: visible; /* Changed to allow full title visibility */
+        flex: 1;
 
     }
 
@@ -7252,11 +6532,12 @@ MOBILE
 
         line-height: 1.15;
 
-        white-space: nowrap;
+        white-space: normal; /* Removed nowrap to display fully */
+        overflow: visible;
 
-        overflow: hidden;
+        text-overflow: clip;
 
-        text-overflow: ellipsis;
+        word-break: break-word;
 
     }
 
@@ -7427,6 +6708,9 @@ VERY SMALL MOBILE
     .officer-assignment-history-title h2 {
 
         font-size: 19px;
+
+        white-space: normal; /* Ensures it stays fully wrapped even on very small screens */
+        word-break: break-word;
 
     }
 

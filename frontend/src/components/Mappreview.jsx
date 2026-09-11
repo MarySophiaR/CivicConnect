@@ -116,7 +116,9 @@ function MapPreview({ latitude, longitude, label, showNavigate = false }) {
           mapInstanceRef.current = null;
         }
 
-        const map = L.map(mapContainerRef.current).setView([lat, lng], 15);
+        const map = L.map(mapContainerRef.current, {
+          scrollWheelZoom: false, // Prevents map zoom from hijacking page scroll and overlapping navbar
+        }).setView([lat, lng], 15);
         mapInstanceRef.current = map;
 
         L.tileLayer(TILE_URL, {
@@ -127,6 +129,11 @@ function MapPreview({ latitude, longitude, label, showNavigate = false }) {
           .addTo(map)
           .bindPopup(label || "Complaint location")
           .openPopup();
+
+        // Responsive map size handler
+        setTimeout(() => {
+          map.invalidateSize();
+        }, 100);
       })
       .catch((error) => {
         console.error("Failed to load map:", error);
@@ -149,33 +156,50 @@ function MapPreview({ latitude, longitude, label, showNavigate = false }) {
   const navigateUrl = `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}`;
 
   return (
-    <div style={{ marginTop: "14px" }}>
-      <div
-        ref={mapContainerRef}
-        style={{
-          height: "260px",
-          width: "100%",
-          borderRadius: "8px",
-          overflow: "hidden",
-        }}
-      />
+    <div className="map-preview-wrapper" style={{ marginTop: "14px", width: "100%" }}>
+      <style>{`
+        .map-preview-container {
+          height: 260px;
+          width: 100%;
+          max-width: 100%;
+          border-radius: 8px;
+          overflow: hidden;
+          z-index: 1;
+          position: relative;
+        }
+        .map-navigate-btn {
+          display: inline-block;
+          margin-top: 10px;
+          padding: 8px 16px;
+          background: #0055A4;
+          color: #fff;
+          border-radius: 6px;
+          text-decoration: none;
+          font-weight: bold;
+          font-size: 14px;
+        }
+        @media (max-width: 700px) {
+          .map-preview-container {
+            height: 200px; /* Adapts height nicely on smaller mobile screens */
+          }
+          .map-navigate-btn {
+            display: block;
+            text-align: center;
+            width: 100%;
+            box-sizing: border-box;
+            padding: 12px 16px; /* Easier to tap with a finger on mobile */
+          }
+        }
+      `}</style>
+
+      <div ref={mapContainerRef} className="map-preview-container" />
 
       {showNavigate && (
         <a
           href={navigateUrl}
           target="_blank"
           rel="noopener noreferrer"
-          style={{
-            display: "inline-block",
-            marginTop: "10px",
-            padding: "8px 16px",
-            background: "#0055A4",
-            color: "#fff",
-            borderRadius: "6px",
-            textDecoration: "none",
-            fontWeight: "bold",
-            fontSize: "14px",
-          }}
+          className="map-navigate-btn"
         >
           Navigate to Site
         </a>

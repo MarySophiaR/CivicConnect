@@ -19,6 +19,50 @@
 
 
 /* =====================================
+   BACK TO COMPLAINTS BUTTON 
+===================================== */
+
+.complaint-details-container button[type="button"] {
+    width: 100%;
+    max-width: 100%;
+    min-height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 8px;
+    margin: 0 0 14px;
+    padding: 0 2px;
+    border: none;
+    border-radius: 8px;
+    background: transparent;
+    color: #0055A4;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1;
+    text-align: left;
+    cursor: pointer;
+    box-sizing: border-box;
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.complaint-details-container button[type="button"]:hover {
+    background: #EEF5FF;
+    color: #0055A4;
+    transform: translateX(-2px);
+}
+
+.complaint-details-container button[type="button"]:focus-visible {
+    outline: none;
+    box-shadow:
+        0 0 0 3px rgba(0, 85, 164, 0.14);
+}
+
+
+/* =====================================
    TOP SECTION
 ===================================== */
 
@@ -124,6 +168,7 @@
     color: #0055A4;
     font-size: 22px;
     margin: 0 0 12px;
+    flex-wrap: wrap; /* Ensures long headings wrap neatly on smaller screens */
 }
 
 .section h3 svg {
@@ -143,21 +188,170 @@
 
 
 /* =====================================
-   HISTORY CARDS
+   DROPDOWN & WORKFLOW SECTION STYLING (Badge on the right corner)
+===================================== */
+
+.dropdown-section {
+    position: relative;
+}
+
+.dropdown-header {
+    position: relative;
+    user-select: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.dropdown-title-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+    flex: 1;
+}
+
+.dropdown-icon-container {
+    padding: 8px;
+    background: #f1f5f9;
+    border-radius: 8px;
+    display: flex;
+    color: #0055A4;
+}
+
+.workflow-subtitle {
+    font-size: 11px;
+    font-weight: 700;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.dropdown-badge-wrapper {
+    display: flex;
+    align-items: center;
+    margin-left: auto; /* Pushes the dropdown indicator/badge to the far right corner */
+}
+
+.event-count-badge {
+    background: #eff6ff;
+    color: #0055A4;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    border: 1px solid #bfdbfe;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.dropdown-content {
+    margin-top: 20px;
+    border-top: 1px solid #e2e8f0;
+    padding-top: 20px;
+    position: relative;
+}
+
+.workflow-timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+
+/* =====================================
+   HISTORY CARDS (Assignment & Escalation Workflow with slight curved left borders)
 ===================================== */
 
 .history-card {
     background: #F8FAFC;
-    border-left: 4px solid #0055A4;
-    border-radius: 10px;
-    padding: 14px;
+    padding: 14px 16px;
     margin-bottom: 10px;
     transition: .25s;
     box-sizing: border-box;
+    border-radius: 16px;
+}
+
+.assignment-card {
+    border-left: 4px solid #0055A4;
+}
+
+.escalation-card {
+    border-left: 4px solid #f97316;
+}
+
+.history-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.history-type-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.assignment-label {
+    color: #0055A4;
+}
+
+.escalation-label {
+    color: #c2410c;
+}
+
+.history-date {
+    font-size: 12px;
+    color: #64748b;
+}
+
+.history-main-text {
+    margin: 0 0 4px 0 !important;
+    font-weight: 600;
+    color: #0055A4 !important; /* Assignment text styled in blue */
+}
+
+.escalation-card .history-main-text {
+    color: #0f172a !important;
+}
+
+.history-sub-text {
+    margin: 0 !important;
+    font-size: 13px;
+    color: #475569;
 }
 
 .history-card p {
     margin: 5px 0;
+    color: #444;
+}
+
+
+/* =====================================
+   RESOLUTION EVIDENCE IMAGE (360x260 proportions)
+===================================== */
+
+.resolution-image-container {
+    margin-top: 10px;
+    width: 100%;
+    overflow-x: auto; /* Handles overflow gracefully if parent container narrows */
+}
+
+.resolution-evidence-image {
+    width: 360px;
+    max-width: 100%; /* Ensures responsiveness on smaller viewports */
+    height: 260px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 2px solid #eef2f7;
+    display: block;
 }
 
 
@@ -206,6 +400,12 @@
     .complaint-details-container h1 {
         font-size: 27px;
         margin: 0 0 14px;
+    }
+
+    .complaint-details-container button[type="button"] {
+        min-height: 48px;
+        margin-bottom: 16px;
+        font-size: 15px;
     }
 
 
@@ -275,7 +475,7 @@
 
 
     /* -------------------------------
-       Sections
+       Sections & Responsive Titles (Assignment History, etc.)
     ------------------------------- */
 
     .section {
@@ -287,8 +487,13 @@
     }
 
     .section h3 {
-        font-size: 20px;
+        font-size: 19px; /* Slightly adjusted to accommodate longer titles like Assignment History cleanly on mobile */
         margin-bottom: 10px;
+        gap: 8px;
+    }
+
+    .section h3 svg {
+        min-width: 20px;
     }
 
     .section p {
@@ -304,6 +509,12 @@
     .history-card {
         padding: 12px;
         margin-bottom: 9px;
+    }
+
+    /* Adjusting resolution evidence image size behavior for mobile viewports */
+    .resolution-evidence-image {
+        width: 100%;
+        height: 210px;
     }
 }
 
@@ -321,6 +532,12 @@
     .complaint-details-container h1 {
         font-size: 25px;
         margin-bottom: 12px;
+    }
+
+    .complaint-details-container button[type="button"] {
+        min-height: 48px;
+        margin-bottom: 16px;
+        font-size: 14px;
     }
 
     .details-top {
@@ -351,7 +568,11 @@
     }
 
     .section h3 {
-        font-size: 19px;
+        font-size: 18px;
+    }
+    
+    .resolution-evidence-image {
+        height: 190px;
     }
 }
 
@@ -396,6 +617,10 @@
     }
 
     .section h3 {
-        font-size: 18px;
+        font-size: 17px;
+    }
+
+    .resolution-evidence-image {
+        height: 165px;
     }
 }

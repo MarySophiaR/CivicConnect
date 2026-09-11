@@ -553,9 +553,30 @@ function OfficerComplaintDetails() {
 
       setActionError("");
 
-      await API.post(`/complaints/${complaint._id}/resolve`, {
-        resolutionRemarks: resolutionRemarks.trim(),
-      });
+      // ---------------------------------------------------------
+      // Send as FormData so the evidence image travels along with
+      // the resolution remarks in the same multipart request.
+      //
+      // IMPORTANT: do NOT manually set a Content-Type header here.
+      // FormData needs the browser to generate the header itself,
+      // since it must include a unique boundary string that only
+      // the browser knows (based on the actual body it builds).
+      // Setting "multipart/form-data" manually, without that
+      // boundary, breaks file parsing on the backend silently —
+      // text fields can still get through while the file is lost,
+      // which is exactly the bug that caused resolution images to
+      // never reach the server. Let axios/the browser set this
+      // header automatically by omitting the headers option below.
+      // ---------------------------------------------------------
+
+      const formData = new FormData();
+      formData.append("resolutionRemarks", resolutionRemarks.trim());
+
+      if (resolutionData?.resolutionImage) {
+        formData.append("resolutionImage", resolutionData.resolutionImage);
+      }
+
+      await API.post(`/complaints/${complaint._id}/resolve`, formData);
 
       setShowResolveModal(false);
 
@@ -732,23 +753,27 @@ function OfficerComplaintDetails() {
           <span>Back to Complaints</span>
         </button>
 
-        {/* =====================================================
-            PAGE HEADER (FULL STRUCTURED CONTENT LAYOUT)
-        ===================================================== */}
-
         <header className="officer-detail-page-header">
-          <div className="officer-detail-heading">
-            {/* =================================================
-                STATIC IMAGE
-            ================================================= */}
+          {/* Top Row: Section Heading & Status Badge */}
+          <div className="officer-detail-header-top">
+            <div className="officer-detail-eyebrow">
+              <span className="officer-detail-heading-icon">
+                <ClipboardList />
+              </span>
+              <span>Complaint Details</span>
+            </div>
 
-            <div
-              className="officer-detail-image-container"
-              style={{
-                cursor: "default",
-                flexShrink: 0,
-              }}
+            <span
+              className={`officer-complaint-status ${getStatusClass(complaint.status)}`}
             >
+              {formatStatus(complaint.status)}
+            </span>
+          </div>
+
+          {/* Bottom Content Area: Image (Left) & Text Details (Right) */}
+          <div className="officer-detail-content-grid">
+            {/* Static Image */}
+            <div className="officer-detail-image-container">
               {complaintImageUrl ? (
                 <img
                   src={complaintImageUrl}
@@ -759,14 +784,11 @@ function OfficerComplaintDetails() {
                       "Complaint image failed to load:",
                       complaintImageUrl,
                     );
-
                     event.currentTarget.style.display = "none";
-
                     const fallback =
                       event.currentTarget.parentElement?.querySelector(
                         ".officer-detail-image-fallback",
                       );
-
                     if (fallback) {
                       fallback.style.display = "flex";
                     }
@@ -776,52 +798,25 @@ function OfficerComplaintDetails() {
 
               <div
                 className="officer-detail-image-fallback"
-                style={{
-                  display: complaintImageUrl ? "none" : "flex",
-                }}
+                style={{ display: complaintImageUrl ? "none" : "flex" }}
               >
                 <ImageIcon size={30} strokeWidth={1.7} />
               </div>
             </div>
 
-            {/* =================================================
-                DETAILS: TITLE & DESCRIPTION IN SEQUENCE
-            ================================================= */}
-
-            <div>
-              <div className="officer-detail-eyebrow">
-                <span className="officer-detail-heading-icon">
-                  <ClipboardList />
-                </span>
-
-                <span>Complaint Details</span>
-              </div>
-
-              <div>
+            {/* Text Details */}
+            <div className="officer-detail-info-group">
+              <div className="officer-detail-field">
                 <span className="heading">Complaint Title</span>
-
                 <h1>{complaint.title || "Untitled Complaint"}</h1>
               </div>
 
-              <div>
+              <div className="officer-detail-field">
                 <span className="heading">Complaint Description</span>
-
                 <p>{complaint.description || "No description provided."}</p>
               </div>
             </div>
           </div>
-
-          {/* =================================================
-              STATUS
-          ================================================= */}
-
-          <span
-            className={`officer-complaint-status ${getStatusClass(
-              complaint.status,
-            )}`}
-          >
-            {formatStatus(complaint.status)}
-          </span>
         </header>
 
         {/* =====================================================
@@ -980,9 +975,12 @@ function OfficerComplaintDetails() {
                 label={
                   [
                     complaint.category
-                      ? complaint.category.charAt(0).toUpperCase() + complaint.category.slice(1)
+                      ? complaint.category.charAt(0).toUpperCase() +
+                        complaint.category.slice(1)
                       : "",
-                    [rawAddress?.area, rawAddress?.city].filter(Boolean).join(", "),
+                    [rawAddress?.area, rawAddress?.city]
+                      .filter(Boolean)
+                      .join(", "),
                   ]
                     .filter(Boolean)
                     .join(" — ") || "Complaint location"
