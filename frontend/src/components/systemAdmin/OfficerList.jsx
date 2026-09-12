@@ -1,8 +1,10 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 import {
     Search,
     Filter,
+    ToggleLeft,
+    ChevronDown,
     UserCheck,
     UserX,
     Loader2
@@ -15,6 +17,203 @@ import API from "../../api/axios";
 import OfficerStatusModal from "./OfficerStatusModal";
 
 import "../../styles/systemAdminComponents.css";
+
+
+/* =========================================
+    CUSTOM FILTER DROPDOWN
+
+    Replaces the native <select> for the role
+    and status filters. A native <select>'s
+    open options list is rendered by the
+    device's operating system on many mobile
+    browsers (not by the page's own HTML/CSS),
+    so its width/position cannot be controlled
+    with CSS. This renders the same look and
+    behaviour using plain DOM elements instead,
+    so the dropdown always stays inside the
+    page and can never overflow the viewport.
+
+    Same value/onChange contract as a native
+    select — swapping this in does not change
+    filtering behaviour anywhere else.
+========================================= */
+
+function FilterDropdown({
+    icon,
+    value,
+    options,
+    onChange,
+    ariaLabel
+}) {
+
+    const [isOpen, setIsOpen] =
+        useState(false);
+
+    const wrapperRef =
+        useRef(null);
+
+
+    /* =====================================
+        CLOSE ON OUTSIDE CLICK
+    ===================================== */
+
+    useEffect(() => {
+
+        const handleClickOutside = (event) => {
+
+            if (
+                wrapperRef.current &&
+                !wrapperRef.current.contains(event.target)
+            ) {
+
+                setIsOpen(false);
+
+            }
+
+        };
+
+        document.addEventListener(
+            "mousedown",
+            handleClickOutside
+        );
+
+        return () => {
+
+            document.removeEventListener(
+                "mousedown",
+                handleClickOutside
+            );
+
+        };
+
+    }, []);
+
+
+    /* =====================================
+        CLOSE ON ESCAPE
+    ===================================== */
+
+    useEffect(() => {
+
+        const handleKeyDown = (event) => {
+
+            if (event.key === "Escape") {
+
+                setIsOpen(false);
+
+            }
+
+        };
+
+        if (isOpen) {
+
+            document.addEventListener(
+                "keydown",
+                handleKeyDown
+            );
+
+        }
+
+        return () => {
+
+            document.removeEventListener(
+                "keydown",
+                handleKeyDown
+            );
+
+        };
+
+    }, [isOpen]);
+
+
+    const selectedOption =
+        options.find(
+            (option) => option.value === value
+        );
+
+
+    return (
+
+        <div
+            className="officer-filter-wrapper officer-custom-dropdown"
+            ref={wrapperRef}
+        >
+
+            {icon}
+
+            <button
+                type="button"
+                className="officer-custom-dropdown-trigger"
+                onClick={() =>
+                    setIsOpen((previous) => !previous)
+                }
+                aria-haspopup="listbox"
+                aria-expanded={isOpen}
+                aria-label={ariaLabel}
+            >
+
+                <span>
+                    {selectedOption
+                        ? selectedOption.label
+                        : ""}
+                </span>
+
+                <ChevronDown
+                    size={16}
+                    strokeWidth={2}
+                    className={
+                        isOpen
+                            ? "officer-custom-dropdown-chevron open"
+                            : "officer-custom-dropdown-chevron"
+                    }
+                />
+
+            </button>
+
+            {isOpen && (
+
+                <ul
+                    className="officer-custom-dropdown-menu"
+                    role="listbox"
+                >
+
+                    {options.map((option) => (
+
+                        <li
+                            key={option.value}
+                            role="option"
+                            aria-selected={
+                                option.value === value
+                            }
+                            className={
+                                option.value === value
+                                    ? "officer-custom-dropdown-option selected"
+                                    : "officer-custom-dropdown-option"
+                            }
+                            onClick={() => {
+
+                                onChange(option.value);
+
+                                setIsOpen(false);
+
+                            }}
+                        >
+
+                            {option.label}
+
+                        </li>
+
+                    ))}
+
+                </ul>
+
+            )}
+
+        </div>
+
+    );
+
+}
 
 
 function OfficerList({ onStatusChanged }) {
@@ -65,6 +264,46 @@ function OfficerList({ onStatusChanged }) {
         {
             value: "municipalCommissioner",
             label: "Municipal Commissioner"
+        }
+
+    ];
+
+
+    /* =========================================
+        ROLE FILTER OPTIONS
+    ========================================= */
+
+    const roleFilterOptions = [
+
+        {
+            value: "all",
+            label: "All Roles"
+        },
+
+        ...officerRoles
+
+    ];
+
+
+    /* =========================================
+        STATUS FILTER OPTIONS
+    ========================================= */
+
+    const statusFilterOptions = [
+
+        {
+            value: "all",
+            label: "All Status"
+        },
+
+        {
+            value: "active",
+            label: "Active"
+        },
+
+        {
+            value: "inactive",
+            label: "Inactive"
         }
 
     ];
@@ -348,75 +587,31 @@ function OfficerList({ onStatusChanged }) {
                     ROLE FILTER
                 ================================= */}
 
-                <div className="officer-filter-wrapper">
-
-                    <Filter
-                        size={17}
-                        strokeWidth={1.8}
-                    />
-
-                    <select
-                        value={roleFilter}
-                        onChange={(event) =>
-                            setRoleFilter(
-                                event.target.value
-                            )
-                        }
-                    >
-
-                        <option value="all">
-                            All Roles
-                        </option>
-
-
-                        {officerRoles.map((role) => (
-
-                            <option
-                                key={role.value}
-                                value={role.value}
-                            >
-
-                                {role.label}
-
-                            </option>
-
-                        ))}
-
-                    </select>
-
-                </div>
+                <FilterDropdown
+                    icon={
+                        <Filter
+                            size={17}
+                            strokeWidth={1.8}
+                        />
+                    }
+                    value={roleFilter}
+                    onChange={setRoleFilter}
+                    options={roleFilterOptions}
+                    ariaLabel="Filter by role"
+                />
 
 
                 {/* ================================
                     STATUS FILTER
                 ================================= */}
 
-                <div className="officer-filter-wrapper">
-
-                    <select
-                        value={statusFilter}
-                        onChange={(event) =>
-                            setStatusFilter(
-                                event.target.value
-                            )
-                        }
-                    >
-
-                        <option value="all">
-                            All Status
-                        </option>
-
-                        <option value="active">
-                            Active
-                        </option>
-
-                        <option value="inactive">
-                            Inactive
-                        </option>
-
-                    </select>
-
-                </div>
+                <FilterDropdown
+                    
+                    value={statusFilter}
+                    onChange={setStatusFilter}
+                    options={statusFilterOptions}
+                    ariaLabel="Filter by status"
+                />
 
             </div>
 

@@ -806,6 +806,163 @@
 
 
 /* =========================================================
+   CUSTOM FILTER DROPDOWN
+   Replaces the native <select>'s open options list, which
+   on many mobile browsers is rendered by the operating
+   system rather than the page itself, and cannot be
+   constrained to the viewport with CSS alone. Visually
+   matches the previous select exactly.
+========================================================= */
+
+.officer-custom-dropdown {
+
+    position: relative;
+}
+
+
+.officer-custom-dropdown-trigger {
+
+    width: 100%;
+    min-width: 0;
+
+    height: 100%;
+
+    margin: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 8px;
+
+    padding: 0 2px;
+
+    border: none;
+    outline: none;
+
+    background: transparent !important;
+
+    color: #334155 !important;
+
+    font-family: inherit;
+
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    box-sizing: border-box;
+}
+
+
+.officer-custom-dropdown-trigger span {
+
+    display: inline-flex;
+    align-items: center;
+
+    line-height: 1.2;
+
+    overflow: hidden;
+
+    white-space: nowrap;
+
+    text-overflow: ellipsis;
+}
+
+
+.officer-custom-dropdown-chevron {
+
+    flex-shrink: 0;
+
+    color: #64748B;
+
+    transition: transform 0.18s ease;
+}
+
+
+.officer-custom-dropdown-chevron.open {
+
+    transform: rotate(180deg);
+}
+
+
+.officer-custom-dropdown-menu {
+
+    position: absolute;
+
+    top: calc(100% + 6px);
+    left: 0;
+    right: 0;
+
+    max-width: 100%;
+
+    margin: 0;
+    padding: 6px;
+
+    list-style: none;
+
+    background: #FFFFFF;
+
+    border: 1px solid #E2E8F0;
+
+    border-radius: 10px;
+
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+
+    box-sizing: border-box;
+
+    max-height: 260px;
+
+    overflow-y: auto;
+
+    z-index: 1000;
+}
+
+
+.officer-custom-dropdown-option {
+
+    padding: 10px 12px;
+
+    border-radius: 7px;
+
+    color: #334155;
+
+    font-size: 14px;
+    font-weight: 500;
+
+    line-height: 1.4;
+
+    cursor: pointer;
+
+    white-space: normal;
+
+    word-break: break-word;
+
+    box-sizing: border-box;
+
+    transition: background 0.15s ease;
+}
+
+
+.officer-custom-dropdown-option:hover {
+
+    background: #EEF5FF;
+}
+
+
+.officer-custom-dropdown-option.selected {
+
+    background: #0055A4;
+
+    color: #FFFFFF;
+}
+
+
+/* =========================================================
    TABLE WRAPPER
 ========================================================= */
 
@@ -1539,6 +1696,28 @@
         height: 45px;
     }
 
+    .officer-search-wrapper {
+
+        height: 58px;
+    }
+
+
+
+    .officer-filter-wrapper select {
+
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
 
     .officer-table-wrapper {
 
@@ -1687,6 +1866,12 @@
 
         padding-left: 12px;
         padding-right: 12px;
+    }
+
+
+    .officer-search-wrapper {
+
+        height: 43px;
     }
 
 
