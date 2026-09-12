@@ -731,6 +731,31 @@
         word-break: break-word;
     }
 
+    /* =====================================================
+       CONTENT GRID (image + info group)
+       This class had NO mobile override before, so the
+       image and text stayed side-by-side and got squeezed
+       into a narrow column on small screens. Stacking it
+       vertically here, matching the same pattern already
+       used for .officer-detail-heading above.
+    ===================================================== */
+
+    .officer-detail-content-grid {
+        flex-direction: column;
+        align-items: center;
+        gap: 18px;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+
+    .officer-detail-info-group {
+        width: 100%;
+        max-width: 100%;
+        align-items: flex-start;
+        box-sizing: border-box;
+    }
+
     .officer-detail-image-container {
         width: 260px;
         min-width: 260px;

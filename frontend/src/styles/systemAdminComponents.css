@@ -215,9 +215,9 @@
 
     .system-admin-main-content {
         margin-left: 0;
-        margin-top: 75px;
+        margin-top: 50px;
         width: 100%;
-        min-height: calc(100vh - 75px);
+        min-height: calc(100vh - 50px);
         padding: 65px 18px 30px;
         box-sizing: border-box;
         overflow-x: hidden;
@@ -277,9 +277,9 @@
 @media (max-width: 400px) {
     .system-admin-main-content {
         margin-left: 0;
-        margin-top: 75px;
+        margin-top: 50px;
         width: 100%;
-        min-height: calc(100vh - 75px);
+        min-height: calc(100vh - 50px);
         padding: 65px 14px 30px;
     }
 
@@ -553,6 +553,9 @@
 
 /* =========================================
    MOBILE
+   .system-admin-navbar stays 75px through
+   this breakpoint, so top:75px still matches
+   — no change needed here.
 ========================================= */
 
 @media (max-width: 700px) {
@@ -690,6 +693,28 @@
     .system-admin-mobile-profile-only .system-admin-profile-menu button {
         height: 54px;
         font-size: 15px;
+    }
+
+}
+
+
+/* =========================================
+   NAVBAR HEIGHT SYNC (max-width: 450px)
+   .system-admin-navbar drops from 75px to
+   68px at this breakpoint, so the sidebar's
+   top must follow to avoid a gap. This
+   breakpoint didn't exist in the original
+   sidebar CSS, so it's added here to track
+   the navbar's own 450px breakpoint. This
+   68px value also carries through to the
+   350px range below, since the navbar's
+   height doesn't change again after 450px.
+========================================= */
+
+@media (max-width: 450px) {
+
+    .system-admin-sidebar {
+        top: 68px;
     }
 
 }

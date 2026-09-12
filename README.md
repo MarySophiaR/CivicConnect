@@ -180,6 +180,7 @@ Officers can:
 - Update complaint status
 - Resolve complaints
 - Add resolution notes
+- Upload a resolution evidence image as proof of completion
 - View assignment history
 - View escalation history
 - Receive workflow alerts

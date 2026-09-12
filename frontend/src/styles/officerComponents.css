@@ -370,6 +370,10 @@
 
 /* =========================================
    MOBILE (max-width: 700px)
+   NOTE: top is synced to .officer-navbar's
+   actual height at this breakpoint (70px),
+   not the desktop value (75px), so there is
+   no gap between navbar and sidebar.
 ========================================= */
 
 @media (max-width: 700px) {
@@ -380,7 +384,7 @@
         min-height: 0;
         padding: 0;
         position: fixed;
-        top: 75px;
+        top: 70px;
         left: 0;
         background: #0055A4;
         z-index: 999;
@@ -491,6 +495,25 @@
 
 
 /* =========================================
+   NAVBAR HEIGHT SYNC (max-width: 450px)
+   .officer-navbar shrinks to 65px here, so
+   the sidebar's top must follow to avoid a
+   gap. This breakpoint doesn't exist in the
+   original sidebar CSS, so it's added here
+   specifically to track the navbar's own
+   450px breakpoint.
+========================================= */
+
+@media (max-width: 450px) {
+
+    .officer-sidebar {
+        top: 65px;
+    }
+
+}
+
+
+/* =========================================
    SMALL MOBILE (max-width: 500px)
 ========================================= */
 
@@ -529,9 +552,18 @@
 
 /* =========================================
    VERY SMALL MOBILE (max-width: 350px)
+   .officer-navbar shrinks to 60px here, so
+   top is updated to match (was hardcoded to
+   the 700px-breakpoint value of 75px before,
+   causing a growing gap at small screens).
 ========================================= */
 
 @media (max-width: 350px) {
+
+    .officer-sidebar {
+        top: 60px;
+    }
+
 
     .officer-sidebar-nav {
         padding: 10px;
