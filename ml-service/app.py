@@ -59,6 +59,29 @@ print("Classes:", CLASS_NAMES)
 
 
 # ---------------------------------
+# Warm Up The Model
+#
+# Loading the model only reads its weights into
+# memory. TensorFlow/Keras still does extra internal
+# graph-building/optimization work the FIRST time
+# model.predict() is actually called. Without this,
+# that one-time cost is paid by whichever real user
+# happens to make the first request after the server
+# starts, making that particular prediction noticeably
+# slower than every one after it. Running one dummy
+# prediction here pays that cost once, at startup,
+# before any real request arrives.
+# ---------------------------------
+print("Warming up model...")
+
+_warmup_input = np.zeros((1, 224, 224, 3), dtype=np.float32)
+
+model.predict(_warmup_input, verbose=0)
+
+print("✅ Model warm-up complete!")
+
+
+# ---------------------------------
 # Home Route
 # ---------------------------------
 @app.route("/")
@@ -229,11 +252,21 @@ def predict():
 
 # ---------------------------------
 # Run Flask App
+#
+# threaded=True lets Flask handle more than one
+# request at a time. Without it, the dev server
+# processes requests one-by-one — if two predict
+# calls (or a predict call and any other request)
+# arrive close together, the second has to wait for
+# the first to fully finish, which can look like
+# random slowness that has nothing to do with the
+# image or the model itself.
 # ---------------------------------
 if __name__ == "__main__":
     app.run(
         host="0.0.0.0",
         port=5000,
         debug=True,
-        use_reloader=False
+        use_reloader=False,
+        threaded=True
     )
